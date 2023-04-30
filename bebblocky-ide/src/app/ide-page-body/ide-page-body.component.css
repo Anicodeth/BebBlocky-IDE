@@ -1,0 +1,14 @@
+.body-container {
+    display: flex;
+    flex-wrap:wrap;
+    border:1px solid black;
+    width: 100%;
+    padding:0.2rem;
+}
+
+.body-section {
+    flex: auto;
+    border:1px solid black;
+    height:36rem;
+
+}

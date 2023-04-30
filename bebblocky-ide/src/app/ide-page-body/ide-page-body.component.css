@@ -7,7 +7,8 @@
 }
 
 .body-section {
-    flex: auto;
+    width: 33%;
+    margin: auto;
     border:1px solid black;
     height:36rem;
 

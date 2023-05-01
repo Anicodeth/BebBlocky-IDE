@@ -1,3 +1,29 @@
 <div class = "header-container">
-    <h1>Beblocky</h1>
+    <div class = "header-segment">
+        <img src = "../../assets/beblocky.png">
+    </div>
+
+    <div class = "header-segment">
+        <fa-icon class="header-icon" (click) = "toggleSetting()" 
+        [icon]="['fas', 'gear']"></fa-icon>
+        <fa-icon class="header-icon" [icon]="['fas', 'bars']"></fa-icon>
+    </div>
+
 </div>
+
+<div *ngIf = "showSetting" class = "setting-menu">
+    <div class = "setting-menu-header">
+        <fa-icon class="header-icon" [icon]="['fas', 'gear']"></fa-icon>
+    </div>
+<p>CODE EDITOR:</p>
+    <div class = "setting">
+        <label for="customRange1" class="form-label">FONT SIZE</label><br>
+        <input type="range" class="form-range" id="customRange1">
+    </div>
+    <div class = "setting">
+        <label for="favcolor">BACKGROUND COLOR</label><br>
+        <input type="color" id="favcolor" name="bkcolor" value="#ff0000">
+    </div> 
+</div>
+
+

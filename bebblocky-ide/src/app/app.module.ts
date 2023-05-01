@@ -10,7 +10,7 @@ import { IdePageFooterComponent } from './ide-page-footer/ide-page-footer.compon
 import { IdePreviewWindowComponent } from './ide-preview-window/ide-preview-window.component';
 import { IdeEditorComponent } from './ide-editor/ide-editor.component';
 import { IdeSlidesComponent } from './ide-slides/ide-slides.component';
-
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +24,8 @@ import { IdeSlidesComponent } from './ide-slides/ide-slides.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

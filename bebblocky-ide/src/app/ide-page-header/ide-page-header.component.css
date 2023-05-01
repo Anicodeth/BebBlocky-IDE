@@ -3,4 +3,83 @@
     height: 3.5rem;
     width:100%;
     border: 1px solid black;
+    justify-content: space-between;
+    padding-left:1rem;
+    padding-right:1rem;
 }
+.header-icon{
+    font-size:2rem;
+    margin-left: 2rem ;
+    color: gray;   
+}
+
+img{
+    height:2.5rem;
+}
+.header-segment {
+    display: flex;
+    padding:0.5rem;
+
+}
+.setting-menu{
+    color:#939CA1;
+    font-weight: bold;
+    height:30rem;
+    width:300px;
+    z-index:10;
+    background-color:white;
+    position: absolute;
+    right:4rem;
+    top:4rem;
+    border-radius: 1rem;
+    box-shadow: 5px 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+    overflow-y:scroll;
+    animation: bounce 1s;
+    padding:1rem;
+}
+
+.setting-menu-header{
+    display:flex;
+    width:100%;
+   
+}
+
+
+.setting{
+  padding:1rem;
+  margin-bottom:1rem;
+  background-color: #F0EEEE;
+  border-radius:1rem;
+  box-shadow: 0px 8px 24px 0px rgba(140, 149, 159, 0.2);
+}
+
+.form-range{
+    width:100%;
+    height:0.25rem;
+}
+
+.setting-menu-header .header-icon{
+    font-size: 2rem;
+    margin:auto;
+
+}
+
+.setting-menu::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+.setting-menu::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(255, 255, 255);
+    border-radius: 10px;
+  }
+  
+.setting-menu::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
+  }
+
+@keyframes bounce {
+    0% { top: 4rem; opacity: 0; }
+    50% { top: 5rem; }
+    100% { top: 4rem; opacity: 1; }
+  }

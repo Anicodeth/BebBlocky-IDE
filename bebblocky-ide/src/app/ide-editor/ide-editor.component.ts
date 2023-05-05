@@ -14,7 +14,6 @@ export class IdeEditorComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     ace.config.set("fontSize", "22px");
-    ace.config.set("fontFamily", "JetBrains Mono");
     ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.12/src-noconflict');
 
     const aceEditor = ace.edit(this.editor.nativeElement);

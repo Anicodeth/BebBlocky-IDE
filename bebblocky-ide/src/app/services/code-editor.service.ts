@@ -4,7 +4,8 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CodeService {
+export class CodeEditorService {
 
-  outputSubject = new Subject<string>();
+  userCode = new Subject<string>();
+  fontSize = 22;
 }

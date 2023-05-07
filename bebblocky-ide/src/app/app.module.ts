@@ -11,7 +11,7 @@ import { IdePreviewWindowComponent } from './ide-preview-window/ide-preview-wind
 import { IdeEditorComponent } from './ide-editor/ide-editor.component';
 import { IdeSlidesComponent } from './ide-slides/ide-slides.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { CodeService } from './services/code.service';
+import { CodeEditorService } from './services/code-editor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +28,7 @@ import { CodeService } from './services/code.service';
     AppRoutingModule,
     FontAwesomeModule
   ],
-  providers: [CodeService],
+  providers: [CodeEditorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

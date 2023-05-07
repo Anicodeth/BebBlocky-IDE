@@ -1,5 +1,5 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CodeService } from '../services/code.service';
+import { CodeEditorService } from '../services/code-editor.service';
 
 @Component({
   selector: 'app-ide-preview-window',
@@ -11,11 +11,11 @@ export class IdePreviewWindowComponent implements OnInit {
   @ViewChild('formattedHtml') formattedHtml!: ElementRef;
   
   constructor(
-    private codeService: CodeService
+    private codeEditorService: CodeEditorService
     ) {}
     
   ngOnInit() {
-    this.codeService.outputSubject.subscribe((output) => {
+    this.codeEditorService.userCode.subscribe((output) => {
       this.formattedHtml.nativeElement.innerHTML = output;
     });
   }

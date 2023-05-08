@@ -30,6 +30,8 @@ export class IdeEditorComponent implements AfterViewInit {
     aceEditor.session.setValue(`<h1 style="color: red;">Title</h1>`); // To add starting code, already from the start
     aceEditor.session.setMode('ace/mode/html');
     aceEditor.setTheme('ace/theme/dracula');
+    aceEditor.setOptions({wrapBehavioursEnabled: false
+    });
   }
 }
 

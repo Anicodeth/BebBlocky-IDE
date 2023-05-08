@@ -2,4 +2,11 @@
     height: 3.5rem;
     width:100%;
     border: 1px solid black;
+    padding: 0.5rem;
+}
+
+button{
+    width:15rem;
+    margin-right:1rem;
+    border-radius:1rem;
 }

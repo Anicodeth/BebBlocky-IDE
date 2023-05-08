@@ -11,11 +11,11 @@ import { IdePreviewWindowComponent } from './ide-preview-window/ide-preview-wind
 import { IdeEditorComponent } from './ide-editor/ide-editor.component';
 import { IdeSlidesComponent } from './ide-slides/ide-slides.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { CodeService } from './services/code.service';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ProfilePageSidebarComponent } from './profile-page-sidebar/profile-page-sidebar.component';
 import { ProfilePageUserdataComponent } from './profile-page-userdata/profile-page-userdata.component';
 import { ProfilePageProgressComponent } from './profile-page-progress/profile-page-progress.component';
+import { CodeEditorService } from './services/code-editor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +36,7 @@ import { ProfilePageProgressComponent } from './profile-page-progress/profile-pa
     AppRoutingModule,
     FontAwesomeModule
   ],
-  providers: [CodeService],
+  providers: [CodeEditorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -35,6 +35,8 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
     aceEditor.session.setValue(`<h1>Title</h1>`); // To add starting code, already from the start
     aceEditor.session.setMode('ace/mode/html');
     aceEditor.setTheme('ace/theme/dracula');
+    aceEditor.setOptions({wrapBehavioursEnabled: false
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {

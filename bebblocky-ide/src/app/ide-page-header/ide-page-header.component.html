@@ -8,7 +8,6 @@
         [icon]="['fas', 'gear']"></fa-icon>
         <fa-icon class="header-icon" [icon]="['fas', 'bars']"></fa-icon>
     </div>
-
 </div>
 
 <div *ngIf = "showSetting" class = "setting-menu">
@@ -18,7 +17,9 @@
 <p>CODE EDITOR:</p>
     <div class = "setting">
         <label for="customRange1" class="form-label">FONT SIZE</label><br>
-        <input type="range" class="form-range" id="customRange1">
+        <input type="range" class="form-range" id="customRange1"
+        [ngModel]="fontSize"
+        (ngModelChange)="setFontSize($event)">
     </div>
     <div class = "setting">
         <label for="favcolor">BACKGROUND COLOR</label><br>

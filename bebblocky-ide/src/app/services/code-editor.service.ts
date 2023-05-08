@@ -7,5 +7,5 @@ import { Subject } from 'rxjs';
 export class CodeEditorService {
 
   userCode = new Subject<string>();
-  fontSize = 22;
+  fontSize = new Subject<number>();
 }

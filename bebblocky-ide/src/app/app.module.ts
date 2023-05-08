@@ -12,6 +12,8 @@ import { IdeEditorComponent } from './ide-editor/ide-editor.component';
 import { IdeSlidesComponent } from './ide-slides/ide-slides.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { CodeEditorService } from './services/code-editor.service';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { CodeEditorService } from './services/code-editor.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
   ],
   providers: [CodeEditorService],
   bootstrap: [AppComponent]

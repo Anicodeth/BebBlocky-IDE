@@ -1,16 +1,14 @@
 .body-container {
     display: flex;
-    flex-wrap:wrap;
-    border:1px solid black;
+    flex-wrap: wrap;
+    border: 1px solid black;
     width: 100%;
-    padding:0.2rem;
+    padding: 0.2rem;
 }
 
 .body-section {
     width: 33%;
     margin: auto;
-    border:1px solid black;
-    height:36rem;
-   
-
+    border: 1px solid black;
+    height: 36rem;
 }

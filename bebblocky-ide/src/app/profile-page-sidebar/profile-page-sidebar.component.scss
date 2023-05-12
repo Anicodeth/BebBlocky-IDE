@@ -8,7 +8,7 @@ $logo-image-shrunk: url('../../assets/logo-icons/BeBlocky-Logo-Small.png');
     // padding: 0% 10%;
     background-color: #f5f5f5;
     border-right: #333 solid 1px;
-    border-radius: 0rem 1rem 1rem 0rem;
+    // border-radius: 0rem 1rem 1rem 0rem;
     height: 100%;
     position: fixed;
     transition: all 0.3s ease-in-out;
@@ -45,25 +45,35 @@ $logo-image-shrunk: url('../../assets/logo-icons/BeBlocky-Logo-Small.png');
         margin: 0;
 
         .sidebar-menu-item {
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 0.2rem 10%;
+
             a {
-                margin: 0.2rem 1rem;
                 box-sizing: border-box;
                 border-radius: 1rem;
                 display: flex;
+                flex-direction: row;
                 align-items: center;
                 text-decoration: none;
                 color: #333;
                 padding: 15px 20px;
                 transition: all 0.3s;
+                margin: 0 auto;
 
                 &:hover {
                     background-color: #fff;
-                    color: #444;
+                    color: #111;
                 }
 
-                i {
+                &.shrink {
+                    justify-content: center;
+                    margin: 0 auto;
+                    text-align: center;
+                }
+
+                fa-icon {
                     font-size: 18px;
-                    margin-right: 15px;
                 }
 
                 .menu-item-text {
@@ -88,27 +98,54 @@ $logo-image-shrunk: url('../../assets/logo-icons/BeBlocky-Logo-Small.png');
     }
 }
 
-@media (max-width: 768px) {
+// Add media only screen and query for responsiveness
+// Adjust the breakpoint as needed
+@media only screen and (max-width: 768px) {
     .sidebar {
-        width: 100%;
-        height: 80px;
+        left: 0;
+        width: 80%;
+        height: 100%;
         position: fixed;
-        bottom: 0;
+        top: 0;
+        box-shadow: 10px rgba(0, 0, 0, 0.75);
+        
+        &.shrink {
+            left: -100%;
+            transition: left 0.3s ease-in-out;
+        }
     }
 
-    .sidebar-menu {
+    .header {
         display: flex;
-        justify-content: space-around;
+        flex-direction: row;
+        // flex-wrap: wrap;
+    }
 
-        .sidebar-menu-item {
-            a {
-                flex-direction: column;
+    .hamburger {
+        display: inline-block;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 10px 12px;
+    }
 
-                i {
-                    margin-right: 0;
-                    margin-bottom: 5px;
-                }
-            }
-        }
+    .hamburger-line {
+        display: block;
+        width: 24px;
+        height: 3px;
+        background-color: #6fb64e;
+        margin: 5px 0;
+        transition: all 0.3s;
+    }
+
+    .hamburger:focus {
+        outline: none;
+    }
+}
+
+// Hide the hamburger button on larger screens
+@media only screen and (min-width: 769px) {
+    .header {
+        display: none;
     }
 }

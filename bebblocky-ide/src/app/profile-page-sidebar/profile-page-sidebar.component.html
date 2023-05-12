@@ -1,3 +1,11 @@
+<div class="header">
+    <div class="hamburger" aria-label="Toggle mobile navigation" (click)="toggleSidebar()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </div>
+    <h1>Header</h1>
+</div>
 <div class="sidebar" [class.shrink]="!isExpanded" (mouseenter)="expandSidebar()" (mouseleave)="shrinkSidebar()">
     <div class="sidebar-logo" [class.shrink]="!isExpanded">
         <img class="sidebar-logo-img"/>
@@ -5,7 +13,7 @@
     </div>
     <ul class="sidebar-menu">
         <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of menuItems">
-            <a [routerLink]="item.link">
+            <a [class.shrink]="!isExpanded" [routerLink]="item.link">
                 <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
                 <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
             </a>

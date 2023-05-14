@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 //Models
-const  { Slides }  = require('./Models/slides');
 const  { User }  = require('./Models/user');
 
 

@@ -23,4 +23,7 @@ const slideSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('Slide', slideSchema);
+
+const Slides = mongoose.model('Slide', slideSchema);
+
+module.exports = { Slides };

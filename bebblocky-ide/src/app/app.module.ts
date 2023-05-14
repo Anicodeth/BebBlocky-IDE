@@ -16,7 +16,10 @@ import { ProfilePageSidebarComponent } from './profile-page-sidebar/profile-page
 import { ProfilePageUserdataComponent } from './profile-page-userdata/profile-page-userdata.component';
 import { ProfilePageProgressComponent } from './profile-page-progress/profile-page-progress.component';
 import { CodeEditorService } from './services/code-editor.service';
-import { FormsModule } from '@angular/forms';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -31,13 +34,16 @@ import { FormsModule } from '@angular/forms';
     ProfilePageComponent,
     ProfilePageSidebarComponent,
     ProfilePageUserdataComponent,
-    ProfilePageProgressComponent
+    ProfilePageProgressComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [CodeEditorService],
   bootstrap: [AppComponent]

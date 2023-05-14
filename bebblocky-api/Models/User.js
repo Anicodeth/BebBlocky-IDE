@@ -8,12 +8,14 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
   password: {
     type: String,
     required: true
-  },
-  photo: {
-    type: String
   },
   progress: [{
     topic: {
@@ -21,11 +23,15 @@ const userSchema = new Schema({
       required: true
     },
     completedPercent: {
-      type: number,
+      type: Number,
       required: true,
       default: 0
     }
   }]
 });
 
-module.exports = mongoose.model('User', userSchema);
+
+
+const User = mongoose.model('User', userSchema);
+
+module.exports = { User };

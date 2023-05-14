@@ -13,12 +13,12 @@ export class BridgeService {
 
   signUp(username: string, email: string, password: string) {
     let body = { username: username, password: password, email: email };
-    return this.http.post('https://localhost:3000/signup', body);
+    return this.http.post('https://beb-blocky-ide.vercel.app/signup', body);
   }
 
   signIn(email: string, password: string) {
 
     let body = { email: email, password: password };
-    return this.http.post('https://localhost:3000/signin', body);
+    return this.http.post('https://beb-blocky-ide.vercel.app/signin', body);
   }
 }

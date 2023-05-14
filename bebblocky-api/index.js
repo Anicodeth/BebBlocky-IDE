@@ -7,6 +7,7 @@ const cors = require('cors');
 //Models
 const Schema = mongoose.Schema;
 
+//userSchema
 const userSchema = new Schema({
   username: {
     type: String,

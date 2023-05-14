@@ -8,10 +8,10 @@
         <h1>Sign In</h1>
         <br />
         <input
-          formControlName="email"
-          placeholder="email"
+          formControlName="username"
+          placeholder="Username"
           required
-          type="email"
+          type="text"
         />
         <input
           formControlName="password"
@@ -36,7 +36,7 @@
       >
         <h1>Create Account</h1>
         <br />
-        <input formControlName="name" placeholder="Name" />
+        <input formControlName="name" placeholder="Username" />
         <input formControlName="email" placeholder="Email" />
         <input formControlName="password" placeholder="Password" />
         <button type="submit">SignUp</button>
@@ -62,10 +62,10 @@
         <h1>Sign In</h1>
         <br />
         <input
-          formControlName="email"
-          placeholder="email"
+          formControlName="username"
+          placeholder="Username"
           required
-          type="email"
+          type="text"
         />
         <input
           formControlName="password"
@@ -87,7 +87,7 @@
       >
         <h1>Create Account</h1>
         <br />
-        <input formControlName="name" placeholder="Name" />
+        <input formControlName="name" placeholder="Username" />
         <input formControlName="email" placeholder="Email" />
         <input formControlName="password" placeholder="Password" />
         <button type="submit" [disabled]="isButtonDisabled">Sign Up</button>

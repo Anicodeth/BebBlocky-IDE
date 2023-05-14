@@ -17,7 +17,7 @@ export class LoginPageComponent {
 
   constructor(private service: BridgeService, private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required],
     });
 
@@ -46,11 +46,11 @@ export class LoginPageComponent {
     this.isButtonDisabled = true;
 
     this.service
-      .signIn(this.loginForm.value.email, this.loginForm.value.password)
+      .signIn(this.loginForm.value.username, this.loginForm.value.password)
       .subscribe((response: any) => {
         this.isButtonDisabled = false;
         this.service.userData = response;
-
+        console.log(response);
         sessionStorage.setItem('auth_token', response.token);
 
         this.router.navigateByUrl("/profile")
@@ -68,9 +68,10 @@ export class LoginPageComponent {
     this.service
       .signUp(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password)
       
-      .subscribe(() => {
+      .subscribe((res) => {
         this.isButtonDisabled = true;
         this.cheaker()
+        console.log(res);
         
       },(err)=>{
         this.isButtonDisabled = true;

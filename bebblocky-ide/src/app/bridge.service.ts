@@ -16,9 +16,9 @@ export class BridgeService {
     return this.http.post('https://beb-blocky-ide.vercel.app/signup', body);
   }
 
-  signIn(email: string, password: string) {
+  signIn(username: string, password: string) {
 
-    let body = { email: email, password: password };
+    let body = { username: username, password: password };
     return this.http.post('https://beb-blocky-ide.vercel.app/signin', body);
   }
 }

@@ -2,7 +2,7 @@
 const express = require('express');
 const jwt = require("jsonwebtoken");
 const mongoose = require('mongoose');
-// const cors = require('cors');
+const cors = require('cors');
 
 //Models
 const Schema = mongoose.Schema;
@@ -50,11 +50,11 @@ mongoose.connect('mongodb+srv://afmtoday:OlxwPFCF0rLMnA3e@cluster0.edrrjyh.mongo
 
 
 //Application authorization
-//app.use(cors({
- //   origin: "*",
-   // methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-   // preflightContinue: false
-  //}));
+app.use(cors({
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false
+  }));
 
 
 //Sign up endpoint

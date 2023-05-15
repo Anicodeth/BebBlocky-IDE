@@ -25,6 +25,15 @@
         <label for="favcolor">BACKGROUND COLOR</label><br>
         <input type="color" id="favcolor" name="bkcolor" value="#ff0000">
     </div> 
+    <div class = "setting">
+        <label for="theme">Theme</label><br>
+        <select [ngModel] = "theme" (ngModelChange)="setTheme($event)">
+            <option selected>dracula</option>
+            <option *ngFor = "let theme of themes">
+                {{theme}}
+            </option>
+        </select>
+    </div> 
 </div>
 
 

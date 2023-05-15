@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import {  AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import * as ace from "ace-builds";
 import { CodeEditorService } from '../services/code-editor.service';
 
@@ -19,28 +19,34 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
 
   ngAfterViewInit(): void {
     this.codeEditorService.fontSize.subscribe((fontSize) => {
-      console.log('here');
-      console.log(fontSize);
-      ace.config.set("fontSize", `${fontSize}px`);
+      aceEditor.setFontSize(fontSize);
     });
-    ace.config.set("fontFamily", "Monospace");
-    ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.12/src-noconflict');
-
     const aceEditor = ace.edit(this.editor.nativeElement);
 
+    this.codeEditorService.editorTheme.subscribe((theme) => {
+      aceEditor.setTheme(`ace/theme/${theme}`);
+
+    });
+
+    ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.12/src-noconflict');
+
+   
     aceEditor.session.on('change', () => {
       this.codeEditorService.userCode.next(aceEditor.getValue());
     });
 
+    
+
     aceEditor.session.setValue(`<h1>Title</h1>`); // To add starting code, already from the start
     aceEditor.session.setMode('ace/mode/html');
-    aceEditor.setTheme('ace/theme/dracula');
+    aceEditor.setTheme("ace/theme/cobalt");
     aceEditor.setOptions({wrapBehavioursEnabled: false
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     ace.config.set("fontSize", `${this.codeEditorService.fontSize}px`);
+
   }
 
 

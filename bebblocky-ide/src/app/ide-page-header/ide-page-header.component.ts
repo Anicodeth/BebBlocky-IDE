@@ -13,6 +13,8 @@ export class IdePageHeaderComponent {
 
   public showSetting: boolean;
   public fontSize: any;
+  public theme:string | undefined;
+  public themes:string[] = ["chrome", "chaos","cobalt", "clouds", "dawn", "eclipse"];
 
   constructor(
     private library: FaIconLibrary,
@@ -29,6 +31,10 @@ export class IdePageHeaderComponent {
 
   setFontSize(fontSize: number): void {
     this.codeEditorService.fontSize.next(fontSize);
+  }
+
+  setTheme(theme:string){
+    this.codeEditorService.editorTheme.next(theme);
   }
 
 

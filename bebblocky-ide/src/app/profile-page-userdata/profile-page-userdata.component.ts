@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile-page-userdata.component.css']
 })
 export class ProfilePageUserdataComponent {
-
+  name: string = 'John Doe';
+  email: string = 'johndoe@example.com';
+  phone: string = '555-555-5555';
+  tasks: string[] = ['Task 1', 'Task 2', 'Task 3'];
 }

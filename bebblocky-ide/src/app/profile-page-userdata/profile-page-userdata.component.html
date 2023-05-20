@@ -1,1 +1,40 @@
-User data works!
+<div class="container">
+    <header class="header">
+        <h1 class="header-title">BeBlocky</h1>
+        <nav class="header-navigation">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#home">Home</a></li>
+                <li class="nav-item"><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="courses-container">
+            <div
+                routerLinkActive="active"
+                *ngFor="let course of courses"
+                class="course-container">
+    
+                <div class="course-container-about">
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.description }}</p>
+                </div>
+    
+                <div class="course-container-progress">
+                    <div class="progress-bar"
+                        [style.width.%]='course.progressPercent'></div>
+                </div>
+    
+                <div class="course-container-action-button">
+                    <a class="course-goto-button">
+                        <fa-icon class="sidebar-menu-item-icon" [icon]="gotoIcon"></fa-icon>
+                    </a>
+                </div>
+    
+            </div>
+        </div>
+        <div class="statistics-container">
+            <h1>Hello World</h1>
+        </div>
+    </main>
+</div>

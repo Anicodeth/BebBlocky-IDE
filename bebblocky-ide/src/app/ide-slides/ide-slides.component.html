@@ -13,12 +13,12 @@
       <p>❱</p>
     </div>
   </div>
-  <div class="slide" [ngStyle]="{ 'background-color': '#FFDE01' }">
+  <div class="slide" [ngStyle]="{ 'background-color':  slides[currentIndex].backgroundColor }">
     <div class="main-content">
 
       <h1 class = "content-title"> {{ slides[currentIndex].title }} </h1>
       <div class = "main-content"> 
-        <div class = "text-content">
+        <div class = "text-content" [ngStyle]="{ 'font-family':  slides[currentIndex].font }">
         {{ slides[currentIndex].content }}
       </div>
       <div *ngIf = "slides[currentIndex].code" #code class = "code-content">

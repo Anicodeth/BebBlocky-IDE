@@ -2,15 +2,32 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const slideSchema = new Schema({
-  title: {
+  slideId: {
+    type:Number,
+    required: true
+  }, 
+  courseName: {
     type: String,
     required: true
   },
-  slides: [{
-    instructions: {
+  slides:[{
+    backgroundColor: 
+    {
+      type: String,
+      required: true
+    },
+    font: {
+      type: String,
+      required: true
+    },
+    title:  {
         type: String,
         required: true
       },
+    content: {
+      type: String,
+      required: true
+    },
     code: {
       type: String,
       required: true

@@ -1,15 +1,26 @@
 .body-container {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid black;
     width: 100%;
     padding: 0.2rem;
+    justify-content: center;
 
 }
 
 .body-section {
-    width: 33%;
+
+    width: 32.5%;
     margin: auto;
-    border: 1px solid black;
     height: 83vh;
+
+}
+
+@media (max-width:1000px) {
+    .body-container{
+        flex-direction: column;
+    }
+    .body-section{
+        width:98%;
+    }
+    
 }

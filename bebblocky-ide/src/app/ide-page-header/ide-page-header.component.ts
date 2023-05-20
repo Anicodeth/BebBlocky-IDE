@@ -14,7 +14,7 @@ export class IdePageHeaderComponent {
   public showSetting: boolean;
   public fontSize: any;
   public theme:string | undefined;
-  public themes:string[] = ["chrome", "chaos","cobalt", "clouds", "dawn", "eclipse"];
+  public themes:string[] = ["chrome", "chaos","cobalt", "clouds", "dawn", "eclipse", "crimson_editor", "dreamweaver", "gob", "github", "gruvbox", "xcode"];
 
   constructor(
     private library: FaIconLibrary,

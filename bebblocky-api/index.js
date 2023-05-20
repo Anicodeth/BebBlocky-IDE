@@ -24,8 +24,8 @@ const userSchema = new Schema({
     required: true
   },
   progress: [{
-    topic: {
-      type: String,
+    slideId: {
+      type: Number,
       required: true
     },
     completedPercent: {
@@ -37,7 +37,52 @@ const userSchema = new Schema({
 });
 
 
+const slideSchema = new Schema({
+  slideId: {
+    type:Number,
+    required: true
+  }, 
+  title: {
+    type: String,
+    required: true
+  },
+  slides: [{
+    backgroundColor: 
+    {
+      type: String,
+      required: true
+    },
+    font: {
+      type: String,
+      required: true
+    },
+    title:  {
+        type: String,
+        required: true
+      },
+    content: {
+      type: String,
+      required: true
+    },
+    code: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String
+    },
+    // other relevant fields here
+  }]
+
+});
+
+
+const Slide = mongoose.model('Slide', slideSchema);
+
 const User = mongoose.model('User', userSchema);
+
+
+
 
 
 app = express();
@@ -55,6 +100,23 @@ app.use(cors({
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false
   }));
+
+
+const authenticateJWT = (req, res, next) => {
+    const token = req.header('Authorization');
+    if (!token) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+  
+    jwt.verify(token, 'Ananya', (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ error: 'Invalid token' });
+      }
+  
+      req.user = decoded;
+      next();
+    });
+  };
 
 
 //Sign up endpoint
@@ -102,10 +164,68 @@ app.post('/signin', async (req, res)=>{
 
   }
 });
-const PORT = process.env.PORT || 4000
+
+
+// GET /slides/:slide_id endpoint with JWT authentication
+app.get('/slides/:slide_id', async (req, res) => {
+  const slideId = req.params.slide_id;
+  const token = req.header('Authorization').replace('Bearer ', '');
+  const decoded = jwt.verify(token, process.env.JWT_SECRET || "Ananya");
+
+  const userId = decoded.userId;
+  const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+ const slide = await Slide.findOne({ slideId: slideId });
+
+    if (slide) {
+      res.json(slide);
+    } else {
+      res.status(404).json({ error: 'Slide not found' });
+    }
+
+  });
+
+
+app.post('/updateprogress/:slide_id/:percent', async (req, res) => {
+  const slideId = req.params.slide_id;
+  const percent = req.params.percent;
+  const token = req.header('Authorization').replace('Bearer ', '');
+  const decoded = jwt.verify(token, process.env.JWT_SECRET || "Ananya");
+
+  const userId = decoded.userId;
+  const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const progress = await user.progress.find((item) => item.slideId == slideId);
+
+    if (!progress) {
+      user.progress.push({
+        slideId: slideId, 
+        completedPercent:percent
+      
+      });
+      user.save();
+      return res.status(404).json({ error: 'New progress created' });
+    }
+
+    progress.completedPercent = percent;
+
+    user.save();
+
+    res.json(progress);
+  
+});
+
+
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
     console.log("Listening on port");
 });
 
 
-module.exports = app;
+module.exports = app ;

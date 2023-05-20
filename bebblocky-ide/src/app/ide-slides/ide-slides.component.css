@@ -2,7 +2,6 @@
   position: relative;
   height: 100%;
   font-family: Rajdhani, sans-serif;
-  
 
 }
 
@@ -22,7 +21,6 @@
   background-size: cover;
   background-position: center;
   border-radius: 0 0 2rem 2rem;
-  
   padding: 1rem;
 
 }
@@ -56,7 +54,7 @@
   display: flex;
   align-items: center;
   transition: justify-content 0.3s ease-in-out;
-  /* border: transparent solid 2px; */
+
 }
 
 .right-arrow {
@@ -83,37 +81,6 @@
   transition: justify-content 0.3s ease-in-out, background-color 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
-/* .right-arrow:hover:before,
-.left-arrow:hover:before {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-} */
-
-/* .right-arrow:before,
-.left-arrow:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  height: 90%;
-  width: 1rem;
-  background-color: #fff;
-  opacity: 0;
-  transform: translateX(10px);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.right-arrow:before {
-  left: 0;
-}
-
-.left-arrow:before {
-  right: 0;
-  transform: translateX(-10px);
-} */
-
 
 .dots-container {
   position: absolute;
@@ -125,7 +92,6 @@
   height: 0.3rem;
   width: 100%;
   box-sizing: border-box;
-  /* background-color: #00000049; */
   z-index: 999;
 }
 
@@ -160,7 +126,6 @@
   margin: 0 auto;
   text-align: center;
   margin-bottom: 1rem;
-  font-family: 'Lucida Console' !important;
   font-size:1.1rem;
   
 }

@@ -19,6 +19,7 @@ import { CodeEditorService } from './services/code-editor.service';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     ProfilePageSidebarComponent,
     ProfilePageUserdataComponent,
     ProfilePageProgressComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,

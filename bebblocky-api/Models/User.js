@@ -18,8 +18,8 @@ const userSchema = new Schema({
     required: true
   },
   progress: [{
-    topic: {
-      type: String,
+    slideId: {
+      type: Number,
       required: true
     },
     completedPercent: {

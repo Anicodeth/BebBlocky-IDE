@@ -35,10 +35,9 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
       this.codeEditorService.userCode.next(aceEditor.getValue());
     });
 
-    
-
     aceEditor.session.setValue(`<h1>Title</h1>`); // To add starting code, already from the start
     aceEditor.session.setMode('ace/mode/html');
+    aceEditor.setFontSize(18);
     aceEditor.setTheme("ace/theme/cobalt");
     aceEditor.setOptions({wrapBehavioursEnabled: false
     });

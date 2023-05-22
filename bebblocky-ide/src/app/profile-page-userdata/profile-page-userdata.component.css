@@ -1,0 +1,37 @@
+.dashboard {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    width: 100%;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 2rem;
+  }
+  
+  .profile, .tasks, .calendar {
+    width: 30%;
+    border: 1px solid #ccc;
+    padding: 1rem;
+  }
+  
+  .calendar {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .calendar-container {
+    width: 80%;
+    height: 300px;
+    border: 1px solid #ccc;
+  }

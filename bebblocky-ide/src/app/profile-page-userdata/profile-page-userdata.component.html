@@ -38,3 +38,28 @@
         </div>
     </main>
 </div>
+<div class="dashboard">
+    <div class="header">
+      <h1>Personal Information Dashboard</h1>
+    </div>
+    <div class="content">
+      <div class="profile">
+        <h2>Profile</h2>
+        <p>Name: {{ name }} </p>
+        <p>Email: {{ email }} </p>
+        <p>Phone: {{ phone }} </p>
+      </div>
+      <div class="tasks">
+        <h2>Tasks</h2>
+        <ul>
+          <li *ngFor="let task of tasks">{{task}}</li>
+        </ul>
+      </div>
+      <div class="calendar">
+        <h2>Calendar</h2>
+        <div class="calendar-container">
+          <!-- <app-calendar></app-calendar> -->
+        </div>
+      </div>
+    </div>
+  </div>

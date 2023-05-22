@@ -29,4 +29,8 @@ export class ProfilePageUserdataComponent {
       'link': '/code'
     }
   ]
+  name: string = 'John Doe';
+  email: string = 'johndoe@example.com';
+  phone: string = '555-555-5555';
+  tasks: string[] = ['Task 1', 'Task 2', 'Task 3'];
 }

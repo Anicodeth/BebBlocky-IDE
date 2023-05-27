@@ -13,28 +13,42 @@
             <div
                 routerLinkActive="active"
                 *ngFor="let course of courses"
-                class="course-container">
-    
-                <div class="course-container-about">
+                class="course">
+
+                <div class="course-about">
                     <h3>{{ course.title }}</h3>
                     <p>{{ course.description }}</p>
                 </div>
-    
-                <div class="course-container-progress">
-                    <div class="progress-bar"
+
+                <div class="course-progress">
+                    <div class="course-progress-bar"
                         [style.width.%]='course.progressPercent'></div>
                 </div>
-    
-                <div class="course-container-action-button">
+
+                <div class="course-action-button">
                     <a class="course-goto-button">
-                        <fa-icon class="sidebar-menu-item-icon" [icon]="gotoIcon"></fa-icon>
+                        <fa-icon class="sidebar-menu-item-icon"
+                            [icon]="gotoIcon"></fa-icon>
                     </a>
                 </div>
-    
+
             </div>
         </div>
-        <div class="statistics-container">
-            <h1>Hello World</h1>
+        <div class="ad-board">
+            <h1>What you can do next?</h1>
+            <div class="ad ad-game">
+                <a href="https://example.com/game">
+                    <img src="game-ad.jpg" alt="Game Ad">
+                    <h3>Play the Amazing Adventure Game!</h3>
+                </a>
+            </div>
+
+            <div class="ad ad-toy">
+                <a href="https://example.com/toys">
+                    <img src="toy-ad.jpg" alt="Toy Ad">
+                    <h3>Explore Our Wide Range of Toys</h3>
+                </a>
+            </div>
         </div>
     </main>
 </div>

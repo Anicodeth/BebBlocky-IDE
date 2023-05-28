@@ -12,7 +12,7 @@ import { BridgeService } from '../bridge.service';
 export class LoginPageComponent {
   public loginForm: FormGroup;
   public signupForm: FormGroup;
-  public mobileToggle:boolean = true;
+  public mobileToggle: boolean = true;
 
 
   constructor(private service: BridgeService, private fb: FormBuilder, private router: Router) {
@@ -29,19 +29,20 @@ export class LoginPageComponent {
   }
 
 
-  isButtonDisabled : boolean = false;
-  isClassActive : boolean = false;
+  isButtonDisabled: boolean = false;
+  isClassActive: boolean = false;
 
-  cheaker(){
+  cheaker() {
     this.isClassActive = !this.isClassActive;
   }
 
-  toggle(){
+  toggle() {
     this.mobileToggle = !this.mobileToggle;
   }
 
   //function to handle the login functionality
   login() {
+    console.log('start');
 
     this.isButtonDisabled = true;
 
@@ -59,24 +60,28 @@ export class LoginPageComponent {
         alert(err.message);
         this.isButtonDisabled = false
       }
-      
+
       );
+    
+      console.log('last');
   }
   //function to handle the signup functionality
   signup() {
+    console.log('start - signup');
     this.isButtonDisabled = true;
     this.service
       .signUp(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password)
-      
+
       .subscribe((res) => {
         this.isButtonDisabled = true;
         this.cheaker()
         console.log(res);
-        
-      },(err)=>{
+
+      }, (err) => {
         this.isButtonDisabled = true;
         alert(err.message)
       }
       );
+      console.log('last - signup');
   }
 }

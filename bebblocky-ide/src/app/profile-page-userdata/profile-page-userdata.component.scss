@@ -3,12 +3,22 @@
 $border: #ff9800;
 $background-color: #ff9800;
 $beblocky-orange: #fcb332;
+
 $beblocky-purple: #703d99;
-$beblocky-light-green: #def0e2;
+
 $beblock-light-blue: #dff1fb;
-$clr-main: #5baf48;
-$clr-accent: #a7d464;
-$linear-gradient: linear-gradient(to right, #5baf48, #a7d464);
+
+$beblocky-green: #5baf48;
+$beblocky-accent-green: #a7d464;
+$beblocky-light-green: #def0e2;
+
+$beblocky-pink: #8f6fb0;
+
+$beblocky-cyan: #2ebca4;
+$beblocky-cyan-accent:#37d6c9;
+
+$green-linear-gradient: linear-gradient(to right, $beblocky-green, $beblocky-accent-green);
+$purple-pink-linear-gradient: linear-gradient(to right, $beblocky-purple, $beblocky-pink);
 
 $ff-primary: "Montserrat", sans-serif;
 
@@ -60,7 +70,7 @@ $ff-primary: "Montserrat", sans-serif;
           transition: color 0.2s;
 
           &:hover {
-            color: $clr-main;
+            color: $beblocky-green;
           }
         }
       }
@@ -73,92 +83,136 @@ $ff-primary: "Montserrat", sans-serif;
   flex-direction: row;
   gap: 1rem;
   width: 100%;
+}
 
-  .courses-container {
-    width: 66%;
-    margin: 1rem auto;
-    // padding: 0 2rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+.courses-container {
+  width: 66%;
+  margin: 1rem auto;
+  // padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 
-    .course-container {
-      margin: 0 auto;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: $linear-gradient;
-      border-radius: 1rem;
-      box-shadow: 0 14px 28px #00000040, 0 10px 10px #00000038;
-      min-width: 90%;
-      min-height: 240px;
-
-      &:hover {
-        box-shadow: 0 14px 28px #00000046, 0 10px 10px #00000041;
-      }
-
-      &-about {
-        display: block;
-        text-align: center;
-        font-family: $ff-primary;
-        padding: 0.5rem;
-      }
-
-      &-progress {
-        margin: 1rem;
-        height: 8px;
-        width: 90%;
-        background-color: $beblocky-light-green;
-        display: block;
-        border-radius: 4px;
-
-        .progress-bar {
-          height: 100%;
-          flex: 1;
-          border-radius: 4px;
-          background-color: $background-color;
-        }
-
-        .progress-bar-filled {
-          background-color: $background-color;
-        }
-      }
-
-      &-action-button {
-        margin: 1rem auto;
-        .course-goto-button {
-          background-color: $background-color;
-          color: #fff;
-          border: none;
-          border-radius: 0.5rem;
-          padding: 10px;
-          cursor: pointer;
-
-          i {
-            font-size: 1.2rem;
-          }
-        }
-      }
-    }
-  }
-
-  .statistics-container {
-    width: 33%;
-    min-height: 100%;
-    
-    background: $beblocky-purple;
-    border-radius: 1rem;
-    box-shadow: 0 14px 28px #00000040, 0 10px 10px #00000038;
-    
+  .course {
+    margin: 0 auto;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: $green-linear-gradient;
+    border-radius: 1rem;
+    box-shadow: 0 14px 28px #00000040, 0 10px 10px #00000038;
+    min-width: 90%;
+    min-height: 240px;
 
-    position: relative;
-    margin: 1rem auto;
-    // min-width: 90%;
+    &:hover {
+      transform: translateY(-5px);
+      transition: all 0.5s ease;
+      box-shadow: 0 14px 28px #00000046, 0 10px 10px #00000041;
+    }
+
+    &-about {
+      display: block;
+      text-align: center;
+      font-family: $ff-primary;
+      padding: 0.5rem;
+    }
+
+    &-progress {
+      margin: 1rem;
+      height: 8px;
+      width: 90%;
+      background-color: $beblocky-light-green;
+      display: block;
+      border-radius: 4px;
+
+      &-bar {
+        height: 100%;
+        flex: 1;
+        border-radius: 4px;
+        background-color: $background-color;
+      }
+    }
+
+    &-action-button {
+      margin: 1rem auto;
+      .course-goto-button {
+        background-color: $background-color;
+        color: #fff;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 10px;
+        cursor: pointer;
+
+        i {
+          font-size: 1.2rem;
+        }
+      }
+    }
   }
 }
+
+.ad-board {
+  // width: 33%;
+  min-height: 100%;
+  
+  background: $purple-pink-linear-gradient;
+  border-radius: 1rem;
+  box-shadow: 0 14px 28px #00000040, 0 10px 10px #00000038;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  margin: 1rem auto;
+
+  h1 {
+    font-size: 1.5rem;
+    color: #fff;
+    font-family: $ff-primary;
+  }
+  
+  .ad {
+    width: 90%;
+    margin: 10px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 7px 14px #00000046, 0 5px 5px #00000041;
+
+    &:hover {
+      transform: translateY(-5px);
+      transition: all 0.5s ease;
+      box-shadow: 0 14px 28px #00000046, 0 10px 10px #00000041;
+    }
+    
+    a {
+      text-decoration: none;
+      color: #333;
+      
+      img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+      
+      h3 {
+        font-size: 18px;
+      }
+    }
+  }
+  
+  .ad-game {
+    background: linear-gradient(to right, $beblocky-cyan, $beblocky-cyan-accent);
+  }
+  
+  .ad-toy {
+    background: linear-gradient(to right, $beblocky-cyan, $beblocky-cyan-accent);
+  }
+}
+

@@ -4,21 +4,37 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class BridgeService {
+export class  BridgeService {
 
   constructor(private http:HttpClient) { }
 
   userData: any;
-  token = sessionStorage.getItem('auth_token')
+  token = sessionStorage.getItem('auth_token');
+
+  baseURL: string = "localhost:3000";
 
   signUp(username: string, email: string, password: string) {
     let body = { username: username, password: password, email: email };
-    return this.http.post('https://beb-blocky-ide.vercel.app/signup', body);
+    return this.http.post( this.baseURL + '/signup', body );
   }
 
   signIn(username: string, password: string) {
 
     let body = { username: username, password: password };
-    return this.http.post('https://beb-blocky-ide.vercel.app/signin', body);
+    return this.http.post( this.baseURL + '/signin', body );
+  }
+
+  getSlides(id: number) {
+    let header = {
+      'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
+    };
+    return this.http.get( this.baseURL + '/slides/' + id.toString(), {headers: header});
+  }
+
+  updateProgress(id: number, percent: number): void {
+    let header = {
+      'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
+    };
+    this.http.post(this.baseURL + `slides/${id}/${percent}`, { headers: header });
   }
 }

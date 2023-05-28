@@ -13,10 +13,8 @@
     "express": "^4.18.2",
     "json-web-token": "^3.2.0",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.1.1"
+    "mongoose": "^7.1.1",
+    "swagger-ui-express": "^4.6.3"
   },
-
-
   "start": "node index.js"
- 
 }

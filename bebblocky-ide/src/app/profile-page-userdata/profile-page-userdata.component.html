@@ -16,13 +16,13 @@
               class="course">
 
               <div class="course-about">
-                  <h3>{{ course.title }}</h3>
+                  <h3>{{ course.courseName }}</h3>
                   <p>{{ course.description }}</p>
               </div>
 
               <div class="course-progress">
                   <div class="course-progress-bar"
-                      [style.width.%]='course.progressPercent'></div>
+                      [style.width.%]='getSlideProgress(course.slideId)'></div>
               </div>
 
               <div class="course-action-button">
@@ -38,14 +38,14 @@
           <h1>What you can do next?</h1>
           <div class="ad ad-game">
               <a href="https://example.com/game">
-                  <img src="game-ad.jpg" alt="Game Ad">
+                  <img alt="Game Ad">
                   <h3>Play the Amazing Adventure Game!</h3>
               </a>
           </div>
 
           <div class="ad ad-toy">
               <a href="https://example.com/toys">
-                  <img src="toy-ad.jpg" alt="Toy Ad">
+                  <img alt="Toy Ad">
                   <h3>Explore Our Wide Range of Toys</h3>
               </a>
           </div>

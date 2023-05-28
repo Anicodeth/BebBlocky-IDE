@@ -3,18 +3,12 @@ const express = require('express');
 const jwt = require("jsonwebtoken");
 const mongoose = require('mongoose');
 const cors = require('cors');
-app = express();
-app.use(express.json());
+const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-var options = {
-  swaggerOptions: {
-    url: 'http://petstore.swagger.io/v2/swagger.json'
-  }
-}
+app = express();
+app.use(express.json());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(null, options));
-//Models
 const Schema = mongoose.Schema;
 
 //userSchema
@@ -123,7 +117,33 @@ const authenticateJWT = (req, res, next) => {
   };
 
 
-//Sign up endpoint
+/**
+ * @swagger
+ * /signup:
+ *   post:
+ *     summary: User signup
+ *     description: Create a new user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: User created successfully
+ *       409:
+ *         description: Username already taken
+ *       500:
+ *         description: Internal server error
+ */
 app.post('/signup', async (req, res) => {
 
     const data = req.body;
@@ -147,7 +167,29 @@ app.post('/signup', async (req, res) => {
     }
   });
   
-
+/**
+ * @swagger
+ * /signin:
+ *   post:
+ *     summary: User signin
+ *     description: Authenticate a user and generate a JWT token
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Successful signin
+ *       401:
+ *         description: Invalid username or password
+ */
 app.post('/signin', async (req, res)=>{
 
   try {
@@ -170,7 +212,25 @@ app.post('/signin', async (req, res)=>{
 });
 
 
-// GET /slides/:slide_id endpoint with JWT authentication
+/**
+ * @swagger
+ * /slides/{slide_id}:
+ *   get:
+ *     summary: Get a slide by ID
+ *     description: Retrieve a slide by its ID with JWT authentication
+ *     parameters:
+ *       - in: path
+ *         name: slide_id
+ *         description: ID of the slide
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       404:
+ *         description: Slide not found
+ */
 app.get('/slides/:slide_id', async (req, res) => {
   const slideId = req.params.slide_id;
   const token = req.header('Authorization').replace('Bearer ', '');
@@ -192,7 +252,71 @@ app.get('/slides/:slide_id', async (req, res) => {
 
   });
 
+/**
+ * @swagger
+ * /slides/{slide_id}/progress:
+ *   get:
+ *     summary: Get progress for a slide
+ *     description: Retrieve the completion percentage for a slide
+ *     parameters:
+ *       - in: path
+ *         name: slide_id
+ *         description: ID of the slide
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       404:
+ *         description: Slide or progress not found
+ */
+app.get('/slides/:slide_id/progress', async (req, res) => {
+  const slideId = req.params.slide_id;
+  const token = req.header('Authorization').replace('Bearer ', '');
+  const decoded = jwt.verify(token, process.env.JWT_SECRET || 'Ananya');
 
+  const userId = decoded.userId;
+  const user = await User.findById(userId);
+  
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  const progress = user.progress.find((item) => item.slideId === slideId);
+
+  if (!progress) {
+    return res.status(404).json({ message: 'Progress not found' });
+  }
+
+  res.json(progress);
+});
+
+/**
+ * @swagger
+ * /updateprogress/{slide_id}/{percent}:
+ *   post:
+ *     summary: Update progress for a slide
+ *     description: Update the completion percentage for a slide with JWT authentication
+ *     parameters:
+ *       - in: path
+ *         name: slide_id
+ *         description: ID of the slide
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: percent
+ *         description: Completion percentage
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       404:
+ *         description: Slide not found
+ */
 app.post('/updateprogress/:slide_id/:percent', async (req, res) => {
   const slideId = req.params.slide_id;
   const percent = req.params.percent;
@@ -226,7 +350,18 @@ app.post('/updateprogress/:slide_id/:percent', async (req, res) => {
 });
 
 
-// GET all slides
+/**
+ * @swagger
+ * /slides:
+ *   get:
+ *     summary: Get all slides
+ *     description: Retrieve all slides
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       500:
+ *         description: Internal server error
+ */
 app.get('/slides', async (req, res) => {
   try {
     const slides = await Slide.find();
@@ -237,8 +372,24 @@ app.get('/slides', async (req, res) => {
   }
 });
 
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Sample API',
+      version: '1.0.0',
+      description: 'Sample API documentation',
+    },
+  },
+  apis: ['./index.js'], // Specify the file(s) where your JSDoc annotations are present
+};
 
-const PORT = process.env.PORT || 3000
+// Generate Swagger specification
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+
+// Serve Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Listening on port");
 });

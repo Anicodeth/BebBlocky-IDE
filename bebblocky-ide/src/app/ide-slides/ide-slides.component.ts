@@ -61,7 +61,7 @@ export class IdeSlidesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.bridgeService.getSlides(1).subscribe(response => {
+    this.bridgeService.getSlide(1).subscribe((response: any) => {
       console.log(response);
     });
   }

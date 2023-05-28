@@ -42,7 +42,6 @@ export class LoginPageComponent {
 
   //function to handle the login functionality
   login() {
-    console.log('start');
 
     this.isButtonDisabled = true;
 
@@ -51,7 +50,6 @@ export class LoginPageComponent {
       .subscribe((response: any) => {
         this.isButtonDisabled = false;
         this.service.userData = response;
-        console.log(response);
         sessionStorage.setItem('auth_token', response.token);
 
         this.router.navigateByUrl("/profile")
@@ -62,26 +60,21 @@ export class LoginPageComponent {
       }
 
       );
-    
-      console.log('last');
   }
   //function to handle the signup functionality
   signup() {
-    console.log('start - signup');
     this.isButtonDisabled = true;
     this.service
       .signUp(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password)
 
       .subscribe((res) => {
         this.isButtonDisabled = true;
-        this.cheaker()
-        console.log(res);
+        this.cheaker();
 
       }, (err) => {
         this.isButtonDisabled = true;
         alert(err.message)
       }
       );
-      console.log('last - signup');
   }
 }

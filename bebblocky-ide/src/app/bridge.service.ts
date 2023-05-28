@@ -11,7 +11,7 @@ export class  BridgeService {
   userData: any;
   token = sessionStorage.getItem('auth_token');
 
-  baseURL: string = "localhost:3000";
+  baseURL: string = "http://localhost:3000";
 
   signUp(username: string, email: string, password: string) {
     let body = { username: username, password: password, email: email };
@@ -24,11 +24,23 @@ export class  BridgeService {
     return this.http.post( this.baseURL + '/signin', body );
   }
 
-  getSlides(id: number) {
+  getSlides() {
+    console.log("here");
+    return this.http.get( this.baseURL + '/slides');
+  }
+
+  getSlide(id: number) {
     let header = {
       'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
     };
     return this.http.get( this.baseURL + '/slides/' + id.toString(), {headers: header});
+  }
+
+  getSlideProgress(id: number) {
+    let header = {
+      'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
+    };
+    return this.http.get( this.baseURL + '/slides/' + id.toString() + '/progress', {headers: header});
   }
 
   updateProgress(id: number, percent: number): void {

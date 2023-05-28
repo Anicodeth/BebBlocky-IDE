@@ -1,0 +1,99 @@
+
+* {
+font-family: monospace;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-transform: capitalize;
+  text-decoration: none;
+  transition: 200ms linear;
+  outline: none;
+  border: none;
+}
+.shorttext{
+  line-height: 1.75rem;
+}
+.bold{
+  font-weight:bolder;
+}
+.header {
+  height: 100vh;
+  color: #fff;
+  background:  linear-gradient(to right, rgba(91, 175, 72,0.9), rgba(167, 212, 100,0.9)),
+    url("../../assets/bk1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5rem;
+  width: 100%;
+  background-color:  #e7ffc3;
+  
+}
+
+.header .links {
+  display: flex;
+  gap: 6rem;
+  margin: 0 3rem;
+}
+
+a {
+    color:#5BAF48;
+    font-weight: bolder;
+}
+
+.header h3 {
+  font-size: 2.8rem;
+
+}
+.header a:hover {
+  color: #1a232c;
+  ;
+  text-decoration: none;
+}
+.links a {
+  font-size: 1.2rem;
+  background-color: tomato;
+  color:white;
+  padding:1rem;
+  border-radius: 0.5rem;
+}
+
+.header .content {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.header .content p {
+  font-size: 2rem;
+  text-align: center;
+  text-transform: none;
+}
+.btn {
+  padding: 0.8rem 1.8rem;
+  font-size: 1.3rem;
+  font-weight: 420;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  background-color: rgb(255, 152, 0);
+  color: #fff;
+}
+.btn:hover {
+  background: #1a232c;
+  color: #fff;
+}

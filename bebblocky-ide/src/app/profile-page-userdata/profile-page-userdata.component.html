@@ -1,79 +1,54 @@
 <div class="container">
-    <header class="header">
-        <h1 class="header-title">BeBlocky</h1>
-        <nav class="header-navigation">
-            <ul class="nav-list">
-                <li class="nav-item"><a routerLink = '/'>Home</a></li>
-                <li class="nav-item"><a href="#about">About</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main class="main">
-        <div class="courses-container">
-            <div
-                routerLinkActive="active"
-                *ngFor="let course of courses"
-                class="course">
+  <header class="header">
+      <h1 class="header-title">BeBlocky</h1>
+      <nav class="header-navigation">
+          <ul class="nav-list">
+              <li class="nav-item"><a href="#home">Home</a></li>
+              <li class="nav-item"><a href="#about">About</a></li>
+          </ul>
+      </nav>
+  </header>
+  <main class="main">
+      <div class="courses-container">
+          <div
+              routerLinkActive="active"
+              *ngFor="let course of courses"
+              class="course">
 
-                <div class="course-about">
-                    <h3>{{ course.title }}</h3>
-                    <p>{{ course.description }}</p>
-                </div>
+              <div class="course-about">
+                  <h3>{{ course.title }}</h3>
+                  <p>{{ course.description }}</p>
+              </div>
 
-                <div class="course-progress">
-                    <div class="course-progress-bar"
-                        [style.width.%]='course.progressPercent'></div>
-                </div>
+              <div class="course-progress">
+                  <div class="course-progress-bar"
+                      [style.width.%]='course.progressPercent'></div>
+              </div>
 
-                <div class="course-action-button">
-                    <a class="course-goto-button">
-                        <fa-icon class="sidebar-menu-item-icon"
-                            [icon]="gotoIcon"></fa-icon>
-                    </a>
-                </div>
+              <div class="course-action-button">
+                  <a class="course-goto-button">
+                      <fa-icon class="sidebar-menu-item-icon"
+                          [icon]="gotoIcon"></fa-icon>
+                  </a>
+              </div>
 
-            </div>
-        </div>
-        <div class="ad-board">
-            <h1>What you can do next?</h1>
-            <div class="ad ad-game">
-                <a href="https://example.com/game">
-                    <img src="game-ad.jpg" alt="Game Ad">
-                    <h3>Play the Amazing Adventure Game!</h3>
-                </a>
-            </div>
+          </div>
+      </div>
+      <div class="ad-board">
+          <h1>What you can do next?</h1>
+          <div class="ad ad-game">
+              <a href="https://example.com/game">
+                  <img src="game-ad.jpg" alt="Game Ad">
+                  <h3>Play the Amazing Adventure Game!</h3>
+              </a>
+          </div>
 
-            <div class="ad ad-toy">
-                <a href="https://example.com/toys">
-                    <img src="toy-ad.jpg" alt="Toy Ad">
-                    <h3>Explore Our Wide Range of Toys</h3>
-                </a>
-            </div>
-        </div>
-    </main>
+          <div class="ad ad-toy">
+              <a href="https://example.com/toys">
+                  <img src="toy-ad.jpg" alt="Toy Ad">
+                  <h3>Explore Our Wide Range of Toys</h3>
+              </a>
+          </div>
+      </div>
+  </main>
 </div>
-<div class="dashboard">
-    <div class="header">
-      <h1>Personal Information Dashboard</h1>
-    </div>
-    <div class="content">
-      <div class="profile">
-        <h2>Profile</h2>
-        <p>Name: {{ name }} </p>
-        <p>Email: {{ email }} </p>
-        <p>Phone: {{ phone }} </p>
-      </div>
-      <div class="tasks">
-        <h2>Tasks</h2>
-        <ul>
-          <li *ngFor="let task of tasks">{{task}}</li>
-        </ul>
-      </div>
-      <div class="calendar">
-        <h2>Calendar</h2>
-        <div class="calendar-container">
-          <!-- <app-calendar></app-calendar> -->
-        </div>
-      </div>
-    </div>
-  </div>

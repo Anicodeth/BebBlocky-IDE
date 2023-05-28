@@ -3,7 +3,17 @@ const express = require('express');
 const jwt = require("jsonwebtoken");
 const mongoose = require('mongoose');
 const cors = require('cors');
+app = express();
+app.use(express.json());
+const swaggerUi = require('swagger-ui-express');
 
+var options = {
+  swaggerOptions: {
+    url: 'http://petstore.swagger.io/v2/swagger.json'
+  }
+}
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(null, options));
 //Models
 const Schema = mongoose.Schema;
 
@@ -81,12 +91,6 @@ const Slide = mongoose.model('Slide', slideSchema);
 
 const User = mongoose.model('User', userSchema);
 
-
-
-
-
-app = express();
-app.use(express.json());
 
 //Database linker
 mongoose.connect('mongodb+srv://afmtoday:OlxwPFCF0rLMnA3e@cluster0.edrrjyh.mongodb.net/bebblocky?retryWrites=true&w=majority')
@@ -219,6 +223,18 @@ app.post('/updateprogress/:slide_id/:percent', async (req, res) => {
 
     res.json(progress);
   
+});
+
+
+// GET all slides
+app.get('/slides', async (req, res) => {
+  try {
+    const slides = await Slide.find();
+    res.json(slides);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 

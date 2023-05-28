@@ -10,7 +10,7 @@ export class  BridgeService {
 
   userData: any;
   token = sessionStorage.getItem('auth_token');
-  baseURL: string = "http://localhost:3000";
+  baseURL: string = "https://beb-blocky-d7l0g6gjl-anicodeth.vercel.app";
 
   signUp(username: string, email: string, password: string) {
     let body = { username: username, password: password, email: email };

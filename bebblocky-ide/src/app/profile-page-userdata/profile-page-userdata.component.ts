@@ -9,7 +9,7 @@ import { BridgeService } from '../bridge.service';
 })
 export class ProfilePageUserdataComponent implements OnInit {
   gotoIcon = faArrowRight;
-  courses: any;
+  courses: any[] = [];
   name: string = 'John Doe';
   email: string = 'johndoe@example.com';
   phone: string = '555-555-5555';
@@ -20,15 +20,14 @@ export class ProfilePageUserdataComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log("here");
     this.bridgeService.getSlides().subscribe((slides: any) => {
       this.courses = slides;
     });
   }
 
   getSlideProgress(id: number) {
-    console.log('here');
     this.bridgeService.getSlideProgress(id).subscribe((progress: any) => {
-      console.log('we inside now.');
       return progress;
     });
   }

@@ -8,7 +8,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
-  { path: 'ide', component: IdePageComponent },
+  { path: 'ide/:slideId', component: IdePageComponent },
   { path: 'profile', component: ProfilePageComponent },
   { path: 'login', component:LoginPageComponent}
 

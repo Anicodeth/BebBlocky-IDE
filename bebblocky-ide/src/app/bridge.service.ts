@@ -10,7 +10,6 @@ export class  BridgeService {
 
   userData: any;
   token = sessionStorage.getItem('auth_token');
-
   baseURL: string = "http://localhost:3000";
 
   signUp(username: string, email: string, password: string) {

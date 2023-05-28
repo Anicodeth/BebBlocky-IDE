@@ -63,7 +63,10 @@ export class IdeSlidesComponent implements OnInit {
 
   ngOnInit() {
     this.slideId = parseInt(this.route.snapshot.paramMap.get('slideId')!);
-    this.bridgeService.getSlide(this.slideId).subscribe((slides: any) => this.slides = slides);
+    this.bridgeService.getSlide(this.slideId).subscribe((slides: any) => {
+      console.log(slides);
+      this.slides = slides.slides;
+    });
   }
 
   goToPrevious(): void {

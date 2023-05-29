@@ -39,6 +39,7 @@ export class  BridgeService {
     let header = {
       'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
     };
+    console.log(header);
     return this.http.get( this.baseURL + '/slides/' + id.toString() + '/progress', {headers: header});
   }
 

@@ -20,15 +20,15 @@ export class ProfilePageUserdataComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("here");
     this.bridgeService.getSlides().subscribe((slides: any) => {
       this.courses = slides;
     });
+    this.getSlideProgress(1);
   }
 
-  getSlideProgress(id: number) {
+  getSlideProgress(id: number): void {
     this.bridgeService.getSlideProgress(id).subscribe((progress: any) => {
-      return progress;
+      console.log(progress);
     });
   }
 }

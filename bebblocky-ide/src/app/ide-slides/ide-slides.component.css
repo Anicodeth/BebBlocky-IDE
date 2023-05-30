@@ -6,7 +6,7 @@
 }
 
 .content-title{
-  
+
   font-family: Source Sans Pro,Helvetica,sans-serif !important;
   color:black !important;
   margin: 0 auto;
@@ -110,6 +110,7 @@
 
 .code-content {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  font-family: Monospace;
   width: 95%;
   background-color: #404040;
   color:white;
@@ -117,7 +118,7 @@
   border-radius: 0.75rem;
   padding:0.5rem;
   margin: auto;
-   
+
 
 
 }
@@ -127,5 +128,5 @@
   text-align: center;
   margin-bottom: 1rem;
   font-size:1.1rem;
-  
+
 }

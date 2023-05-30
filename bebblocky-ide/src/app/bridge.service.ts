@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { throwError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class  BridgeService {
 
   userData: any;
   token = sessionStorage.getItem('auth_token');
-  baseURL: string = "https://beb-blocky-ide.vercel.app";
+  baseURL: string = "http://localhost:3000";
 
   signUp(username: string, email: string, password: string) {
     let body = { username: username, password: password, email: email };
@@ -37,10 +39,20 @@ export class  BridgeService {
 
   getSlideProgress(id: number) {
     let header = {
-      'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
+      'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}`
     };
-    console.log(header);
-    return this.http.get( this.baseURL + '/slides/' + id.toString() + '/progress', {headers: header});
+
+    return this.http.get(this.baseURL + '/slides/' + id.toString() + '/progress', { headers: header }).pipe(
+      catchError((error) => {
+        if (error.error && error.error.message === 'Progress not found') {
+          // Return a default value of 0 when progress is not found
+          return of(0);
+        }
+
+        // Forward the error to the subscriber
+        return throwError(error);
+      })
+    );
   }
 
   updateProgress(id: number, percent: number): void {

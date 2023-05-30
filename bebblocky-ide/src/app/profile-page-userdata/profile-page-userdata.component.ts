@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faTachometerAlt, faCode, faUser, faCog, faTableCells, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { BridgeService } from '../bridge.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-page-userdata',
@@ -23,12 +25,11 @@ export class ProfilePageUserdataComponent implements OnInit {
     this.bridgeService.getSlides().subscribe((slides: any) => {
       this.courses = slides;
     });
-    this.getSlideProgress(1);
   }
 
-  getSlideProgress(id: number): void {
-    this.bridgeService.getSlideProgress(id).subscribe((progress: any) => {
-      console.log(progress);
-    });
+  getSlideProgress(id: number): Observable<number> {
+    return this.bridgeService.getSlideProgress(id).pipe(
+      map((progress: any) => progress.completedPercent)
+    );
   }
 }

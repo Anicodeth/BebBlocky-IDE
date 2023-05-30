@@ -16,14 +16,16 @@
               class="course">
 
               <div class="course-about">
-                  <h3>{{ course.courseName }}</h3>
+                  <h3>{{ course.title }}</h3>
                   <p>{{ course.description }}</p>
               </div>
-
               <div class="course-progress">
-                  <div class="course-progress-bar"
-                      [style.width.%]=100></div>
+                <div
+                    class="course-progress-bar"
+                    [style.width.%]=0>
+                </div>
               </div>
+
 
               <div class="course-action-button">
                   <a routerLink="/ide/{{ course.slideId }}" routerLinkActive="active"

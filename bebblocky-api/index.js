@@ -283,11 +283,76 @@ app.get('/slides/:slide_id/progress', async (req, res) => {
     return res.status(404).json({ message: 'User not found' });
   }
 
-  const progress = user.progress.find((item) => item.slideId === slideId);
+  const progress = user.progress.find((item) => {
+    console.log(item, slideId, item.slideId == slideId);
+    return item.slideId == slideId;
+  });
 
+  console.log(progress);
   if (!progress) {
     return res.status(404).json({ message: 'Progress not found' });
   }
+
+  res.json(progress);
+});
+
+
+/**
+ * @swagger
+ * /slides/{slide_id}/progress:
+ *   post:
+ *     summary: Create progress for a slide
+ *     description: Create a new progress entry for a slide with JWT authentication
+ *     parameters:
+ *       - in: path
+ *         name: slide_id
+ *         description: ID of the slide
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - in: body
+ *         name: progress
+ *         description: Progress data
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             completedPercent:
+ *               type: integer
+ *               description: Completion percentage
+ *               example: 50
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       404:
+ *         description: Slide or user not found
+ */
+app.post('/slides/:slide_id/progress', async (req, res) => {
+  const slideId = req.params.slide_id;
+  const completedPercent = 0;
+  const token = req.header('Authorization').replace('Bearer ', '');
+  const decoded = jwt.verify(token, process.env.JWT_SECRET || 'Ananya');
+
+  const userId = decoded.userId;
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  const progress = user.progress.find((item) => item.slideId === slideId);
+
+  if (!progress) {
+    user.progress.push({
+      slideId: slideId,
+      completedPercent: completedPercent,
+    });
+    await user.save();
+    return res.status(200).json({ message: 'New progress created' });
+  }
+
+  progress.completedPercent = completedPercent;
+  await user.save();
 
   res.json(progress);
 });
@@ -323,6 +388,7 @@ app.post('/updateprogress/:slide_id/:percent', async (req, res) => {
   const token = req.header('Authorization').replace('Bearer ', '');
   const decoded = jwt.verify(token, process.env.JWT_SECRET || "Ananya");
 
+  console.log('backend - here');
   const userId = decoded.userId;
   const user = await User.findById(userId);
     if (!user) {
@@ -369,6 +435,79 @@ app.get('/slides', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+/**
+ * @swagger
+ * /slides:
+ *   post:
+ *     summary: Create a slide
+ *     description: Create a new slide
+ *     parameters:
+ *      - in: body
+ *        name: slide
+ *        description: The slide to create
+ *        schema:
+ *          $ref: '#/definitions/Slide'
+ *     responses:
+ *       201:
+ *         description: Slide created successfully
+ *       400:
+ *         description: Bad request
+ *       500:
+ *         description: Internal server error
+ */
+app.post('/slides', async (req, res) => {
+  try {
+    const slide = new Slide(req.body);
+    const savedSlide = await slide.save();
+    res.status(201).json(savedSlide);
+  } catch (error) {
+    console.error(error);
+    if (error.name === 'ValidationError') {
+      res.status(400).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }
+});
+
+/**
+ * @swagger
+ * /slides/{id}:
+ *   delete:
+ *     summary: Delete a slide by ID
+ *     description: Delete a slide based on its ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: ID of the slide to delete
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       204:
+ *         description: Slide deleted successfully
+ *       404:
+ *         description: Slide not found
+ *       500:
+ *         description: Internal server error
+ */
+
+app.delete('/slides/:slideId', async (req, res) => {
+  try {
+    const slideId = req.params.slideId;
+    const deletedSlide = await Slide.findOneAndDelete({ slideId: slideId });
+
+    if (!deletedSlide) {
+      return res.status(404).json({ message: 'Slide not found' });
+    }
+    
+    res.sendStatus(204);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to delete the slide' });
   }
 });
 

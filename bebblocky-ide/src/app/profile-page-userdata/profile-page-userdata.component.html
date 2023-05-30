@@ -17,15 +17,13 @@
 
               <div class="course-about">
                   <h3>{{ course.title }}</h3>
-                  <p>{{ course.description }}</p>
               </div>
               <div class="course-progress">
                 <div
                     class="course-progress-bar"
-                    [style.width.%]=0>
+                    [style.width.%]=getSlideProgress(course.slideId)>
                 </div>
               </div>
-
 
               <div class="course-action-button">
                   <a routerLink="/ide/{{ course.slideId }}" routerLinkActive="active"

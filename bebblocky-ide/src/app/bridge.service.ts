@@ -55,10 +55,11 @@ export class  BridgeService {
     );
   }
 
-  updateProgress(id: number, percent: number): void {
+  updateProgress(id: number, percent: number) {
+    console.log('in the bridge', id, percent);
     let header = {
       'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
     };
-    this.http.post(this.baseURL + `slides/${id}/${percent}`, { headers: header });
+    return this.http.post(this.baseURL + `/updateprogress/${id}/${percent}`, { headers: header });
   }
 }

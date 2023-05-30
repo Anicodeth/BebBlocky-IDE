@@ -27,9 +27,8 @@ export class ProfilePageUserdataComponent implements OnInit {
     });
   }
 
-  getSlideProgress(id: number): Observable<number> {
-    return this.bridgeService.getSlideProgress(id).pipe(
-      map((progress: any) => progress.completedPercent)
-    );
+  getSlideProgress(id: number) {
+    console.log(this.courses);
+    return 75;
   }
 }

@@ -24,7 +24,7 @@ $ff-primary: "Montserrat", sans-serif;
 
 .container {
   // background-color: $beblocky-light-green;
-  height: 100vh;
+  height: auto;
   min-width: 90vw;
   margin: 0 auto;
   // background-color: red;
@@ -104,7 +104,7 @@ $ff-primary: "Montserrat", sans-serif;
     background: $green-linear-gradient;
     border-radius: 1rem;
     box-shadow: 0 14px 28px #00000040, 0 10px 10px #00000038;
-    min-width: 90%;
+    width: 100%;
     min-height: 240px;
 
     &:hover {

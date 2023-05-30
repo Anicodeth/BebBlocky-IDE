@@ -383,7 +383,8 @@ app.post('/slides/:slide_id/progress', async (req, res) => {
  *         description: Slide not found
  */
 app.post('/updateprogress/:slide_id/:percent', async (req, res) => {
-  const slideId = req.params.slide_id;
+  try{
+    const slideId = req.params.slide_id;
   const percent = req.params.percent;
   const token = req.header('Authorization').replace('Bearer ', '');
   const decoded = jwt.verify(token, process.env.JWT_SECRET || "Ananya");
@@ -411,7 +412,11 @@ app.post('/updateprogress/:slide_id/:percent', async (req, res) => {
 
     user.save();
 
-    res.json(progress);
+    res.json(progress);}
+    catch(err){
+      
+    }
+
   
 });
 

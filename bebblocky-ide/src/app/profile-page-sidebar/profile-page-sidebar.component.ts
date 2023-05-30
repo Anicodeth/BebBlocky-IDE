@@ -9,7 +9,7 @@ import { faTachometerAlt, faCode, faUser, faCog, faTableCells } from '@fortaweso
 export class ProfilePageSidebarComponent implements OnInit {
   isExpanded: boolean = false;
   menuItems: any[] = [
-    { name: 'Code', link: '/ide', icon: faCode, class: 'special' },
+    { name: 'Code', link: '/ide/4', icon: faCode, class: 'special' },
     { name: 'Profile', link: '/profile', icon: faUser, class: 'regular' },
     // Add more menu items here
   ];

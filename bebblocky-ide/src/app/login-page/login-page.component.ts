@@ -51,7 +51,7 @@ export class LoginPageComponent {
         this.isButtonDisabled = false;
         this.service.userData = response;
         sessionStorage.setItem('auth_token', response.token);
-        this.service.progress = response.userCheck.progress;
+        sessionStorage.setItem("courseProg", JSON.stringify(response.userCheck.progress));
 
         this.router.navigateByUrl("/profile")
 

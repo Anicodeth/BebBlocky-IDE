@@ -24,17 +24,24 @@ export class ProfilePageUserdataComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.temp = sessionStorage.getItem('courseProg')
-    this.bridgeService.progress.forEach((val:any)=>{
+    this.temp =sessionStorage.getItem('courseProg');
+    if (this.temp){
+    JSON.parse(this.temp).forEach((val:any)=>{
 this.progress.set(val.slideId, val.completedPercent);
 
-    });
+    });}
 
+    this.temp = sessionStorage.getItem('courses');
 
-
+   if (!this.temp){
     this.bridgeService.getSlides().subscribe((slides: any) => {
       this.courses = slides;
+      sessionStorage.setItem('courses', JSON.stringify(this.courses));
     });
+  }else{
+    this.courses = JSON.parse(this.temp);
+    console.log(this.courses);
+  }
   }
 
   getProgress(id:any) {

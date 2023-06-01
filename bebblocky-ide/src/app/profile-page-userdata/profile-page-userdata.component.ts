@@ -12,6 +12,8 @@ import { map } from 'rxjs/operators';
 export class ProfilePageUserdataComponent implements OnInit {
   gotoIcon = faArrowRight;
   courses: any[] = [];
+  progress = new Map<number, number>();
+  temp:any;
   name: string = 'John Doe';
   email: string = 'johndoe@example.com';
   phone: string = '555-555-5555';
@@ -22,13 +24,24 @@ export class ProfilePageUserdataComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.temp = sessionStorage.getItem('courseProg')
+    this.bridgeService.progress.forEach((val:any)=>{
+this.progress.set(val.slideId, val.completedPercent);
+
+    });
+
+
+
     this.bridgeService.getSlides().subscribe((slides: any) => {
       this.courses = slides;
     });
   }
 
-  getSlideProgress(id: number) {
-    console.log(this.courses);
-    return 75;
+  getProgress(id:any) {
+    const val:any = this.progress.get(id);
+    if (!val){
+      return 0
+    }
+    return val;
   }
 }

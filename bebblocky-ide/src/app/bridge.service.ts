@@ -7,13 +7,14 @@ import { throwError, of } from 'rxjs';
   providedIn: 'root'
 })
 export class  BridgeService {
+  progress: any;
 
   constructor(private http:HttpClient) { }
 
   userData: any;
   token = sessionStorage.getItem('auth_token');
-  baseURL: string = "https://beb-blocky-ide.vercel.app";
-
+  //baseURL: string = "https://beb-blocky-ide.vercel.app";
+  baseURL: string = "http://localhost:3000";
   signUp(username: string, email: string, password: string) {
     let body = { username: username, password: password, email: email };
     return this.http.post( this.baseURL + '/signup', body );

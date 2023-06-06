@@ -58,7 +58,7 @@ export class IdeSlidesComponent implements OnInit {
   }
 
   updateProgress() {
-    this.bridgeService.updateProgress(this.slideId, this.currentIndex / this.slides.length * 100).subscribe((response) => {
+    this.bridgeService.updateProgress(this.slideId, (this.currentIndex / this.slides.length) * 100).subscribe((response) => {
       console.log('progress updated');
     });;
   }

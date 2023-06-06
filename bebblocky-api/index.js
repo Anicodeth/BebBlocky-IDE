@@ -386,7 +386,8 @@ app.post('/updateprogress/:slide_id/:percent', async (req, res) => {
   try{
     const slideId = req.params.slide_id;
   const percent = req.params.percent;
-  const token = req.header('Authorization').replace('Bearer ', '');
+  const token = (req.body.headers.Authorization).replace('Bearer ', '');
+
   const decoded = jwt.verify(token, process.env.JWT_SECRET || "Ananya");
 
   console.log('backend - here');
@@ -414,7 +415,7 @@ app.post('/updateprogress/:slide_id/:percent', async (req, res) => {
 
     res.json(progress);}
     catch(err){
-      
+      console.log(err);
     }
 
   
@@ -533,7 +534,7 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
 // Serve Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log("Listening on port");
 });

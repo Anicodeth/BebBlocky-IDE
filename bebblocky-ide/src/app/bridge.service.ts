@@ -13,8 +13,8 @@ export class  BridgeService {
 
   userData: any;
   token = sessionStorage.getItem('auth_token');
-  baseURL: string = "https://beb-blocky-ide.vercel.app";
-  //baseURL: string = "http://localhost:3000";
+  //baseURL: string = "https://beb-blocky-ide.vercel.app";
+  baseURL: string = "http://localhost:4000";
   signUp(username: string, email: string, password: string) {
     let body = { username: username, password: password, email: email };
     return this.http.post( this.baseURL + '/signup', body );
@@ -61,6 +61,7 @@ export class  BridgeService {
     let header = {
       'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
     };
+    console.log('in the bridge', id, percent,header);
     return this.http.post(this.baseURL + `/updateprogress/${id}/${percent}`, { headers: header });
   }
 }

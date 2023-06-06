@@ -40,7 +40,6 @@ this.progress.set(val.slideId, val.completedPercent);
     });
   }else{
     this.courses = JSON.parse(this.temp);
-    console.log(this.courses);
   }
   }
 

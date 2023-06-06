@@ -58,8 +58,17 @@ export class IdeSlidesComponent implements OnInit {
   }
 
   updateProgress() {
-    this.bridgeService.updateProgress(this.slideId, ((this.currentIndex + 1) / this.slides.length) * 100).subscribe((response) => {
-      console.log('progress updated');
+    let percent: any = ((this.currentIndex + 1) / this.slides.length) * 100;
+
+    this.bridgeService.updateProgress(this.slideId, percent).subscribe((response) => {
+      let temp:any=sessionStorage.getItem('courseProg');
+      temp = JSON.parse(temp);
+      
+      temp.forEach((val:any)=>{
+        if(val.slideId == this.slideId){
+          val.completedPercent = percent;}
+      });
+      sessionStorage.setItem('courseProg', JSON.stringify(temp));
     });;
   }
 }

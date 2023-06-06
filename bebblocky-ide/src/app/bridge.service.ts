@@ -57,11 +57,9 @@ export class  BridgeService {
   }
 
   updateProgress(id: number, percent: number) {
-    console.log('in the bridge', id, percent);
     let header = {
       'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
     };
-    console.log('in the bridge', id, percent,header);
     return this.http.post(this.baseURL + `/updateprogress/${id}/${percent}`, { headers: header });
   }
 }

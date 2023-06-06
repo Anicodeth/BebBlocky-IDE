@@ -390,7 +390,6 @@ app.post('/updateprogress/:slide_id/:percent', async (req, res) => {
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET || "Ananya");
 
-  console.log('backend - here');
   const userId = decoded.userId;
   const user = await User.findById(userId);
     if (!user) {

@@ -99,6 +99,7 @@ $logo-image-shrunk: url('../../assets/logo-icons/BeBlocky-Logo-Small.png');
 // Adjust the breakpoint as needed
 @media only screen and (max-width: 768px) {
     .sidebar {
+        
         left: 0;
         width: 80%;
         height: 100%;
@@ -107,7 +108,7 @@ $logo-image-shrunk: url('../../assets/logo-icons/BeBlocky-Logo-Small.png');
         box-shadow: 10px rgba(0, 0, 0, 0.75);
         
         &.shrink {
-            left: -100%;
+            left: -120%;
             transition: left 0.3s ease-in-out;
         }
     }
@@ -123,15 +124,15 @@ $logo-image-shrunk: url('../../assets/logo-icons/BeBlocky-Logo-Small.png');
         cursor: pointer;
         background-color: transparent;
         border: none;
-        padding: 10px 12px;
+        padding: 0.5rem 0.5rem;
     }
 
     .hamburger-line {
         display: block;
-        width: 24px;
-        height: 3px;
+        width: 2.5rem;
+        height: 0.2rem;
         background-color: #6fb64e;
-        margin: 5px 0;
+        margin: 0.5rem 0;
         transition: all 0.3s;
     }
 
@@ -142,7 +143,8 @@ $logo-image-shrunk: url('../../assets/logo-icons/BeBlocky-Logo-Small.png');
 
 // Hide the hamburger button on larger screens
 @media only screen and (min-width: 769px) {
-    .header {
+    .header{
         display: none;
     }
+
 }

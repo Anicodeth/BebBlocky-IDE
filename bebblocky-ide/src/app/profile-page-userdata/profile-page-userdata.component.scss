@@ -51,23 +51,34 @@ $ff-primary: "Montserrat", sans-serif;
   }
 
   &-navigation {
+    width:100%;
+
     .nav-list {
       height: 100%;
+      width:100%;
       display: flex;
       flex-direction: row;
       list-style: none;
+      align-items: center;
+      justify-content: right;
 
       .nav-item {
         display: flex;
+        height:100%;
         justify-content: center;
         align-items: center;
-        margin-left: 20px;
+        margin-right: 1rem;
         padding: 0;
+        font-weight: bolder;
+        font-family: monospace;
+        
 
         a {
-          font-size: 16px;
+     
+          font-size: 1.4rem;
           color: #333;
           transition: color 0.2s;
+          height:100%;
 
           &:hover {
             color: $beblocky-green;
@@ -215,5 +226,35 @@ $ff-primary: "Montserrat", sans-serif;
   .ad-toy {
     background: linear-gradient(to right, $beblocky-cyan, $beblocky-cyan-accent);
   }
+}
+
+@media only screen and (max-width: 768px) {
+
+  .header {
+    display:none;
+  }
+
+  .courses-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding:0rem;
+  }
+  .course{
+    padding: 1rem;
+  width: 95%;
+  }
+  .main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0.65rem;
+  }
+
+  .ad-board{
+    padding: 1rem;
+  }
+
+
 }
 

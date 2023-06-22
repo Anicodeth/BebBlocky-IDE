@@ -54,20 +54,19 @@ export class IdeSlidesComponent implements OnInit {
 
 
   goToNext(): void {
-
-    if (!this.isStringMatch(this.slides[this.currentIndex].code, this.input, 0.7)){
-      console.log("Not related");
+        // if related patterns are found
+        console.log(this.calculateSentencePercentage(this.input,this.slides[this.currentIndex].code))
+         if (this.calculateSentencePercentage(this.input,this.slides[this.currentIndex].code) < 0){
+              alert('You did not do the task correctly! Go back and check what is missing from your code.')
           }
           else{
-            console.log("Related");
+            //if strings are related
+            if (this.currentIndex != this.slides.length - 1) {
+              this.currentIndex += 1;}
+
+            this.updateProgress();
           }
       
-    if (this.currentIndex != this.slides.length - 1) {
-      this.currentIndex += 1;
-    }
-
-
-    this.updateProgress();
   }
 
   goToSlide(slideIndex: number): void {
@@ -94,70 +93,28 @@ export class IdeSlidesComponent implements OnInit {
   }
 
 
-
-   isStringMatch(input: string, searchString: string, similarityThreshold: number): boolean {
-    const normalizedInput = input.toLowerCase();
-    const normalizedSearchString = searchString.toLowerCase();
+   calculateSentencePercentage(paragraph: string, sentence: string): number {
+    const paragraphLower = paragraph.toLowerCase();
+    const sentenceLower = sentence.toLowerCase();
   
-    if (normalizedInput.includes(normalizedSearchString)) {
-      return true;
-    }
+    // Remove punctuation from the sentence and split it into individual words
+    const sentenceWords = sentenceLower.replace(/[.,?!]/g, "").split(" ");
   
-    const inputWords = normalizedInput.split(' ');
-    const searchWords = normalizedSearchString.split(' ');
+    // Calculate the number of words in the sentence
+    const sentenceLength = sentenceWords.length;
   
-    for (const searchWord of searchWords) {
-      let foundMatch = false;
+    // Count the number of matching words in the paragraph
+    const matchingWords = sentenceWords.filter((word) => paragraphLower.includes(word));
   
-      for (const inputWord of inputWords) {
-        const similarity = this.calculateSimilarity(inputWord, searchWord);
+    // Calculate the number of matching words
+    const matchingWordCount = matchingWords.length;
   
-        if (similarity >= similarityThreshold) {
-          foundMatch = true;
-          break;
-        }
-      }
+    // Calculate the percentage of the sentence present in the paragraph
+    const percentage = (matchingWordCount / sentenceLength) * 100;
   
-      if (!foundMatch) {
-        return false;
-      }
-    }
-  
-    return true;
+    return percentage;
   }
   
-   calculateSimilarity(str1: string, str2: string): number {
-    const maxLength = Math.max(str1.length, str2.length);
-    const distance = this.levenshteinDistance(str1, str2);
-    return 1 - distance / maxLength;
-  }
   
-   levenshteinDistance(str1: string, str2: string): number {
-    const dp: number[][] = [];
-  
-    for (let i = 0; i <= str1.length; i++) {
-      dp[i] = [i];
-    }
-  
-    for (let j = 0; j <= str2.length; j++) {
-      dp[0][j] = j;
-    }
-  
-    for (let i = 1; i <= str1.length; i++) {
-      for (let j = 1; j <= str2.length; j++) {
-        if (str1[i - 1] === str2[j - 1]) {
-          dp[i][j] = dp[i - 1][j - 1];
-        } else {
-          dp[i][j] = Math.min(
-            dp[i - 1][j] + 1, // deletion
-            dp[i][j - 1] + 1, // insertion
-            dp[i - 1][j - 1] + 1 // substitution
-          );
-        }
-      }
-    }
-  
-    return dp[str1.length][str2.length];
-  }
   
 }

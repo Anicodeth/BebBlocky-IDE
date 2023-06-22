@@ -13,7 +13,7 @@ export class ProfilePageUserdataComponent implements OnInit {
   gotoIcon = faArrowRight;
   courses: any[] = [];
   progress = new Map<number, number>();
-  temp:any;
+  temp: any;
   name: string = 'John Doe';
   email: string = 'johndoe@example.com';
   phone: string = '555-555-5555';
@@ -21,31 +21,36 @@ export class ProfilePageUserdataComponent implements OnInit {
 
   constructor(
     private bridgeService: BridgeService,
-  ) {}
+  ) { }
+
+  get username() {
+    return this.bridgeService.userData.username;
+  }
 
   ngOnInit() {
-    this.temp =sessionStorage.getItem('courseProg');
-    if (this.temp){
-    JSON.parse(this.temp).forEach((val:any)=>{
-this.progress.set(val.slideId, val.completedPercent);
+    this.temp = sessionStorage.getItem('courseProg');
+    if (this.temp) {
+      JSON.parse(this.temp).forEach((val: any) => {
+        this.progress.set(val.slideId, val.completedPercent);
 
-    });}
+      });
+    }
 
     this.temp = sessionStorage.getItem('courses');
 
-   if (!this.temp){
-    this.bridgeService.getSlides().subscribe((slides: any) => {
-      this.courses = slides;
-      sessionStorage.setItem('courses', JSON.stringify(this.courses));
-    });
-  }else{
-    this.courses = JSON.parse(this.temp);
-  }
+    if (!this.temp) {
+      this.bridgeService.getSlides().subscribe((slides: any) => {
+        this.courses = slides.slides;
+        sessionStorage.setItem('courses', JSON.stringify(this.courses));
+      });
+    } else {
+      this.courses = JSON.parse(this.temp);
+    }
   }
 
-  getProgress(id:any) {
-    const val:any = this.progress.get(id);
-    if (!val){
+  getProgress(id: any) {
+    const val: any = this.progress.get(id);
+    if (!val) {
       return 0
     }
     return val;

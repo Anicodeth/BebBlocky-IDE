@@ -41,27 +41,27 @@ export class LoginPageComponent {
   }
 
   //function to handle the login functionality
-  login() {
+  login(): void {
+  this.isButtonDisabled = true;
 
-    this.isButtonDisabled = true;
-
-    this.service
-      .signIn(this.loginForm.value.username, this.loginForm.value.password)
-      .subscribe((response: any) => {
+  this.service.signIn(this.loginForm.value.username, this.loginForm.value.password)
+    .subscribe(
+      (response: any) => {
+        console.log('ng here');
         this.isButtonDisabled = false;
-        this.service.userData = response;
+        this.service.userData = response.user;
         sessionStorage.setItem('auth_token', response.token);
-        sessionStorage.setItem("courseProg", JSON.stringify(response.userCheck.progress));
+        sessionStorage.setItem("courseProg", JSON.stringify(response.user.progress));
 
-        this.router.navigateByUrl("/profile")
-
-      }, (err) => {
-        alert(err.message);
-        this.isButtonDisabled = false
+        this.router.navigateByUrl("/profile");
+      },
+      (error: any) => {
+        alert(error.message);
+        this.isButtonDisabled = false;
       }
+    );
+}
 
-      );
-  }
   //function to handle the signup functionality
   signup() {
     this.isButtonDisabled = true;

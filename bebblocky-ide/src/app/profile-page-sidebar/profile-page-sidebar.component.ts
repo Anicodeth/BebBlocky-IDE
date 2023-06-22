@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faTachometerAlt, faCode, faUser, faCog, faTableCells } from '@fortawesome/free-solid-svg-icons';
+import { faCss3, faHtml5, faSquareJs } from '@fortawesome/free-brands-svg-icons';
+import { faTachometerAlt, faCode, faUser, faCog, faTableCells, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-profile-page-sidebar',
@@ -9,8 +10,12 @@ import { faTachometerAlt, faCode, faUser, faCog, faTableCells } from '@fortaweso
 export class ProfilePageSidebarComponent implements OnInit {
   isExpanded: boolean = false;
   menuItems: any[] = [
-    { name: 'Code', link: '/ide/4', icon: faCode, class: 'special' },
+    { name: 'Code', link: '/ide/', icon: faCode, class: 'special' },
     { name: 'Profile', link: '/profile', icon: faUser, class: 'regular' },
+    { name: 'All Courses', link: '/profile', icon: faLayerGroup, class: 'regular' },
+    { name: 'HTML Courses', link: '/profile', icon: faHtml5, class: 'regular' },
+    { name: 'CSS Courses', link: '/profile', icon: faCss3, class: 'regular' },
+    { name: 'JS Courses', link: '/profile', icon: faSquareJs, class: 'regular' },
     // Add more menu items here
   ];
 

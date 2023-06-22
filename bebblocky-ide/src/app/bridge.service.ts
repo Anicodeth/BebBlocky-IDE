@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { throwError, of } from 'rxjs';
 
 @Injectable({
@@ -13,29 +13,45 @@ export class  BridgeService {
 
   userData: any;
   token = sessionStorage.getItem('auth_token');
-  baseURL: string = "https://beb-blocky-ide.vercel.app";
- // baseURL: string = "http://localhost:4000";
+  // baseURL: string = "https://beb-blocky-ide.vercel.app";
+  resourcesBaseURL: string = "http://localhost:3000/api/v1";
+  authBaseUrl: string = "http://localhost:3000/auth/v1";
+
   signUp(username: string, email: string, password: string) {
     let body = { username: username, password: password, email: email };
-    return this.http.post( this.baseURL + '/signup', body );
+    return this.http.post( this.authBaseUrl + '/signup', body );
   }
 
-  signIn(username: string, password: string) {
+  signIn(username: string, password: string): any {
+  let body = { username: username, password: password };
+  let response = this.http.post(this.authBaseUrl + '/signin', body);
 
-    let body = { username: username, password: password };
-    return this.http.post( this.baseURL + '/signin', body );
-  }
+  return response.pipe(
+    tap((data: any) => {
+      this.userData = data;
+      sessionStorage.setItem('auth_token', data.token);
+    })
+  );
+}
+
 
   getSlides() {
     console.log("here");
-    return this.http.get( this.baseURL + '/slides');
+    return this.http.get( this.resourcesBaseURL + '/slides');
+  }
+
+  getUserSlides() {
+    let header = {
+      'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
+    };
+    return this.http.get( this.resourcesBaseURL + '/user/slides', {headers: header});
   }
 
   getSlide(id: number) {
     let header = {
       'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
     };
-    return this.http.get( this.baseURL + '/slides/' + id.toString(), {headers: header});
+    return this.http.get( this.resourcesBaseURL + '/slides/' + id.toString(), {headers: header});
   }
 
   getSlideProgress(id: number) {
@@ -43,7 +59,7 @@ export class  BridgeService {
       'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}`
     };
 
-    return this.http.get(this.baseURL + '/slides/' + id.toString() + '/progress', { headers: header }).pipe(
+    return this.http.get(this.resourcesBaseURL + '/user/slides/' + id.toString() + '/progress', { headers: header }).pipe(
       catchError((error) => {
         if (error.error && error.error.message === 'Progress not found') {
           // Return a default value of 0 when progress is not found
@@ -56,10 +72,10 @@ export class  BridgeService {
     );
   }
 
-  updateProgress(id: number, percent: number) {
+  updateSlideProgress(id: number, percent: number) {
     let header = {
       'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
     };
-    return this.http.post(this.baseURL + `/updateprogress/${id}/${percent}`, { headers: header });
+    return this.http.post(this.resourcesBaseURL + `/user/slides/${id}/progress`, { completedPercent: percent }, { headers: header });
   }
 }

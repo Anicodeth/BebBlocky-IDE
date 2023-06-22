@@ -32,9 +32,12 @@ export class IdeSlidesComponent implements OnInit {
 
   ngOnInit() {
     this.slideId = parseInt(this.route.snapshot.paramMap.get('slideId')!);
-    this.bridgeService.getSlide(this.slideId).subscribe((slides: any) => {
-      this.slides = slides.slides;
+    this.bridgeService.getSlide(this.slideId).subscribe((slide: any) => {
+      this.slides = slide.slide.slides;
+      console.log(this.slides);
     });
+
+
 
 
     this.codeEditorService.userCode.subscribe((output) => {
@@ -78,7 +81,7 @@ export class IdeSlidesComponent implements OnInit {
   updateProgress() {
     let percent: any = ((this.currentIndex + 1) / this.slides.length) * 100;
 
-    this.bridgeService.updateProgress(this.slideId, percent).subscribe((response) => {
+    this.bridgeService.updateSlideProgress(this.slideId, percent).subscribe((response) => {
       let temp:any=sessionStorage.getItem('courseProg');
       temp = JSON.parse(temp);
       

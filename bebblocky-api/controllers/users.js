@@ -104,9 +104,13 @@ exports.getUserSlideProgress = async (req, res) => {
   try {
     authenticateJWT(req, res, async () => {
       try {
+        const slideId = req.params.slideId;
         const userId = req.user.userId;
         const user = await User.findById(userId);
-        res.json({ progress: user.progress });
+        const progress = user.progress.find(
+          progress => progress.slideId == slideId
+        );
+        res.json({ progress });
       } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
@@ -123,20 +127,20 @@ exports.updateUserSlideProgress = async (req, res) => {
     authenticateJWT(req, res, async () => {
       try {
         const userId = req.user.userId;
-        const { slideId, completed } = req.body;
-        console.log(slideId, completedPercent);
+        const slideId = req.params.slideId;
+        const { completedPercent } = req.body;
         const user = await User.findById(userId);
 
-        // Find the progress object corresponding to the slideId
-        const progressIndex = user.progress.findIndex(
-          progress => progress.slideId === slideId
+        const progress = user.progress.find(
+          progress => progress.slideId == slideId
         );
-
-        // Update the completion status
-        if (progressIndex !== -1) {
-          user.progress[progressIndex].completedPercent = completedPercent;
-        } else {
+        
+        if (!progress) {
           user.progress.push({ slideId, completedPercent });
+        }
+
+        if (progress) {
+          progress.completedPercent = completedPercent;
         }
 
         // Save the updated user object

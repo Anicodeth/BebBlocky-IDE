@@ -25,7 +25,6 @@ app.use(
   })
 );
 
-
 // Route imports
 const usersRouter = require("./routes/users");
 const slidesRouter = require("./routes/slides");
@@ -36,7 +35,6 @@ VERSION = "v1";
 app.use(`/api/${VERSION}/user`, usersRouter);
 app.use(`/api/${VERSION}/slides`, slidesRouter);
 app.use(`/auth/${VERSION}`, authRouter);
-
 
 // Serve the application
 const PORT = process.env.PORT || 3000;

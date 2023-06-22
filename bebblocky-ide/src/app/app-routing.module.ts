@@ -9,7 +9,9 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'ide/:slideId', component: IdePageComponent },
-  { path: 'profile', component: ProfilePageComponent },
+  { path: 'courses/:type', component: ProfilePageComponent},
+  { path: 'courses', component: ProfilePageComponent},
+  { path: 'profile', component: ProfilePageComponent},
   { path: 'login', component:LoginPageComponent}
 
 ];

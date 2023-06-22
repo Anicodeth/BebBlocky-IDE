@@ -36,7 +36,6 @@ export class  BridgeService {
 
 
   getSlides() {
-    console.log("here");
     return this.http.get( this.resourcesBaseURL + '/slides');
   }
 
@@ -44,7 +43,16 @@ export class  BridgeService {
     let header = {
       'Authorization':  `Bearer ${sessionStorage.getItem('auth_token')}`
     };
-    return this.http.get( this.resourcesBaseURL + '/user/slides', {headers: header});
+    return this.http.get( this.resourcesBaseURL + '/user/slides', { headers: header });
+  }
+
+  getSlidesByType(type: string) {
+    if (!type) {
+      return this.getSlides();
+    } else if (type == 'my') {
+      return this.getUserSlides();
+    }
+    return this.http.get( this.resourcesBaseURL + '/slides/' + type);
   }
 
   getSlide(id: number) {

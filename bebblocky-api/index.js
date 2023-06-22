@@ -1,121 +1,40 @@
 //Main imports
-const express = require('express');
-const jwt = require("jsonwebtoken");
+const express = require("express");
+const cors = require("cors");
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 const mongoose = require('mongoose');
-const cors = require('cors');
-const swaggerJsdoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
 
 app = express();
-app.use(express.json());
-
-const Schema = mongoose.Schema;
-
-//userSchema
-const userSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  progress: [{
-    slideId: {
-      type: Number,
-      required: true
-    },
-    completedPercent: {
-      type: Number,
-      required: true,
-      default: 0
-    }
-  }]
-});
-
-
-const slideSchema = new Schema({
-  slideId: {
-    type:Number,
-    required: true
-  }, 
-  title: {
-    type: String,
-    required: true
-  },
-  slides: [{
-    backgroundColor: 
-    {
-      type: String,
-      required: true
-    },
-    font: {
-      type: String,
-      required: true
-    },
-    title:  {
-        type: String,
-        required: true
-      },
-    content: {
-      type: String,
-      required: true
-    },
-    code: {
-      type: String,
-      required: true
-    },
-    image: {
-      type: String
-    },
-    // other relevant fields here
-  }]
-
-});
-
-
-const Slide = mongoose.model('Slide', slideSchema);
-
-const User = mongoose.model('User', userSchema);
-
 
 //Database linker
-mongoose.connect('mongodb+srv://afmtoday:OlxwPFCF0rLMnA3e@cluster0.edrrjyh.mongodb.net/bebblocky?retryWrites=true&w=majority')
-.then(() => console.log('Connected to MongoDB'))
-.catch((err) => console.error('Error connecting to MongoDB', err));
+mongoose
+  .connect(
+    "mongodb+srv://afmtoday:OlxwPFCF0rLMnA3e@cluster0.edrrjyh.mongodb.net/bebblocky?retryWrites=true&w=majority"
+  )
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Error connecting to MongoDB", err));
 
-
-//Application authorization
-app.use(cors({
+// App configuration
+app.use(express.json());
+app.use(
+  cors({
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false
-  }));
+    preflightContinue: false,
+  })
+);
 
+// Route imports
+const usersRouter = require("./routes/users");
+const slidesRouter = require("./routes/slides");
+const authRouter = require("./routes/auth");
 
-const authenticateJWT = (req, res, next) => {
-    const token = req.header('Authorization');
-    if (!token) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
-  
-    jwt.verify(token, 'Ananya', (err, decoded) => {
-      if (err) {
-        return res.status(403).json({ error: 'Invalid token' });
-      }
-  
-      req.user = decoded;
-      next();
-    });
-  };
-
+// Route definitions
+VERSION = "v1";
+app.use(`/api/${VERSION}/user`, usersRouter);
+app.use(`/api/${VERSION}/slides`, slidesRouter);
+app.use(`/auth/${VERSION}`, authRouter);
 
 /**
  * @swagger
@@ -535,13 +454,7 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-    console.log("Listening on port");
+  console.log(`Listening on port ${PORT}.`);
 });
 
-//endpoint for testing
-app.get('/', (req, res) => {
-    res.send('Hello World!');   
-}); 
-
-
-module.exports = app ;
+module.exports = app;

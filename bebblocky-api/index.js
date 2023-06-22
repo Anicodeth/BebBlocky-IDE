@@ -200,7 +200,7 @@ app.post('/signin', async (req, res)=>{
       if (!userCheck){
         throw new Error('Invalid username or password');
       }
-
+      
       const token = jwt.sign({userId: userCheck._id}, process.env.JWT_SECRET || "Ananya");
 
       res.json({userCheck, token});
@@ -226,7 +226,8 @@ app.post('/signin', async (req, res)=>{
  *         schema:
  *           type: string
  *     responses:
- *       200:
+ *       200:.
+ * 
  *         description: Successful response
  *       404:
  *         description: Slide not found
@@ -288,7 +289,6 @@ app.get('/slides/:slide_id/progress', async (req, res) => {
     return item.slideId == slideId;
   });
 
-  console.log(progress);
   if (!progress) {
     return res.status(404).json({ message: 'Progress not found' });
   }
@@ -537,6 +537,11 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log("Listening on port");
 });
+
+//endpoint for testing
+app.get('/', (req, res) => {
+    res.send('Hello World!');   
+}); 
 
 
 module.exports = app ;

@@ -10,14 +10,18 @@ import { JsCoursesComponent } from './dashboard/pages/js-courses/js-courses.comp
 import { CssCoursesComponent } from './dashboard/pages/css-courses/css-courses.component';
 import { HtmlCoursesComponent } from './dashboard/pages/html-courses/html-courses.component';
 import { ProfileComponent } from './dashboard/pages/profile/profile.component';
+import { LoggedInGuard } from './shared/guards/logged-in.guard';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
-  { path: 'ide/:slideId', component: IdePageComponent },
+  {
+    path: 'ide/:slideId', component: IdePageComponent, canActivate: [LoggedInGuard],
+  },
   { path: 'login', component: LoginPageComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [LoggedInGuard],
     children: [
       { path: 'courses', component: AllCoursesComponent },
       { path: 'my-courses', component: MyCoursesComponent },

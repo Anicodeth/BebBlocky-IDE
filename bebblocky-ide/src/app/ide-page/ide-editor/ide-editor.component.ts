@@ -1,6 +1,6 @@
 import {  AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import * as ace from "ace-builds";
-import { CodeEditorService } from '../services/code-editor.service';
+import { CodeEditorService } from '../../services/code-editor.service';
 
 @Component({
   selector: 'app-ide-editor',

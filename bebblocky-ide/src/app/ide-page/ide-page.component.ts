@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { BridgeService } from '../bridge.service';
+import { BridgeService } from '../services/bridge.service';
 import { ActivatedRoute } from '@angular/router';
-import { SlideInterface } from '../ide-slides/ide-slides.component';
 
 @Component({
   selector: 'app-ide-page',

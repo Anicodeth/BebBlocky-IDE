@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { BridgeService } from '../bridge.service';
 import { ActivatedRoute } from '@angular/router';
-import { CodeEditorService } from '../services/code-editor.service';
+import { BridgeService } from 'src/app/services/bridge.service';
+import { CodeEditorService } from 'src/app/services/code-editor.service';
 
 export interface SlideInterface {
   backgroundColor: string;

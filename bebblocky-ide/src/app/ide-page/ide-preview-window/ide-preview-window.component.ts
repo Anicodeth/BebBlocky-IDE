@@ -1,5 +1,5 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CodeEditorService } from '../services/code-editor.service';
+import { CodeEditorService } from 'src/app/services/code-editor.service';
 
 @Component({
   selector: 'app-ide-preview-window',

@@ -41,8 +41,7 @@ userSchema.pre('save', async function (next) {
       const highestUserId = await User.findOne().sort('-userId').exec();
       const newUserId = highestUserId ? highestUserId.userId + 1 : 1;
       user.userId = newUserId;
-    } catch (error) {
-      return next(error);
+    } catch (error) {  return next(error);
     }
   }
   next();

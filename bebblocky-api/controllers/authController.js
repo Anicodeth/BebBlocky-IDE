@@ -17,7 +17,6 @@ exports.postSignUp = async (req, res) => {
 
     res.status(201).json(user);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };
@@ -44,7 +43,6 @@ exports.postSignIn = async (req, res) => {
 
     res.status(201).json({ user, token });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };

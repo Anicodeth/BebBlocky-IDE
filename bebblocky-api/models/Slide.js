@@ -51,8 +51,7 @@ slideSchema.pre('save', async function (next) {
       const highestSlideId = await Slide.findOne().sort('-slideId').exec();
       const newSlideId = highestSlideId ? highestSlideId.slideId + 1 : 1;
       slide.slideId = newSlideId;
-    } catch (error) {
-      return next(error);
+    } catch (error) {  return next(error);
     }
   }
   next();

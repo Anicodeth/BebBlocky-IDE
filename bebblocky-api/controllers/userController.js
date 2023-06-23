@@ -1,5 +1,5 @@
 const userService = require('../services/userService');
-const authenticateJWT = require('../middleware/authMiddleware');
+const authenticateJWT = require('../middlewares/authMiddleware');
 
 function getUserSlidesByType(req, res, category) {
   try {

@@ -30,10 +30,13 @@ $logo-image-shrunk: url('../../assets/logo-icons/BeBlocky-Logo-Small.png');
             background-size: 60%; // Shrink the background size instead of changing the image
             transition: background-size 0.3s opacity; // Add transition for smooth animation
         }
+    }
 
-        .sidebar-logo-img {
-            src: $logo-image;
-        }
+    .sidebar-title {
+        font-size: 1.5rem;
+        text-align: center;
+        margin: 0.5rem 0;
+        color: #6fb64e;
     }
 
     .sidebar-menu {
@@ -69,7 +72,7 @@ $logo-image-shrunk: url('../../assets/logo-icons/BeBlocky-Logo-Small.png');
                     text-align: center;
                 }
 
-                fa-icon {
+                .sidebar-menu-item-icon {
                     font-size: 18px;
                 }
 

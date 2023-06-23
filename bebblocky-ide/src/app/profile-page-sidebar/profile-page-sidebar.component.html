@@ -4,19 +4,42 @@
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
     </div>
+    <div class="header-title">
+        <span [class.shrink]="isExpanded" *ngIf="!isExpanded" class="menu-item-text">
+            {{ currTab }}
+        </span>
+    </div>
 </div>
 <div class="sidebar" [class.shrink]="!isExpanded" (mouseenter)="expandSidebar()" (mouseleave)="shrinkSidebar()">
     <div class="sidebar-logo" [class.shrink]="!isExpanded">
         <img class="sidebar-logo-img" />
         <!-- Add your logo or brand name here -->
     </div>
-    <ul class="sidebar-menu">
-        <!-- If prvious type == item.name, set it active -->
-        <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of menuItems">
-            <a [class.shrink]="!isExpanded" [routerLink]="item.link" [class]="item.name == currentRoute ? 'active' : ''">
-                <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
-                <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
-            </a>
-        </li>
-    </ul>
+    <div>
+        <ul class="sidebar-menu">
+            <!-- If prvious type == item.name, set it active -->
+            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of userMenuItems">
+                <a [class.shrink]="!isExpanded" [routerLink]="item.link" [class]="item.name == currentRoute ? 'active' : ''">
+                    <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
+                    <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-title">
+        <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">
+            Browse our courses
+        </span>
+    </div>
+    <div>
+        <ul class="sidebar-menu">
+            <!-- If prvious type == item.name, set it active -->
+            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of courseMenuItems">
+                <a [class.shrink]="!isExpanded" [routerLink]="item.link" [class]="item.name == currentRoute ? 'active' : ''">
+                    <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
+                    <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>

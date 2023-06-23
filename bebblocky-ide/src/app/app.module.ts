@@ -13,7 +13,6 @@ import { IdeSlidesComponent } from './ide-slides/ide-slides.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ProfilePageUserdataComponent } from './profile-page-userdata/profile-page-userdata.component';
-import { ProfilePageProgressComponent } from './profile-page-progress/profile-page-progress.component';
 import { CodeEditorService } from './services/code-editor.service';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -35,7 +34,6 @@ import { ProfilePageSidebarComponent } from './profile-page-sidebar/profile-page
     ProfilePageComponent,
     ProfilePageSidebarComponent,
     ProfilePageUserdataComponent,
-    ProfilePageProgressComponent,
     LoginPageComponent,
     LandingPageComponent
   ],

@@ -12,9 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProfilePageSidebarComponent implements OnInit, DoCheck {
   isExpanded: boolean = false;
   currTab: any;
-  menuItems: any[] = [
+  userMenuItems: any[] = [
     { name: 'Code', link: '/ide/4', icon: faCode, class: 'special' },
-    { name: 'Profile', link: '/courses/my', icon: faUser, class: 'regular' },
+    { name: 'Profile', link: '/courses/my', icon: faUser, class: 'regular' },]
+  courseMenuItems: any[] = [
     { name: 'All Courses', link: '/courses', icon: faLayerGroup, class: 'regular' },
     { name: 'HTML Courses', link: '/courses/html', icon: faHtml5, class: 'regular' },
     { name: 'CSS Courses', link: '/courses/css', icon: faCss3, class: 'regular' },
@@ -28,7 +29,9 @@ export class ProfilePageSidebarComponent implements OnInit, DoCheck {
 
   ngOnInit(): void { }
 
-  ngDoCheck() {}
+  ngDoCheck() {
+    this.currentRoute;
+  }
 
   get currentRoute(): string {
     let type = this.route.snapshot.paramMap.get('slideId')!;
@@ -47,7 +50,6 @@ export class ProfilePageSidebarComponent implements OnInit, DoCheck {
         this.currTab = 'JS Courses';
         break;
       default:
-        this.currTab = 'All Courses';
         break;
     }
 

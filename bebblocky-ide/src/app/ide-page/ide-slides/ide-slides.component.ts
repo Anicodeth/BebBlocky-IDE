@@ -34,7 +34,6 @@ export class IdeSlidesComponent implements OnInit {
     this.slideId = parseInt(this.route.snapshot.paramMap.get('slideId')!);
     this.bridgeService.getSlide(this.slideId).subscribe((slide: any) => {
       this.slides = slide.slide.slides;
-      console.log(this.slides);
     });
 
 
@@ -55,7 +54,6 @@ export class IdeSlidesComponent implements OnInit {
 
   goToNext(): void {
         // if related patterns are found
-        console.log(this.calculateSentencePercentage(this.input,this.slides[this.currentIndex].code))
          if (this.calculateSentencePercentage(this.input,this.slides[this.currentIndex].code) < 0){
               alert('You did not do the task correctly! Go back and check what is missing from your code.')
           }

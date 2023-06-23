@@ -15,7 +15,7 @@ export class HtmlCoursesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.bridgeService.getSlidesByType('html').subscribe((courses: any) => {
+    this.bridgeService.getSlides('html').subscribe((courses: any) => {
       this.courses = courses.slides;
     });
   }

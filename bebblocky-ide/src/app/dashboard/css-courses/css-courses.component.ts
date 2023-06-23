@@ -15,7 +15,7 @@ export class CssCoursesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.bridgeService.getSlidesByType('css').subscribe((courses: any) => {
+    this.bridgeService.getSlides('css').subscribe((courses: any) => {
       this.courses = courses.slides;
     });
   }

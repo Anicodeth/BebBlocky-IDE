@@ -49,7 +49,7 @@ export class ProfilePageUserdataComponent implements OnInit, DoCheck {
   }
   
   getCourses() {
-    this.bridgeService.getSlidesByType(this.previousType).subscribe((slides: any) => {
+    this.bridgeService.getSlides(this.previousType).subscribe((slides: any) => {
       this.courses = slides.slides;
       sessionStorage.setItem('courses', JSON.stringify(this.courses));
     });

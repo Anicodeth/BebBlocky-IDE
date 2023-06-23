@@ -36,22 +36,20 @@ export class BridgeService {
     );
   }
 
-  getSlides(): Observable<Slide[]> {
-    return this.http.get<Slide[]>(this.resourcesBaseURL + '/slides');
-  }
-
-  getUserSlides(): Observable<Slide[]> {
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
-    return this.http.get<Slide[]>(this.resourcesBaseURL + '/user/slides', { headers: headers });
-  }
-
-  getSlidesByType(type: string): Observable<Slide[]> {
+  getSlides(type: string): Observable<Slide[]> {
     if (!type) {
-      return this.getSlides();
-    } else if (type === 'my') {
-      return this.getUserSlides();
+      return this.http.get<Slide[]>(this.resourcesBaseURL + '/slides/');
     }
     return this.http.get<Slide[]>(this.resourcesBaseURL + '/slides/' + type);
+  }
+
+  getUserSlides(type: string): Observable<Slide[]> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
+
+    if (!type) {
+      return this.http.get<Slide[]>(this.resourcesBaseURL + '/user/slides', { headers: headers });
+    }
+    return this.http.get<Slide[]>(this.resourcesBaseURL + '/user/slides' + type, { headers: headers });
   }
 
   getSlide(id: number): Observable<Slide> {

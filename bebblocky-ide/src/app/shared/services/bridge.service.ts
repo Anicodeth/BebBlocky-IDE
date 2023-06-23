@@ -47,6 +47,10 @@ export class BridgeService {
     sessionStorage.removeItem('auth_token');
   }
 
+  isLoggedIn() {
+    return !!sessionStorage.getItem('auth_token');
+  }
+
   getUser() {
     if (!this.user) {
       this.user = JSON.parse(sessionStorage.getItem('user') || '{}');

@@ -15,14 +15,14 @@ export class SidebarComponent {
     { name: 'Code', link: '/ide/4', icon: faCode, class: 'special' },
   ]
   userMenuItems: any[] = [
-    { name: 'Profile', link: '/courses/my', icon: faUser, class: 'regular' },
-    { name: 'My Courses', link: '/courses/my', icon: faFileCode, class: 'regular' },
+    { name: 'Profile', link: '/dashboard/profile', icon: faUser, class: 'regular' },
+    { name: 'My Courses', link: '/dashboard/my-courses', icon: faFileCode, class: 'regular' },
   ]
   courseMenuItems: any[] = [
-    { name: 'All Courses', link: '/courses', icon: faLayerGroup, class: 'regular' },
-    { name: 'HTML Courses', link: '/courses/html', icon: faHtml5, class: 'regular' },
-    { name: 'CSS Courses', link: '/courses/css', icon: faCss3, class: 'regular' },
-    { name: 'JS Courses', link: '/courses/js', icon: faSquareJs, class: 'regular' },
+    { name: 'All Courses', link: '/dashboard/courses', icon: faLayerGroup, class: 'regular' },
+    { name: 'HTML Courses', link: '/dashboard/html-courses', icon: faHtml5, class: 'regular' },
+    { name: 'CSS Courses', link: '/dashboard/css-courses', icon: faCss3, class: 'regular' },
+    { name: 'JS Courses', link: '/dashboard/js-courses', icon: faSquareJs, class: 'regular' },
     // Add more menu items here
   ];
 

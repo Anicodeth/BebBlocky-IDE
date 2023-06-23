@@ -25,7 +25,12 @@ import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { HeaderComponent } from './dashboard/header/header.component';
 import { UserCoursesComponent } from './dashboard/user-courses/user-courses.component';
-import { CourseComponent } from './dashboard/course/course.component';
+import { CourseComponent } from './dashboard/courses/course/course.component';
+import { AllCoursesComponent } from './dashboard/all-courses/all-courses.component';
+import { MyCoursesComponent } from './dashboard/my-courses/my-courses.component';
+import { JsCoursesComponent } from './dashboard/js-courses/js-courses.component';
+import { CssCoursesComponent } from './dashboard/css-courses/css-courses.component';
+import { HtmlCoursesComponent } from './dashboard/html-courses/html-courses.component';
 
 
 @NgModule({
@@ -49,7 +54,12 @@ import { CourseComponent } from './dashboard/course/course.component';
     ProfileComponent,
     HeaderComponent,
     UserCoursesComponent,
-    CourseComponent
+    CourseComponent,
+    AllCoursesComponent,
+    MyCoursesComponent,
+    JsCoursesComponent,
+    CssCoursesComponent,
+    HtmlCoursesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,15 +1,24 @@
+/**
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: User API
+ */
+
 const router = require('express').Router();
 const userController = require('../controllers/userController.js');
 
 /**
  * @swagger
- * /api/v1/user:
+ * /user:
  *   get:
- *     summary: Get user's details
+ *     summary: Get user's information
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Successfully retrieved user details
+ *         description: Successful operation
  *       500:
  *         description: Internal server error
  */
@@ -17,13 +26,15 @@ router.get('/', userController.getUser);
 
 /**
  * @swagger
- * /api/v1/user/slides:
+ * /user/slides:
  *   get:
  *     summary: Get user's slides
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Successfully retrieved user slides
+ *         description: Successful operation
  *       500:
  *         description: Internal server error
  */
@@ -31,13 +42,15 @@ router.get('/slides', userController.getUserSlides);
 
 /**
  * @swagger
- * /api/v1/user/slides/html:
+ * /user/slides/html:
  *   get:
  *     summary: Get user's HTML slides
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Successfully retrieved user HTML slides
+ *         description: Successful operation
  *       500:
  *         description: Internal server error
  */
@@ -45,13 +58,15 @@ router.get('/slides/html', userController.getUserHtmlSlides);
 
 /**
  * @swagger
- * /api/v1/user/slides/css:
+ * /user/slides/css:
  *   get:
  *     summary: Get user's CSS slides
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Successfully retrieved user CSS slides
+ *         description: Successful operation
  *       500:
  *         description: Internal server error
  */
@@ -59,13 +74,15 @@ router.get('/slides/css', userController.getUserCssSlides);
 
 /**
  * @swagger
- * /api/v1/user/slides/js:
+ * /user/slides/js:
  *   get:
  *     summary: Get user's JavaScript slides
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Successfully retrieved user JavaScript slides
+ *         description: Successful operation
  *       500:
  *         description: Internal server error
  */
@@ -73,20 +90,22 @@ router.get('/slides/js', userController.getUserJsSlides);
 
 /**
  * @swagger
- * /api/v1/user/slides/{slideId}/progress:
+ * /user/slides/{slideId}/progress:
  *   get:
- *     summary: Get user's slide progress by slide ID
+ *     summary: Get user's slide progress
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
- *       - name: slideId
- *         in: path
- *         description: ID of the slide
+ *       - in: path
+ *         name: slideId
  *         required: true
+ *         description: Slide ID
  *         schema:
  *           type: string
  *     responses:
  *       200:
- *         description: Successfully retrieved user slide progress
+ *         description: Successful operation
  *       500:
  *         description: Internal server error
  */
@@ -94,15 +113,17 @@ router.get('/slides/:slideId/progress', userController.getUserSlideProgress);
 
 /**
  * @swagger
- * /api/v1/user/slides/{slideId}/progress:
+ * /user/slides/{slideId}/progress:
  *   post:
- *     summary: Update user slide progress by slide ID
+ *     summary: Update user slide progress
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
- *       - name: slideId
- *         in: path
- *         description: ID of the slide
+ *       - in: path
+ *         name: slideId
  *         required: true
+ *         description: Slide ID
  *         schema:
  *           type: string
  *     requestBody:
@@ -110,15 +131,13 @@ router.get('/slides/:slideId/progress', userController.getUserSlideProgress);
  *       content:
  *         application/json:
  *           schema:
- *             type: object
  *             properties:
  *               completedPercent:
  *                 type: number
- *             required:
- *               - completedPercent
+ *                 description: Percentage of slide completion
  *     responses:
  *       200:
- *         description: User slide progress updated successfully
+ *         description: Successful operation
  *       500:
  *         description: Internal server error
  */

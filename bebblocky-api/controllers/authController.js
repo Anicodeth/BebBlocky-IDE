@@ -1,21 +1,11 @@
-const User = require('../models/User');
-const jwt = require('jsonwebtoken');
+const authService = require('../services/authService');
 
 exports.postSignUp = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    // Check if the username or email already exists
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-    if (existingUser) {
-      return res.status(409).json({ message: 'Username or email already taken' });
-    }
-
-    // Create a new user
-    const user = new User({ username, email, password });
-    await user.save();
-
-    res.status(201).json(user);
+    const createdUser = await authService.createUser(username, email, password);
+    res.status(201).json(createdUser);
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
   }
@@ -25,23 +15,8 @@ exports.postSignIn = async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    // Check if the user exists
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid username or password' });
-    }
-
-    // Check if the password is correct
-    if (user.password !== password) {
-      return res.status(401).json({ message: 'Invalid username or password' });
-    }
-
-    // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, 'Ananya');
-
-    console.log(token);
-
-    res.status(201).json({ user, token });
+    const loggedInUser = await authService.loginUser(username, password);
+    res.status(201).json(loggedInUser);
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
   }

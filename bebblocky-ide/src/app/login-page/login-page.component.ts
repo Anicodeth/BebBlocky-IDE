@@ -53,7 +53,7 @@ export class LoginPageComponent {
         sessionStorage.setItem('auth_token', response.token);
         sessionStorage.setItem("courseProg", JSON.stringify(response.user.progress));
 
-        this.router.navigateByUrl("/profile");
+        this.router.navigateByUrl("/dashboard/profile");
       },
       (error: any) => {
         alert(error.message);

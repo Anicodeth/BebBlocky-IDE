@@ -16,7 +16,7 @@ export class SidebarComponent {
     { name: 'Code', link: '/ide/4', icon: faCode, class: 'special' },
   ]
   userMenuItems: any[] = [
-    { name: 'Profile', link: '/dashboard/profile', icon: faUser, class: 'regular' },
+    { name: 'My Profile', link: '/dashboard/profile', icon: faUser, class: 'regular' },
     { name: 'My Courses', link: '/dashboard/my-courses', icon: faFileCode, class: 'regular' },
   ]
   courseMenuItems: any[] = [

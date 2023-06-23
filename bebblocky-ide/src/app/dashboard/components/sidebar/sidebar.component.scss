@@ -1,6 +1,6 @@
 // Define variables for the logo images
-$logo-image: url('../../../assets/logo-icons/BeBlocky-Logo-Green.png');
-$logo-image-shrunk: url('../../../assets/logo-icons/BeBlocky-Logo-Small.png');
+$logo-image: url('../../../../assets/logo-icons/BeBlocky-Logo-Green.png');
+$logo-image-shrunk: url('../../../../assets/logo-icons/BeBlocky-Logo-Small.png');
 
 // Define classes for the sidebar and logo elements
 .sidebar {
@@ -34,8 +34,9 @@ $logo-image-shrunk: url('../../../assets/logo-icons/BeBlocky-Logo-Small.png');
 
     .sidebar-title {
         font-size: 1.5rem;
-        text-align: center;
-        margin: 0.5rem 0;
+        // text-align: center;
+        margin: 0.5rem 10%;
+        padding: 0rem 0.5rem;
         color: #6fb64e;
     }
 

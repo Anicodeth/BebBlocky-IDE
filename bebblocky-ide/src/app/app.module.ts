@@ -20,17 +20,16 @@ import { ProfilePageSidebarComponent } from './profile-page-sidebar/profile-page
 import { IdePreviewWindowComponent } from './ide-page/ide-preview-window/ide-preview-window.component';
 import { IdeSlidesComponent } from './ide-page/ide-slides/ide-slides.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CoursesComponent } from './dashboard/courses/courses.component';
-import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
-import { ProfileComponent } from './dashboard/profile/profile.component';
-import { HeaderComponent } from './dashboard/header/header.component';
-import { UserCoursesComponent } from './dashboard/user-courses/user-courses.component';
-import { CourseComponent } from './dashboard/courses/course/course.component';
-import { AllCoursesComponent } from './dashboard/all-courses/all-courses.component';
-import { MyCoursesComponent } from './dashboard/my-courses/my-courses.component';
-import { JsCoursesComponent } from './dashboard/js-courses/js-courses.component';
-import { CssCoursesComponent } from './dashboard/css-courses/css-courses.component';
-import { HtmlCoursesComponent } from './dashboard/html-courses/html-courses.component';
+import { CoursesComponent } from './dashboard/components/courses/courses.component';
+import { SidebarComponent } from './dashboard/components/sidebar/sidebar.component';
+import { ProfileComponent } from './dashboard/pages/profile/profile.component';
+import { HeaderComponent } from './dashboard/components/header/header.component';
+import { CourseComponent } from './dashboard/components/courses/course/course.component';
+import { AllCoursesComponent } from './dashboard/pages/all-courses/all-courses.component';
+import { MyCoursesComponent } from './dashboard/pages/my-courses/my-courses.component';
+import { JsCoursesComponent } from './dashboard/pages/js-courses/js-courses.component';
+import { CssCoursesComponent } from './dashboard/pages/css-courses/css-courses.component';
+import { HtmlCoursesComponent } from './dashboard/pages/html-courses/html-courses.component';
 
 
 @NgModule({
@@ -53,7 +52,6 @@ import { HtmlCoursesComponent } from './dashboard/html-courses/html-courses.comp
     SidebarComponent,
     ProfileComponent,
     HeaderComponent,
-    UserCoursesComponent,
     CourseComponent,
     AllCoursesComponent,
     MyCoursesComponent,

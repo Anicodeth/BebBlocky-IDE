@@ -49,7 +49,7 @@ export class BridgeService {
     if (!type) {
       return this.http.get<Slide[]>(this.resourcesBaseURL + '/user/slides', { headers: headers });
     }
-    return this.http.get<Slide[]>(this.resourcesBaseURL + '/user/slides' + type, { headers: headers });
+    return this.http.get<Slide[]>(this.resourcesBaseURL + '/user/slides/' + type, { headers: headers });
   }
 
   getSlide(id: number): Observable<Slide> {

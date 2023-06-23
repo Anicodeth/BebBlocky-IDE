@@ -1,8 +1,6 @@
-import { AfterContentChecked, Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { faTachometerAlt, faCode, faUser, faCog, faTableCells, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { Component, DoCheck, OnInit } from '@angular/core';
+import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { BridgeService } from '../bridge.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

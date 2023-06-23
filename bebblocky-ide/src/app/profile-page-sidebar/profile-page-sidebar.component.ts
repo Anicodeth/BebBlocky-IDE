@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { faCss3, faHtml5, faSquareJs } from '@fortawesome/free-brands-svg-icons';
 import { faCode, faUser, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './profile-page-sidebar.component.html',
   styleUrls: ['./profile-page-sidebar.component.scss']
 })
-export class ProfilePageSidebarComponent implements OnInit {
+export class ProfilePageSidebarComponent implements OnInit, DoCheck {
   isExpanded: boolean = false;
   currTab: any;
   menuItems: any[] = [
@@ -28,6 +28,8 @@ export class ProfilePageSidebarComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  ngDoCheck() {}
+
   get currentRoute(): string {
     let type = this.route.snapshot.paramMap.get('slideId')!;
 
@@ -44,7 +46,6 @@ export class ProfilePageSidebarComponent implements OnInit {
       case 'js':
         this.currTab = 'JS Courses';
         break;
-    
       default:
         this.currTab = 'All Courses';
         break;

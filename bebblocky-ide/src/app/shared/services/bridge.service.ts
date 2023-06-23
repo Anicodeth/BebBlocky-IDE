@@ -4,7 +4,6 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, of, Observable } from 'rxjs';
 import { User } from '../models/user.dto';
 import { Slide } from '../models/slide.dto';
-import { DashboardLoadingService } from './dashboard-loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +12,14 @@ export class BridgeService {
   progress: any;
 
   constructor(
-    private http: HttpClient,
-    private loadingService: DashboardLoadingService
+    private http: HttpClient
     ) { }
 
   user: User = JSON.parse(sessionStorage.getItem('user') || '{}');
   token: String = sessionStorage.getItem('auth_token')!;
 
   baseUrl: String = 'http://beb-blocky-ide.vercel.app';
+  // baseUrl: String = 'http://localhost:3000';
   resourcesBaseURL: String = this.baseUrl + '/api/v1';
   authBaseUrl: String = this.baseUrl + '/auth/v1';
 

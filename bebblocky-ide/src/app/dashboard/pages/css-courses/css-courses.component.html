@@ -5,8 +5,9 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
         </p>
     </div>
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
     <app-courses *ngIf="courses && courses.length > 0" [courses]="courses"></app-courses>
-    <div class="sorry" *ngIf="courses.length === 0">
+    <div class="sorry" *ngIf="!showSpinner && courses.length === 0">
         Sorry we don't have courses for you.
     </div>
 </div>

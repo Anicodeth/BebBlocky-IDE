@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Slide } from 'src/app/shared/models/slide.dto';
 import { BridgeService } from 'src/app/shared/services/bridge.service';
-import { DashboardLoadingService } from 'src/app/shared/services/dashboard-loading.service';
 
 @Component({
   selector: 'app-js-courses',
@@ -13,15 +12,14 @@ export class JsCoursesComponent implements OnInit {
   public showSpinner: boolean = true;
 
   constructor(
-    private bridgeService: BridgeService,
-    private loadingService: DashboardLoadingService
+    private bridgeService: BridgeService
   ) { }
 
   ngOnInit() {
-    this.loadingService.isLoading = true;
+    this.showSpinner = true;
     this.bridgeService.getSlides('js').subscribe((courses: any) => {
       this.courses = courses.slides;
-      this.loadingService.isLoading = false;
+      this.showSpinner = false;
     });
   }
 }

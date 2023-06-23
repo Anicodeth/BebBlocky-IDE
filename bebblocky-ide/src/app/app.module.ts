@@ -29,7 +29,6 @@ import { CssCoursesComponent } from './dashboard/pages/css-courses/css-courses.c
 import { HtmlCoursesComponent } from './dashboard/pages/html-courses/html-courses.component';
 import { TruncatePipe } from './shared/pipes/truncate.pipe';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
-import { DashboardLoadingService } from './shared/services/dashboard-loading.service';
 import { BridgeService } from './shared/services/bridge.service';
 
 
@@ -69,7 +68,6 @@ import { BridgeService } from './shared/services/bridge.service';
   ],
   providers: [
     CodeEditorService,
-    DashboardLoadingService,
     BridgeService
   ],
   bootstrap: [AppComponent]

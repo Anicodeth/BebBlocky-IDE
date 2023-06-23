@@ -5,16 +5,19 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
         </p>
     </div>
-    <div class="courses">
-        <h2>Your HTML Courses</h2>
-        <app-courses [courses]="htmlCourses"></app-courses>
-    </div>
-    <div class="courses">
-        <h2>Your CSS Courses</h2>
-        <app-courses [courses]="cssCourses"></app-courses>
-    </div>
-    <div class="courses">
-        <h2>Your JavaScript Courses</h2>
-        <app-courses [courses]="jsCourses"></app-courses>
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+    <div class="content" *ngIf="!showSpinner">
+        <div class="courses">
+            <h2>Your HTML Courses</h2>
+            <app-courses [courses]="htmlCourses"></app-courses>
+        </div>
+        <div class="courses">
+            <h2>Your CSS Courses</h2>
+            <app-courses [courses]="cssCourses"></app-courses>
+        </div>
+        <div class="courses">
+            <h2>Your JavaScript Courses</h2>
+            <app-courses [courses]="jsCourses"></app-courses>
+        </div>
     </div>
 </div>

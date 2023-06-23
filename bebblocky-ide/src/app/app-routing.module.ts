@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [LoggedInGuard],
+    // canActivate: [LoggedInGuard],
     children: [
       { path: 'courses', component: AllCoursesComponent },
       { path: 'my-courses', component: MyCoursesComponent },

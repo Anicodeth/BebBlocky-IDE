@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BridgeService } from '../services/bridge.service';
+import { BridgeService } from '../shared/services/bridge.service';
 
 
 @Component({

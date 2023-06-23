@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { CodeEditorService } from '../../services/code-editor.service';
+import { CodeEditorService } from '../../shared/services/code-editor.service';
 
 @Component({
   selector: 'app-ide-page-header',

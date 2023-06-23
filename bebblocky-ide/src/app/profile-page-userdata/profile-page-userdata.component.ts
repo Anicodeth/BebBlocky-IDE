@@ -1,6 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { BridgeService } from '../services/bridge.service';
+import { BridgeService } from '../shared/services/bridge.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

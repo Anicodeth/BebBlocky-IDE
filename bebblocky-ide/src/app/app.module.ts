@@ -11,7 +11,7 @@ import { IdeEditorComponent } from './ide-page/ide-editor/ide-editor.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ProfilePageUserdataComponent } from './profile-page-userdata/profile-page-userdata.component';
-import { CodeEditorService } from './services/code-editor.service';
+import { CodeEditorService } from './shared/services/code-editor.service';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,6 +24,8 @@ import { CoursesComponent } from './dashboard/courses/courses.component';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { HeaderComponent } from './dashboard/header/header.component';
+import { UserCoursesComponent } from './dashboard/user-courses/user-courses.component';
+import { CourseComponent } from './dashboard/course/course.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { HeaderComponent } from './dashboard/header/header.component';
     CoursesComponent,
     SidebarComponent,
     ProfileComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserCoursesComponent,
+    CourseComponent
   ],
   imports: [
     BrowserModule,

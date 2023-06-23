@@ -18,8 +18,24 @@
     <div>
         <ul class="sidebar-menu">
             <!-- If prvious type == item.name, set it active -->
+            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of generalMenuItems">
+                <a [class.shrink]="!isExpanded" [routerLink]="item.link">
+                    <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
+                    <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-title">
+        <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">
+            Your Dashboard
+        </span>
+    </div>
+    <div>
+        <ul class="sidebar-menu">
+            <!-- If prvious type == item.name, set it active -->
             <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of userMenuItems">
-                <a [class.shrink]="!isExpanded" [routerLink]="item.link" [class]="item.name == currentRoute ? 'active' : ''">
+                <a [class.shrink]="!isExpanded" [routerLink]="item.link">
                     <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
                     <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
                 </a>
@@ -35,7 +51,7 @@
         <ul class="sidebar-menu">
             <!-- If prvious type == item.name, set it active -->
             <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of courseMenuItems">
-                <a [class.shrink]="!isExpanded" [routerLink]="item.link" [class]="item.name == currentRoute ? 'active' : ''">
+                <a [class.shrink]="!isExpanded" [routerLink]="item.link">
                     <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
                     <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
                 </a>

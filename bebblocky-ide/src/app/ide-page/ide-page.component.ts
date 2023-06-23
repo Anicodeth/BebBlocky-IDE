@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BridgeService } from '../services/bridge.service';
+import { BridgeService } from '../shared/services/bridge.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

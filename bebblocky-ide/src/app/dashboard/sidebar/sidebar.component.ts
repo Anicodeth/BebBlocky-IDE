@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faHtml5, faCss3, faSquareJs } from '@fortawesome/free-brands-svg-icons';
-import { faCode, faUser, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { faCode, faUser, faLayerGroup, faFileCode } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,9 +11,13 @@ import { faCode, faUser, faLayerGroup } from '@fortawesome/free-solid-svg-icons'
 export class SidebarComponent {
   isExpanded: boolean = false;
   currTab: any;
-  userMenuItems: any[] = [
+  generalMenuItems: any[] = [
     { name: 'Code', link: '/ide/4', icon: faCode, class: 'special' },
-    { name: 'Profile', link: '/courses/my', icon: faUser, class: 'regular' },]
+  ]
+  userMenuItems: any[] = [
+    { name: 'Profile', link: '/courses/my', icon: faUser, class: 'regular' },
+    { name: 'My Courses', link: '/courses/my', icon: faFileCode, class: 'regular' },
+  ]
   courseMenuItems: any[] = [
     { name: 'All Courses', link: '/courses', icon: faLayerGroup, class: 'regular' },
     { name: 'HTML Courses', link: '/courses/html', icon: faHtml5, class: 'regular' },
@@ -57,14 +61,20 @@ export class SidebarComponent {
 
 
   expandSidebar(): void {
+    setTimeout(() => {
+    }, 1000);
     this.isExpanded = true;
   }
 
   shrinkSidebar(): void {
+    setTimeout(() => {
+    }, 1000);
     this.isExpanded = false;
   }
 
   toggleSidebar() {
+    setTimeout(() => {
+    }, 1000);
     this.isExpanded = !this.isExpanded;
     if (this.isExpanded) {
       document.addEventListener('click', this.onDocumentClick);

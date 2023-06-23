@@ -1,6 +1,7 @@
 export interface Slide {
   slideId: number;
   courseName: string;
+  courseDescription: string;
   courseCategory: 'html' | 'css' | 'js';
   slides: SlideDetails[];
 }

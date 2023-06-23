@@ -5,11 +5,13 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardLoadingService {
-  private loadingSubject = new BehaviorSubject<boolean>(false);
+  private loading = false;
 
-  isLoading$ = this.loadingSubject.asObservable();
+  get isLoading() {
+    return this.loading;
+  }
 
-  setLoading(value: boolean) {
-    this.loadingSubject.next(value);
+  set isLoading(value: boolean) {
+    this.loading = value;
   }
 }

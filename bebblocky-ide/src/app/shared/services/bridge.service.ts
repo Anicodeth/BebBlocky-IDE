@@ -18,10 +18,11 @@ export class BridgeService {
     ) { }
 
   user: User = JSON.parse(sessionStorage.getItem('user') || '{}');
-  token = sessionStorage.getItem('auth_token');
+  token: String = sessionStorage.getItem('auth_token')!;
 
-  resourcesBaseURL = 'http://beb-blocky-ide.vercel.app/api/v1';
-  authBaseUrl = 'http://beb-blocky-ide.vercel.app/auth/v1';
+  baseUrl: String = 'http://beb-blocky-ide.vercel.app';
+  resourcesBaseURL: String = this.baseUrl + '/api/v1';
+  authBaseUrl: String = this.baseUrl + '/auth/v1';
 
   signUp(username: string, email: string, password: string) {
     const body = { username: username, password: password, email: email };

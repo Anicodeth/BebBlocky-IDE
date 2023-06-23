@@ -13,7 +13,7 @@ export class DashboardComponent {
     private loadingService: DashboardLoadingService
   ) {}
   
-  get loading() {
-    return this.loadingService.isLoading$;
+  get showSpinner() {
+    return this.loadingService.isLoading;
   }
 }

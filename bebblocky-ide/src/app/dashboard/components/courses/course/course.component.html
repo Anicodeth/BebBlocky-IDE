@@ -2,12 +2,12 @@
 
     <div class="course-about">
         <h3>{{ slideName }}</h3>
+        <p>{{ slideDescription | truncate:15 }}</p>
     </div>
     <div class="course-progress">
         <div class="course-progress-bar" [style.width.%]="progress">
         </div>
     </div>
-
     <div class="course-action-button">
         <a routerLink="/ide/{{ slideId }}" routerLinkActive="active" class="course-goto-button">
             <fa-icon class="sidebar-menu-item-icon" [icon]="gotoIcon"></fa-icon>

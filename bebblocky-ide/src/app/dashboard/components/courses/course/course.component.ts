@@ -10,6 +10,7 @@ import { BridgeService } from 'src/app/shared/services/bridge.service';
 })
 export class CourseComponent {
   @Input() slideName: String = "";
+  @Input() slideDescription: String = "";
   @Input() slideId: number = 0;
   @Input() progress: number = 0;
 

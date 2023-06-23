@@ -18,6 +18,7 @@ exports.getJsSlides = async () => {
 
 exports.createSlide = async (slideData) => {
   const slide = new Slide(slideData);
+  console.log('here');
   await slide.save();
   return slide;
 };

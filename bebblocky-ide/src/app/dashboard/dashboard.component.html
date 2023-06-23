@@ -3,12 +3,7 @@
        <app-sidebar></app-sidebar>
     </div>
     <div class="main-content">
-        <router-outlet *ngIf="!(loading | async) as isLoading"></router-outlet>
-        <ng-template #loadingTemplate>
-            <div class="loading-spinner">
-                <!-- You can use any loading spinner library or custom style here -->
-                <i class="fa fa-spinner fa-spin"></i> Loading...
-            </div>
-        </ng-template>
+        <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+        <router-outlet *ngIf="!showSpinner"></router-outlet>
     </div>
 </div>

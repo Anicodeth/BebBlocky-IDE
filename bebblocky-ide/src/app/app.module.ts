@@ -27,6 +27,10 @@ import { MyCoursesComponent } from './dashboard/pages/my-courses/my-courses.comp
 import { JsCoursesComponent } from './dashboard/pages/js-courses/js-courses.component';
 import { CssCoursesComponent } from './dashboard/pages/css-courses/css-courses.component';
 import { HtmlCoursesComponent } from './dashboard/pages/html-courses/html-courses.component';
+import { TruncatePipe } from './shared/pipes/truncate.pipe';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
+import { DashboardLoadingService } from './shared/services/dashboard-loading.service';
+import { BridgeService } from './shared/services/bridge.service';
 
 
 @NgModule({
@@ -51,7 +55,9 @@ import { HtmlCoursesComponent } from './dashboard/pages/html-courses/html-course
     MyCoursesComponent,
     JsCoursesComponent,
     CssCoursesComponent,
-    HtmlCoursesComponent
+    HtmlCoursesComponent,
+    TruncatePipe,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +67,11 @@ import { HtmlCoursesComponent } from './dashboard/pages/html-courses/html-course
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [CodeEditorService],
+  providers: [
+    CodeEditorService,
+    DashboardLoadingService,
+    BridgeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

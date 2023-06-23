@@ -10,6 +10,10 @@ const slideSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  courseDescription: {
+    type: String,
+    required: true
+  },
   courseCategory: {
     type: String,
     required: true,

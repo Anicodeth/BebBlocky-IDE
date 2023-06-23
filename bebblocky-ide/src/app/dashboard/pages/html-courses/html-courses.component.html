@@ -5,7 +5,9 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
         </p>
     </div>
-    <div class="courses">
-        <app-courses [courses]="courses"></app-courses>
+    <app-courses *ngIf="courses && courses.length > 0" [courses]="courses"></app-courses>
+    <div class="sorry" *ngIf="courses.length === 0">
+        Sorry we don't have courses for you.
     </div>
 </div>
+

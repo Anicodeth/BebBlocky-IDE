@@ -1,1 +1,46 @@
-<app-header></app-header>
+<div class="header">
+    <app-header></app-header>
+</div>
+<!-- Add a div to show user's details and another to show ads -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Profile</h3>
+                </div>
+                <div class="card-body">
+                    <div class="col-md-6">
+                        <h4>{{user.username}}</h4>
+                        <p>{{user.email}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Ads</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6" *ngFor="let ad of ads">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>{{ad.title}}</h4>
+                                </div>
+                                <div class="card-body">
+                                    <img src="{{ad.image}}" alt="ad image" class="img-fluid">
+                                    <p>{{ad.description}}</p>
+                                    <p>{{ad.price}}</p>
+                                    <p>{{ad.category}}</p>
+                                    <p>{{ad.date}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

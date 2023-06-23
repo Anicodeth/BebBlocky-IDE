@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, of, Observable } from 'rxjs';
 import { User } from '../models/user.dto';
 import { Slide } from '../models/slide.dto';
+import { DashboardLoadingService } from './dashboard-loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,12 @@ import { Slide } from '../models/slide.dto';
 export class BridgeService {
   progress: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private loadingService: DashboardLoadingService
+    ) { }
 
-  userData: User | any;
+  user: User = JSON.parse(sessionStorage.getItem('user') || '{}');
   token = sessionStorage.getItem('auth_token');
 
   resourcesBaseURL = 'http://beb-blocky-ide.vercel.app/api/v1';
@@ -29,11 +33,26 @@ export class BridgeService {
     const response = this.http.post<User>(this.authBaseUrl + '/signin', body);
 
     return response.pipe(
-      tap((data: User) => {
-        this.userData = data;
+      tap((data: any) => {
+        this.user = data.user;
+        sessionStorage.setItem('user', JSON.stringify(data.user));
         sessionStorage.setItem('auth_token', data.token);
+        sessionStorage.setItem("courseProg", JSON.stringify(data.user.progress));
       })
     );
+  }
+
+  logout() {
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('auth_token');
+  }
+
+  getUser() {
+    if (!this.user) {
+      this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
+    }
+
+    return this.user;
   }
 
   getSlides(type: string): Observable<Slide[]> {

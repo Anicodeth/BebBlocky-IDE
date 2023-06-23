@@ -47,11 +47,7 @@ export class LoginPageComponent {
   this.service.signIn(this.loginForm.value.username, this.loginForm.value.password)
     .subscribe(
       (response: any) => {
-        console.log('ng here');
         this.isButtonDisabled = false;
-        this.service.userData = response.user;
-        sessionStorage.setItem('auth_token', response.token);
-        sessionStorage.setItem("courseProg", JSON.stringify(response.user.progress));
 
         this.router.navigateByUrl("/dashboard/profile");
       },

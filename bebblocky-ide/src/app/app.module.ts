@@ -9,14 +9,11 @@ import { IdePageBodyComponent } from './ide-page/ide-page-body/ide-page-body.com
 import { IdePageFooterComponent } from './ide-page/ide-page-footer/ide-page-footer.component';
 import { IdeEditorComponent } from './ide-page/ide-editor/ide-editor.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { ProfilePageUserdataComponent } from './profile-page-userdata/profile-page-userdata.component';
 import { CodeEditorService } from './shared/services/code-editor.service';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { ProfilePageSidebarComponent } from './profile-page-sidebar/profile-page-sidebar.component';
 import { IdePreviewWindowComponent } from './ide-page/ide-preview-window/ide-preview-window.component';
 import { IdeSlidesComponent } from './ide-page/ide-slides/ide-slides.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -42,9 +39,6 @@ import { HtmlCoursesComponent } from './dashboard/pages/html-courses/html-course
     IdePreviewWindowComponent,
     IdeEditorComponent,
     IdeSlidesComponent,
-    ProfilePageComponent,
-    ProfilePageSidebarComponent,
-    ProfilePageUserdataComponent,
     LoginPageComponent,
     LandingPageComponent,
     DashboardComponent,

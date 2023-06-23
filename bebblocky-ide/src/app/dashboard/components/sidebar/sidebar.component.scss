@@ -1,3 +1,29 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+$border: #ff9800;
+$background-color: #ff9800;
+$beblocky-orange: #fcb332;
+
+$beblocky-purple: #703d99;
+
+$beblock-light-blue: #dff1fb;
+
+$beblocky-green: #5baf48;
+$beblocky-accent-green: #a7d464;
+$beblocky-light-green: #def0e2;
+
+$beblocky-pink: #8f6fb0;
+
+$beblocky-cyan: #2ebca4;
+$beblocky-cyan-accent: #37d6c9;
+
+$green-linear-gradient: linear-gradient(to right, $beblocky-green, $beblocky-accent-green);
+$purple-pink-linear-gradient: linear-gradient(to right, $beblocky-purple, $beblocky-pink);
+
+$ff-primary: "Montserrat", sans-serif;
+$fw-bold: 600;
+$fw-regular: 400;
+
 // Define variables for the logo images
 $logo-image: url('../../../../assets/logo-icons/BeBlocky-Logo-Green.png');
 $logo-image-shrunk: url('../../../../assets/logo-icons/BeBlocky-Logo-Small.png');
@@ -37,7 +63,9 @@ $logo-image-shrunk: url('../../../../assets/logo-icons/BeBlocky-Logo-Small.png')
         // text-align: center;
         margin: 0.5rem 10%;
         padding: 0rem 0.5rem;
-        color: #6fb64e;
+        color: $beblocky-green;
+        font-family: $ff-primary;
+        font-weight: $fw-bold;
     }
 
     .sidebar-menu {
@@ -61,6 +89,8 @@ $logo-image-shrunk: url('../../../../assets/logo-icons/BeBlocky-Logo-Small.png')
                 padding: 15px 20px;
                 transition: all 0.3s;
                 margin: 0 auto;
+                font-family: $ff-primary;
+                font-weight: $fw-regular;
 
                 &:hover {
                     background-color: #fff;

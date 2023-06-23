@@ -4,3 +4,10 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
 }
+
+// Media query to show one by one on mobiles
+@media (max-width: 768px) {
+    .courses {
+        grid-template-columns: 1fr;
+    }
+}

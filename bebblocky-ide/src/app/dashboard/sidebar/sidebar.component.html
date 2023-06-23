@@ -5,8 +5,8 @@
         <span class="hamburger-line"></span>
     </div>
     <div class="header-title">
-        <span [class.shrink]="isExpanded" *ngIf="!isExpanded" class="menu-item-text">
-            {{ currTab }}
+        <span [class.shrink]="isExpanded" class="menu-item-text">
+            {{ currentMenuItemName }}
         </span>
     </div>
 </div>
@@ -17,8 +17,7 @@
     </div>
     <div>
         <ul class="sidebar-menu">
-            <!-- If prvious type == item.name, set it active -->
-            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of generalMenuItems">
+            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of generalMenuItems" (click)="setCurrentMenuItemName(item.name)">
                 <a [class.shrink]="!isExpanded" [routerLink]="item.link">
                     <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
                     <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
@@ -33,8 +32,7 @@
     </div>
     <div>
         <ul class="sidebar-menu">
-            <!-- If prvious type == item.name, set it active -->
-            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of userMenuItems">
+            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of userMenuItems" (click)="setCurrentMenuItemName(item.name)">
                 <a [class.shrink]="!isExpanded" [routerLink]="item.link">
                     <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
                     <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
@@ -44,13 +42,12 @@
     </div>
     <div class="sidebar-title">
         <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">
-            Browse our courses
+            Browse our courses!
         </span>
     </div>
     <div>
         <ul class="sidebar-menu">
-            <!-- If prvious type == item.name, set it active -->
-            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of courseMenuItems">
+            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of courseMenuItems" (click)="setCurrentMenuItemName(item.name)">
                 <a [class.shrink]="!isExpanded" [routerLink]="item.link">
                     <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
                     <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>

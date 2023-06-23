@@ -10,7 +10,8 @@ import { faCode, faUser, faLayerGroup, faFileCode } from '@fortawesome/free-soli
 })
 export class SidebarComponent {
   isExpanded: boolean = false;
-  currTab: any;
+  currentMenuItemName: String = '';
+
   generalMenuItems: any[] = [
     { name: 'Code', link: '/ide/4', icon: faCode, class: 'special' },
   ]
@@ -30,35 +31,9 @@ export class SidebarComponent {
   constructor(private route: ActivatedRoute,
     private router: Router) { }
 
-  ngOnInit(): void { }
-
-  ngDoCheck() {
-    this.currentRoute;
+  setCurrentMenuItemName(name: String): void {
+    this.currentMenuItemName = name;
   }
-
-  get currentRoute(): string {
-    let type = this.route.snapshot.paramMap.get('slideId')!;
-
-    switch (type) {
-      case 'my':
-        this.currTab = 'Profile';
-        break;
-      case 'html':
-        this.currTab = 'HTML Courses';
-        break;
-      case 'css':
-        this.currTab = 'CSS Courses';
-        break;
-      case 'js':
-        this.currTab = 'JS Courses';
-        break;
-      default:
-        break;
-    }
-
-    return this.currTab;
-  }
-
 
   expandSidebar(): void {
     setTimeout(() => {

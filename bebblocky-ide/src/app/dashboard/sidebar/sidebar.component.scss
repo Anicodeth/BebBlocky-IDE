@@ -117,9 +117,9 @@ $logo-image-shrunk: url('../../../assets/logo-icons/BeBlocky-Logo-Small.png');
     }
 
     .header {
+        min-width: 100vw;
         display: flex;
         flex-direction: row;
-        // flex-wrap: wrap;
     }
 
     .hamburger {
@@ -141,6 +141,15 @@ $logo-image-shrunk: url('../../../assets/logo-icons/BeBlocky-Logo-Small.png');
 
     .hamburger:focus {
         outline: none;
+    }
+
+    .header-title {
+        display: flex;
+        align-items: center;
+        margin: 0rem 1rem;
+        width: 100%;
+        font-size: 1.5rem;
+        color: #6fb64e;
     }
 }
 

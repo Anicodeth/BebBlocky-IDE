@@ -23,7 +23,6 @@ exports.postSignUp = async (req, res) => {
 };
 
 exports.postSignIn = async (req, res) => {
-  console.log('here');
   const { username, password } = req.body;
 
   try {

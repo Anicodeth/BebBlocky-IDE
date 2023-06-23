@@ -19,6 +19,11 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ProfilePageSidebarComponent } from './profile-page-sidebar/profile-page-sidebar.component';
 import { IdePreviewWindowComponent } from './ide-page/ide-preview-window/ide-preview-window.component';
 import { IdeSlidesComponent } from './ide-page/ide-slides/ide-slides.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CoursesComponent } from './dashboard/courses/courses.component';
+import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
+import { ProfileComponent } from './dashboard/profile/profile.component';
+import { HeaderComponent } from './dashboard/header/header.component';
 
 
 @NgModule({
@@ -35,7 +40,12 @@ import { IdeSlidesComponent } from './ide-page/ide-slides/ide-slides.component';
     ProfilePageSidebarComponent,
     ProfilePageUserdataComponent,
     LoginPageComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    DashboardComponent,
+    CoursesComponent,
+    SidebarComponent,
+    ProfileComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

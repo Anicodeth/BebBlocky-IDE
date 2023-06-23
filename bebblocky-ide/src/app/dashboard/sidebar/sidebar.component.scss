@@ -1,0 +1,153 @@
+// Define variables for the logo images
+$logo-image: url('../../../assets/logo-icons/BeBlocky-Logo-Green.png');
+$logo-image-shrunk: url('../../../assets/logo-icons/BeBlocky-Logo-Small.png');
+
+// Define classes for the sidebar and logo elements
+.sidebar {
+    width: 20rem;
+    background-color: #f5f5f5;
+    height: 100%;
+    position: fixed;
+    transition: all 0.3s ease-in-out;
+    overflow: auto;
+    z-index: 1000;
+
+    &.shrink {
+        width: 5%;
+    }
+
+    .sidebar-logo {
+        height: 20%;
+        width: 90%;
+        background-image: $logo-image; // Set the normal logo image as background
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        transition: background-size 0.3s; // Add transition for smooth animation
+
+        &.shrink {
+            background-image: $logo-image-shrunk; // Set the shrunk logo image as background
+            background-size: 60%; // Shrink the background size instead of changing the image
+            transition: background-size 0.3s opacity; // Add transition for smooth animation
+        }
+    }
+
+    .sidebar-title {
+        font-size: 1.5rem;
+        text-align: center;
+        margin: 0.5rem 0;
+        color: #6fb64e;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        padding: 0.5rem;
+        margin: 0;
+
+        .sidebar-menu-item {
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 0.2rem 10%;
+
+            a {
+                box-sizing: border-box;
+                border-radius: 1rem;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                text-decoration: none;
+                color: #333;
+                padding: 15px 20px;
+                transition: all 0.3s;
+                margin: 0 auto;
+
+                &:hover {
+                    background-color: #fff;
+                    color: #111;
+                }
+
+                &.shrink {
+                    justify-content: center;
+                    margin: 0 auto;
+                    text-align: center;
+                }
+
+                .sidebar-menu-item-icon {
+                    font-size: 18px;
+                }
+
+                .menu-item-text {
+                    display: block;
+                    padding: 0 0 0 1rem;
+                    transition: all 0.5s;
+
+                    &.shrink {
+                        display: none;
+                        transition: display 0.3s ease-in-out;
+                    }
+                }
+            }
+
+            &.active {
+                a {
+                    background-color: #94e2eca8;
+                    color: #444;
+                }
+            }
+        }
+    }
+}
+
+// Add media only screen and query for responsiveness
+// Adjust the breakpoint as needed
+@media only screen and (max-width: 768px) {
+    .sidebar {
+
+        left: 0;
+        width: 80%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        box-shadow: 10px rgba(0, 0, 0, 0.75);
+
+        &.shrink {
+            left: -120%;
+            transition: left 0.3s ease-in-out;
+        }
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        // flex-wrap: wrap;
+    }
+
+    .hamburger {
+        display: inline-block;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 0.5rem 0.5rem;
+    }
+
+    .hamburger-line {
+        display: block;
+        width: 2.5rem;
+        height: 0.2rem;
+        background-color: #6fb64e;
+        margin: 0.5rem 0;
+        transition: all 0.3s;
+    }
+
+    .hamburger:focus {
+        outline: none;
+    }
+}
+
+// Hide the hamburger button on larger screens
+@media only screen and (min-width: 769px) {
+    .header {
+        display: none;
+    }
+
+}

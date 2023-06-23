@@ -2,13 +2,18 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 exports.createUser = async (username, email, password) => {
-  const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-  if (existingUser) {
-    throw new Error('Username or email already taken');
-  }
-
   const user = new User({ username, email, password });
   await user.save();
+  return user;
+};
+
+exports.getUserByUsername = async (username) => {
+  const user = await User.findOne({ username });
+  return user;
+};
+
+exports.checkExistingUser = async (username, email) => {
+  const user = await User.findOne({ $or: [{ username }, { email }] });
   return user;
 };
 

@@ -83,3 +83,38 @@ exports.updateUserSlideProgress = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+exports.updateLastAccessedSlide = async (req, res) => {
+  try {
+    authenticateJWT(req, res, async () => {
+      try {
+        console.log('here');
+        const userId = req.user.userId;
+        const { slideId } = req.body;
+        const message = await userService.updateLastAccessedSlide(userId, slideId);
+        res.status(201).json({ message });
+      } catch (error) {    
+        res.status(500).json({ message: 'Internal server error' });
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
+exports.getLastAccessedSlide = async (req, res) => {
+  try {
+    authenticateJWT(req, res, async () => {
+      try {
+        const userId = req.user.userId;
+        const lastAccessedSlideId = await userService.getLastAccessedSlide(userId);
+        res.status(201).json({ lastAccessedSlideId });
+      } catch (error) {    
+        res.status(500).json({ message: 'Internal server error' });
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};

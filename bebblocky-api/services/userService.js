@@ -61,9 +61,35 @@ async function updateUserSlideProgress(userId, slideId, completedPercent) {
   }
 }
 
+async function updateLastAccessedSlide(userId, slideId) {
+  try {
+    const user = await User.findById(userId);
+    user.lastAccessedSlideId = slideId;
+
+    // Save the updated user object
+    await user.save();
+
+    return 'Slide progress updated successfully';
+  } catch (error) {
+    throw new Error('Internal server error');
+  }
+}
+
+async function getLastAccessedSlide(userId) {
+  try {
+    const user = await User.findById(userId);
+
+    return user.lastAccessedSlideId;
+  } catch (error) {
+    throw new Error('Internal server error');
+  }
+}
+
 module.exports = {
   getUser,
   getUserSlides,
   getUserSlideProgress,
-  updateUserSlideProgress
+  updateUserSlideProgress,
+  updateLastAccessedSlide,
+  getLastAccessedSlide,
 };

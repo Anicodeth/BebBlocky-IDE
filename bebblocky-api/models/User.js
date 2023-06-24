@@ -30,7 +30,11 @@ const userSchema = new mongoose.Schema({
       required: true,
       default: 0
     }
-  }]
+  }],
+  lastAccessedSlideId: {
+    type: Number,
+    required: false,
+  }
 });
 
 // Define a pre 'save' middleware to generate and assign the incrementing userId

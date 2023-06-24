@@ -143,4 +143,10 @@ router.get('/slides/:slideId/progress', userController.getUserSlideProgress);
  */
 router.post('/slides/:slideId/progress', userController.updateUserSlideProgress);
 
+// Define a route to get the last accessed route
+router.get('slides/last-accessed', userController.getLastAccessedSlide);
+
+// Define a route to update the last accessed route
+router.post('slides/last-accessed', userController.updateLastAccessedSlide);
+
 module.exports = router;

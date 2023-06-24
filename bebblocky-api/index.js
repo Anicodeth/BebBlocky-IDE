@@ -15,17 +15,6 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB", err));
 
-// Route imports
-const userRoutes = require("./routes/userRoutes");
-const slidesRoutes = require("./routes/slidesRoutes");
-const authRoutes = require("./routes/authRoutes");
-
-// Route definitions
-VERSION = "v1";
-app.use(`/api/${VERSION}/user`, userRoutes);
-app.use(`/api/${VERSION}/slides`, slidesRoutes);
-app.use(`/auth/${VERSION}`, authRoutes);
-
 // Swagger configuration
 const swaggerOptions = {
   definition: {
@@ -54,6 +43,17 @@ app.use(
     preflightContinue: false,
   })
 );
+
+// Route imports
+const userRoutes = require("./routes/userRoutes");
+const slidesRoutes = require("./routes/slidesRoutes");
+const authRoutes = require("./routes/authRoutes");
+
+// Route definitions
+VERSION = "v1";
+app.use(`/api/${VERSION}/user`, userRoutes);
+app.use(`/api/${VERSION}/slides`, slidesRoutes);
+app.use(`/auth/${VERSION}`, authRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

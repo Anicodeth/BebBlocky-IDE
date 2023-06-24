@@ -18,8 +18,8 @@ export class BridgeService {
   user: User = JSON.parse(sessionStorage.getItem('user') || '{}');
   token: String = sessionStorage.getItem('auth_token')!;
 
-  // baseUrl: String = 'http://beb-blocky-ide.vercel.app';
-  baseUrl: String = 'http://localhost:3000';
+  baseUrl: String = 'http://beb-blocky-ide.vercel.app';
+  // baseUrl: String = 'http://localhost:3000';
   resourcesBaseURL: String = this.baseUrl + '/api/v1';
   authBaseUrl: String = this.baseUrl + '/auth/v1';
 

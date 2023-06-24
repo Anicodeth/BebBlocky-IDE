@@ -12,12 +12,13 @@ $linear-gradient: linear-gradient(to right, #5baf48, #a7d464);
 $ff-primary: "Montserrat", sans-serif;
 
 .grid-container {
-    height: 100%;
-    width: 100%;
+    min-height: 100vh;
+    min-width: 100vw;
 
     padding: 0px;
     margin: 0px;
     display: flex;
+    flex-direction: row;
     // grid-template-columns: auto 1fr;
     // gap: 1rem;
     background-color: $beblocky-light-green;
@@ -35,20 +36,7 @@ $ff-primary: "Montserrat", sans-serif;
 }
 
 .main-content {
-    display: flex;
-    flex-direction: column;
+    position: relative;
     width: 95vw;
     min-height: 100vh;
-}
-
-.progress {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.userdata {
-    width: 100%;
-    // border-radius: 5px;
-    // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }

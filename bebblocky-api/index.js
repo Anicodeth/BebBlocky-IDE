@@ -15,25 +15,6 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB", err));
 
-// Swagger configuration
-const swaggerOptions = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Beblocky Web App API',
-      version: '1.0.0',
-      description: 'Beblocky Web App API documentation',
-    },
-  },
-  apis: ['./routes/*'], // Specify the file(s) where your JSDoc annotations are present
-};
-
-// Generate Swagger specification
-const swaggerSpec = swaggerJsdoc(swaggerOptions);
-
-// Serve Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 // App configuration
 app.use(express.json());
 app.use(
@@ -43,6 +24,22 @@ app.use(
     preflightContinue: false,
   })
 );
+
+
+// Swagger configuration
+const swaggerSpec = swaggerJsdoc({
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Beblocky Web App API',
+      version: '1.0.0',
+      description: 'Beblocky Web App API documentation',
+    },
+  },
+  apis: ['./routes/*'], // Specify the file(s) where your JSDoc annotations are present
+});
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 // Route imports
 const userRoutes = require("./routes/userRoutes");
@@ -55,7 +52,7 @@ app.use(`/api/${VERSION}/user`, userRoutes);
 app.use(`/api/${VERSION}/slides`, slidesRoutes);
 app.use(`/auth/${VERSION}`, authRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 000;
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}.`);
 });

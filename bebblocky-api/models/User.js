@@ -33,7 +33,8 @@ const userSchema = new mongoose.Schema({
   }],
   lastAccessedSlideId: {
     type: Number,
-    required: false,
+    required: true,
+    default: 0
   }
 });
 

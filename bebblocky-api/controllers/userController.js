@@ -91,6 +91,7 @@ exports.updateLastAccessedSlide = async (req, res) => {
         console.log('here');
         const userId = req.user.userId;
         const { slideId } = req.body;
+        console.log(slideId);
         const message = await userService.updateLastAccessedSlide(userId, slideId);
         res.status(201).json({ message });
       } catch (error) {    

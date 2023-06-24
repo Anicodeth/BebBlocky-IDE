@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Beblocky-Ide</string>
+    <string name="title_activity_main">Beblocky-Ide</string>
+    <string name="package_name">com.beblocky.app</string>
+    <string name="custom_url_scheme">com.beblocky.app</string>
+</resources>

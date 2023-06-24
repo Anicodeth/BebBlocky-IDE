@@ -30,6 +30,8 @@ import { HtmlCoursesComponent } from './dashboard/pages/html-courses/html-course
 import { TruncatePipe } from './shared/pipes/truncate.pipe';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { BridgeService } from './shared/services/bridge.service';
+import { ProgressRipplesComponent } from './ui/progress-ripples/progress-ripples.component';
+import { SkCubesComponent } from './ui/sk-cubes/sk-cubes.component';
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import { BridgeService } from './shared/services/bridge.service';
     HtmlCoursesComponent,
     TruncatePipe,
     LoadingSpinnerComponent,
+    ProgressRipplesComponent,
+    SkCubesComponent,
   ],
   imports: [
     BrowserModule,

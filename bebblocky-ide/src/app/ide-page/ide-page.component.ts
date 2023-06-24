@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./ide-page.component.css']
 })
 export class IdePageComponent {
+  public showSpinner: boolean = false;
   public slide: any;
 
   constructor(
@@ -16,11 +17,13 @@ export class IdePageComponent {
   ) {}
 
   ngOnInit() {
+    this.showSpinner = true;
     const slideId = this.route.snapshot.paramMap.get('slideId')!;
     this.bridgeService.getSlide(parseInt(slideId)).subscribe((slide: any) => {
       console.log('here');
       this.slide = slide;
       this.bridgeService.updateLastAccessedSlideId(this.slide.id).subscribe(() => {});
+      this.showSpinner = false;
     });
   }
 }

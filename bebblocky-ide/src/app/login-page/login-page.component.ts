@@ -28,7 +28,6 @@ export class LoginPageComponent {
     });
   }
 
-
   isButtonDisabled: boolean = false;
   isClassActive: boolean = false;
 
@@ -65,11 +64,11 @@ export class LoginPageComponent {
       .signUp(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password)
 
       .subscribe((res) => {
-        this.isButtonDisabled = true;
+        this.isButtonDisabled = false;
         this.cheaker();
 
       }, (err) => {
-        this.isButtonDisabled = true;
+        this.isButtonDisabled = false;
         alert(err.message)
       }
       );

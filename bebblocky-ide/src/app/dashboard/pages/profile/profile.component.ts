@@ -8,6 +8,7 @@ import { BridgeService } from 'src/app/shared/services/bridge.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  public showSpinner: boolean = false;
   public user: User;
   public ads: any[] = [
     {
@@ -35,7 +36,14 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = this.bridgeService.getUser();
-  }
+    this.showSpinner = true;
 
+    // timeout to show the spinner
+    setTimeout(() => {
+      this.showSpinner = false;
+
+      // Move the code that depends on this.showSpinner inside the timeout callback
+      this.user = this.bridgeService.getUser();
+    }, 1000);
+  }
 }

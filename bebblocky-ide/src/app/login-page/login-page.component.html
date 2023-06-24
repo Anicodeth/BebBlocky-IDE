@@ -18,9 +18,11 @@
         type="password"
         placeholder="Password"
       />
-      <a href="#">Forgot Your Password</a>
+      <a href="#">Forgot Your Password?</a>
 
-      <button type="submit">Sign In</button>
+      <button type="submit">
+        <p *ngIf="!isButtonDisabled">Sign In here</p>
+      </button>
       <h5 class="sign-up" (click)="toggle()">Sign Up</h5>
     </form>
   </div>
@@ -65,9 +67,12 @@
           type="password"
           placeholder="Password"
         />
-        <a href="#">Forgot Your Password</a>
+        <a href="#">Forgot Your Password?</a>
 
-        <button type="submit" [disabled]="isButtonDisabled">Sign In</button>
+        <button type="submit" [disabled]="isButtonDisabled">
+          <span *ngIf="!isButtonDisabled">Sign In</span>
+          <app-progress-ripples *ngIf="isButtonDisabled"></app-progress-ripples>
+        </button>
       </form>
     </div>
 
@@ -82,7 +87,10 @@
         <input formControlName="name" placeholder="Username" />
         <input formControlName="email" placeholder="Email" />
         <input formControlName="password" placeholder="Password" />
-        <button type="submit" [disabled]="isButtonDisabled">Sign Up</button>
+        <button type="submit" [disabled]="isButtonDisabled">
+          <span *ngIf="!isButtonDisabled">Sign Up</span>
+          <app-progress-ripples *ngIf="isButtonDisabled"></app-progress-ripples>
+        </button>
       </form>
     </div>
 

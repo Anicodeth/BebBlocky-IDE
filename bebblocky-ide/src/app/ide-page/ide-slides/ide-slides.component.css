@@ -108,9 +108,13 @@
   background-color: #D3D3D3;
 }
 
+.main-content {
+  overflow-y: scroll;
+}
+
 .code-content {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  font-family: Monospace;
+  font-family: monospace;
   width: 95%;
   background-color: #404040;
   color:white;
@@ -119,10 +123,7 @@
   padding:0.5rem;
   margin: auto;
   white-space: pre-line;
-  
-
-
-
+  overflow-y: scroll;
 }
 
 .text-content{

@@ -18,8 +18,8 @@ export class BridgeService {
   user: User = JSON.parse(sessionStorage.getItem('user') || '{}');
   token: String = sessionStorage.getItem('auth_token')!;
 
-  baseUrl: String = 'http://beb-blocky-ide.vercel.app';
-  // baseUrl: String = 'http://localhost:3000';
+  // baseUrl: String = 'http://beb-blocky-ide.vercel.app';
+  baseUrl: String = 'http://localhost:3000';
   resourcesBaseURL: String = this.baseUrl + '/api/v1';
   authBaseUrl: String = this.baseUrl + '/auth/v1';
 
@@ -98,5 +98,15 @@ export class BridgeService {
   updateSlideProgress(id: number, percent: number): Observable<any> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
     return this.http.post(this.resourcesBaseURL + `/user/slides/${id}/progress`, { completedPercent: percent }, { headers: headers });
+  }
+
+  updateLastAccessedSlideId(id: number): Observable<any> {
+    console.log('here');
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
+    return this.http.post(this.resourcesBaseURL + `/user/slides/last-accessed`, { slideId: id }, { headers: headers });
+  }
+
+  getLastAccessedSlideId() {
+    return this.user.lastAccessedSlideId;
   }
 }

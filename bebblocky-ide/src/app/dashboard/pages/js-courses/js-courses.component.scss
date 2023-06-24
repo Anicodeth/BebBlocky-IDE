@@ -1,5 +1,5 @@
 .container {
-    width: 100%;
+    min-width: 100vw;
     min-height: 100vh;
     margin: 1rem 1rem;
 }
@@ -21,6 +21,10 @@
         font-weight: 400;
         color: #000;
     }
+}
+
+.spinner {
+    width: 100%;
 }
 
 .courses {

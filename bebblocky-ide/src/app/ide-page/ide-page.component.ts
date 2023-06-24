@@ -17,6 +17,10 @@ export class IdePageComponent {
 
   ngOnInit() {
     const slideId = this.route.snapshot.paramMap.get('slideId')!;
-    this.bridgeService.getSlide(parseInt(slideId)).subscribe((slide: any) => this.slide = slide);
+    this.bridgeService.getSlide(parseInt(slideId)).subscribe((slide: any) => {
+      console.log('here');
+      this.slide = slide;
+      this.bridgeService.updateLastAccessedSlideId(this.slide.id).subscribe(() => {});
+    });
   }
 }

@@ -15,6 +15,11 @@
         <img class="sidebar-logo-img">
         <!-- Add your logo or brand name here -->
     </div>
+    <div class="sidebar-title">
+        <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">
+            Continue the course you were working on before
+        </span>
+    </div>
     <div>
         <ul class="sidebar-menu">
             <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of generalMenuItems" (click)="setCurrentMenuItemName(item.name)">

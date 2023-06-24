@@ -5,6 +5,7 @@ export interface User {
   password: string;
   progress: Progress[];
   token: string;
+  lastAccessedSlideId: number;
 }
 
 export interface Progress {

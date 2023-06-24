@@ -13,7 +13,7 @@ export class ProfilePageSidebarComponent implements OnInit {
   isExpanded: boolean = false;
   currTab: any;
   menuItems: any[] = [
-    { name: 'Code', link: '/ide/4', icon: faCode, class: 'special' },
+    { name: 'Code', link: '/ide/1', icon: faCode, class: 'special' },
     { name: 'Profile', link: '/courses/my', icon: faUser, class: 'regular' },
     { name: 'All Courses', link: '/courses', icon: faLayerGroup, class: 'regular' },
     { name: 'HTML Courses', link: '/courses/html', icon: faHtml5, class: 'regular' },

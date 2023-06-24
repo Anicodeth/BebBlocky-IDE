@@ -1,0 +1,32 @@
+.container {
+    width: 100%;
+    min-height: 100vh;
+    margin: 1rem 1rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    h1 {
+        font-size: 32px;
+        font-weight: 600;
+        color: #000;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: 400;
+        color: #000;
+    }
+}
+
+.spinner {
+    width: 100%;
+}
+
+.courses {
+    width: 100%;
+}

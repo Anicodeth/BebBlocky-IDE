@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { BridgeService } from '../bridge.service';
+import { BridgeService } from '../shared/services/bridge.service';
 import { ActivatedRoute } from '@angular/router';
-import { SlideInterface } from '../ide-slides/ide-slides.component';
 
 @Component({
   selector: 'app-ide-page',
@@ -9,6 +8,7 @@ import { SlideInterface } from '../ide-slides/ide-slides.component';
   styleUrls: ['./ide-page.component.css']
 })
 export class IdePageComponent {
+  public showSpinner: boolean = false;
   public slide: any;
 
   constructor(
@@ -17,7 +17,13 @@ export class IdePageComponent {
   ) {}
 
   ngOnInit() {
+    this.showSpinner = true;
     const slideId = this.route.snapshot.paramMap.get('slideId')!;
-    this.bridgeService.getSlide(parseInt(slideId)).subscribe((slide: any) => this.slide = slide);
+    this.bridgeService.getSlide(parseInt(slideId)).subscribe((slide: any) => {
+      console.log('here');
+      this.slide = slide;
+      this.bridgeService.updateLastAccessedSlideId(this.slide.id).subscribe(() => {});
+      this.showSpinner = false;
+    });
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BridgeService } from '../bridge.service';
+import { BridgeService } from '../shared/services/bridge.service';
 
 
 @Component({
@@ -28,7 +28,6 @@ export class LoginPageComponent {
     });
   }
 
-
   isButtonDisabled: boolean = false;
   isClassActive: boolean = false;
 
@@ -47,13 +46,9 @@ export class LoginPageComponent {
   this.service.signIn(this.loginForm.value.username, this.loginForm.value.password)
     .subscribe(
       (response: any) => {
-        console.log('ng here');
         this.isButtonDisabled = false;
-        this.service.userData = response.user;
-        sessionStorage.setItem('auth_token', response.token);
-        sessionStorage.setItem("courseProg", JSON.stringify(response.user.progress));
 
-        this.router.navigateByUrl("/profile");
+        this.router.navigateByUrl("/dashboard/profile");
       },
       (error: any) => {
         alert(error.message);
@@ -69,11 +64,11 @@ export class LoginPageComponent {
       .signUp(this.signupForm.value.name, this.signupForm.value.email, this.signupForm.value.password)
 
       .subscribe((res) => {
-        this.isButtonDisabled = true;
+        this.isButtonDisabled = false;
         this.cheaker();
 
       }, (err) => {
-        this.isButtonDisabled = true;
+        this.isButtonDisabled = false;
         alert(err.message)
       }
       );

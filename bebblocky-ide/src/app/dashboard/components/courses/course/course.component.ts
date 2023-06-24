@@ -15,4 +15,13 @@ export class CourseComponent {
   @Input() progress: number = 0;
 
   public gotoIcon = faArrowRight;
+
+  constructor(
+    private bridgeService: BridgeService
+  ) {}
+
+  get slideProgress() {
+    const progress = this.bridgeService.getSlideProgress(this.slideId);
+    return progress;
+  }
 }

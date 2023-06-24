@@ -21,7 +21,8 @@
       <a href="#">Forgot Your Password?</a>
 
       <button type="submit">
-        <p *ngIf="!isButtonDisabled">Sign In here</p>
+        <span *ngIf="!isButtonDisabled">Sign In</span>
+        <app-progress-ripples *ngIf="isButtonDisabled"></app-progress-ripples>
       </button>
       <h5 class="sign-up" (click)="toggle()">Sign Up</h5>
     </form>
@@ -39,7 +40,7 @@
       <input formControlName="email" placeholder="Email" />
       <input formControlName="password" placeholder="Password" />
       <button type="submit">SignUp</button>
-      <h5 class="sign-up" (click)="toggle()">Sign In</h5>
+      <h5 class="sign-up" (click)="toggle()">Sign Up</h5>
     </form>
   </div>
 

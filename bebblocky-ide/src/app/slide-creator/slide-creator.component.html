@@ -1,0 +1,73 @@
+<h1>Create Slide</h1>
+
+<div class="slide-form">
+  <div class="form-group">
+    <label for="courseName">Course Name:</label>
+    <input type="text" id="courseName" [(ngModel)]="slide.courseName">
+  </div>
+  
+  <div class="form-group">
+    <label for="courseDescription">Course Description:</label>
+    <textarea id="courseDescription" [(ngModel)]="slide.courseDescription"></textarea>
+  </div>
+  
+  <div class="form-group">
+    <label for="courseCategory">Course Category:</label>
+    <select id="courseCategory" [(ngModel)]="slide.courseCategory">
+      <option value="html">HTML</option>
+      <option value="css">CSS</option>
+      <option value="js">JavaScript</option>
+    </select>
+  </div>
+  
+  <button class="save-button" (click)="createSlide()">Save Slide</button>
+</div>
+
+<hr>
+
+<h2>New Slide</h2>
+
+<div class="slide-form">
+  <div class="form-group">
+    <label for="backgroundColor">Background Color:</label>
+    <input type="text" id="backgroundColor" [(ngModel)]="newSlide.backgroundColor">
+  </div>
+
+  <div class="form-group">
+    <label for="font">Font:</label>
+    <input type="text" id="font" [(ngModel)]="newSlide.font">
+  </div>
+
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input type="text" id="title" [(ngModel)]="newSlide.title">
+  </div>
+
+  <div class="form-group">
+    <label for="content">Content:</label>
+    <textarea id="content" [(ngModel)]="newSlide.content"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="code">Code:</label>
+    <textarea id="code" [(ngModel)]="newSlide.code"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="image">Image URL:</label>
+    <input type="text" id="image" [(ngModel)]="newSlide.image">
+  </div>
+
+  <button class="add-button" (click)="addSlide()">Add Slide</button>
+</div>
+
+<hr>
+
+<h2>Slides</h2>
+
+<div *ngFor="let slideDetail of slide.slides" class="slide-details">
+  <h3>{{ slideDetail.title }}</h3>
+  <p>{{ slideDetail.content }}</p>
+  <!-- Display other slide details as needed -->
+  <hr>
+</div>

@@ -11,6 +11,7 @@ import { CssCoursesComponent } from './dashboard/pages/css-courses/css-courses.c
 import { HtmlCoursesComponent } from './dashboard/pages/html-courses/html-courses.component';
 import { ProfileComponent } from './dashboard/pages/profile/profile.component';
 import { LoggedInGuard } from './shared/guards/logged-in.guard';
+import { SlideCreatorComponent } from './slide-creator/slide-creator.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
     path: 'ide/:slideId', component: IdePageComponent, canActivate: [LoggedInGuard],
   },
   { path: 'login', component: LoginPageComponent },
+  { path: 'add-slides', component: SlideCreatorComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

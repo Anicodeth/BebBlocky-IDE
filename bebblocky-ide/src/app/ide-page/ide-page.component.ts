@@ -20,7 +20,6 @@ export class IdePageComponent {
     this.showSpinner = true;
     const slideId = this.route.snapshot.paramMap.get('slideId')!;
     this.bridgeService.getSlide(parseInt(slideId)).subscribe((slide: any) => {
-      console.log('here');
       this.slide = slide;
       this.bridgeService.updateLastAccessedSlideId(this.slide.id).subscribe(() => {});
       this.showSpinner = false;

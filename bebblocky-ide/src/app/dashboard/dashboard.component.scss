@@ -25,6 +25,9 @@ $ff-primary: "Montserrat", sans-serif;
 }
 
 @media screen and (max-width: 768px) {
+    .header {
+        display: none;
+    }
     .grid-container {
         display: flex;
         flex-direction: column;

@@ -1,11 +1,10 @@
 <div routerLinkActive="active" class="course">
-
     <div class="course-about">
-        <h3>{{ slideName | truncate:5 }}</h3>
+        <h3>{{ slideName | truncate:6 }}</h3>
         <p>{{ slideDescription | truncate:15 }}</p>
     </div>
     <div class="course-progress">
-        <div class="course-progress-bar" [style.width.%]="progress">
+        <div class="course-progress-bar" [style.width.%]="slideProgress">
         </div>
     </div>
     <div class="course-action-button">

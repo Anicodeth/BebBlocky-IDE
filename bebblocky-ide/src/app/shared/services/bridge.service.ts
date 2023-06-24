@@ -18,7 +18,7 @@ export class BridgeService {
   user: User = JSON.parse(sessionStorage.getItem('user') || '{}');
   token: String = sessionStorage.getItem('auth_token')!;
 
-  baseUrl: String = 'http://beb-blocky-ide.vercel.app';
+  baseUrl: String = 'https://beb-blocky-ide.vercel.app';
   // baseUrl: String = 'http://localhost:3000';
   resourcesBaseURL: String = this.baseUrl + '/api/v1';
   authBaseUrl: String = this.baseUrl + '/auth/v1';
@@ -42,6 +42,17 @@ export class BridgeService {
     );
   }
 
+  getSlideProgress(slideId: number) {
+    // find the slideId from the session storage "courseProg" and return the progress
+    let courseProg = JSON.parse(sessionStorage.getItem("courseProg") || '{}');
+    // slide id might not be the exact index of the array so we need to find it and return it
+    for (let i = 0; i < courseProg.length; i++) {
+      if (courseProg[i].slideId == slideId) {
+        return courseProg[i].completedPercent;
+      }
+    }
+  }
+
   logout() {
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('auth_token');
@@ -51,11 +62,20 @@ export class BridgeService {
     return !!sessionStorage.getItem('auth_token');
   }
 
-  getUser() {
-    if (!this.user) {
-      this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
-    }
+  setUser(): Observable<User> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
+    const response = this.http.post<User>(this.resourcesBaseURL + '/user', { headers: headers });
 
+    return response.pipe(
+      tap((data: any) => {
+        this.user = data.user;
+        sessionStorage.setItem('user', JSON.stringify(data.user));
+        sessionStorage.setItem("courseProg", JSON.stringify(data.user.progress));
+      })
+    );
+  }
+
+  getUser() {
     return this.user;
   }
 
@@ -80,33 +100,21 @@ export class BridgeService {
     return this.http.get<Slide>(this.resourcesBaseURL + '/slides/' + id.toString(), { headers: headers });
   }
 
-  getSlideProgress(id: number): Observable<number> {
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
-    return this.http.get<number>(this.resourcesBaseURL + '/user/slides/' + id.toString() + '/progress', { headers: headers }).pipe(
-      catchError((error) => {
-        if (error.error && error.error.message === 'Progress not found') {
-          // Return a default value of 0 when progress is not found
-          return of(0);
-        }
-
-        // Forward the error to the subscriber
-        return throwError(error);
-      })
-    );
-  }
-
   updateSlideProgress(id: number, percent: number): Observable<any> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
     return this.http.post(this.resourcesBaseURL + `/user/slides/${id}/progress`, { completedPercent: percent }, { headers: headers });
   }
 
   updateLastAccessedSlideId(id: number): Observable<any> {
-    console.log('here');
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
     return this.http.post(this.resourcesBaseURL + `/user/slides/last-accessed`, { slideId: id }, { headers: headers });
   }
 
   getLastAccessedSlideId() {
     return this.user.lastAccessedSlideId;
+  }
+
+  createSlide(slide: Slide): Observable<Slide> {
+    return this.http.post<Slide>(this.resourcesBaseURL + '/slides', slide);
   }
 }

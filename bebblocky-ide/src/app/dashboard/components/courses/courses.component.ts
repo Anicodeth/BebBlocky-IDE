@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Slide } from 'src/app/shared/models/slide.dto';
+import { Course } from 'src/app/shared/models/course.dto';
 
 @Component({
   selector: 'app-courses',
@@ -7,9 +7,9 @@ import { Slide } from 'src/app/shared/models/slide.dto';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent {
-  @Input() courses: Slide[] = [];
+  @Input() courses: Course[] = [];
 
-  getSlideProgress(id: number) {
+  getcourseProgress(id: number) {
     return 0;
   }
 }

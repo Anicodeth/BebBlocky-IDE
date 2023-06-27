@@ -19,8 +19,8 @@ export interface SlideInterface {
 export class IdeSlidesComponent implements OnInit {
   @ViewChild('code') private codeExample: ElementRef<HTMLElement> | any;
 
-  public slides: any;
-  public slideId: any;
+  public courses: any;
+  public courseId: any;
   public input:any;
   currentIndex: number = 0;
 
@@ -31,9 +31,9 @@ export class IdeSlidesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.slideId = parseInt(this.route.snapshot.paramMap.get('slideId')!);
-    this.bridgeService.getSlide(this.slideId).subscribe((slide: any) => {
-      this.slides = slide.slide.slides;
+    this.courseId = parseInt(this.route.snapshot.paramMap.get('courseId')!);
+    this.bridgeService.getCourse(this.courseId).subscribe((course: any) => {
+      this.courses = course.course.courses;
     });
 
 
@@ -54,12 +54,12 @@ export class IdeSlidesComponent implements OnInit {
 
   goToNext(): void {
         // if related patterns are found
-         if (this.calculateSentencePercentage(this.input,this.slides[this.currentIndex].code) < 0){
+         if (this.calculateSentencePercentage(this.input,this.courses[this.currentIndex].code) < 0){
               alert('You did not do the task correctly! Go back and check what is missing from your code.')
           }
           else{
             //if strings are related
-            if (this.currentIndex != this.slides.length - 1) {
+            if (this.currentIndex != this.courses.length - 1) {
               this.currentIndex += 1;}
 
             this.updateProgress();
@@ -67,23 +67,23 @@ export class IdeSlidesComponent implements OnInit {
       
   }
 
-  goToSlide(slideIndex: number): void {
-    this.currentIndex = slideIndex;
+  goToSlide(courseIndex: number): void {
+    this.currentIndex = courseIndex;
   }
 
   getCurrentSlideUrl() {
-    return `url('${this.slides[this.currentIndex].backgroundUrl}')`;
+    return `url('${this.courses[this.currentIndex].backgroundUrl}')`;
   }
 
   updateProgress() {
-    let percent: any = ((this.currentIndex + 1) / this.slides.length) * 100;
+    let percent: any = ((this.currentIndex + 1) / this.courses.length) * 100;
 
-    this.bridgeService.updateSlideProgress(this.slideId, percent).subscribe((response) => {
+    this.bridgeService.updateCourseProgress(this.courseId, percent).subscribe((response) => {
       let temp:any=sessionStorage.getItem('courseProg');
       temp = JSON.parse(temp);
       
       temp.forEach((val:any)=>{
-        if(val.slideId == this.slideId){
+        if(val.courseId == this.courseId){
           val.completedPercent = percent;}
       });
       sessionStorage.setItem('courseProg', JSON.stringify(temp));

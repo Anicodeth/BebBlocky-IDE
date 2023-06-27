@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class IdePageComponent {
   public showSpinner: boolean = false;
-  public slide: any;
+  public course: any;
 
   constructor(
     private bridgeService: BridgeService,
@@ -18,10 +18,10 @@ export class IdePageComponent {
 
   ngOnInit() {
     this.showSpinner = true;
-    const slideId = this.route.snapshot.paramMap.get('slideId')!;
-    this.bridgeService.getSlide(parseInt(slideId)).subscribe((slide: any) => {
-      this.slide = slide;
-      this.bridgeService.updateLastAccessedSlideId(this.slide.id).subscribe(() => {});
+    const courseId = this.route.snapshot.paramMap.get('courseId')!;
+    this.bridgeService.getCourse(parseInt(courseId)).subscribe((course: any) => {
+      this.course = course;
+      this.bridgeService.updateLastAccessedCourseId(this.course.id).subscribe(() => {});
       this.showSpinner = false;
     });
   }

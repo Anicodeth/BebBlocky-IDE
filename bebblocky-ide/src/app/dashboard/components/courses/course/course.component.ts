@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { Slide } from 'src/app/shared/models/slide.dto';
+import { Course } from 'src/app/shared/models/course.dto';
 import { BridgeService } from 'src/app/shared/services/bridge.service';
 
 @Component({
@@ -9,9 +9,9 @@ import { BridgeService } from 'src/app/shared/services/bridge.service';
   styleUrls: ['./course.component.scss']
 })
 export class CourseComponent {
-  @Input() slideName: String = "";
-  @Input() slideDescription: String = "";
-  @Input() slideId: number = 0;
+  @Input() courseName: String = "";
+  @Input() courseDescription: String = "";
+  @Input() courseId: number = 0;
   @Input() progress: number = 0;
 
   public gotoIcon = faArrowRight;
@@ -20,8 +20,8 @@ export class CourseComponent {
     private bridgeService: BridgeService
   ) {}
 
-  get slideProgress() {
-    const progress = this.bridgeService.getSlideProgress(this.slideId);
+  get courseProgress() {
+    const progress = this.bridgeService.getCourseProgress(this.courseId);
     return progress;
   }
 }

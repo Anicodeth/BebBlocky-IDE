@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, of, Observable } from 'rxjs';
 import { User } from '../models/user.dto';
-import { Slide } from '../models/slide.dto';
+import { Course } from '../models/course.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +18,8 @@ export class BridgeService {
   user: User = JSON.parse(sessionStorage.getItem('user') || '{}');
   token: String = sessionStorage.getItem('auth_token')!;
 
-  baseUrl: String = 'https://beb-blocky-ide.vercel.app';
-  // baseUrl: String = 'http://localhost:3000';
+  // baseUrl: String = 'https://beb-blocky-ide.vercel.app';
+  baseUrl: String = 'http://localhost:3000';
   resourcesBaseURL: String = this.baseUrl + '/api/v1';
   authBaseUrl: String = this.baseUrl + '/auth/v1';
 
@@ -42,12 +42,12 @@ export class BridgeService {
     );
   }
 
-  getSlideProgress(slideId: number) {
-    // find the slideId from the session storage "courseProg" and return the progress
+  getCourseProgress(courseId: number) {
+    // find the courseId from the session storage "courseProg" and return the progress
     let courseProg = JSON.parse(sessionStorage.getItem("courseProg") || '{}');
-    // slide id might not be the exact index of the array so we need to find it and return it
+    // course id might not be the exact index of the array so we need to find it and return it
     for (let i = 0; i < courseProg.length; i++) {
-      if (courseProg[i].slideId == slideId) {
+      if (courseProg[i].courseId == courseId) {
         return courseProg[i].completedPercent;
       }
     }
@@ -79,42 +79,42 @@ export class BridgeService {
     return this.user;
   }
 
-  getSlides(type: string): Observable<Slide[]> {
+  getCourses(type: string): Observable<Course[]> {
     if (!type) {
-      return this.http.get<Slide[]>(this.resourcesBaseURL + '/slides/');
+      return this.http.get<Course[]>(this.resourcesBaseURL + '/courses/');
     }
-    return this.http.get<Slide[]>(this.resourcesBaseURL + '/slides/' + type);
+    return this.http.get<Course[]>(this.resourcesBaseURL + '/courses/' + type);
   }
 
-  getUserSlides(type: string): Observable<Slide[]> {
+  getUserCourses(type: string): Observable<Course[]> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
 
     if (!type) {
-      return this.http.get<Slide[]>(this.resourcesBaseURL + '/user/slides', { headers: headers });
+      return this.http.get<Course[]>(this.resourcesBaseURL + '/user/courses', { headers: headers });
     }
-    return this.http.get<Slide[]>(this.resourcesBaseURL + '/user/slides/' + type, { headers: headers });
+    return this.http.get<Course[]>(this.resourcesBaseURL + '/user/courses/' + type, { headers: headers });
   }
 
-  getSlide(id: number): Observable<Slide> {
+  getCourse(id: number): Observable<Course> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
-    return this.http.get<Slide>(this.resourcesBaseURL + '/slides/' + id.toString(), { headers: headers });
+    return this.http.get<Course>(this.resourcesBaseURL + '/courses/' + id.toString(), { headers: headers });
   }
 
-  updateSlideProgress(id: number, percent: number): Observable<any> {
+  updateCourseProgress(id: number, percent: number): Observable<any> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
-    return this.http.post(this.resourcesBaseURL + `/user/slides/${id}/progress`, { completedPercent: percent }, { headers: headers });
+    return this.http.post(this.resourcesBaseURL + `/user/courses/${id}/progress`, { completedPercent: percent }, { headers: headers });
   }
 
-  updateLastAccessedSlideId(id: number): Observable<any> {
+  updateLastAccessedCourseId(id: number): Observable<any> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
-    return this.http.post(this.resourcesBaseURL + `/user/slides/last-accessed`, { slideId: id }, { headers: headers });
+    return this.http.post(this.resourcesBaseURL + `/user/courses/last-accessed`, { courseId: id }, { headers: headers });
   }
 
-  getLastAccessedSlideId() {
-    return this.user.lastAccessedSlideId;
+  getLastAccessedCourseId() {
+    return this.user.lastAccessedCourseId;
   }
 
-  createSlide(slide: Slide): Observable<Slide> {
-    return this.http.post<Slide>(this.resourcesBaseURL + '/slides', slide);
+  createCourse(course: Course): Observable<Course> {
+    return this.http.post<Course>(this.resourcesBaseURL + '/courses', course);
   }
 }

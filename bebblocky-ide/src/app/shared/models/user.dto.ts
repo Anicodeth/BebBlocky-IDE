@@ -5,10 +5,10 @@ export interface User {
   password: string;
   progress: Progress[];
   token: string;
-  lastAccessedSlideId: number;
+  lastAccessedCourseId: number;
 }
 
 export interface Progress {
-  slideId: number;
+  courseId: number;
   completedPercent: number;
 }

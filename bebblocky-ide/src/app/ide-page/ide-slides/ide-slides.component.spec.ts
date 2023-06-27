@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IdeSlidesComponent } from './ide-slides.component';
+import { IdeSlidesComponent } from './ide-courses.component';
 
 describe('IdeSlidesComponent', () => {
   let component: IdeSlidesComponent;

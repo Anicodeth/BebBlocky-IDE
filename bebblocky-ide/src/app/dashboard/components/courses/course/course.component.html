@@ -1,14 +1,14 @@
 <div routerLinkActive="active" class="course">
     <div class="course-about">
-        <h3>{{ slideName | truncate:6 }}</h3>
-        <p>{{ slideDescription | truncate:15 }}</p>
+        <h3>{{ courseName | truncate:6 }}</h3>
+        <p>{{ courseDescription | truncate:15 }}</p>
     </div>
     <div class="course-progress">
-        <div class="course-progress-bar" [style.width.%]="slideProgress">
+        <div class="course-progress-bar" [style.width.%]="courseProgress">
         </div>
     </div>
     <div class="course-action-button">
-        <a routerLink="/ide/{{ slideId }}" routerLinkActive="active" class="course-goto-button">
+        <a routerLink="/ide/{{ courseId }}" routerLinkActive="active" class="course-goto-button">
             <fa-icon class="sidebar-menu-item-icon" [icon]="gotoIcon"></fa-icon>
         </a>
     </div>

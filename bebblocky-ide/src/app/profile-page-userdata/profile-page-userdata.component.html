@@ -19,12 +19,12 @@
               <div class="course-progress">
                 <div
                     class="course-progress-bar"
-                    [style.width.%]="getProgress(course.slideId)">
+                    [style.width.%]="getProgress(course.courseId)">
                 </div>
               </div>
 
               <div class="course-action-button">
-                  <a routerLink="/ide/{{ course.slideId }}" routerLinkActive="active"
+                  <a routerLink="/ide/{{ course.courseId }}" routerLinkActive="active"
                   class="course-goto-button">
                       <fa-icon class="sidebar-menu-item-icon"
                           [icon]="gotoIcon"></fa-icon>

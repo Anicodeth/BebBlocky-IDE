@@ -32,7 +32,6 @@ import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.co
 import { BridgeService } from './shared/services/bridge.service';
 import { ProgressRipplesComponent } from './ui/progress-ripples/progress-ripples.component';
 import { SkCubesComponent } from './ui/sk-cubes/sk-cubes.component';
-import { SlideCreatorComponent } from './slide-creator/slide-creator.component';
 
 
 @NgModule({
@@ -61,8 +60,7 @@ import { SlideCreatorComponent } from './slide-creator/slide-creator.component';
     TruncatePipe,
     LoadingSpinnerComponent,
     ProgressRipplesComponent,
-    SkCubesComponent,
-    SlideCreatorComponent,
+    SkCubesComponent
   ],
   imports: [
     BrowserModule,

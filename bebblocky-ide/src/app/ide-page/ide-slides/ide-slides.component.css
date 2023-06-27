@@ -1,4 +1,4 @@
-.slider {
+.courser {
   position: relative;
   height: 100%;
   font-family: Rajdhani, sans-serif;
@@ -15,7 +15,7 @@
   font-size: 2rem;
 
 }
-.slide {
+.course {
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -25,17 +25,17 @@
 
 }
 
-.slide .text-content {
+.course .text-content {
   padding: 1.6rem 0 0 0;
 }
 
-.slide image {
+.course image {
   width: 80%;
 }
 
 
 
-.slide p {
+.course p {
   margin: 0 auto;
   color: #fff;
 }
@@ -100,11 +100,11 @@
   width: 100%;
 }
 
-.completed-slide {
+.completed-course {
   background-color: #00000098;
 }
 
-.new-slide {
+.new-course {
   background-color: #D3D3D3;
 }
 

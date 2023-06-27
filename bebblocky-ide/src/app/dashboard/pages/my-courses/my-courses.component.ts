@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Slide } from 'src/app/shared/models/slide.dto';
+import { Course } from 'src/app/shared/models/course.dto';
 import { BridgeService } from 'src/app/shared/services/bridge.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { BridgeService } from 'src/app/shared/services/bridge.service';
   styleUrls: ['./my-courses.component.scss']
 })
 export class MyCoursesComponent implements OnInit {
-  public htmlCourses: Slide[] = [];
-  public cssCourses: Slide[] = [];
-  public jsCourses: Slide[] = [];
+  public htmlCourses: Course[] = [];
+  public cssCourses: Course[] = [];
+  public jsCourses: Course[] = [];
 
   public showSpinner: boolean = true;
 
@@ -20,16 +20,16 @@ export class MyCoursesComponent implements OnInit {
 
   ngOnInit() {
     this.showSpinner = true;
-    this.bridgeService.getUserSlides('html').subscribe((courses: any) => {
-      this.htmlCourses = courses.slides;
+    this.bridgeService.getUserCourses('html').subscribe((courses: any) => {
+      this.htmlCourses = courses.courses;
       this.showSpinner = false;
     });
-    this.bridgeService.getUserSlides('css').subscribe((courses: any) => {
-      this.cssCourses = courses.slides;
+    this.bridgeService.getUserCourses('css').subscribe((courses: any) => {
+      this.cssCourses = courses.courses;
       this.showSpinner = false;
     });
-    this.bridgeService.getUserSlides('js').subscribe((courses: any) => {
-      this.jsCourses = courses.slides;
+    this.bridgeService.getUserCourses('js').subscribe((courses: any) => {
+      this.jsCourses = courses.courses;
       this.showSpinner = false;
     });
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Slide } from 'src/app/shared/models/slide.dto';
+import { Course } from 'src/app/shared/models/course.dto';
 import { BridgeService } from 'src/app/shared/services/bridge.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { BridgeService } from 'src/app/shared/services/bridge.service';
   styleUrls: ['./js-courses.component.scss']
 })
 export class JsCoursesComponent implements OnInit {
-  public courses: Slide[] = [];
+  public courses: Course[] = [];
   public showSpinner: boolean = true;
 
   constructor(
@@ -17,8 +17,8 @@ export class JsCoursesComponent implements OnInit {
 
   ngOnInit() {
     this.showSpinner = true;
-    this.bridgeService.getSlides('js').subscribe((courses: any) => {
-      this.courses = courses.slides;
+    this.bridgeService.getCourses('js').subscribe((courses: any) => {
+      this.courses = courses.courses;
       this.showSpinner = false;
     });
   }

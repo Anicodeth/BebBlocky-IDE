@@ -1,6 +1,6 @@
 <div class="courses">
     <div class="course" *ngFor="let course of courses">
-        <app-course [slideId]="course.slideId" [slideName]="course.courseName" [slideDescription]="course.courseDescription"
-            [progress]="getSlideProgress(course.slideId)"></app-course>
+        <app-course [courseId]="course.courseId" [courseName]="course.courseName" [courseDescription]="course.courseDescription"
+            [progress]="getcourseProgress(course.courseId)"></app-course>
     </div>
 </div>

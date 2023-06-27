@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.generalMenuItems = [
-      { name: 'Code', link: `/ide/${this.bridgeService.getLastAccessedSlideId()}`, icon: faCode, class: 'special' },
+      { name: 'Code', link: `/ide/${this.bridgeService.getLastAccessedCourseId()}`, icon: faCode, class: 'special' },
     ]
     this.userMenuItems = [
       { name: 'My Profile', link: '/dashboard/profile', icon: faUser, class: 'regular' },

@@ -13,13 +13,18 @@ import { ProfileComponent } from './dashboard/pages/profile/profile.component';
 import { LoggedInGuard } from './shared/guards/logged-in.guard';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
   {
-    path: 'ide/:courseId', component: IdePageComponent, canActivate: [LoggedInGuard],
+    path: '',
+    // redirectTo: sessionStorage.getItem('auth_token') ? '/dashboard' : '/landing',
+    // pathMatch: 'full',
+    component: LandingPageComponent
   },
+  { path: 'ide/:courseId', component: IdePageComponent, canActivate: [LoggedInGuard] },
   { path: 'login', component: LoginPageComponent },
   {
     path: 'dashboard',
+    // redirectTo: '/dashboard/profile',
+    // pathMatch: 'full',
     component: DashboardComponent,
     canActivate: [LoggedInGuard],
     children: [

@@ -22,6 +22,9 @@ export class CourseComponent {
 
   get courseProgress() {
     const progress = this.bridgeService.getCourseProgress(this.courseId);
+    if (!progress) {
+      return 0;
+    }
     return progress;
   }
 }

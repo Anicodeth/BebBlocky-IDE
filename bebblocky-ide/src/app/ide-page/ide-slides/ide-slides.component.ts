@@ -36,6 +36,11 @@ export class IdeSlidesComponent implements OnInit {
     this.bridgeService.getCourse(this.courseId).subscribe((course: any) => {
       this.slides = course.course.slides;
       this.codeEditorService.startCode.next(this.slides[0].startingCode);
+
+      const progress = this.bridgeService.getCourseProgress(this.courseId);
+      // Progress is in percentage from 100, so we need to find the index by using 100 and the length of the slides
+      this.currentIndex = Math.floor((progress / 100) * this.slides.length);
+      this.goToSlide(this.currentIndex);
     });
 
     this.codeEditorService.userCode.subscribe((userWrittenCode) => {
@@ -47,27 +52,22 @@ export class IdeSlidesComponent implements OnInit {
   goToPrevious(): void {
     if (this.currentIndex != 0) {
       this.currentIndex -= 1;
-      this.setStartingCode();
     }
     this.updateProgress();
   }
 
 
   goToNext(): void {
-    // if related patterns are found
-    console.log(this.input, this.slides[this.currentIndex].code);
     if (this.calculateSentencePercentage(this.input, this.slides[this.currentIndex].code) < 0) {
-      alert('You did not do the task correctly! Go back and check what is missing from your code.')
+      alert('You did not do the task correctly! Go back and check what is missing from your code.');
+      return;
     }
-    else {
-      //if strings are related
-      if (this.currentIndex != this.slides.length - 1) {
-        this.currentIndex += 1;
-        this.setStartingCode();
-      }
 
-      this.updateProgress();
+    if (this.currentIndex != this.slides.length - 1) {
+      this.currentIndex += 1;
     }
+
+    this.updateProgress();
 
   }
 
@@ -80,6 +80,7 @@ export class IdeSlidesComponent implements OnInit {
   }
 
   updateProgress() {
+    this.setStartingCode();
     let percent: any = ((this.currentIndex + 1) / this.slides.length) * 100;
 
     this.bridgeService.updateCourseProgress(this.courseId, percent).subscribe((response) => {
@@ -104,6 +105,7 @@ export class IdeSlidesComponent implements OnInit {
     if (!paragraph || !sentence) {
       return 100;
     }
+
     const paragraphLower = paragraph.toLowerCase();
     const sentenceLower = sentence.toLowerCase();
 

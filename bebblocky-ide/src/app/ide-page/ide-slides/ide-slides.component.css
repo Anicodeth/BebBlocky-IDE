@@ -35,7 +35,6 @@
 }
 
 
-
 .course p {
   margin: 0 auto;
   color: #fff;
@@ -110,10 +109,12 @@
 }
 
 .main-content {
+  max-height: 100%;
   overflow-y: scroll;
 }
 
 .code-content {
+  overflow: auto;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   font-family: monospace;
   width: 95%;
@@ -123,8 +124,6 @@
   border-radius: 0.75rem;
   padding: 0.5rem;
   margin: auto;
-  white-space: pre-line;
-  overflow-y: scroll;
 }
 
 .text-content {

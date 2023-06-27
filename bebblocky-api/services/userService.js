@@ -10,7 +10,7 @@ async function getUser(userId) {
   }
 }
 
-async function getUsercourses(userId, courseCategory) {
+async function getUserCourses(userId, courseCategory) {
   try {
     const user = await User.findById(userId);
     const courses = (courseCategory)
@@ -21,11 +21,12 @@ async function getUsercourses(userId, courseCategory) {
       user.progress.some(progress => progress.courseId === course.courseId)
     );
     return usercourses;
-  } catch (error) {throw new Error('Internal server error');
+  } catch (error) {
+    throw new Error('Internal server error');
   }
 }
 
-async function getUsercourseProgress(userId, courseId) {
+async function getUserCourseProgress(userId, courseId) {
   try {
     const user = await User.findById(userId);
     const progress = user.progress.find(
@@ -37,7 +38,7 @@ async function getUsercourseProgress(userId, courseId) {
   }
 }
 
-async function updateUsercourseProgress(userId, courseId, completedPercent) {
+async function updateUserCourseProgress(userId, courseId, completedPercent) {
   try {
     const user = await User.findById(userId);
     const progress = user.progress.find(
@@ -61,11 +62,13 @@ async function updateUsercourseProgress(userId, courseId, completedPercent) {
   }
 }
 
-async function updateLastAccessedcourse(userId, courseId) {
+async function updateLastAccessedCourse(userId, courseId) {
   try {
     const user = await User.findById(userId);
-    user.lastAccessedcourseId = courseId;
-
+    console.log(user.lastAccessedCourseId, courseId);
+    // If the user doesn't have the attribute lastAccessedCourseId, add it
+    user.lastAccessedCourseId = courseId;
+    console.log(user.lastAccessedCourseId, courseId);
     // Save the updated user object
     await user.save();
 
@@ -75,11 +78,11 @@ async function updateLastAccessedcourse(userId, courseId) {
   }
 }
 
-async function getLastAccessedcourse(userId) {
+async function getLastAccessedCourse(userId) {
   try {
     const user = await User.findById(userId);
 
-    return user.lastAccessedcourseId;
+    return user.lastAccessedCourseId;
   } catch (error) {
     throw new Error('Internal server error');
   }
@@ -87,9 +90,9 @@ async function getLastAccessedcourse(userId) {
 
 module.exports = {
   getUser,
-  getUsercourses,
-  getUsercourseProgress,
-  updateUsercourseProgress,
-  updateLastAccessedcourse,
-  getLastAccessedcourse,
+  getUserCourses,
+  getUserCourseProgress,
+  updateUserCourseProgress,
+  updateLastAccessedCourse,
+  getLastAccessedCourse,
 };

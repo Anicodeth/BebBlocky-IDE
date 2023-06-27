@@ -1,6 +1,6 @@
 export interface Course {
   courseId: number;
-  courseName: string;
+  courseTitle: string;
   courseDescription: string;
   courseLanguage: 'html' | 'css' | 'js';
   courses: Slide[];

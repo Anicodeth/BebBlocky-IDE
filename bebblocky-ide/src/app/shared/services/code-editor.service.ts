@@ -5,7 +5,8 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CodeEditorService {
-
+  startCode = new Subject<string>();
+  editorLanguage = new Subject<string>();
   userCode = new Subject<string>();
   fontSize = new Subject<number>();
   editorTheme = new Subject<string>();

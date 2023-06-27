@@ -25,7 +25,6 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
 
     this.codeEditorService.editorTheme.subscribe((theme) => {
       aceEditor.setTheme(`ace/theme/${theme}`);
-
     });
 
     ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.12/src-noconflict');
@@ -35,8 +34,15 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
       this.codeEditorService.userCode.next(aceEditor.getValue());
     });
 
-    aceEditor.session.setValue(`<h1>Title</h1>`); // To add starting code, already from the start
-    aceEditor.session.setMode('ace/mode/html');
+    this.codeEditorService.startCode.subscribe((startCode) => {
+      console.log('here', startCode);
+      aceEditor.session.setValue(startCode);
+    });
+
+    this.codeEditorService.editorLanguage.subscribe((language) => {
+      aceEditor.session.setMode(`ace/mode/${language}`);
+    });
+
     aceEditor.setFontSize(18);
     aceEditor.setTheme("ace/theme/cobalt");
     aceEditor.setOptions({wrapBehavioursEnabled: false

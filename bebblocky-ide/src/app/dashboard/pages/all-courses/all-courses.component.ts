@@ -18,7 +18,7 @@ export class AllCoursesComponent implements OnInit {
   ngOnInit() {
     this.showSpinner = true;
     this.bridgeService.getCourses('').subscribe((courses: any) => {
-      this.courses = courses.course;
+      this.courses = courses.courses;
       this.showSpinner = false;
     });
   }

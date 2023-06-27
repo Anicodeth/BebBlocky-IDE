@@ -107,6 +107,7 @@ export class BridgeService {
 
   updateLastAccessedCourseId(id: number): Observable<any> {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
+    console.log(id);
     return this.http.post(this.resourcesBaseURL + `/user/courses/last-accessed`, { courseId: id }, { headers: headers });
   }
 

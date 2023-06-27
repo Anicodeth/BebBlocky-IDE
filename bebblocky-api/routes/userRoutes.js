@@ -38,7 +38,7 @@ router.get('/', userController.getUser);
  *       500:
  *         description: Internal server error
  */
-router.get('/courses', userController.getUsercourses);
+router.get('/courses', userController.getUserCourses);
 
 /**
  * @swagger
@@ -54,7 +54,7 @@ router.get('/courses', userController.getUsercourses);
  *       500:
  *         description: Internal server error
  */
-router.get('/courses/html', userController.getUserHtmlcourses);
+router.get('/courses/html', userController.getUserHtmlCourses);
 
 /**
  * @swagger
@@ -70,7 +70,7 @@ router.get('/courses/html', userController.getUserHtmlcourses);
  *       500:
  *         description: Internal server error
  */
-router.get('/courses/css', userController.getUserCsscourses);
+router.get('/courses/css', userController.getUserCssCourses);
 
 /**
  * @swagger
@@ -86,7 +86,7 @@ router.get('/courses/css', userController.getUserCsscourses);
  *       500:
  *         description: Internal server error
  */
-router.get('/courses/js', userController.getUserJscourses);
+router.get('/courses/js', userController.getUserJsCourses);
 
 /**
  * @swagger
@@ -109,7 +109,7 @@ router.get('/courses/js', userController.getUserJscourses);
  *       500:
  *         description: Internal server error
  */
-router.get('/courses/:courseId/progress', userController.getUsercourseProgress);
+router.get('/courses/:courseId/progress', userController.getUserCourseProgress);
 
 /**
  * @swagger
@@ -141,12 +141,12 @@ router.get('/courses/:courseId/progress', userController.getUsercourseProgress);
  *       500:
  *         description: Internal server error
  */
-router.post('/courses/:courseId/progress', userController.updateUsercourseProgress);
+router.post('/courses/:courseId/progress', userController.updateUserCourseProgress);
 
 // Define a route to get the last accessed route
-router.get('/courses/last-accessed', userController.getLastAccessedcourse);
+router.get('/courses/last-accessed', userController.getLastAccessedCourse);
 
 // Define a route to update the last accessed route
-router.post('/courses/last-accessed', userController.updateLastAccessedcourse);
+router.post('/courses/last-accessed', userController.updateLastAccessedCourse);
 
 module.exports = router;

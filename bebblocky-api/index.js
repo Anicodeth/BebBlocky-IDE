@@ -43,16 +43,16 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Route imports
 const userRoutes = require("./routes/userRoutes");
-const slidesRoutes = require("./routes/slidesRoutes");
+const coursesRoutes = require("./routes/coursesRoutes");
 const authRoutes = require("./routes/authRoutes");
 
 // Route definitions
 VERSION = "v1";
 app.use(`/api/${VERSION}/user`, userRoutes);
-app.use(`/api/${VERSION}/slides`, slidesRoutes);
+app.use(`/api/${VERSION}/courses`, coursesRoutes);
 app.use(`/auth/${VERSION}`, authRoutes);
 
-const PORT = process.env.PORT || 000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}.`);
 });

@@ -1,5 +1,17 @@
 const mongoose = require('mongoose');
 
+const progressSchema = new mongoose.Schema({
+  courseId: {
+    type: Number,
+    required: true
+  },
+  completedPercent: {
+    type: Number,
+    required: true,
+    default: 0
+  }
+});
+
 const userSchema = new mongoose.Schema({
   userId: {
     type: Number,
@@ -20,18 +32,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  progress: [{
-    slideId: {
-      type: Number,
-      required: true
-    },
-    completedPercent: {
-      type: Number,
-      required: true,
-      default: 0
-    }
-  }],
-  lastAccessedSlideId: {
+  progress: [
+    progressSchema,
+  ],
+  lastAccessedCourseId: {
     type: Number,
     required: true,
     default: 0

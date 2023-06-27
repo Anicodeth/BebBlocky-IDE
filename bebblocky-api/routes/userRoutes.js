@@ -26,9 +26,9 @@ router.get('/', userController.getUser);
 
 /**
  * @swagger
- * /user/slides:
+ * /user/courses:
  *   get:
- *     summary: Get user's slides
+ *     summary: Get user's courses
  *     tags: [User]
  *     security:
  *       - bearerAuth: []
@@ -38,13 +38,13 @@ router.get('/', userController.getUser);
  *       500:
  *         description: Internal server error
  */
-router.get('/slides', userController.getUserSlides);
+router.get('/courses', userController.getUsercourses);
 
 /**
  * @swagger
- * /user/slides/html:
+ * /user/courses/html:
  *   get:
- *     summary: Get user's HTML slides
+ *     summary: Get user's HTML courses
  *     tags: [User]
  *     security:
  *       - bearerAuth: []
@@ -54,13 +54,13 @@ router.get('/slides', userController.getUserSlides);
  *       500:
  *         description: Internal server error
  */
-router.get('/slides/html', userController.getUserHtmlSlides);
+router.get('/courses/html', userController.getUserHtmlcourses);
 
 /**
  * @swagger
- * /user/slides/css:
+ * /user/courses/css:
  *   get:
- *     summary: Get user's CSS slides
+ *     summary: Get user's CSS courses
  *     tags: [User]
  *     security:
  *       - bearerAuth: []
@@ -70,13 +70,13 @@ router.get('/slides/html', userController.getUserHtmlSlides);
  *       500:
  *         description: Internal server error
  */
-router.get('/slides/css', userController.getUserCssSlides);
+router.get('/courses/css', userController.getUserCsscourses);
 
 /**
  * @swagger
- * /user/slides/js:
+ * /user/courses/js:
  *   get:
- *     summary: Get user's JavaScript slides
+ *     summary: Get user's JavaScript courses
  *     tags: [User]
  *     security:
  *       - bearerAuth: []
@@ -86,21 +86,21 @@ router.get('/slides/css', userController.getUserCssSlides);
  *       500:
  *         description: Internal server error
  */
-router.get('/slides/js', userController.getUserJsSlides);
+router.get('/courses/js', userController.getUserJscourses);
 
 /**
  * @swagger
- * /user/slides/{slideId}/progress:
+ * /user/courses/{courseId}/progress:
  *   get:
- *     summary: Get user's slide progress
+ *     summary: Get user's course progress
  *     tags: [User]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: slideId
+ *         name: courseId
  *         required: true
- *         description: Slide ID
+ *         description: course ID
  *         schema:
  *           type: string
  *     responses:
@@ -109,21 +109,21 @@ router.get('/slides/js', userController.getUserJsSlides);
  *       500:
  *         description: Internal server error
  */
-router.get('/slides/:slideId/progress', userController.getUserSlideProgress);
+router.get('/courses/:courseId/progress', userController.getUsercourseProgress);
 
 /**
  * @swagger
- * /user/slides/{slideId}/progress:
+ * /user/courses/{courseId}/progress:
  *   post:
- *     summary: Update user slide progress
+ *     summary: Update user course progress
  *     tags: [User]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: slideId
+ *         name: courseId
  *         required: true
- *         description: Slide ID
+ *         description: course ID
  *         schema:
  *           type: string
  *     requestBody:
@@ -134,19 +134,19 @@ router.get('/slides/:slideId/progress', userController.getUserSlideProgress);
  *             properties:
  *               completedPercent:
  *                 type: number
- *                 description: Percentage of slide completion
+ *                 description: Percentage of course completion
  *     responses:
  *       200:
  *         description: Successful operation
  *       500:
  *         description: Internal server error
  */
-router.post('/slides/:slideId/progress', userController.updateUserSlideProgress);
+router.post('/courses/:courseId/progress', userController.updateUsercourseProgress);
 
 // Define a route to get the last accessed route
-router.get('/slides/last-accessed', userController.getLastAccessedSlide);
+router.get('/courses/last-accessed', userController.getLastAccessedcourse);
 
 // Define a route to update the last accessed route
-router.post('/slides/last-accessed', userController.updateLastAccessedSlide);
+router.post('/courses/last-accessed', userController.updateLastAccessedcourse);
 
 module.exports = router;

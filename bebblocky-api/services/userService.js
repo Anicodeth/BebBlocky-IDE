@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const Slide = require('../models/Slide');
+const course = require('../models/Course');
 
 async function getUser(userId) {
   try {
@@ -10,26 +10,26 @@ async function getUser(userId) {
   }
 }
 
-async function getUserSlides(userId, courseCategory) {
+async function getUsercourses(userId, courseCategory) {
   try {
     const user = await User.findById(userId);
-    const slides = (courseCategory)
-      ? await Slide.find({ courseCategory })
-      : await Slide.find();
+    const courses = (courseCategory)
+      ? await course.find({ courseCategory })
+      : await course.find();
 
-    const userSlides = slides.filter(slide =>
-      user.progress.some(progress => progress.slideId === slide.slideId)
+    const usercourses = courses.filter(course =>
+      user.progress.some(progress => progress.courseId === course.courseId)
     );
-    return userSlides;
+    return usercourses;
   } catch (error) {throw new Error('Internal server error');
   }
 }
 
-async function getUserSlideProgress(userId, slideId) {
+async function getUsercourseProgress(userId, courseId) {
   try {
     const user = await User.findById(userId);
     const progress = user.progress.find(
-      progress => progress.slideId == slideId
+      progress => progress.courseId == courseId
     );
     return progress;
   } catch (error) {
@@ -37,15 +37,15 @@ async function getUserSlideProgress(userId, slideId) {
   }
 }
 
-async function updateUserSlideProgress(userId, slideId, completedPercent) {
+async function updateUsercourseProgress(userId, courseId, completedPercent) {
   try {
     const user = await User.findById(userId);
     const progress = user.progress.find(
-      progress => progress.slideId == slideId
+      progress => progress.courseId == courseId
     );
 
     if (!progress) {
-      user.progress.push({ slideId, completedPercent });
+      user.progress.push({ courseId, completedPercent });
     }
 
     if (progress) {
@@ -55,31 +55,31 @@ async function updateUserSlideProgress(userId, slideId, completedPercent) {
     // Save the updated user object
     await user.save();
 
-    return 'Slide progress updated successfully';
+    return 'course progress updated successfully';
   } catch (error) {
     throw new Error('Internal server error');
   }
 }
 
-async function updateLastAccessedSlide(userId, slideId) {
+async function updateLastAccessedcourse(userId, courseId) {
   try {
     const user = await User.findById(userId);
-    user.lastAccessedSlideId = slideId;
+    user.lastAccessedcourseId = courseId;
 
     // Save the updated user object
     await user.save();
 
-    return 'Slide progress updated successfully';
+    return 'course progress updated successfully';
   } catch (error) {
     throw new Error('Internal server error');
   }
 }
 
-async function getLastAccessedSlide(userId) {
+async function getLastAccessedcourse(userId) {
   try {
     const user = await User.findById(userId);
 
-    return user.lastAccessedSlideId;
+    return user.lastAccessedcourseId;
   } catch (error) {
     throw new Error('Internal server error');
   }
@@ -87,9 +87,9 @@ async function getLastAccessedSlide(userId) {
 
 module.exports = {
   getUser,
-  getUserSlides,
-  getUserSlideProgress,
-  updateUserSlideProgress,
-  updateLastAccessedSlide,
-  getLastAccessedSlide,
+  getUsercourses,
+  getUsercourseProgress,
+  updateUsercourseProgress,
+  updateLastAccessedcourse,
+  getLastAccessedcourse,
 };

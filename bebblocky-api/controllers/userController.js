@@ -1,13 +1,13 @@
 const userService = require('../services/userService');
 const authenticateJWT = require('../middlewares/authMiddleware');
 
-function getUserSlidesByType(req, res, category) {
+function getUsercoursesByType(req, res, category) {
   try {
     authenticateJWT(req, res, async () => {
       try {
         const userId = req.user.userId;
-        const userSlides = await userService.getUserSlides(userId, category);
-        res.status(200).json({ slides: userSlides });
+        const usercourses = await userService.getUsercourses(userId, category);
+        res.status(200).json({ courses: usercourses });
       } catch (error) {    
         res.status(500).json({ message: 'Internal server error' });
       }
@@ -33,29 +33,29 @@ exports.getUser = async (req, res) => {
   }
 };
 
-exports.getUserSlides = async (req, res) => {
-  getUserSlidesByType(req, res);
+exports.getUsercourses = async (req, res) => {
+  getUsercoursesByType(req, res);
 };
 
-exports.getUserHtmlSlides = async (req, res) => {
-  getUserSlidesByType(req, res, 'html');
+exports.getUserHtmlcourses = async (req, res) => {
+  getUsercoursesByType(req, res, 'html');
 };
 
-exports.getUserCssSlides = async (req, res) => {
-  getUserSlidesByType(req, res, 'css');
+exports.getUserCsscourses = async (req, res) => {
+  getUsercoursesByType(req, res, 'css');
 };
 
-exports.getUserJsSlides = async (req, res) => {
-  getUserSlidesByType(req, res, 'js');
+exports.getUserJscourses = async (req, res) => {
+  getUsercoursesByType(req, res, 'js');
 };
 
-exports.getUserSlideProgress = async (req, res) => {
+exports.getUsercourseProgress = async (req, res) => {
   try {
     authenticateJWT(req, res, async () => {
       try {
-        const slideId = req.params.slideId;
+        const courseId = req.params.courseId;
         const userId = req.user.userId;
-        const progress = await userService.getUserSlideProgress(userId, slideId);
+        const progress = await userService.getUsercourseProgress(userId, courseId);
         res.status(200).json({ progress });
       } catch (error) {    
         res.status(500).json({ message: 'Internal server error' });
@@ -66,14 +66,14 @@ exports.getUserSlideProgress = async (req, res) => {
   }
 };
 
-exports.updateUserSlideProgress = async (req, res) => {
+exports.updateUsercourseProgress = async (req, res) => {
   try {
     authenticateJWT(req, res, async () => {
       try {
         const userId = req.user.userId;
-        const slideId = req.params.slideId;
+        const courseId = req.params.courseId;
         const { completedPercent } = req.body;
-        const message = await userService.updateUserSlideProgress(userId, slideId, completedPercent);
+        const message = await userService.updateUsercourseProgress(userId, courseId, completedPercent);
         res.status(201).json({ message });
       } catch (error) {    
         res.status(500).json({ message: 'Internal server error' });
@@ -84,15 +84,15 @@ exports.updateUserSlideProgress = async (req, res) => {
   }
 };
 
-exports.updateLastAccessedSlide = async (req, res) => {
+exports.updateLastAccessedcourse = async (req, res) => {
   try {
     authenticateJWT(req, res, async () => {
       try {
         console.log('here');
         const userId = req.user.userId;
-        const { slideId } = req.body;
-        console.log(slideId);
-        const message = await userService.updateLastAccessedSlide(userId, slideId);
+        const { courseId } = req.body;
+        console.log(courseId);
+        const message = await userService.updateLastAccessedcourse(userId, courseId);
         res.status(201).json({ message });
       } catch (error) {    
         res.status(500).json({ message: 'Internal server error' });
@@ -104,13 +104,13 @@ exports.updateLastAccessedSlide = async (req, res) => {
 };
 
 
-exports.getLastAccessedSlide = async (req, res) => {
+exports.getLastAccessedcourse = async (req, res) => {
   try {
     authenticateJWT(req, res, async () => {
       try {
         const userId = req.user.userId;
-        const lastAccessedSlideId = await userService.getLastAccessedSlide(userId);
-        res.status(201).json({ lastAccessedSlideId });
+        const lastAccessedcourseId = await userService.getLastAccessedcourse(userId);
+        res.status(201).json({ lastAccessedcourseId });
       } catch (error) {    
         res.status(500).json({ message: 'Internal server error' });
       }

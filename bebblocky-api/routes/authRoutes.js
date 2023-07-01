@@ -1,5 +1,7 @@
 const router = require('express').Router();
+const { Router } = require('express');
 const authController = require('../controllers/authController.js');
+const protfolioController = require('../controllers/protfolioController.js');
 
 /**
  * @swagger
@@ -55,12 +57,14 @@ router.post('/signin', authController.postSignIn);
  *               - password
  *     responses:
  *       200:
- *         description: Successfully signed up
+ *        description: Successfully signed up
  *       400:
  *         description: Invalid request payload
  *       500:
  *         description: Internal server error
  */
 router.post('/signup', authController.postSignUp);
+
+router.post('/protfolio', protfolioController.getProtfolio);
 
 module.exports = router;

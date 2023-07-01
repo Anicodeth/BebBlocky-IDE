@@ -4,11 +4,11 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
-  styleUrls: ['./create-course.component.css']
+  styleUrls: ['./create-course.component.scss']
 })
 export class CreateCourseComponent {
   public slidesForm: FormGroup | any;
-
+  public slidesStatuses: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -18,25 +18,13 @@ export class CreateCourseComponent {
     this.slidesForm = this.fb.group({
       slides: this.fb.array([])
     });
-    // const storedOnSession = this.sessionService.getItem('slides');
-    // if (storedOnSession) {
-    //   storedOnSession.forEach((item: any) => {
-    //     this.slides.push(
-    //       this.fb.group(item)
-    //     )
-    //   });
-    // }
-
-    // this.slidesForm.valueChanges.subscribe(() => {
-    //   this.sessionService.setItem('slides', this.slides.value);
-    // });
   }
 
   get slides(): FormArray {
     return this.slidesForm.get('slides') as FormArray;
   }
 
-  addLanguage() {
+  addSlide() {
     this.slides.push(
       this.fb.group({
         backgroundColor: [null, Validators.required],
@@ -50,6 +38,15 @@ export class CreateCourseComponent {
         image: [null, Validators.required],
       })
     );
+    this.slidesStatuses.push('doing');
+  }
+
+  setSilideAsDone(index: number) {
+    this.slidesStatuses[index] = 'done';
+  }
+
+  setSilideAsDoing(index: number) {
+    this.slidesStatuses[index] = 'doing';
   }
 
   removeLanguage(index: number) {

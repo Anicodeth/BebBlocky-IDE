@@ -16,5 +16,7 @@ export interface Slide {
   startingCode: string;
   code: string;
   image: string;
+  requiresPastProgress: string;
+  shouldBeSaved: string;
   // other relevant fields here
 }

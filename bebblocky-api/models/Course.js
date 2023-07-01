@@ -35,7 +35,7 @@ const slideSchema = new mongoose.Schema({
     type: String
   },
   requiresPastProgress: {
-    type: String
+    type: Boolean
   },
   shouldBeSaved: {
     type: Boolean

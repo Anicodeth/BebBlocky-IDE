@@ -18,8 +18,8 @@ export class BridgeService {
   user: User = JSON.parse(sessionStorage.getItem('user') || '{}');
   token: String = sessionStorage.getItem('auth_token')!;
 
-  baseUrl: String = 'https://beb-blocky-ide.vercel.app';
-  // baseUrl: String = 'http://localhost:3000';
+  // baseUrl: String = 'https://beb-blocky-ide.vercel.app';
+  baseUrl: String = 'http://localhost:3000';
   resourcesBaseURL: String = this.baseUrl + '/api/v1';
   authBaseUrl: String = this.baseUrl + '/auth/v1';
 
@@ -100,12 +100,12 @@ export class BridgeService {
     return this.http.get<Course>(this.resourcesBaseURL + '/courses/' + id.toString(), { headers: headers });
   }
 
-  updateCourseProgress(id: number, percent: number): Observable<any> {
+  updateCourseProgress(id: number, percent: number): any {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
     return this.http.post(this.resourcesBaseURL + `/user/courses/${id}/progress`, { completedPercent: percent }, { headers: headers });
   }
 
-  updateLastAccessedCourseId(id: number): Observable<any> {
+  updateLastAccessedCourseId(id: number): any {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
     console.log(id);
     return this.http.post(this.resourcesBaseURL + `/user/courses/last-accessed`, { courseId: id }, { headers: headers });

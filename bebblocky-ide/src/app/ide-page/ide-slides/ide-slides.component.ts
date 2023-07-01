@@ -35,12 +35,12 @@ export class IdeSlidesComponent implements OnInit {
     this.courseId = parseInt(this.route.snapshot.paramMap.get('courseId')!);
     this.bridgeService.getCourse(this.courseId).subscribe((course: any) => {
       this.slides = course.course.slides;
-      this.codeEditorService.startCode.next(this.slides[0].startingCode);
+      // this.codeEditorService.startCode.next(this.slides[0].startingCode);
 
-      const progress = this.bridgeService.getCourseProgress(this.courseId);
+      // const progress = this.bridgeService.getCourseProgress(this.courseId);
       // Progress is in percentage from 100, so we need to find the index by using 100 and the length of the slides
-      this.currentIndex = Math.floor((progress / 100) * this.slides.length);
-      this.goToSlide(this.currentIndex);
+      // this.currentIndex = Math.floor((progress / 100) * this.slides.length);
+      // this.goToSlide(this.currentIndex);
     });
 
     this.codeEditorService.userCode.subscribe((userWrittenCode) => {
@@ -83,7 +83,7 @@ export class IdeSlidesComponent implements OnInit {
     this.setStartingCode();
     let percent: any = ((this.currentIndex + 1) / this.slides.length) * 100;
 
-    this.bridgeService.updateCourseProgress(this.courseId, percent).subscribe((response) => {
+    this.bridgeService.updateCourseProgress(this.courseId, percent).subscribe((response: any) => {
       let temp: any = sessionStorage.getItem('courseProg');
       temp = JSON.parse(temp);
 

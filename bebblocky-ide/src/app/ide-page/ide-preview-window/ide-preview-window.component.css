@@ -1,8 +1,11 @@
 .preview-window{
-    
+    max-width: 100%;
     border-radius: 2rem;
     border:1px solid cyan ;
     height:100%;
     padding: 1rem;
-   
+}
+
+.preview-window img {
+    max-width: 100%;
 }

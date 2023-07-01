@@ -11,6 +11,7 @@ import { CssCoursesComponent } from './dashboard/pages/css-courses/css-courses.c
 import { HtmlCoursesComponent } from './dashboard/pages/html-courses/html-courses.component';
 import { ProfileComponent } from './dashboard/pages/profile/profile.component';
 import { LoggedInGuard } from './shared/guards/logged-in.guard';
+import { CreateCourseComponent } from './create-course/create-course.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
     // pathMatch: 'full',
     component: LandingPageComponent
   },
+  { path: 'create-course', component: CreateCourseComponent },
   { path: 'ide/:courseId', component: IdePageComponent, canActivate: [LoggedInGuard] },
   { path: 'login', component: LoginPageComponent },
   {
@@ -35,7 +37,7 @@ const routes: Routes = [
       { path: 'html-courses', component: HtmlCoursesComponent },
       { path: 'profile', component: ProfileComponent }
     ]
-  }
+  } 
 ];
 
 @NgModule({

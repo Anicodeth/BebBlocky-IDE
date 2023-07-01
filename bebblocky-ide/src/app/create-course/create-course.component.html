@@ -1,0 +1,94 @@
+<h4>Add A New Course</h4>
+<div>
+    <form [formGroup]="slidesForm">
+        <div formArrayName="slides">
+            <div class="add-links" *ngFor="let slide of slides.controls; let i = index" [formGroupName]="i"
+                class="slide">
+                <div class="slide-content">
+                    <div class="slide-form">
+                        <div class="form-row">
+                            <div class="form-grouping">
+                                <label for="name">Background Color (in Hex)</label>
+                                <input type="text" id="backgroundColor" placeholder="e.g. #000000"
+                                    formControlName="backgroundColor"
+                                    (keyup)="capitalizeFormControl('backgroundColor', i)">
+                            </div>
+                            <div class="form-grouping">
+                                <label for="name">Text Color (in Hex)</label>
+                                <input type="text" id="color" placeholder="e.g. #fff" formControlName="color"
+                                    (keyup)="capitalizeFormControl('color', i)">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-grouping">
+                                <label for="name">Title</label>
+                                <input type="text" id="title" placeholder="e.g.Lesson 1: How to build an AirShip"
+                                    formControlName="title" (keyup)="capitalizeFormControl('title', i)">
+                            </div>
+                            <div class="form-grouping">
+                                <label for="name">Title Font</label>
+                                <input type="text" id="titleFont" placeholder="e.g. Fira Font"
+                                    formControlName="titleFont" (keyup)="capitalizeFormControl('titleFont', i)">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-grouping">
+                                <label for="name">Slide Content</label>
+                                <textarea type="text" id="content"
+                                    placeholder="e.g. In order to start building an AirShip, the first step, unsurprisingly is learning about it."
+                                    formControlName="content" (keyup)="capitalizeFormControl('content', i)"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-grouping">
+                                <label for="name">Slide Content Font</label>
+                                <input type="text" id="contentFont" placeholder="e.g. Verdana"
+                                    formControlName="contentFont" (keyup)="capitalizeFormControl('contentFont', i)">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-grouping">
+                                <label for="name">Starting Code</label>
+                                <textarea type="text" id="startingCode"
+                                    placeholder="You write here the code the students start with. For example, if you want them to focus on css, you could give them starting HTML code here."
+                                    formControlName="startingCode"
+                                    (keyup)="capitalizeFormControl('startingCode', i)"></textarea>
+                            </div>
+                            <div class="form-grouping">
+                                <label for="name">Code</label>
+                                <textarea type="text" id="code"
+                                    placeholder="You write here the actual code the students need to write and practice."
+                                    formControlName="code" (keyup)="capitalizeFormControl('code', i)"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-grouping">
+                                <label for="name">Image Link</label>
+                                <input type="text" id="image"
+                                    placeholder="e.g. https://www.beblocky.org/assets.image.jpg" formControlName="image"
+                                    (keyup)="capitalizeFormControl('image', i)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide-preview">
+                        <app-ide-slide [code]="slides.controls[i].value.code"
+                            [backgroundColor]="slides.controls[i].value.backgroundColor"
+                            [color]="slides.controls[i].value.color"
+                            [title]="slides.controls[i].value.title"
+                            [titleFont]="slides.controls[i].value.titleFont"
+                            [content]="slides.controls[i].value.content"
+                            [contentFont]="slides.controls[i].value.contentFont"
+                            [image]="slides.controls[i].value.image">
+                        </app-ide-slide>
+                    </div>
+                </div>
+                <button type="button" (click)="removeLanguage(i)">
+                    Delete the slide
+                </button>
+            </div>
+        </div>
+        <button type="button" (click)="addLanguage()">
+            Add a new Slide
+        </button>
+    </form>
+</div>

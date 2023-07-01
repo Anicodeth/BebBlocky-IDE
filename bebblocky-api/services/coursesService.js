@@ -17,6 +17,7 @@ exports.getJsCourses = async () => {
 };
 
 exports.createCourse = async (courseData) => {
+  console.log(courseData);
   const course = new Course(courseData);
   await course.save();
   return course;

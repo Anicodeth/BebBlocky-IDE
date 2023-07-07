@@ -48,7 +48,14 @@ export class LoginPageComponent {
       (response: any) => {
         this.isButtonDisabled = false;
 
-        this.router.navigateByUrl("/dashboard/profile");
+        const user = response.user;
+
+        if (user.role === "user") {
+          this.router.navigateByUrl("/dashboard/profile");
+        } else {
+          this.router.navigateByUrl("/admin/courses");  
+        }
+
       },
       (error: any) => {
         alert(error.message);

@@ -3,7 +3,15 @@ export interface Course {
   courseTitle: string;
   courseDescription: string;
   courseLanguage: 'html' | 'css' | 'js';
-  courses: Slide[];
+  lessons: Lesson[];
+}
+
+export interface Lesson {
+  lessonId: number;
+  lessonTitle: string;
+  lessonDescription: string;
+  lessonLanguage: 'html' | 'css' | 'js';
+  slides: Slide[];
 }
 
 export interface Slide {

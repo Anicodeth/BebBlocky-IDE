@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
   styleUrls: ['./create-course.component.scss']
 })
 export class CreateCourseComponent {
+  public showSpinner: boolean = false;
   public slidesForm: FormGroup | any;
   public slidesStatuses: string[] = [];
 
@@ -15,9 +16,15 @@ export class CreateCourseComponent {
   ) { }
 
   ngOnInit(): void {
-    this.slidesForm = this.fb.group({
-      slides: this.fb.array([])
-    });
+    this.showSpinner = true;
+
+    // timeout to show the spinner
+    setTimeout(() => {
+      this.showSpinner = false;
+      this.slidesForm = this.fb.group({
+        slides: this.fb.array([])
+      });
+    }, 1000);
   }
 
   get slides(): FormArray {

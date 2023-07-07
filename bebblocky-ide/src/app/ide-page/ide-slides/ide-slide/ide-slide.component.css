@@ -12,8 +12,9 @@
     padding: 1.6rem 0 0 0;
 }
 
-.course image {
+.course img {
     max-width: 80%;
+    margin: 0 auto;
 }
 
 

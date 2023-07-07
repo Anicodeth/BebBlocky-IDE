@@ -32,8 +32,36 @@ $ff-primary: "Montserrat", sans-serif;
   margin: 1rem 1rem;
 
   // border: 2px solid #333;
-  border-radius: 1rem;
+  border-radius: 0.6rem;
   box-shadow: 0 7px 14px #0000002c, 0 5px 5px #00000025;
+
+  &-username {
+    font-family: $ff-primary;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    span {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: 0 1rem;
+      padding: 0 1rem;
+      border: 1px solid #333;
+      border-radius: 1rem;
+
+      fa-icon {
+        margin-right: 1rem;
+      }
+    }
+  }
 
   &-title {
     font-size: 24px;

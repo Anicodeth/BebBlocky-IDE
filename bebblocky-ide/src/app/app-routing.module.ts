@@ -4,14 +4,16 @@ import { IdePageComponent } from './ide-page/ide-page.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AllCoursesComponent } from './dashboard/pages/all-courses/all-courses.component';
-import { MyCoursesComponent } from './dashboard/pages/my-courses/my-courses.component';
-import { JsCoursesComponent } from './dashboard/pages/js-courses/js-courses.component';
-import { CssCoursesComponent } from './dashboard/pages/css-courses/css-courses.component';
-import { HtmlCoursesComponent } from './dashboard/pages/html-courses/html-courses.component';
-import { ProfileComponent } from './dashboard/pages/profile/profile.component';
+import { AllCoursesComponent } from './pages/all-courses/all-courses.component';
+import { MyCoursesComponent } from './pages/my-courses/my-courses.component';
+import { JsCoursesComponent } from './pages/js-courses/js-courses.component';
+import { CssCoursesComponent } from './pages/css-courses/css-courses.component';
+import { HtmlCoursesComponent } from './pages/html-courses/html-courses.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { LoggedInGuard } from './shared/guards/logged-in.guard';
-import { CreateCourseComponent } from './create-course/create-course.component';
+import { CreateCourseComponent } from './admin-panel/create-course/create-course.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { IsAdminGuard } from './shared/guards/is-admin.guard';
 
 const routes: Routes = [
   {
@@ -20,7 +22,6 @@ const routes: Routes = [
     // pathMatch: 'full',
     component: LandingPageComponent
   },
-  { path: 'create-course', component: CreateCourseComponent },
   { path: 'ide/:courseId', component: IdePageComponent, canActivate: [LoggedInGuard] },
   { path: 'login', component: LoginPageComponent },
   {
@@ -36,6 +37,22 @@ const routes: Routes = [
       { path: 'css-courses', component: CssCoursesComponent },
       { path: 'html-courses', component: HtmlCoursesComponent },
       { path: 'profile', component: ProfileComponent }
+    ]
+  } ,
+  { path: 'create-course', component: CreateCourseComponent, canActivate: [LoggedInGuard, IsAdminGuard] },
+  {
+    path: 'admin',
+    component: AdminPanelComponent,
+    // redirectTo: '/admin/courses',
+    // pathMatch: 'full',
+    canActivate: [LoggedInGuard, IsAdminGuard],
+    children: [
+      { path: 'courses', component: AllCoursesComponent },
+      { path: 'my-courses', component: MyCoursesComponent },
+      { path: 'js-courses', component: JsCoursesComponent },
+      { path: 'css-courses', component: CssCoursesComponent },
+      { path: 'html-courses', component: HtmlCoursesComponent },
+      { path: 'python-courses', component: ProfileComponent }
     ]
   } 
 ];

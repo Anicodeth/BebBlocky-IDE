@@ -2,7 +2,7 @@
     <div class="editor-toggle">
       <button (click)="toggleEditor('html')" [class.active]="activeEditor === 'html'">HTML</button>
       <button (click)="toggleEditor('css')" [class.active]="activeEditor === 'css'">CSS</button>
-      <button (click)="toggleEditor('js')" [class.active]="activeEditor === 'js'">JavaScript</button>
+      <button (click)="toggleEditor('js')" [class.active]="activeEditor === 'js'">JS</button>
     </div>
     <div class="editor-section " [ngClass]="{'reveal': addHtmlClass}" >
       <label for="html-editor" >index.html</label>

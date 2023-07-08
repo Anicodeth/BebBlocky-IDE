@@ -1,7 +1,32 @@
-.app-ace-editor {
-    border: 2px solid #f8f9fa;
-    height: 100%;
-    width: 100%;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
-}
 
+.all-editors {
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+  }
+  
+  .editor-toggle {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .editor-toggle button {
+    padding: 5px 10px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .editor-toggle button.active {
+    background-color: #eaeaea;
+  }
+  
+  .editor-section {
+    flex: 1;
+  }
+  
+  .app-ace-editor {
+    height: 100%;
+  }

@@ -13,6 +13,7 @@
     display: flex;    
     z-index: 1;
     width: 100%;
+    display: none;
 }
 
 .window-toggle button{
@@ -23,7 +24,7 @@
 
     width: 32.5%;
     margin: auto;
-    height: 83vh;
+    height: 82.5vh;
     display: none;
 
 }

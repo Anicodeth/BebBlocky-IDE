@@ -25,8 +25,13 @@
   
   .editor-section {
     flex: 1;
+    display: none;
   }
   
   .app-ace-editor {
     height: 100%;
+  }
+
+  .reveal {
+    display: block;
   }

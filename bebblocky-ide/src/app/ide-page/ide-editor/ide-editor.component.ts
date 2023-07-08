@@ -2,6 +2,7 @@ import {  AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChanges
 import * as ace from "ace-builds";
 import { CodeEditorService } from '../../shared/services/code-editor.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { TruncatePipe } from 'src/app/shared/pipes/truncate.pipe';
 
 @Component({
   selector: 'app-ide-editor',
@@ -20,6 +21,11 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
   public htmlCode: string = '';
   public cssCode: string = '';
   public jsCode: string = ''; 
+
+
+  public addHtmlClass: boolean = true;
+  public addCssClass: boolean = false;
+  public addJsClass: boolean = false;
 
   public compiledCode = `
       <html>
@@ -41,6 +47,21 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
 
     toggleEditor(editor: 'html' | 'css' | 'js'): void {
     this.activeEditor = editor;
+    if (editor === 'html') {
+      this.addHtmlClass = true;
+      this.addCssClass = false;
+      this.addJsClass = false;
+    } else if (editor === 'css') {
+      this.addHtmlClass = false;
+      this.addCssClass = true;
+      this.addJsClass = false;
+    }
+    else if (editor === 'js') {
+      this.addHtmlClass = false;
+      this.addCssClass = false;
+      this.addJsClass = true;
+    }
+    
   }
   compileCode(code:string): void {
     console.log(code);    

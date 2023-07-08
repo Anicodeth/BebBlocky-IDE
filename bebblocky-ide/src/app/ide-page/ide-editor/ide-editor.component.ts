@@ -1,6 +1,7 @@
 import {  AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import * as ace from "ace-builds";
 import { CodeEditorService } from '../../shared/services/code-editor.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-ide-editor',
@@ -35,6 +36,7 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
 
   constructor(
     private codeEditorService: CodeEditorService,
+    private sanitizer: DomSanitizer
   ) { }
 
     toggleEditor(editor: 'html' | 'css' | 'js'): void {
@@ -44,6 +46,11 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
     console.log(code);    
     this.codeEditorService.userCode.next(code);
   }
+
+  public sanitizeScript(script: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(script);
+  }
+
   get structuredCode(): any {
     return {
       code: `
@@ -94,7 +101,7 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
     
     aceJsEditor.session.on('change', () => {
       this.jsCode = aceJsEditor.getValue();
-
+      this.sanitizeScript(this.jsCode);
       this.compileCode(this.structuredCode.code);
     });
 

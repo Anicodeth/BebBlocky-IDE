@@ -11,7 +11,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class IdePreviewWindowComponent implements OnInit {
 
-  @ViewChild('formattedHtml') formattedHtml!: ElementRef;
+
+  @ViewChild('formattedHtml', { static: false }) formattedHtml!: ElementRef<HTMLIFrameElement>;
+
 
   constructor(
     private codeEditorService: CodeEditorService,
@@ -22,6 +24,14 @@ export class IdePreviewWindowComponent implements OnInit {
   ngOnInit() {
     this.codeEditorService.userCode.subscribe((output) => {
       this.formattedHtml.nativeElement.innerHTML = output;
+
+      const iframeDocument = this.formattedHtml.nativeElement.contentDocument || this.formattedHtml.nativeElement.contentWindow?.document;
+      if (iframeDocument) {
+        // Modify the iframe's content here
+        iframeDocument.open();
+        iframeDocument.write(output);
+        iframeDocument.close();
+      }
     });
   }
 

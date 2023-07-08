@@ -1,8 +1,25 @@
+.overlay{
+
+    width:fit-content;
+    height: 100%;
+    position: relative;
+    
+}
+
 .preview-window{
-    max-width: 100%;
+    width: 100%;
     border-radius: 2rem;
     border:1px solid cyan ;
     height:100%;
     padding: 1rem;
     overflow: auto;
+}
+
+.redirect {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: aqua;
+    padding: 1rem;
+  
 }

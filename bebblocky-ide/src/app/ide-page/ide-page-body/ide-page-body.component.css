@@ -15,6 +15,7 @@
 
 }
 
+
 @media (max-width:1000px) {
     .body-container{
         flex-direction: column;

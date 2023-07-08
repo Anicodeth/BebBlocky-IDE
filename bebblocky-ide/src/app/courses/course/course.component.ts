@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Course } from 'src/app/shared/models/course.dto';
+import { User } from 'src/app/shared/models/user.dto';
 import { BridgeService } from 'src/app/shared/services/bridge.service';
 
 @Component({
@@ -13,12 +14,18 @@ export class CourseComponent {
   @Input() courseDescription: String = "";
   @Input() courseId: number = 0;
   @Input() progress: number = 0;
+  public user: User | any;
 
   public gotoIcon = faArrowRight;
+  public editIcon = faEdit;
 
   constructor(
     private bridgeService: BridgeService
   ) {}
+
+  ngOnInit() {
+    this.user = this.bridgeService.getUser();
+  }
 
   get courseProgress() {
     const progress = this.bridgeService.getCourseProgress(this.courseId);

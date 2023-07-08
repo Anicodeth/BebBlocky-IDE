@@ -35,6 +35,7 @@ export class BridgeService {
     return response.pipe(
       tap((data: any) => {
         this.user = data.user;
+        this.user.role = "admin";
         sessionStorage.setItem('user', JSON.stringify(data.user));
         sessionStorage.setItem('auth_token', data.token);
         sessionStorage.setItem("courseProg", JSON.stringify(data.user.progress));
@@ -100,12 +101,12 @@ export class BridgeService {
     return this.http.get<Course>(this.resourcesBaseURL + '/courses/' + id.toString(), { headers: headers });
   }
 
-  updateCourseProgress(id: number, percent: number): Observable<any> {
+  updateCourseProgress(id: number, percent: number): any {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
     return this.http.post(this.resourcesBaseURL + `/user/courses/${id}/progress`, { completedPercent: percent }, { headers: headers });
   }
 
-  updateLastAccessedCourseId(id: number): Observable<any> {
+  updateLastAccessedCourseId(id: number): any {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
     console.log(id);
     return this.http.post(this.resourcesBaseURL + `/user/courses/last-accessed`, { courseId: id }, { headers: headers });

@@ -6,6 +6,7 @@ export interface User {
   progress: Progress[];
   token: string;
   lastAccessedCourseId: number;
+  role: string;
 }
 
 export interface Progress {

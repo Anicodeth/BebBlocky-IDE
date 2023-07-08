@@ -1,40 +1,69 @@
 const mongoose = require('mongoose');
 
 const slideSchema = new mongoose.Schema({
-    backgroundColor: {
-        type: String,
-        required: true
-    },
-    color: {
-        type: String,
-        required: true
-    },
-    title: {
-        type: String,
-        required: true
-    },
-    titleFont: {
-        type: String,
-        required: true
-    },
-    content: {
-        type: String,
-        required: true
-    },
-    contentFont: {
-        type: String,
-        required: true
-    },
-    startingCode: {
-        type: String,
-    },
-    code: {
-        type: String,
-    },
-    image: {
-        type: String
-    },
-    // other relevant fields here
+  backgroundColor: {
+    type: String,
+    required: true
+  },
+  color: {
+    type: String,
+    required: true
+  },
+  title: {
+    type: String,
+    required: true
+  },
+  titleFont: {
+    type: String,
+    required: true
+  },
+  content: {
+    type: String,
+    required: true
+  },
+  contentFont: {
+    type: String,
+    required: true
+  },
+  startingCode: {
+    type: String,
+  },
+  code: {
+    type: String,
+  },
+  image: {
+    type: String
+  },
+  requiresPastProgress: {
+    type: Boolean
+  },
+  shouldBeSaved: {
+    type: Boolean
+  }
+  // other relevant fields here
+});
+
+const lessonSchema = new mongoose.Schema({
+  lessonId: {
+    type: Number,
+    required: false,
+    unique: true
+  },
+  lessonTitle: {
+    type: String,
+    required: true
+  },
+  lessonDescription: {
+    type: String,
+    required: true
+  },
+  lessonLanguage: {
+    type: String,
+    required: true,
+  },
+  slides: [
+    slideSchema,
+  ]
 });
 
 const courseSchema = new mongoose.Schema({
@@ -56,8 +85,8 @@ const courseSchema = new mongoose.Schema({
     required: true,
     enum: ['html', 'css', 'js'] // Restrict the category to these values
   },
-  slides: [
-    slideSchema,
+  lessons: [
+    lessonSchema,
   ]
 });
 
@@ -69,7 +98,8 @@ courseSchema.pre('save', async function (next) {
       const highestCourseId = await Course.findOne().sort('-courseId').exec();
       const newCourseId = highestCourseId ? highestCourseId.courseId + 1 : 1;
       course.courseId = newCourseId;
-    } catch (error) {  return next(error);
+    } catch (error) {
+      return next(error);
     }
   }
   next();

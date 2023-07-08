@@ -22,7 +22,7 @@ export class IdePageComponent {
     this.bridgeService.getCourse(parseInt(courseId)).subscribe((course: any) => {
       this.course = course.course;
       console.log(this.course.courseId);
-      this.bridgeService.updateLastAccessedCourseId(this.course.courseId).subscribe(() => {});
+      // this.bridgeService.updateLastAccessedCourseId(this.course.courseId).subscribe(() => {});
       this.showSpinner = false;
     });
   }

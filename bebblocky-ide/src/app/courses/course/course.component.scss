@@ -65,6 +65,9 @@ $ff-primary: "Montserrat", sans-serif;
     }
 
     &-action-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin: 1rem auto;
 
         .course-goto-button {
@@ -72,7 +75,8 @@ $ff-primary: "Montserrat", sans-serif;
             color: #fff;
             border: none;
             border-radius: 0.5rem;
-            padding: 10px;
+            padding: 10px 15px;
+            margin-right: 1rem;
             cursor: pointer;
 
             i {

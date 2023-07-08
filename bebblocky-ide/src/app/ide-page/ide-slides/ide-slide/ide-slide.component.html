@@ -1,0 +1,19 @@
+<div class="course" [ngStyle]="{
+    'background-color': backgroundColor,
+    color: color
+}">
+    <div class="main-content">
+        <h1 class="content-title" [ngStyle]="{ 'font-family':  titleFont }">
+            {{ title }}
+        </h1>
+        <div class="main-content">
+            <div class="text-content" [ngStyle]="{ 'font-family':  contentFont }">
+                {{ content }}
+            </div>
+            <div *ngIf="code" class="code-content">
+                {{ code }}
+            </div>
+        </div>
+        <img src="{{ image }}">
+    </div>
+</div>

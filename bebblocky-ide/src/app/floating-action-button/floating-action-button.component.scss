@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+$border: #ff9800;
+$background-color: #ff9800;
+$beblocky-orange: #fcb332;
+
+$beblocky-purple: #703d99;
+
+$beblock-light-blue: #dff1fb;
+
+$beblocky-green: #5baf48;
+$beblocky-accent-green: #a7d464;
+$beblocky-light-green: #def0e2;
+
+$beblocky-pink: #8f6fb0;
+
+$beblocky-cyan: #2ebca4;
+$beblocky-cyan-accent: #37d6c9;
+
+$green-linear-gradient: linear-gradient(to right, $beblocky-green, $beblocky-accent-green);
+$purple-pink-linear-gradient: linear-gradient(to right, $beblocky-purple, $beblocky-pink);
+
+$ff-primary: "Montserrat", sans-serif;
+
+.floating-action-button {
+    background: $beblocky-orange;
+    border: 1px solid $beblocky-orange;
+    border-radius: 50%;
+
+    cursor: pointer;
+    padding: 1rem 1.2rem;
+
+    &:hover {
+        background: $background-color;
+        border: 1px solid $background-color;
+        border-radius: 50%;
+
+        cursor: pointer;
+    }
+
+    fa-icon {
+        color: white;
+    }
+}

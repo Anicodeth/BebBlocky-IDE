@@ -25,15 +25,14 @@ app.use(
   })
 );
 
-
 // Swagger configuration
 const swaggerSpec = swaggerJsdoc({
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Beblocky Web App API',
+      title: 'Beblocky 2.0 Web App API',
       version: '1.0.0',
-      description: 'Beblocky Web App API documentation',
+      description: 'Beblocky 2.0 Web App API documentation',
     },
   },
   apis: ['./routes/*'], // Specify the file(s) where your JSDoc annotations are present

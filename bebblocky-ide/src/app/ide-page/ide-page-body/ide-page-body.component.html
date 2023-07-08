@@ -1,4 +1,11 @@
+<div class = "phone-container">
+    <div class="window-toggle">
+        <button (click)="toggleWindows('slide')" [class.active]="activeWindow === 'slide'">Read</button>
+        <button (click)="toggleWindows('editor')" [class.active]="activeWindow === 'editor'">Write</button>
+        <button (click)="toggleWindows('preview')" [class.active]="activeWindow === 'preview'">Run</button>
+      </div>
 <div class = "body-container">
+
     <div class = "body-section">
         <app-ide-slides></app-ide-slides>
     </div>
@@ -8,4 +15,5 @@
     <div class = "body-section">
         <app-ide-preview-window></app-ide-preview-window>
     </div>
+</div>
 </div>

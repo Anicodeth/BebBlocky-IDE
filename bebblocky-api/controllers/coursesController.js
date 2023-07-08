@@ -1,5 +1,6 @@
 const courseService = require('../services/coursesService');
 
+//Entire courses
 exports.getCourses = async (req, res) => {
   try {
     const courses = await courseService.getAllCourses();
@@ -9,6 +10,7 @@ exports.getCourses = async (req, res) => {
   }
 };
 
+//Entire Html cour
 exports.getHtmlCourses = async (req, res) => {
   try {
     const htmlCourses = await courseService.getHtmlCourses();

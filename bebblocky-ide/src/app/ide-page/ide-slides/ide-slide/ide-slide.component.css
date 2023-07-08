@@ -23,10 +23,6 @@
     color: #fff;
 }
 
-.main-content {
-    max-height: 100%;
-    overflow-y: scroll;
-}
 
 .main-content img {
     margin: 0 auto;
@@ -34,7 +30,6 @@
 }
 
 .code-content {
-    overflow: auto;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     font-family: monospace;
     width: 95%;
@@ -45,6 +40,7 @@
     padding: 0.5rem;
     margin: auto;
     white-space: pre;
+    overflow-x: scroll;
 }
 
 .text-content {

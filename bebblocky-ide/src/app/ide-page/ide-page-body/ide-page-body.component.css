@@ -24,6 +24,7 @@
     width: 32.5%;
     margin: auto;
     height: 83vh;
+    display: none;
 
 }
 
@@ -36,6 +37,10 @@
     align-items: center;
     position: relative;
 }
+
+.reveal {
+    display: block;
+  }
 
 
 @media (max-width:1000px) {

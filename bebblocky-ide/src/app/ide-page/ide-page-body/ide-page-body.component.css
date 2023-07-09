@@ -13,13 +13,23 @@
     display: flex;    
     z-index: 1;
     width: 100%;
-    display: none;
+
 }
 
 .window-toggle button{
     flex:1rem;
+    background-color: #444857;
+    color: #76DAFF;
+    font-family: monospace !important;
+    font-size: 1rem;
+    height:2.5rem;
+    font-weight: bold;
 }
 
+.window-toggle button.active {
+    background-color: #1E1F26;
+    color:white;
+  }
 .body-section {
 
     width: 32.5%;

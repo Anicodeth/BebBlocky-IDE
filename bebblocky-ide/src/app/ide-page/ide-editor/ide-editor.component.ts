@@ -2,7 +2,10 @@ import {  AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChanges
 import * as ace from "ace-builds";
 import { CodeEditorService } from '../../shared/services/code-editor.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { TruncatePipe } from 'src/app/shared/pipes/truncate.pipe';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+
 
 @Component({
   selector: 'app-ide-editor',
@@ -27,6 +30,8 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
   public addCssClass: boolean = false;
   public addJsClass: boolean = false;
 
+  public verticalEditor:boolean = false;
+
   public compiledCode = `
       <html>
       <head>
@@ -42,8 +47,11 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
 
   constructor(
     private codeEditorService: CodeEditorService,
-    private sanitizer: DomSanitizer
-  ) { }
+    private sanitizer: DomSanitizer,
+    private library: FaIconLibrary
+  ) { 
+    library.addIconPacks(fas, far);
+  }
 
     toggleEditor(editor: 'html' | 'css' | 'js'): void {
     this.activeEditor = editor;
@@ -66,6 +74,10 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
   compileCode(code:string): void {
     console.log(code);    
     this.codeEditorService.userCode.next(code);
+  }
+
+  changeEditor():void{
+    this.verticalEditor = !this.verticalEditor;
   }
 
   public sanitizeScript(script: string): SafeHtml {

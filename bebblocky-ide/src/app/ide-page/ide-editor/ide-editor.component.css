@@ -42,6 +42,17 @@
     height: 100%;
   }
 
+  .restructure {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    z-index: 1;
+    border-radius: 50%;
+  }
+
   .reveal {
     display: block;
   }
@@ -52,4 +63,10 @@
     background-color: black;
     color: aqua;
     padding: 0.5rem;
+  }
+
+  .vertical{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }

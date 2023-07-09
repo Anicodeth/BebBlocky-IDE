@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HostListener } from '@angular/core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-ide-page-body',
@@ -16,6 +19,12 @@ export class IdePageBodyComponent implements OnInit {
   public addEditorClass: boolean = false;
   public addPreviewClass: boolean = false;
   public addWebClass: boolean = true;
+
+  constructor(
+    private library: FaIconLibrary
+  ) {
+    library.addIconPacks(fas, far);
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {

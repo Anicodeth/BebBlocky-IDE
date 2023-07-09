@@ -10,7 +10,7 @@
 }
 
 .window-toggle {
-    display: flex;    
+    display: none;    
     z-index: 1;
     width: 100%;
 

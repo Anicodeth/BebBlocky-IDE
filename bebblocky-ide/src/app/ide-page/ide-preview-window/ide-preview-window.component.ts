@@ -1,7 +1,9 @@
 import { Renderer2, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { CodeEditorService } from 'src/app/shared/services/code-editor.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 
 
 @Component({
@@ -18,8 +20,11 @@ export class IdePreviewWindowComponent implements OnInit {
   constructor(
     private codeEditorService: CodeEditorService,
     private renderer: Renderer2,
-    private sanitizer: DomSanitizer
-  ) { }
+    private sanitizer: DomSanitizer,
+    private library: FaIconLibrary
+  ) { 
+    library.addIconPacks(fas, far);
+  }
 
   ngOnInit() {
     this.codeEditorService.userCode.subscribe((output) => {
@@ -36,22 +41,9 @@ export class IdePreviewWindowComponent implements OnInit {
   }
 
   openInNewTab() {
-  const newWindow = window.open();
-  const document = newWindow?.document;
-  const fragment = document?.createDocumentFragment();
-
-  const sanitizedHtml: SafeHtml = this.sanitizer.bypassSecurityTrustHtml(this.formattedHtml.nativeElement.innerHTML);
-  const htmlElement = this.renderer.createElement('html');
-  const headElement = this.renderer.createElement('head');
-  const bodyElement = this.renderer.createElement('body');
-
-  this.renderer.setProperty(bodyElement, 'innerHTML', sanitizedHtml);
-
-  this.renderer.appendChild(htmlElement, headElement);
-  this.renderer.appendChild(htmlElement, bodyElement);
-
-  this.renderer.appendChild(fragment, htmlElement);
-  document?.appendChild(fragment?.firstChild as Node);
+    const newTab:any = window.open('', '_blank');
+    newTab.document.write(this.formattedHtml.nativeElement.innerHTML);
+    
 }
 
 }

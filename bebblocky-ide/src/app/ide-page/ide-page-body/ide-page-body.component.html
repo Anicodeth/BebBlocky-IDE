@@ -17,10 +17,13 @@
         <app-ide-slides></app-ide-slides>
     </div>
     <div class = "body-section" [ngClass]="{'reveal': addEditorClass, 'web-reveal': addWebClass}" >
-        <app-ide-editor></app-ide-editor>
+       <!--<app-ide-editor></app-ide-editor>-->
+       <app-ide-python-editor></app-ide-python-editor>
+
     </div>
     <div class = "body-section" [ngClass]="{'reveal': addPreviewClass, 'web-reveal': addWebClass}" >
-        <app-ide-preview-window></app-ide-preview-window>
+       <app-ide-preview-window></app-ide-preview-window> 
+
     </div>
 </div>
 </div>

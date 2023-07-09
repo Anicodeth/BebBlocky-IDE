@@ -51,7 +51,17 @@
     font-size: 1.5rem;
     z-index: 1;
     border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background-color: #444857;
+    color: #76DAFF;
+    transition: 0.3s linear;
+      
   }
+  .restructure:hover{
+    background-color: #1E1F26;
+    color:white;
+}
 
   .reveal {
     display: block;

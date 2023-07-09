@@ -37,6 +37,8 @@ import { IdeSlideComponent } from './ide-page/ide-slides/ide-slide/ide-slide.com
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AdminSidebarComponent } from './admin-panel/admin-sidebar/admin-sidebar.component';
 import { FloatingActionButtonComponent } from './floating-action-button/floating-action-button.component';
+import { IdePythonEditorComponent } from './ide-python-editor/ide-python-editor.component';
+import { IdePythonConsoleComponent } from './ide-python-console/ide-python-console.component';
 
 
 @NgModule({
@@ -70,7 +72,10 @@ import { FloatingActionButtonComponent } from './floating-action-button/floating
     IdeSlideComponent,
     AdminPanelComponent,
     AdminSidebarComponent,
-    FloatingActionButtonComponent
+    FloatingActionButtonComponent,
+    IdePythonConsoleComponent,
+    IdePythonEditorComponent
+    
   ],
   imports: [
     BrowserModule,

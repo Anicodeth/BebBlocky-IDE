@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HostListener } from '@angular/core';
 
 @Component({
@@ -6,7 +6,8 @@ import { HostListener } from '@angular/core';
   templateUrl: './ide-page-body.component.html',
   styleUrls: ['./ide-page-body.component.css']
 })
-export class IdePageBodyComponent {
+export class IdePageBodyComponent implements OnInit {
+
   public activeWindow: 'slide' | 'editor' | 'preview' = 'slide';
 
 
@@ -43,5 +44,11 @@ export class IdePageBodyComponent {
       this.addPreviewClass = true;
     }
     
+  }
+
+  ngOnInit(): void {
+    if(window.innerWidth < 1000) {
+      this.addWebClass = false;}
+
   }
 }

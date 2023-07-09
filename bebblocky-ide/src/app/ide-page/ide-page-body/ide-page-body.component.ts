@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-ide-page-body',
@@ -13,6 +14,16 @@ export class IdePageBodyComponent {
   public addSlideClass: boolean = true;
   public addEditorClass: boolean = false;
   public addPreviewClass: boolean = false;
+  public addWebClass: boolean = true;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    if (event.target.innerWidth < 1000) {
+      this.addWebClass = false;
+    } else {
+      this.addWebClass = true;
+    }
+  }
 
 
   toggleWindows(window: 'slide' | 'editor' | 'preview'): void {

@@ -6,13 +6,13 @@
       </div>
 <div class = "body-container">
 
-    <div class = "body-section" [ngClass]="{'reveal': addSlideClass}" >
+    <div class = "body-section" [ngClass]="{'reveal': addSlideClass, 'web-reveal': addWebClass}" >
         <app-ide-slides></app-ide-slides>
     </div>
-    <div class = "body-section" [ngClass]="{'reveal': addEditorClass}" >
+    <div class = "body-section" [ngClass]="{'reveal': addEditorClass, 'web-reveal': addWebClass}" >
         <app-ide-editor></app-ide-editor>
     </div>
-    <div class = "body-section" [ngClass]="{'reveal': addPreviewClass}" >
+    <div class = "body-section" [ngClass]="{'reveal': addPreviewClass, 'web-reveal': addWebClass}" >
         <app-ide-preview-window></app-ide-preview-window>
     </div>
 </div>

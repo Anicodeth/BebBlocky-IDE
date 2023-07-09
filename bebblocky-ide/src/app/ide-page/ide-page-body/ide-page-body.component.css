@@ -43,8 +43,16 @@
     display: block;
   }
 
+  .web-reveal{
+    display: block;
+  }
+
 
 @media (max-width:1000px) {
+
+    .window-toggle{
+        display: flex;
+    }
     .body-container{
         flex-direction: column;
     }

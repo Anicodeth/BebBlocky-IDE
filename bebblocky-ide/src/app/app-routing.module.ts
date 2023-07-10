@@ -14,6 +14,7 @@ import { LoggedInGuard } from './shared/guards/logged-in.guard';
 import { CreateCourseComponent } from './admin-panel/create-course/create-course.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { IsAdminGuard } from './shared/guards/is-admin.guard';
+import { IdePythonEditorComponent } from './ide-python-editor/ide-python-editor.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
   },
   { path: 'ide/:courseId', component: IdePageComponent, canActivate: [LoggedInGuard] },
   { path: 'login', component: LoginPageComponent },
+  { path: 'python', component: IdePythonEditorComponent},
   {
     path: 'dashboard',
     // redirectTo: '/dashboard/profile',

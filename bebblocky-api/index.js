@@ -5,7 +5,35 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const mongoose = require('mongoose');
 
+
 app = express();
+
+
+const http = require('http');
+const server = http.createServer(app);
+const io = require('socket.io')(server, {
+  cors: {origin : '*'}
+});
+
+io.on('connection', (socket) => {
+  console.log('New client connected');
+
+  // Listen for 'execute' event from the client
+  socket.on('execute', (data) => {
+    const { code } = data;
+
+    // Execute the code
+    // ... your code execution logic goes here ...
+
+    // Emit the 'output' event with the result
+    socket.emit('output', { output: 'Execution result' });
+  });
+
+  // Disconnect event
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
 
 //Database linker
 mongoose
@@ -25,6 +53,7 @@ app.use(
   })
 );
 
+
 // Swagger configuration
 const swaggerSpec = swaggerJsdoc({
   definition: {
@@ -40,20 +69,26 @@ const swaggerSpec = swaggerJsdoc({
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
-// Route imports
+// Route imports  
 const userRoutes = require("./routes/userRoutes");
 const coursesRoutes = require("./routes/coursesRoutes");
 const authRoutes = require("./routes/authRoutes");
+const pythonRoutes = require("./routes/pythonRoutes");
 
 // Route definitions
 VERSION = "v1";
 app.use(`/api/${VERSION}/user`, userRoutes);
 app.use(`/api/${VERSION}/courses`, coursesRoutes);
 app.use(`/auth/${VERSION}`, authRoutes);
+app.use(`/api/${VERSION}/python `, pythonRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}.`);
+});
+
+server.listen(3000, () => {
+  console.log(`Python Server running on port ${3000}`);
 });
 
 module.exports = app;

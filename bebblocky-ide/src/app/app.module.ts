@@ -39,7 +39,7 @@ import { AdminSidebarComponent } from './admin-panel/admin-sidebar/admin-sidebar
 import { FloatingActionButtonComponent } from './floating-action-button/floating-action-button.component';
 import { IdePythonEditorComponent } from './ide-python-editor/ide-python-editor.component';
 import { IdePythonConsoleComponent } from './ide-python-console/ide-python-console.component';
-
+import { NgTerminalModule } from 'ng-terminal';
 
 @NgModule({
   declarations: [
@@ -78,6 +78,7 @@ import { IdePythonConsoleComponent } from './ide-python-console/ide-python-conso
     
   ],
   imports: [
+    NgTerminalModule,
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,

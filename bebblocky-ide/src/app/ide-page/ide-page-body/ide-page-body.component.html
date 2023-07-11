@@ -1,11 +1,29 @@
+<div class = "phone-container">
+    <div class="window-toggle">
+        <button (click)="toggleWindows('slide')" [class.active]="activeWindow === 'slide'">Read
+            <fa-icon class="header-icon" [icon]="['fas', 'bars']"></fa-icon>
+        </button>
+        <button (click)="toggleWindows('editor')" [class.active]="activeWindow === 'editor'">Code
+            <fa-icon class="header-icon" [icon]="['fas', 'code']"></fa-icon>
+        </button>
+    
+        <button (click)="toggleWindows('preview')" [class.active]="activeWindow === 'preview'">Run
+            <fa-icon class="header-icon" [icon]="['fas', 'arrow-right']"></fa-icon>
+        </button>
+      </div>
 <div class = "body-container">
-    <div class = "body-section">
+
+    <div class = "body-section" [ngClass]="{'reveal': addSlideClass, 'web-reveal': addWebClass}" >
         <app-ide-slides></app-ide-slides>
     </div>
-    <div class = "body-section">
-        <app-ide-editor></app-ide-editor>
+    <div class = "body-section" [ngClass]="{'reveal': addEditorClass, 'web-reveal': addWebClass}" >
+       <app-ide-editor></app-ide-editor>
+     <!--  <app-ide-python-editor></app-ide-python-editor>-->
+
     </div>
-    <div class = "body-section">
-        <app-ide-preview-window></app-ide-preview-window>
+    <div class = "body-section" [ngClass]="{'reveal': addPreviewClass, 'web-reveal': addWebClass}" >
+       <app-ide-preview-window></app-ide-preview-window> 
+
     </div>
+</div>
 </div>

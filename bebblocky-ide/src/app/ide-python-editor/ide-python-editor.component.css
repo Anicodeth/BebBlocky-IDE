@@ -1,0 +1,36 @@
+.python-container{
+    display: flex;
+    height: 30rem;
+    width: 100rem;
+    background-color: black;
+}
+
+
+
+.python-editor{
+    height: 100%;
+    width: 100%;
+    
+}
+.python-run{
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    padding: 10px;
+    background-color: #2ecc71;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#output{
+
+    margin: 10px;
+    padding: 10px; 
+    color: white;
+    border-radius: 5px;
+    width: 50%;
+    height:100%;
+    background-color: black;
+}

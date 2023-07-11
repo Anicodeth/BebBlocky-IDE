@@ -29,7 +29,7 @@ img{
     color:#939CA1;
     font-weight: bold;
     height:30rem;
-    z-index:10;
+    z-index:1001;
     background-color:white;
     position: absolute;
     right:4rem;

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-create-course',
@@ -33,8 +34,18 @@ export class CreateCourseComponent {
     }, 1000);
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+  dropLessons(event: CdkDragDrop<string[]>) {
+    console.log('here');
+    let temp = this.lessons.at(event.previousIndex).value;
+    this.lessons.at(event.previousIndex).setValue(this.lessons.at(event.currentIndex).value);
+    this.lessons.at(event.currentIndex).setValue(temp);
+  }
+
+  dropSlides(lessonIndex: number, event: CdkDragDrop<string[]>) {
+    console.log('here');
+    let temp = this.getSlides(lessonIndex).at(event.previousIndex).value;
+    this.getSlides(lessonIndex).at(event.previousIndex).setValue(this.getSlides(lessonIndex).at(event.currentIndex).value);
+    this.getSlides(lessonIndex).at(event.currentIndex).setValue(temp);
   }
 
   // Course Related Functions

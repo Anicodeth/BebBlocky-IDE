@@ -2,8 +2,8 @@
     <div class="course-creator__title">
         <h1>Create a New Course!</h1>
     </div>
-    <form [formGroup]="courseForm">
-        <div  cdkDropList class="lesson-list" (cdkDropListDropped)="drop($event)" class="course-creator__manage-course">
+    <form [formGroup]="courseForm" cdkDropList class="lesson-list" (cdkDropListDropped)="dropLessons($event)">
+        <div  class="course-creator__manage-course">
             <div class="course-creator__manage-course__course-information"
                 formGroupName="course">
                 <div
@@ -41,7 +41,7 @@
             formArrayName="lessons">
             <div class="course-creator__lessons__lesson" *ngFor="let lesson of
                 lessons.controls; let lessonIndex= index"
-                [formGroupName]="lessonIndex">
+                [formGroupName]="lessonIndex" cdkDrag>
                 <div class="course-creator__lessons__lesson__manage-lesson">
                     <div
                         class="course-creator__lessons__lesson__manage-lesson__lesson-information">
@@ -90,7 +90,7 @@
                     formArrayName="slides">
                     <div class="course-creator__lessons__lesson__slides__slide"
                         *ngFor="let slide of getSlides(lessonIndex).controls;
-                        let slideIndex= index" [formGroupName]="slideIndex">
+                        let slideIndex= index" [formGroupName]="slideIndex" cdkDrag>
                         <div *ngIf="!isSlideDone(lessonIndex, slideIndex)"
                             class="course-creator__lessons__lesson__slides__slide__main-form" [ngStyle]="{
                                 'background-color': getSlide(lessonIndex,

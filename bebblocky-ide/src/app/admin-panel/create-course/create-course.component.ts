@@ -8,12 +8,21 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 })
 export class CreateCourseComponent {
   public showSpinner: boolean = false;
-  public slidesForm: FormGroup | any;
-  public slidesStatuses: string[] = [];
+  public courseForm: FormGroup | any;
 
   constructor(
     private fb: FormBuilder,
-  ) { }
+  ) {
+    this.courseForm = this.fb.group({
+      course: this.fb.group({
+        courseTitle: [null, Validators.required],
+        courseDescription: [null, Validators.required],
+        courseLanguage: [null, Validators.required],
+        done: [false]
+      }),
+      lessons: this.fb.array([])
+    });
+  }
 
   ngOnInit(): void {
     this.showSpinner = true;
@@ -21,18 +30,70 @@ export class CreateCourseComponent {
     // timeout to show the spinner
     setTimeout(() => {
       this.showSpinner = false;
-      this.slidesForm = this.fb.group({
-        slides: this.fb.array([])
-      });
     }, 1000);
   }
 
-  get slides(): FormArray {
-    return this.slidesForm.get('slides') as FormArray;
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
   }
 
-  addSlide() {
-    this.slides.push(
+  // Course Related Functions
+  get course(): FormGroup {
+    return this.courseForm.get('course') as FormGroup;
+  }
+
+  toggleCourse() {
+    this.course.get('done')?.setValue(!this.course.get('done')?.value);
+  }
+
+  isCourseDone(): boolean {
+    return this.course.get('done')?.value;
+  }
+
+
+  // Lesson Related Methods
+  get lessons(): FormArray {
+    return this.courseForm.get('lessons') as FormArray;
+  }
+
+  addLesson() {
+    let lessonId = this.lessons.length + 1;
+    this.lessons.push(
+      this.fb.group({
+        lessonId: [lessonId, Validators.required],
+        lessonTitle: [null, Validators.required],
+        lessonDescription: [null, Validators.required],
+        lessonLanguage: [null, Validators.required],
+        done: [false],
+        slides: this.fb.array([]),
+        editingSlideIndex: [null]
+      })
+    );
+  }
+
+  removeLesson(index: number) {
+    this.lessons.removeAt(index);
+  }
+
+  toggleLesson(index: number) {
+    this.lessons.at(index).get('done')?.setValue(!this.lessons.at(index).get('done')?.value);
+  }
+
+  isLessonDone(index: number): boolean {
+    return this.lessons.at(index).get('done')?.value;
+  }
+
+  // Slide Related Methods
+  getSlides(lessonIndex: number): FormArray {
+    return this.lessons.at(lessonIndex).get('slides') as FormArray;
+  }
+
+  getSlide(lessonIndex: number, slideIndex: number): FormGroup {
+    return this.getSlides(lessonIndex).at(slideIndex) as FormGroup;
+  }
+
+  addSlide(lessonIndex: number) {
+    this.getSlides(lessonIndex).push(
       this.fb.group({
         backgroundColor: [null, Validators.required],
         color: [null, Validators.required],
@@ -43,25 +104,28 @@ export class CreateCourseComponent {
         startingCode: [null, Validators.required],
         code: [null, Validators.required],
         image: [null, Validators.required],
+        done: [false]
       })
     );
-    this.slidesStatuses.push('doing');
+    this.lessons.at(lessonIndex).get('editingSlideIndex')?.setValue(this.getSlides(lessonIndex).length - 1);
   }
 
-  setSilideAsDone(index: number) {
-    this.slidesStatuses[index] = 'done';
+  removeSlide(lessonIndex: number, slideIndx: number) {
+    this.getSlides(lessonIndex).removeAt(slideIndx);
+  }
+  
+  toggleSlide(lessonIndex: number, slideIndex: number) {
+    this.getSlide(lessonIndex, slideIndex).get('done')?.setValue(!this.getSlide(lessonIndex, slideIndex).get('done')?.value);
   }
 
-  setSilideAsDoing(index: number) {
-    this.slidesStatuses[index] = 'doing';
+  isSlideDone(lessonIndex: number, slideIndex: number): boolean {
+    return this.getSlide(lessonIndex, slideIndex).get('done')?.value;
   }
 
-  removeLanguage(index: number) {
-    this.slides.removeAt(index);
-  }
 
-  capitalizeFormControl(formControlName: string, index: number) {
-    this.capitalize(this.slides.at(index), formControlName);
+  // Utility Methods
+  capitalizeFormControl(slides: FormArray, formControlName: string, index: number) {
+    this.capitalize(slides.at(index), formControlName);
   }
 
   capitalize(formGroup: FormGroup | any, formControlName: string) {

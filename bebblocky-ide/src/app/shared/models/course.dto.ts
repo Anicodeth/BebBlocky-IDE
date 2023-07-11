@@ -4,6 +4,7 @@ export interface Course {
   courseDescription: string;
   courseLanguage: 'html' | 'css' | 'js';
   lessons: Lesson[];
+  done: boolean;
 }
 
 export interface Lesson {
@@ -11,6 +12,8 @@ export interface Lesson {
   lessonTitle: string;
   lessonDescription: string;
   lessonLanguage: 'html' | 'css' | 'js';
+  done: boolean;
+  editingSlideIndex: number;
   slides: Slide[];
 }
 
@@ -26,5 +29,6 @@ export interface Slide {
   image: string;
   requiresPastProgress: string;
   shouldBeSaved: string;
+  done: boolean;
   // other relevant fields here
 }

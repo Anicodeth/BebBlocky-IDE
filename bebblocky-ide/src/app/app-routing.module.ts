@@ -39,7 +39,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent }
     ]
   } ,
-  { path: 'create-course', component: CreateCourseComponent, canActivate: [LoggedInGuard, IsAdminGuard] },
+  { path: 'create-course', component: CreateCourseComponent, },
   {
     path: 'admin',
     component: AdminPanelComponent,

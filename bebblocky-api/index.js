@@ -4,31 +4,34 @@ const cors = require("cors");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const mongoose = require('mongoose');
-
+const pythonProcess = require("./processes/pythonProcess");
 
 app = express();
 
-const { spawn } = require('child_process');
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server, {
   cors: {origin : '*'}
 });
 
+
 io.on('connection', (socket) => {
   console.log('New client connected');
 
 
+
   // Listen for 'execute' event from the client
-  socket.on('execute', (data) => {
-    const { code } = data;
+  socket.on('execute',  (data) => {
+    pythonProcess(data, socket);
+  }
+  );
     
   // Disconnect event
   socket.on('disconnect', () => {
     console.log('Client disconnected');
   });
 });
-});
+
 //Database linker
 mongoose
   .connect(
@@ -68,6 +71,7 @@ const userRoutes = require("./routes/userRoutes");
 const coursesRoutes = require("./routes/coursesRoutes");
 const authRoutes = require("./routes/authRoutes");
 const pythonRoutes = require("./routes/pythonRoutes");
+const pythonExecution = require("./processes/pythonProcess");
 
 // Route definitions
 VERSION = "v1";

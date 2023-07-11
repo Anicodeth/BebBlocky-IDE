@@ -39,17 +39,24 @@ executePython() {
 
 
 
-
+public temp:string = "";
   ngAfterViewInit() {
+    
     ace.config.set('basePath', 'https://unpkg.com/ace-builds@1.4.12/src-noconflict');
     this.pythonEditor = ace.edit(this.pythonEditor.nativeElement);
     this.pythonEditor.setTheme('ace/theme/dracula');
     this.pythonEditor.session.setMode('ace/mode/python');
     this.pythonEditor.setFontSize(18);
-
+    
+    this.child.write('\r\n');
     this.child.onData().subscribe((input:any) => {
+      
+
+      console.log('input', input);
       if (input === '\r') { // Carriage Return (When Enter is pressed)
         this.child.write(this.prompt);
+        this.socket.emit('input', { input: this.temp });
+        this.temp = "";
       } else if (input === '\u007f') { // Delete (When Backspace is pressed)
         if (this.child.underlying.buffer.active.cursorX > 2) {
           this.child.write('\b \b');
@@ -57,15 +64,25 @@ executePython() {
       } else if (input === '\u0003') { // End of Text (When Ctrl and C are pressed)
           this.child.write('^C');
           this.child.write(this.prompt);
-      }else
-        this.child.write(input);
-    });
+      }else this.child.write(input);
+        
+      this.temp += input;
+      }    
+    );
 
   }
  
   
   ngOnInit(): void {
-   
+    this.socket.on('output', (data) => {
+      this.child.write(data + '\r\n');
+    });
+
+  
+
+  
+
+    
   }
 
 }

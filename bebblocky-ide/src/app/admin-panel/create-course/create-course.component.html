@@ -1,89 +1,163 @@
-<div *ngIf="!showSpinner" class="slide-creator-container">
-    <h1>Add A New Course</h1>
-    <div class="course-information">
-        Here
+<div class="course-creator">
+    <div class="course-creator__title">
+        <h1>Create a New Course!</h1>
     </div>
-    <div class="slides">
-        <form [formGroup]="slidesForm">
-            <div formArrayName="slides">
-                <div class="add-links" *ngFor="let slide of slides.controls; let i = index" [formGroupName]="i"
-                    class="slide">
-                    <div class="slide-content">
-                        <div class="slide-preview" *ngIf="slidesStatuses[i] == 'done'">
-                            <app-ide-slide [code]="slides.controls[i].value.code"
-                                [backgroundColor]="slides.controls[i].value.backgroundColor"
-                                [color]="slides.controls[i].value.color" [title]="slides.controls[i].value.title"
-                                [titleFont]="slides.controls[i].value.titleFont"
-                                [content]="slides.controls[i].value.content"
-                                [contentFont]="slides.controls[i].value.contentFont"
-                                [image]="slides.controls[i].value.image">
-                            </app-ide-slide>
+    <form [formGroup]="courseForm" cdkDropList class="lesson-list" (cdkDropListDropped)="dropLessons($event)">
+        <div  class="course-creator__manage-course">
+            <div class="course-creator__manage-course__course-information"
+                formGroupName="course">
+                <div
+                    class="course-creator__manage-course__course-information__title">
+                    <input type="text" formControlName="courseTitle"
+                        placeholder="Title">
+                </div>
+                <div
+                    class="course-creator__manage-course__course-information__description">
+                    <textarea formControlName="courseDescription"
+                        placeholder="Description"></textarea>
+                </div>
+                <div
+                    class="course-creator__manage-course__course-information__language">
+                    <select formControlName="courseLanguage">
+                        <option value="html" default>HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="js">JavaScript</option>
+                        <option value="py">Python</option>
+                    </select>
+                </div>
+            </div>
+            <div class="course-creator__manage-course__buttons buttons">
+                <div class="course-creator__manage-course__buttons__save-course
+                    button" (click)="toggleCourse()">
+                    Save
+                </div>
+                <div class="course-creator__manage-course__buttons__add-lesson
+                    button add" (click)="addLesson()">
+                    Add a Lesson
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!isCourseDone()" class="course-creator__lessons"
+            formArrayName="lessons">
+            <div class="course-creator__lessons__lesson" *ngFor="let lesson of
+                lessons.controls; let lessonIndex= index"
+                [formGroupName]="lessonIndex" cdkDrag>
+                <div class="course-creator__lessons__lesson__manage-lesson">
+                    <div
+                        class="course-creator__lessons__lesson__manage-lesson__lesson-information">
+                        <div
+                            class="course-creator__lessons__lesson__manage-lesson__lesson-information__title">
+                            <input type="text" formControlName="lessonTitle"
+                                placeholder="Lesson title">
                         </div>
-                        <div class="slide-form" *ngIf="slidesStatuses[i] == 'doing'">
-                            <div class="slide" [ngStyle]="{
-    'background-color': slides.controls[i].value.backgroundColor,
-    color: slides.controls[i].value.color
-}">
-                                <div class="main-content">
-                                    <div class="content-title"
-                                        [ngStyle]="{ 'font-family':  slides.controls[i].value.titleFont }">
-                                        <input type="text" id="title" placeholder="Slide Title" formControlName="title"
-                                            (keyup)="capitalizeFormControl('title', i)">
-                                    </div>
-                                    <div class="text-content"
-                                        [ngStyle]="{ 'font-family': slides.controls[i].value.contentFont }">
-                                        <textarea class="content-textarea" type="text" id="content"
-                                            placeholder="Slide's text content" formControlName="content"></textarea>
-                                    </div>
-                                    <div class="code-content">
-                                        <textarea class="code-textarea" type="text" id="code"
-                                            placeholder="Code. e.g. <html></html>" formControlName="code"
-                                            (keyup)="capitalizeFormControl('code', i)"></textarea>
-                                    </div>
-                                    <img src="{{ slides.controls[i].value.image }}">
-                                </div>
-                            </div>
+                        <div *ngIf="!isLessonDone(lessonIndex)"
+                            class="course-creator__lessons__lesson__manage-lesson__lesson-information__description">
+                            <textarea formControlName="lessonDescription"
+                                placeholder="Lesson description"></textarea>
                         </div>
-                        <div class="options-form" *ngIf="slidesStatuses[i] == 'done'">
-                            <div class="form-grouping">
-                                <label for="name">Title Font</label>
-                                <input type="text" id="titleFont" placeholder="e.g. Verdana"
-                                    formControlName="titleFont">
-                            </div>
-                            <div class="form-grouping">
-                                <label for="name">Content Font</label>
-                                <input type="text" id="contentFont" placeholder="e.g. Arial"
-                                    formControlName="contentFont">
-                            </div>
-                            <div class="form-grouping">
-                                <label for="name">Background</label>
-                                <input type="color" id="backgroundColor" placeholder="e.g. #000000"
-                                    formControlName="backgroundColor">
-                            </div>
-                            <div class="form-grouping">
-                                <label for="name">Text</label>
-                                <input type="color" id="color" placeholder="e.g. #000000" formControlName="color">
-                            </div>
+                        <div *ngIf="!isLessonDone(lessonIndex)"
+                            class="course-creator__lessons__lesson__manage-lesson__lesson-information__language">
+                            <select formControlName="lessonLanguage">
+                                <option value="html" default>HTML</option>
+                                <option value="css">CSS</option>
+                                <option value="js">JavaScript</option>
+                                <option value="py">Python</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="slide-buttons">
-                        <button type="button" (click)="removeLanguage(i)" class="delete-button">
-                            Delete
-                        </button>
-                        <button *ngIf="slidesStatuses[i]=='doing'" type="button" (click)="setSilideAsDone(i)">
-                            Done with adding content
-                        </button>
-                        <button *ngIf="slidesStatuses[i]=='done'" type="button" (click)="setSilideAsDoing(i)">
-                            Edit slide content
-                        </button>
+                    <div
+                        class="course-creator__lessons__lesson__manage-lesson__buttons
+                        buttons">
+                        <div
+                            class="course-creator__lessons__lesson__manage-lesson__buttons__add-slide
+                            button save" (click)="toggleLesson(lessonIndex)">
+                            {{ !isLessonDone(lessonIndex) ? 'Save' : 'Edit' }} the lesson
+                        </div>
+                        <div
+                            class="course-creator__lessons__lesson__manage-lesson__buttons__delete
+                            button delete" (click)="removeLesson(lessonIndex)">
+                            Delete Lesson
+                        </div>
+                        <div *ngIf="!isLessonDone(lessonIndex)"
+                            class="course-creator__lessons__lesson__manage-lesson__buttons__add-slide
+                            button add" (click)="addSlide(lessonIndex)">
+                            Add a Slide
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!isLessonDone(lessonIndex)"
+                    class="course-creator__lessons__lesson__slides"
+                    formArrayName="slides">
+                    <div class="course-creator__lessons__lesson__slides__slide"
+                        *ngFor="let slide of getSlides(lessonIndex).controls;
+                        let slideIndex= index" [formGroupName]="slideIndex" cdkDrag>
+                        <div *ngIf="!isSlideDone(lessonIndex, slideIndex)"
+                            class="course-creator__lessons__lesson__slides__slide__main-form" [ngStyle]="{
+                                'background-color': getSlide(lessonIndex,
+                                slideIndex).value.backgroundColor,
+                                color: getSlide(lessonIndex,
+                                slideIndex).value.color
+                                }">
+                                <div
+                                    class="course-creator__lessons__lesson__slides__slide__main-form__title"
+                                    [ngStyle]="{
+                                    'font-family': getSlide(lessonIndex,
+                                    slideIndex).value.titleFont }">
+                                    <input type="text"
+                                        formControlName="title"
+                                        placeholder="Slide title">
+                                </div>
+                                <div class="course-creator__lessons__lesson__slides__slide__main-form__content" [ngStyle]="{
+                                    'font-family': getSlide(lessonIndex,
+                                    slideIndex).value.contentFont }">
+                                    <textarea formControlName="content"
+                                    placeholder="Slide content"></textarea>
+                                </div>
+                                <div
+                                    class="course-creator__lessons__lesson__slides__slide__main-form__code">
+                                    <textarea formControlName="code"
+                                    placeholder="Slide code"></textarea>
+                                </div>
+                        </div>
+                        <div *ngIf="isSlideDone(lessonIndex, slideIndex)"
+                            class="course-creator__lessons__lesson__slides__slide__options-form">
+                            <app-ide-slide
+                            [backgroundColor]="getSlide(lessonIndex,
+                                    slideIndex).value.backgroundColor"
+                            [color]="getSlide(lessonIndex, slideIndex).value.color"
+                            [title]="getSlide(lessonIndex, slideIndex).value.title"
+                            [titleFont]="getSlide(lessonIndex,
+                                    slideIndex).value.titleFont"
+                                    [content]="getSlide(lessonIndex, slideIndex).value.content"
+                            [contentFont]="getSlide(lessonIndex, slideIndex).value.contentFont"
+                            [code]="getSlide(lessonIndex, slideIndex).value.code"
+                            [image]="getSlide(lessonIndex, slideIndex).value.image"
+                            ></app-ide-slide>
+                        </div>
+                        <div
+                            class="course-creator__lessons__lesson__slides__slide__buttons">
+                            <div
+                                class="course-creator__lessons__lesson__slides__slide__buttons__delete
+                                button delete"
+                                (click)="removeSlide(lessonIndex, slideIndex)">
+                                Delete Slide
+                            </div>
+                            <div *ngIf="!isSlideDone(lessonIndex, slideIndex)"
+                                class="course-creator__lessons__lesson__slides__slide__buttons__save
+                                button save"
+                                (click)="toggleSlide(lessonIndex, slideIndex)">
+                                Edit Appearance
+                            </div>
+                            <div *ngIf="isSlideDone(lessonIndex, slideIndex)"
+                                class="course-creator__lessons__lesson__slides__slide__buttons__save
+                                button save"
+                                (click)="toggleSlide(lessonIndex, slideIndex)">
+                                Edit Contents
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
-    <button class="slide-add" type="button" (click)="addSlide()">
-        Add a new Slide
-    </button>
+        </div>
+    </form>
 </div>
-
-<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>

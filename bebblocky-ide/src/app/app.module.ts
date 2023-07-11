@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NgTerminalModule } from 'ng-terminal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,9 +39,7 @@ import { IdeSlideComponent } from './ide-page/ide-slides/ide-slide/ide-slide.com
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AdminSidebarComponent } from './admin-panel/admin-sidebar/admin-sidebar.component';
 import { FloatingActionButtonComponent } from './floating-action-button/floating-action-button.component';
-import { IdePythonEditorComponent } from './ide-python-editor/ide-python-editor.component';
-import { IdePythonConsoleComponent } from './ide-python-console/ide-python-console.component';
-import { NgTerminalModule } from 'ng-terminal';
+
 
 @NgModule({
   declarations: [
@@ -72,19 +72,17 @@ import { NgTerminalModule } from 'ng-terminal';
     IdeSlideComponent,
     AdminPanelComponent,
     AdminSidebarComponent,
-    FloatingActionButtonComponent,
-    IdePythonConsoleComponent,
-    IdePythonEditorComponent
-    
+    FloatingActionButtonComponent
   ],
   imports: [
-    NgTerminalModule,
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DragDropModule,
+    NgTerminalModule
   ],
   providers: [
     CodeEditorService,

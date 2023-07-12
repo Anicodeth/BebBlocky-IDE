@@ -1,12 +1,13 @@
 const pythonExecution = (data, socket) => {
 
-socket.on('input', (data) => {
-  pythonProcess.stdin.write(data.input);});
 
 const { spawn } = require('child_process');
 const { code } = data;
 // Create a Python process
 const pythonProcess = spawn('python', ['-u', '-c', code]);
+
+
+
 
 // Listen for stdout data from Python process
 pythonProcess.stdout.on('data', (data) => {
@@ -27,6 +28,10 @@ process.stdin.on('data', (data) => {
   pythonProcess.stdin.write(data);
 });
 
+socket.on('input', (data) => {
+  console.log(data, "Here");
+  console.log(pythonProcess.stdin.write(data.input + '\n'));
+});
 // Handle process exit
 pythonProcess.on('exit', (code) => {
   console.log(`Python process exited with code ${code}`);

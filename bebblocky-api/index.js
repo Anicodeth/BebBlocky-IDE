@@ -19,7 +19,6 @@ io.on('connection', (socket) => {
   console.log('New client connected');
 
 
-
   // Listen for 'execute' event from the client
   socket.on('execute',  (data) => {
     pythonProcess(data, socket);

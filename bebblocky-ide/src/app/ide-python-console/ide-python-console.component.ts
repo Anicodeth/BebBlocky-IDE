@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import * as ace from "ace-builds";
-import { io , Socket  } from 'socket.io-client';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+
 import { FunctionsUsingCSI, NgTerminal } from 'ng-terminal';
 import { PythonService } from '../python.service';
 
@@ -23,7 +22,7 @@ public temp:string = "";
     this.child.onData().subscribe((input:any) => {
       if (input === '\r') { // Carriage Return (When Enter is pressed)
         this.child.write(this.prompt);
-        this.pythonservice.pythonSocket.emit('input', { input: this.temp  });
+        this.pythonservice.socket.emit('input', { input: this.temp  });
         this.temp = "";
       } else if (input === '\u007f') { // Delete (When Backspace is pressed)
         if (this.child.underlying.buffer.active.cursorX > 2) {
@@ -60,7 +59,7 @@ public temp:string = "";
 }
 
   ngOnInit(): void {
-    this.pythonservice.pythonSocket.on('output', (data) => {
+    this.pythonservice.socket.on('output', (data:any) => {
       this.child.write(data + '\r\n');
     });
   }

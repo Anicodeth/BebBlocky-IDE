@@ -25,7 +25,6 @@ const routes: Routes = [
   },
   { path: 'ide/:courseId', component: IdePageComponent, canActivate: [LoggedInGuard] },
   { path: 'login', component: LoginPageComponent },
-  { path: 'python', component: IdePythonEditorComponent},
   {
     path: 'dashboard',
     // redirectTo: '/dashboard/profile',

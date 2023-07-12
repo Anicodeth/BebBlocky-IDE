@@ -79,14 +79,14 @@ app.use(`/api/${VERSION}/courses`, coursesRoutes);
 app.use(`/auth/${VERSION}`, authRoutes);
 app.use(`/api/${VERSION}/python `, pythonRoutes);
 
-/* 
+/*
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}.`);
 });
 */
 
-server.listen(3001, () => {
+server.listen(4000, () => {
   console.log(`Python Server running on port ${3000}`);
 });
 

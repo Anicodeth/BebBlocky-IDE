@@ -40,6 +40,7 @@ import { AdminSidebarComponent } from './admin-panel/admin-sidebar/admin-sidebar
 import { FloatingActionButtonComponent } from './floating-action-button/floating-action-button.component';
 import { IdePythonEditorComponent } from './ide-python-editor/ide-python-editor.component';
 import { IdePythonConsoleComponent } from './ide-python-console/ide-python-console.component';
+import { PythonService } from './python.service';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { IdePythonConsoleComponent } from './ide-python-console/ide-python-conso
   ],
   providers: [
     CodeEditorService,
-    BridgeService
+    BridgeService,
+    PythonService
   ],
   bootstrap: [AppComponent]
 })

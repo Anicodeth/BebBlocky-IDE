@@ -12,6 +12,7 @@ import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 export class IdePageBodyComponent implements OnInit {
 
   public activeWindow: 'slide' | 'editor' | 'preview' = 'slide';
+  public type: string = 'python'
 
 
 

@@ -1,7 +1,7 @@
 .python-container{
     display: flex;
-    height: 30rem;
-    width: 100rem;
+    height: 100%;
+    width:  100%;
     background-color: black;
 }
 

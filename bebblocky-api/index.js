@@ -86,8 +86,8 @@ app.listen(PORT, () => {
 });
 */
 
-server.listen(4000, () => {
-  console.log(`Python Server running on port ${3000}`);
+server.listen(process.env.PORT || 4000, () => {
+  console.log(`Server running`);
 });
 
 module.exports = app;

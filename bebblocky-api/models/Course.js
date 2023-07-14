@@ -83,7 +83,7 @@ const courseSchema = new mongoose.Schema({
   courseLanguage: {
     type: String,
     required: true,
-    enum: ['html', 'css', 'js'] // Restrict the category to these values
+    enum: ['html', 'css', 'js', 'python'] // Restrict the category to these values
   },
   lessons: [
     lessonSchema,

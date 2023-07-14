@@ -31,6 +31,7 @@
     "ace-builds": "^1.19.0",
     "brython": "^3.11.3",
     "ng-terminal": "^6.0.0-beta",
+    "ngx-terminal": "^0.0.4",
     "prismjs": "^1.29.0",
     "rxjs": "~7.8.0",
     "skulpt": "^1.2.0",

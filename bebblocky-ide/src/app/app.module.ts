@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { NgTerminalModule } from 'ng-terminal';
-
+import { NgTerminalComponent, NgTerminalModule } from 'ng-terminal';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IdePageComponent } from './ide-page/ide-page.component';
@@ -39,7 +38,9 @@ import { IdeSlideComponent } from './ide-page/ide-slides/ide-slide/ide-slide.com
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AdminSidebarComponent } from './admin-panel/admin-sidebar/admin-sidebar.component';
 import { FloatingActionButtonComponent } from './floating-action-button/floating-action-button.component';
-
+import { IdePythonEditorComponent } from './ide-python-editor/ide-python-editor.component';
+import { IdePythonConsoleComponent } from './ide-python-console/ide-python-console.component';
+import { PythonService } from './python.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,9 @@ import { FloatingActionButtonComponent } from './floating-action-button/floating
     IdeSlideComponent,
     AdminPanelComponent,
     AdminSidebarComponent,
-    FloatingActionButtonComponent
+    FloatingActionButtonComponent,
+    IdePythonEditorComponent,
+    IdePythonConsoleComponent
   ],
   imports: [
     BrowserModule,
@@ -83,10 +86,12 @@ import { FloatingActionButtonComponent } from './floating-action-button/floating
     HttpClientModule,
     DragDropModule,
     NgTerminalModule
+
   ],
   providers: [
     CodeEditorService,
-    BridgeService
+    BridgeService,
+    PythonService
   ],
   bootstrap: [AppComponent]
 })

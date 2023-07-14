@@ -1,9 +1,24 @@
 <div class="course-creator">
     <div class="course-creator__title">
-        <h1>Create a New Course!</h1>
+        <h1>Creating New Course!</h1>
     </div>
-    <form [formGroup]="courseForm" cdkDropList class="lesson-list" (cdkDropListDropped)="dropLessons($event)">
+    <form [formGroup]="courseForm"  class="lesson-list">
         <div  class="course-creator__manage-course">
+            <div class="course-creator__manage-course__buttons">
+                <div class="course-creator__manage-course__buttons__title">
+                    <h2>Course Options</h2>
+                </div>
+                <div class="course-creator__manage-course__buttons__buttons buttons">
+                    <div class="course-creator__manage-course__buttons__save-course
+                        button save" (click)="toggleCourse()">
+                        Save
+                    </div>
+                    <div class="course-creator__manage-course__buttons__add-lesson
+                        button add" (click)="addLesson()">
+                        Add a Lesson
+                    </div>
+                </div>
+            </div>
             <div class="course-creator__manage-course__course-information"
                 formGroupName="course">
                 <div
@@ -26,22 +41,15 @@
                     </select>
                 </div>
             </div>
-            <div class="course-creator__manage-course__buttons buttons">
-                <div class="course-creator__manage-course__buttons__save-course
-                    button" (click)="toggleCourse()">
-                    Save
-                </div>
-                <div class="course-creator__manage-course__buttons__add-lesson
-                    button add" (click)="addLesson()">
-                    Add a Lesson
-                </div>
-            </div>
         </div>
         <div *ngIf="!isCourseDone()" class="course-creator__lessons"
             formArrayName="lessons">
             <div class="course-creator__lessons__lesson" *ngFor="let lesson of
                 lessons.controls; let lessonIndex= index"
-                [formGroupName]="lessonIndex" cdkDrag>
+                [formGroupName]="lessonIndex"
+                cdkDropList
+                (cdkDropListDropped)="dropSlides(lessonIndex, $event)"
+                [class]="lessonIndex == editingLessonIndex ? 'editing' : 'idle'">
                 <div class="course-creator__lessons__lesson__manage-lesson">
                     <div
                         class="course-creator__lessons__lesson__manage-lesson__lesson-information">
@@ -50,12 +58,12 @@
                             <input type="text" formControlName="lessonTitle"
                                 placeholder="Lesson title">
                         </div>
-                        <div *ngIf="!isLessonDone(lessonIndex)"
+                        <div
                             class="course-creator__lessons__lesson__manage-lesson__lesson-information__description">
                             <textarea formControlName="lessonDescription"
                                 placeholder="Lesson description"></textarea>
                         </div>
-                        <div *ngIf="!isLessonDone(lessonIndex)"
+                        <div
                             class="course-creator__lessons__lesson__manage-lesson__lesson-information__language">
                             <select formControlName="lessonLanguage">
                                 <option value="html" default>HTML</option>
@@ -66,31 +74,38 @@
                         </div>
                     </div>
                     <div
-                        class="course-creator__lessons__lesson__manage-lesson__buttons
-                        buttons">
-                        <div
-                            class="course-creator__lessons__lesson__manage-lesson__buttons__add-slide
-                            button save" (click)="toggleLesson(lessonIndex)">
-                            {{ !isLessonDone(lessonIndex) ? 'Save' : 'Edit' }} the lesson
+                        class="course-creator__lessons__lesson__manage-lesson__buttons">
+                        <div class="course-creator__lessons__lesson__manage-lesson__buttons__title">
+                            <h2>Lesson Details</h2>
+                            <p>Edit the details of the lesson here</p>
                         </div>
-                        <div
-                            class="course-creator__lessons__lesson__manage-lesson__buttons__delete
-                            button delete" (click)="removeLesson(lessonIndex)">
-                            Delete Lesson
-                        </div>
-                        <div *ngIf="!isLessonDone(lessonIndex)"
-                            class="course-creator__lessons__lesson__manage-lesson__buttons__add-slide
-                            button add" (click)="addSlide(lessonIndex)">
-                            Add a Slide
+                        <div class="course-creator__lessons__lesson__manage-lesson__buttons__buttons">
+                            <div
+                                class="course-creator__lessons__lesson__manage-lesson__buttons__add-slide
+                                button save" (click)="toggleLesson(lessonIndex)">
+                                {{ !isLessonDone(lessonIndex) && lessonIndex === editingLessonIndex ? 'Save' : 'Edit' }}
+                            </div>
+                            <div
+                                class="course-creator__lessons__lesson__manage-lesson__buttons__delete
+                                button delete" (click)="removeLesson(lessonIndex)">
+                                Delete
+                            </div>
+                            <div *ngIf="!isLessonDone(lessonIndex) && lessonIndex === editingLessonIndex"
+                                class="course-creator__lessons__lesson__manage-lesson__buttons__add-slide
+                                button add" (click)="addSlide(lessonIndex)">
+                                Add Slide
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div *ngIf="!isLessonDone(lessonIndex)"
+                <div *ngIf="!isLessonDone(lessonIndex) && lessonIndex === editingLessonIndex"
                     class="course-creator__lessons__lesson__slides"
                     formArrayName="slides">
                     <div class="course-creator__lessons__lesson__slides__slide"
-                        *ngFor="let slide of getSlides(lessonIndex).controls;
-                        let slideIndex= index" [formGroupName]="slideIndex" cdkDrag>
+                        *ngFor="let slide of getSlides(lessonIndex).controls; let slideIndex= index"
+                        [formGroupName]="slideIndex"
+                        cdkDrag
+                        [class]="slideIndex == getEditingSlideIndex(lessonIndex) ? 'editing-slide' : 'idle-slide'">
                         <div *ngIf="!isSlideDone(lessonIndex, slideIndex)"
                             class="course-creator__lessons__lesson__slides__slide__main-form" [ngStyle]="{
                                 'background-color': getSlide(lessonIndex,
@@ -155,6 +170,32 @@
                                 Edit Contents
                             </div>
                         </div>
+                    </div>
+                    <div *ngIf="getSlides(lessonIndex).controls.length > 0" class="course-creator__lessons__lesson__slides__preview">
+                        <div class="course-creator__lessons__lesson__slides__preview__title">
+                            <h2>Lesson Preview</h2>
+                            <p>These are your slides for this lesson so far.</p>
+                        </div>
+                        <div class="course-creator__lessons__lesson__slides__preview__slide"
+                        *ngFor="let slide of getSlides(lessonIndex).controls; let slideIndex= index"
+                        (click)="toggleSlide(lessonIndex, slideIndex)"
+                        [class]="slideIndex == getEditingSlideIndex(lessonIndex) ? 'editing-slide-preview' : 'idle-slide-preview'">
+                            <app-ide-slide
+                            [backgroundColor]="getSlide(lessonIndex,
+                                    slideIndex).value.backgroundColor"
+                            [color]="getSlide(lessonIndex, slideIndex).value.color"
+                            [title]="getSlide(lessonIndex, slideIndex).value.title"
+                            [titleFont]="getSlide(lessonIndex,
+                                    slideIndex).value.titleFont"
+                                    [content]="getSlide(lessonIndex, slideIndex).value.content"
+                            [contentFont]="getSlide(lessonIndex, slideIndex).value.contentFont"
+                            [code]="getSlide(lessonIndex, slideIndex).value.code"
+                            [image]="getSlide(lessonIndex, slideIndex).value.image"
+                            ></app-ide-slide>
+                        </div>
+                    </div>
+                    <div *ngIf="getSlides(lessonIndex).controls.length == 0">
+                        You can start by adding a slide to this lesson.
                     </div>
                 </div>
             </div>

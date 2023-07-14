@@ -19,7 +19,8 @@ export class CreateCourseComponent {
         courseTitle: [null, Validators.required],
         courseDescription: [null, Validators.required],
         courseLanguage: [null, Validators.required],
-        done: [false]
+        done: [false],
+        editingLessonIndex: [null],
       }),
       lessons: this.fb.array([])
     });
@@ -42,7 +43,8 @@ export class CreateCourseComponent {
   }
 
   dropSlides(lessonIndex: number, event: CdkDragDrop<string[]>) {
-    console.log('here');
+    console.log('here, dropping slides.');
+    console.log(event.previousIndex, event.currentIndex);
     let temp = this.getSlides(lessonIndex).at(event.previousIndex).value;
     this.getSlides(lessonIndex).at(event.previousIndex).setValue(this.getSlides(lessonIndex).at(event.currentIndex).value);
     this.getSlides(lessonIndex).at(event.currentIndex).setValue(temp);
@@ -75,11 +77,20 @@ export class CreateCourseComponent {
         lessonTitle: [null, Validators.required],
         lessonDescription: [null, Validators.required],
         lessonLanguage: [null, Validators.required],
-        done: [false],
         slides: this.fb.array([]),
-        editingSlideIndex: [null]
+        editingSlideIndex: [null],
+        done: [false],
       })
     );
+    this.course.get('editingLessonIndex')?.setValue(this.lessons.length - 1);
+  }
+
+  get editingLessonIndex(): number | null {
+    return this.course.get('editingLessonIndex')?.value;
+  }
+
+  set editingLessonIndex(index: number | null) {
+    this.course.get('editingLessonIndex')?.setValue(index);
   }
 
   removeLesson(index: number) {
@@ -87,7 +98,18 @@ export class CreateCourseComponent {
   }
 
   toggleLesson(index: number) {
-    this.lessons.at(index).get('done')?.setValue(!this.lessons.at(index).get('done')?.value);
+    if (index != this.editingLessonIndex) {
+      this.editingLessonIndex = index;
+      this.setLessonStatus(index, false);
+      return;
+    } else {
+      this.editingLessonIndex = null;
+    }
+  }
+  
+  setLessonStatus(index: number, status: boolean) {
+    this.editingLessonIndex = index;
+    this.lessons.at(index).get('done')?.setValue(status);
   }
 
   isLessonDone(index: number): boolean {
@@ -121,12 +143,26 @@ export class CreateCourseComponent {
     this.lessons.at(lessonIndex).get('editingSlideIndex')?.setValue(this.getSlides(lessonIndex).length - 1);
   }
 
+  getEditingSlideIndex(lessonIndex: number): number {
+    return this.lessons.at(lessonIndex).get('editingSlideIndex')?.value;
+  }
+
   removeSlide(lessonIndex: number, slideIndx: number) {
     this.getSlides(lessonIndex).removeAt(slideIndx);
   }
+
+  setSlideStatus(lessonIndex: number, slideIndex: number, status: boolean) {
+    this.getSlides(lessonIndex).at(slideIndex).get('done')?.setValue(status);
+  }
   
   toggleSlide(lessonIndex: number, slideIndex: number) {
-    this.getSlide(lessonIndex, slideIndex).get('done')?.setValue(!this.getSlide(lessonIndex, slideIndex).get('done')?.value);
+    if (slideIndex != this.getEditingSlideIndex(lessonIndex)) {
+      this.lessons.at(lessonIndex).get('editingSlideIndex')?.setValue(slideIndex);
+      this.setSlideStatus(lessonIndex, slideIndex, true);
+      return;
+    } else {
+      this.lessons.at(lessonIndex).get('editingSlideIndex')?.setValue(null);
+    }
   }
 
   isSlideDone(lessonIndex: number, slideIndex: number): boolean {

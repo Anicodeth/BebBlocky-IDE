@@ -18,7 +18,7 @@ export class CreateCourseComponent {
       course: this.fb.group({
         courseTitle: [null, Validators.required],
         courseDescription: [null, Validators.required],
-        courseLanguage: [null, Validators.required],
+        courseLanguage: ['html', Validators.required],
         done: [false],
         editingLessonIndex: [null],
       }),
@@ -74,11 +74,11 @@ export class CreateCourseComponent {
     this.lessons.push(
       this.fb.group({
         lessonId: [lessonId, Validators.required],
-        lessonTitle: [null, Validators.required],
-        lessonDescription: [null, Validators.required],
-        lessonLanguage: [null, Validators.required],
+        lessonTitle: ["", Validators.required],
+        lessonDescription: ["", Validators.required],
+        lessonLanguage: ['html', Validators.required],
         slides: this.fb.array([]),
-        editingSlideIndex: [null],
+        editingSlideIndex: [""],
         done: [false],
       })
     );
@@ -128,15 +128,15 @@ export class CreateCourseComponent {
   addSlide(lessonIndex: number) {
     this.getSlides(lessonIndex).push(
       this.fb.group({
-        backgroundColor: [null, Validators.required],
-        color: [null, Validators.required],
-        title: [null, Validators.required],
-        titleFont: [null, Validators.required],
-        content: [null, Validators.required],
-        contentFont: [null, Validators.required],
-        startingCode: [null, Validators.required],
-        code: [null, Validators.required],
-        image: [null, Validators.required],
+        backgroundColor: ["", Validators.required],
+        color: ["", Validators.required],
+        title: ["", Validators.required],
+        titleFont: ["", Validators.required],
+        content: ["", Validators.required],
+        contentFont: ["", Validators.required],
+        startingCode: ["", Validators.required],
+        code: ["", Validators.required],
+        image: ["", Validators.required],
         done: [false]
       })
     );
@@ -152,7 +152,9 @@ export class CreateCourseComponent {
   }
 
   setSlideStatus(lessonIndex: number, slideIndex: number, status: boolean) {
-    this.getSlides(lessonIndex).at(slideIndex).get('done')?.setValue(status);
+    if (status) {
+      this.lessons.at(lessonIndex).get('editingSlideIndex')?.setValue(slideIndex);
+    }
   }
   
   toggleSlide(lessonIndex: number, slideIndex: number) {
@@ -160,8 +162,6 @@ export class CreateCourseComponent {
       this.lessons.at(lessonIndex).get('editingSlideIndex')?.setValue(slideIndex);
       this.setSlideStatus(lessonIndex, slideIndex, true);
       return;
-    } else {
-      this.lessons.at(lessonIndex).get('editingSlideIndex')?.setValue(null);
     }
   }
 

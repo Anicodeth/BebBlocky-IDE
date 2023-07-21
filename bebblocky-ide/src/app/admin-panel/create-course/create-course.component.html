@@ -1,4 +1,4 @@
-<div class="course-creator">
+<div *ngIf="!showSpinner" class="course-creator">
     <form [formGroup]="courseForm"  class="lesson-list">
         <div class="course-creator__manage-course">
             <div class="course-creator__manage-course__buttons">
@@ -199,3 +199,4 @@
         </div>
     </form>
 </div>
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { BridgeService } from 'src/app/shared/services/bridge.service';
 
 @Component({
   selector: 'app-create-course',
@@ -41,6 +42,7 @@ export class CreateCourseComponent {
 
   constructor(
     private fb: FormBuilder,
+    private bridgeService: BridgeService
   ) {
     this.courseForm = this.fb.group({
       course: this.fb.group({
@@ -60,7 +62,7 @@ export class CreateCourseComponent {
     // timeout to show the spinner
     setTimeout(() => {
       this.showSpinner = false;
-    }, 1000);
+    }, 2000);
   }
 
   dropLessons(event: CdkDragDrop<string[]>) {
@@ -98,8 +100,11 @@ export class CreateCourseComponent {
         courseLanguage: this.courseForm.value.course.courseLanguage,
         lessons: this.cleanLessons(this.courseForm.value.lessons)
       }
-
-      console.log(JSON.stringify(courseData));
+      this.showSpinner = true;
+      this.bridgeService.createCourse(courseData).subscribe((res: any) => {
+        this.showSpinner = false;
+        console.log(res);
+      });
   }
 
   cleanLessons(lessonsData: any) {

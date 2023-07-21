@@ -116,7 +116,8 @@ export class BridgeService {
     return this.user.lastAccessedCourseId;
   }
 
-  createCourse(course: Course): Observable<Course> {
+  createCourse(course: Course | Object): Observable<Course> {
+    console.log(course);
     return this.http.post<Course>(this.resourcesBaseURL + '/courses', course);
   }
 }

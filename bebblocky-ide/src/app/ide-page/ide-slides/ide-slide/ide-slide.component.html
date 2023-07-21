@@ -1,6 +1,6 @@
 <div class="course" [ngStyle]="{
     'background-color': backgroundColor,
-    color: color
+    'color': color
 }">
     <div class="main-content">
         <h1 class="content-title" [ngStyle]="{ 'font-family':  titleFont }">
@@ -8,7 +8,7 @@
         </h1>
         <div class="main-content">
             <div class="text-content" [ngStyle]="{ 'font-family':  contentFont }">
-                {{ content }}
+                <p>{{ content }}</p>
             </div>
             <div *ngIf="code" class="code-content">
                 {{ code }}

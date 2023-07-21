@@ -1,14 +1,13 @@
 <div class="course-creator">
     <form [formGroup]="courseForm"  class="lesson-list">
-        <div  class="course-creator__manage-course">
+        <div class="course-creator__manage-course">
             <div class="course-creator__manage-course__buttons">
                 <div class="course-creator__manage-course__buttons__title">
                     <h2>Add a New Course</h2>
                     <p>You can start editing the options of the course here. You can add actual content by adding lessons to it.</p>
                 </div>
                 <div class="course-creator__manage-course__buttons__buttons buttons">
-                    <div class="course-creator__manage-course__buttons__save-course
-                        button save" (click)="toggleCourse()">
+                    <div class="course-creator__manage-course__buttons__save-course button save" (click)="saveCourse()">
                         Save
                     </div>
                     <div class="course-creator__manage-course__buttons__add-lesson
@@ -45,7 +44,7 @@
         </div>
         <div *ngIf="!isCourseDone()" class="course-creator__lessons"
             formArrayName="lessons">
-            <div class="course-creator__lessons__lesson" *ngFor="let lesson of
+            <div [@listAnimation]="lessonIndex == editingLessonIndex ? 'open' : 'close'" class="course-creator__lessons__lesson" *ngFor="let lesson of
                 lessons.controls; let lessonIndex= index"
                 [formGroupName]="lessonIndex"
                 cdkDropList
@@ -111,10 +110,8 @@
                         [class]="slideIndex == getEditingSlideIndex(lessonIndex) ? 'editing-slide' : 'idle-slide'">
                         <div *ngIf="!isSlideDone(lessonIndex, slideIndex)"
                             class="course-creator__lessons__lesson__slides__slide__main-form" [ngStyle]="{
-                                'background-color': getSlide(lessonIndex,
-                                slideIndex).value.backgroundColor,
-                                color: getSlide(lessonIndex,
-                                slideIndex).value.color
+                                'background-color': getSlide(lessonIndex,slideIndex).value.backgroundColor,
+                                'color': getSlide(lessonIndex, slideIndex).value.color
                                 }">
                                 <div
                                     class="course-creator__lessons__lesson__slides__slide__main-form__title form-holder"
@@ -124,80 +121,56 @@
                                     <label *ngIf="getSlide(lessonIndex, slideIndex).value.title.length == 0" for="title">Slide Title</label>
                                     <input id="title" type="text"
                                         formControlName="title"
-                                        placeholder="e.g. CSS Media Queries">
+                                        placeholder="e.g. CSS Media Queries"
+                                        [ngStyle]="{
+                                        'color': getSlide(lessonIndex, slideIndex).value.color
+                                        }">
                                 </div>
                                 <div class="course-creator__lessons__lesson__slides__slide__main-form__content form-holder" [ngStyle]="{
                                     'font-family': getSlide(lessonIndex,
                                     slideIndex).value.contentFont }">
                                     <label *ngIf="getSlide(lessonIndex, slideIndex).value.content.length == 0" for="content">Slide Content</label>
                                     <textarea id="content" formControlName="content"
-                                    placeholder="CSS Media Queries are a powerful tool in creating responsive websites.
-They allow us to apply different styles based on the characteristics of the device or screen size.
-Media Queries use the @media rule in CSS to define different styles for different conditions.
-Common media query conditions include screen width, device orientation, resolution, and more."></textarea>
+                                    placeholder="{{ contentExample }}"
+                                    [ngStyle]="{
+                                    'color': getSlide(lessonIndex, slideIndex).value.color
+                                    }"></textarea>
                                 </div>
                                 <div
                                     class="course-creator__lessons__lesson__slides__slide__main-form__code form-holder">
                                     <label *ngIf="getSlide(lessonIndex, slideIndex).value.code.length == 0" for="code">Slide Code</label>
-                                    <textarea id="code" formControlName="code"
-                                    placeholder="@media (max-width: 768px) {
-  /* Styles applied when the screen width is 768 pixels or less */
-  .container {
-    flex-direction: column;
-  }
-  
-  .sidebar {
-    display: none;
-  }
-  
-  .main-content {
-    width: 100%;
-  }
-}"></textarea>
+                                    <textarea id="code" formControlName="code" placeholder="{{ codeExample }}"></textarea>
                                 </div>
                         </div>
-                        <div *ngIf="isSlideDone(lessonIndex, slideIndex)"
-                            class="course-creator__lessons__lesson__slides__slide__options-form">
-                            <app-ide-slide
-                            [backgroundColor]="getSlide(lessonIndex,
-                                    slideIndex).value.backgroundColor"
-                            [color]="getSlide(lessonIndex, slideIndex).value.color"
-                            [title]="getSlide(lessonIndex, slideIndex).value.title"
-                            [titleFont]="getSlide(lessonIndex,
-                                    slideIndex).value.titleFont"
-                                    [content]="getSlide(lessonIndex, slideIndex).value.content"
-                            [contentFont]="getSlide(lessonIndex, slideIndex).value.contentFont"
-                            [code]="getSlide(lessonIndex, slideIndex).value.code"
-                            [image]="getSlide(lessonIndex, slideIndex).value.image"
-                            ></app-ide-slide>
-                        </div>
-                        <div
-                            class="course-creator__lessons__lesson__slides__slide__buttons">
-                            <div
-                                class="course-creator__lessons__lesson__slides__slide__buttons__delete
+                        <div class="course-creator__lessons__lesson__slides__slide__buttons">
+                            <div class="course-creator__lessons__lesson__slides__slide__buttons__change-background button setting" (click)="changeBackgroundInput.click()">
+                                <input formControlName="backgroundColor" type="color" style="display: none;" #changeBackgroundInput>
+                                Background Color
+                            </div>
+                            <div class="course-creator__lessons__lesson__slides__slide__buttons__change-color button setting" (click)="changeColorInput.click()">
+                                <input formControlName="color" type="color" style="display: none;" #changeColorInput>
+                                Text Color
+                            </div>
+                            <div class="course-creator__lessons__lesson__slides__slide__buttons__change-title-font button setting" (click)="changeTitleFontInput.focus()">
+                                <select formControlName="titleFont" #changeTitleFontInput>
+                                    <option value="">Title Font</option>
+                                    <option *ngFor="let font of listOfFonts" value="{{ font }}">{{ font }}</option>
+                                </select>
+                            </div>
+                            <div class="course-creator__lessons__lesson__slides__slide__buttons__change-content-font button setting" (click)="changeContentFontInput.focus()">
+                                <select formControlName="contentFont" #changeContentFontInput>
+                                    <option value="">Content Font</option>
+                                    <option *ngFor="let font of listOfFonts" value="{{ font }}">{{ font }}</option>
+                                </select>
+                            </div>
+                            <div class="course-creator__lessons__lesson__slides__slide__buttons__delete
                                 button delete"
                                 (click)="removeSlide(lessonIndex, slideIndex)">
                                 Delete Slide
                             </div>
-                            <div *ngIf="!isSlideDone(lessonIndex, slideIndex)"
-                                class="course-creator__lessons__lesson__slides__slide__buttons__save
-                                button save"
-                                (click)="setSlideStatus(lessonIndex, slideIndex, false)">
-                                Edit Appearance
-                            </div>
-                            <div *ngIf="isSlideDone(lessonIndex, slideIndex)"
-                                class="course-creator__lessons__lesson__slides__slide__buttons__save
-                                button save"
-                                (click)="setSlideStatus(lessonIndex, slideIndex, true)">
-                                Edit Contents
-                            </div>
                         </div>
                     </div>
                     <div *ngIf="getSlides(lessonIndex).controls.length > 0" class="course-creator__lessons__lesson__slides__preview">
-                        <!-- <div class="course-creator__lessons__lesson__slides__preview__title">
-                            <h2>Lesson Preview</h2>
-                            <p>These are your slides for this lesson so far.</p>
-                        </div> -->
                         <div class="course-creator__lessons__lesson__slides__preview__slide"
                         *ngFor="let slide of getSlides(lessonIndex).controls; let slideIndex= index"
                         (click)="toggleSlide(lessonIndex, slideIndex)"

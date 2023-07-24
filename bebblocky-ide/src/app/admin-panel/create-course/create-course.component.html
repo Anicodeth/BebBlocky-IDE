@@ -118,10 +118,8 @@
                                     [ngStyle]="{
                                     'font-family': getSlide(lessonIndex,
                                     slideIndex).value.titleFont }">
-                                    <label *ngIf="getSlide(lessonIndex, slideIndex).value.title.length == 0" for="title">Slide Title</label>
-                                    <input id="title" type="text"
-                                        formControlName="title"
-                                        placeholder="e.g. CSS Media Queries"
+                                    <!-- <label *ngIf="getSlide(lessonIndex, slideIndex).value.title.length == 0" for="title">Slide Title</label> -->
+                                    <input id="title" type="text" formControlName="title" placeholder="Title Goes Here"
                                         [ngStyle]="{
                                         'color': getSlide(lessonIndex, slideIndex).value.color
                                         }">
@@ -129,17 +127,17 @@
                                 <div class="course-creator__lessons__lesson__slides__slide__main-form__content form-holder" [ngStyle]="{
                                     'font-family': getSlide(lessonIndex,
                                     slideIndex).value.contentFont }">
-                                    <label *ngIf="getSlide(lessonIndex, slideIndex).value.content.length == 0" for="content">Slide Content</label>
-                                    <textarea id="content" formControlName="content"
-                                    placeholder="{{ contentExample }}"
+                                    <!-- <label *ngIf="getSlide(lessonIndex, slideIndex).value.content.length == 0" for="content">Slide Content</label> -->
+                                    <textarea id="content" formControlName="content" placeholder="Content Goes Here. \n{{ contentExample }}"
+                                    rows="4"
                                     [ngStyle]="{
                                     'color': getSlide(lessonIndex, slideIndex).value.color
                                     }"></textarea>
                                 </div>
                                 <div
                                     class="course-creator__lessons__lesson__slides__slide__main-form__code form-holder">
-                                    <label *ngIf="getSlide(lessonIndex, slideIndex).value.code.length == 0" for="code">Slide Code</label>
-                                    <textarea id="code" formControlName="code" placeholder="{{ codeExample }}"></textarea>
+                                    <!-- <label *ngIf="getSlide(lessonIndex, slideIndex).value.code.length == 0" for="code">Slide Code</label> -->
+                                    <textarea id="code" formControlName="code" rows="3" placeholder="{{ codeExample }}"></textarea>
                                 </div>
                         </div>
                         <div class="course-creator__lessons__lesson__slides__slide__buttons">

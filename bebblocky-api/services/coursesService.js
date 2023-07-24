@@ -17,10 +17,12 @@ exports.getJsCourses = async () => {
 };
 
 exports.createCourse = async (courseData) => {
-  console.log(courseData);
-  const course = new Course(courseData);
-  await course.save();
-  return course;
+  const result = await saveCourse(courseData);
+  if (result.success) {
+    return result.data;
+  } else {
+    throw new Error(result.error);
+  }
 };
 
 exports.getCourseById = async (courseId) => {
@@ -30,3 +32,29 @@ exports.getCourseById = async (courseId) => {
 exports.deleteCourseById = async (courseId) => {
   return Course.findOneAndDelete({ courseId });
 };
+
+async function saveCourse(courseData) {
+  const course = new Course(courseData);
+
+  try {
+    await course.validate();
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message
+    };
+  }
+
+  try {
+    const savedCourse = await course.save();
+    return {
+      success: true,
+      data: savedCourse
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: 'Failed to save the course'
+    };
+  }
+}

@@ -18,8 +18,8 @@ export class BridgeService {
   user: User = JSON.parse(sessionStorage.getItem('user') || '{}');
   token: String = sessionStorage.getItem('auth_token')!;
 
-  baseUrl: String = 'https://beb-blocky-ide.vercel.app';
-   //baseUrl: String = 'http://localhost:4000';
+  // baseUrl: String = 'https://beb-blocky-ide.vercel.app';
+   baseUrl: String = 'http://localhost:4000';
   resourcesBaseURL: String = this.baseUrl + '/api/v1';
   authBaseUrl: String = this.baseUrl + '/auth/v1';
 
@@ -118,6 +118,8 @@ export class BridgeService {
 
   createCourse(course: Course | Object): Observable<Course> {
     console.log(course);
+    // Add a courseId just because the backend needs it
+    course = { ...course, courseId: 0 };
     return this.http.post<Course>(this.resourcesBaseURL + '/courses', course);
   }
 }

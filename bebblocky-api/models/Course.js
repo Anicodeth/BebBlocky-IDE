@@ -3,27 +3,35 @@ const mongoose = require('mongoose');
 const slideSchema = new mongoose.Schema({
   backgroundColor: {
     type: String,
+    required: true
   },
   color: {
     type: String,
+    required: true
   },
   title: {
     type: String,
+    required: true
   },
   titleFont: {
     type: String,
+    required: true
   },
   content: {
     type: String,
+    required: true
   },
   contentFont: {
     type: String,
+    required: true
   },
   startingCode: {
     type: String,
+    required: true
   },
   code: {
     type: String,
+    required: true
   },
   image: {
     type: String
@@ -61,7 +69,6 @@ const lessonSchema = new mongoose.Schema({
 const courseSchema = new mongoose.Schema({
   courseId: {
     type: Number,
-    required: true, // Changed to true to ensure every course has an ID
     unique: true
   },
   courseTitle: {
@@ -70,7 +77,7 @@ const courseSchema = new mongoose.Schema({
   },
   courseDescription: {
     type: String,
-    // required: true // - Commented for debugging
+    required: true
   },
   courseLanguage: {
     type: String,

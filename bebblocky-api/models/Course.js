@@ -27,9 +27,11 @@ const slideSchema = new mongoose.Schema({
   },
   startingCode: {
     type: String,
+    required: true
   },
   code: {
     type: String,
+    required: true
   },
   image: {
     type: String
@@ -45,9 +47,7 @@ const slideSchema = new mongoose.Schema({
 
 const lessonSchema = new mongoose.Schema({
   lessonId: {
-    type: Number,
-    required: false,
-    unique: true
+    type: Number
   },
   lessonTitle: {
     type: String,
@@ -55,21 +55,20 @@ const lessonSchema = new mongoose.Schema({
   },
   lessonDescription: {
     type: String,
-    required: true
   },
   lessonLanguage: {
     type: String,
     required: true,
+    enum: ['html', 'css', 'js', 'python']
   },
   slides: [
-    slideSchema,
+    slideSchema
   ]
 });
 
 const courseSchema = new mongoose.Schema({
   courseId: {
     type: Number,
-    required: false,
     unique: true
   },
   courseTitle: {
@@ -83,10 +82,10 @@ const courseSchema = new mongoose.Schema({
   courseLanguage: {
     type: String,
     required: true,
-    enum: ['html', 'css', 'js', 'python'] // Restrict the category to these values
+    enum: ['html', 'css', 'js', 'python']
   },
   lessons: [
-    lessonSchema,
+    lessonSchema
   ]
 });
 

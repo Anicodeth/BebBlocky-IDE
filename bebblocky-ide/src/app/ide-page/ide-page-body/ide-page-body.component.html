@@ -17,13 +17,13 @@
         <app-ide-slides></app-ide-slides>
     </div>
     <div class = "body-section" [ngClass]="{'reveal': addEditorClass, 'web-reveal': addWebClass}" >
-      <app-ide-editor *ngIf = "type === 'html'"></app-ide-editor>
-      <app-ide-python-editor *ngIf = "type === 'python'"></app-ide-python-editor>
+      <app-ide-editor *ngIf="type === 'html'"></app-ide-editor>
+      <app-ide-python-editor *ngIf="type === 'python'"></app-ide-python-editor>
 
     </div>
     <div class = "body-section" [ngClass]="{'reveal': addPreviewClass, 'web-reveal': addWebClass}" >
-       <app-ide-preview-window *ngIf = "type === 'html'"></app-ide-preview-window> 
-       <app-ide-python-console *ngIf = "type === 'python'"></app-ide-python-console>
+       <app-ide-preview-window *ngIf="type === 'html'"></app-ide-preview-window> 
+       <app-ide-python-console *ngIf="type === 'python'"></app-ide-python-console>
 
     </div>
 </div>

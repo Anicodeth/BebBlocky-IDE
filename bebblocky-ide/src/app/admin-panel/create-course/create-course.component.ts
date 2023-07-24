@@ -1,18 +1,48 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { BridgeService } from 'src/app/shared/services/bridge.service';
 
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
-  styleUrls: ['./create-course.component.scss']
+  styleUrls: ['./create-course.component.scss'],
+  animations: [
+    trigger('listAnimation', [
+      state('open', style({
+        opacity: 1,
+        transform: 'translateX(0)'
+      })),
+      state('closed', style({
+        opacity: 0,
+        transform: 'translateX(-100%)'
+      })),
+      transition('open => closed', [
+        animate('1s')
+      ]),
+      transition('closed => open', [
+        animate('0.5s')
+      ]),
+    ])
+  ]
 })
 export class CreateCourseComponent {
   public showSpinner: boolean = false;
   public courseForm: FormGroup | any;
+  public contentExample: string = "CSS Media Queries are a powerful tool in creating responsive websites. They allow us to apply different styles based on the characteristics of the device or screen size. Media Queries use the @media rule in CSS to define different styles for different conditions. Common media query conditions include screen width, device orientation, resolution, and more.";
+
+  public codeExample: string = "";
+
+  public listOfFonts: string[] = [
+    "Arial",
+    "Verdana",
+    "Jetbrains Mono"
+  ];
 
   constructor(
     private fb: FormBuilder,
+    private bridgeService: BridgeService
   ) {
     this.courseForm = this.fb.group({
       course: this.fb.group({
@@ -32,19 +62,16 @@ export class CreateCourseComponent {
     // timeout to show the spinner
     setTimeout(() => {
       this.showSpinner = false;
-    }, 1000);
+    }, 2000);
   }
 
   dropLessons(event: CdkDragDrop<string[]>) {
-    console.log('here');
     let temp = this.lessons.at(event.previousIndex).value;
     this.lessons.at(event.previousIndex).setValue(this.lessons.at(event.currentIndex).value);
     this.lessons.at(event.currentIndex).setValue(temp);
   }
 
   dropSlides(lessonIndex: number, event: CdkDragDrop<string[]>) {
-    console.log('here, dropping slides.');
-    console.log(event.previousIndex, event.currentIndex);
     let temp = this.getSlides(lessonIndex).at(event.previousIndex).value;
     this.getSlides(lessonIndex).at(event.previousIndex).setValue(this.getSlides(lessonIndex).at(event.currentIndex).value);
     this.getSlides(lessonIndex).at(event.currentIndex).setValue(temp);
@@ -61,6 +88,59 @@ export class CreateCourseComponent {
 
   isCourseDone(): boolean {
     return this.course.get('done')?.value;
+  }
+
+  saveCourse(): void {
+      const courseData = {
+        courseTitle: this.courseForm.value.course.courseTitle,
+        courseDescription: this.courseForm.value.course.courseDescription,
+        courseLanguage: this.courseForm.value.course.courseLanguage,
+        lessons: this.cleanLessons(this.courseForm.value.lessons)
+      }
+      this.showSpinner = true;
+      this.bridgeService.createCourse(courseData).subscribe((res: any) => {
+        this.showSpinner = false;
+      });
+  }
+
+  cleanLessons(lessonsData: any) {
+    let lessons = [];
+    for (let lesson of lessonsData) {
+      lessons.push(this.cleanLesson(lesson));
+    }
+    return lessons;
+  }
+
+  cleanLesson(lessonData: any) {
+    return {
+      lessonId: lessonData.lessonId,
+      lessonTitle: lessonData.lessonTitle,
+      lessonDescription: lessonData.lessonDescription,
+      lessonLanguage: lessonData.lessonLanguage,
+      slides: this.cleanSlides(lessonData.slides)
+    }
+  }
+
+  cleanSlides(slidesData: any) {
+    let slides = [];
+    for (let slide of slidesData) {
+      slides.push(this.cleanSlide(slide));
+    }
+    return slides;
+  }
+
+  cleanSlide(slideData: any) {
+    return {
+      backgroundColor: slideData.backgroundColor,
+      color: slideData.color,
+      title: slideData.title,
+      titleFont: slideData.titleFont,
+      content: slideData.content,
+      code: slideData.code,
+      contentFont: slideData.contentFont,
+      startingCode: slideData.startingCode,
+      image: slideData.image
+    }
   }
 
 

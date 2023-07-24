@@ -14,8 +14,6 @@ export class IdePageBodyComponent implements OnInit {
   public activeWindow: 'slide' | 'editor' | 'preview' = 'slide';
   public type: string = 'html'
 
-
-
   public addSlideClass: boolean = true;
   public addEditorClass: boolean = false;
   public addPreviewClass: boolean = false;
@@ -36,7 +34,6 @@ export class IdePageBodyComponent implements OnInit {
     }
   }
 
-
   toggleWindows(window: 'slide' | 'editor' | 'preview'): void {
     this.activeWindow = window;
     if (window === 'slide') {
@@ -53,12 +50,13 @@ export class IdePageBodyComponent implements OnInit {
       this.addEditorClass = false;
       this.addPreviewClass = true;
     }
-    
+
   }
 
   ngOnInit(): void {
-    if(window.innerWidth < 1000) {
-      this.addWebClass = false;}
+    if (window.innerWidth < 1000) {
+      this.addWebClass = false;
+    }
 
   }
 }

@@ -65,11 +65,9 @@ async function updateUserCourseProgress(userId, courseId, completedPercent) {
 async function updateLastAccessedCourse(userId, courseId) {
   try {
     const user = await User.findById(userId);
-    console.log(user.lastAccessedCourseId, courseId);
+
     // If the user doesn't have the attribute lastAccessedCourseId, add it
     user.lastAccessedCourseId = courseId;
-    console.log(user.lastAccessedCourseId, courseId);
-    // Save the updated user object
     await user.save();
 
     return 'course progress updated successfully';

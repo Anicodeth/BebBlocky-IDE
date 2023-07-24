@@ -20,10 +20,11 @@ export interface SlideInterface {
 export class IdeSlidesComponent implements OnInit {
   @ViewChild('code') private codeExample: ElementRef<HTMLElement> | any;
 
+  public course: any;
   public slides: Slide[] = [];
   public courseId: any;
   public input: any;
-  currentIndex: number = 0;
+  public currentIndex: number = 0;
 
   constructor(
     private bridgeService: BridgeService,
@@ -34,8 +35,24 @@ export class IdeSlidesComponent implements OnInit {
   ngOnInit() {
     this.courseId = parseInt(this.route.snapshot.paramMap.get('courseId')!);
     this.bridgeService.getCourse(this.courseId).subscribe((course: any) => {
-      this.slides = course.course.slides;
-      console.log(this.slides);
+      this.course = course.course;
+      // Check if course is arranged with lessons (writing this to be compatible with the old, and the new courses)
+      if (this.course.slides == undefined) {
+        // If it is not, then we the slides are in lessons
+        this.slides = [];
+        let lessons = this.course.lessons;
+        for (let lessonIndex = 0; lessonIndex < lessons.length; lessonIndex++) {
+          const lesson = lessons[lessonIndex];
+          let slides = lesson.slides;
+          for (let slideIndex = 0; slideIndex < slides.length; slideIndex++) {
+            const slide = slides[slideIndex];
+            this.slides.push(slide);
+          }
+        }
+      } else {
+        this.slides = this.course.slides;
+      }
+      
       // this.codeEditorService.startCode.next(this.slides[0].startingCode);
 
       // const progress = this.bridgeService.getCourseProgress(this.courseId);

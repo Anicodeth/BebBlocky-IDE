@@ -20,13 +20,22 @@
 
 .course p {
     margin: 0 auto;
-    color: #fff;
+    /* color: #fff; */
 }
 
 
 .main-content img {
     margin: 0 auto;
     max-width: 80%;
+}
+
+.content-title {
+    font-size: 2.3rem;
+}
+
+.text-content p {
+    font-size: 1.3rem;
+    text-align: justify;
 }
 
 .code-content {

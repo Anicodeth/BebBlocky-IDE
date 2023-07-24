@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { NgTerminalComponent, NgTerminalModule } from 'ng-terminal';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+import { NgTerminalComponent, NgTerminalModule } from 'ng-terminal';
+
 import { AppComponent } from './app.component';
 import { IdePageComponent } from './ide-page/ide-page.component';
 import { IdePageHeaderComponent } from './ide-page/ide-page-header/ide-page-header.component';
@@ -85,8 +88,8 @@ import { PythonService } from './python.service';
     ReactiveFormsModule,
     HttpClientModule,
     DragDropModule,
-    NgTerminalModule
-
+    NgTerminalModule,
+    BrowserAnimationsModule
   ],
   providers: [
     CodeEditorService,

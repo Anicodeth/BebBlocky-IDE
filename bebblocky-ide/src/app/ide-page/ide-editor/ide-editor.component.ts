@@ -72,7 +72,6 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
     
   }
   compileCode(code:string): void {
-    console.log(code);    
     this.codeEditorService.userCode.next(code);
   }
 
@@ -123,7 +122,6 @@ export class IdeEditorComponent implements AfterViewInit, OnChanges {
 
     aceHtmlEditor.session.on('change', () => {
       this.htmlCode = aceHtmlEditor.getValue();
-      console.log(this.htmlCode);
       this.compileCode(this.structuredCode.code);
     });
 

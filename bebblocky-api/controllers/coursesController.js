@@ -44,7 +44,7 @@ exports.addCourse = async (req, res) => {
     const createdCourse = await courseService.createCourse(courseData);
     res.status(201).json(createdCourse);
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: error.message });
   }
 };
 

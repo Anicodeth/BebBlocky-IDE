@@ -19,7 +19,7 @@ export class BridgeService {
   token: String = sessionStorage.getItem('auth_token')!;
 
   baseUrl: String = 'https://beb-blocky-ide.vercel.app';
-  //  baseUrl: String = 'http://localhost:4000'; // - Development only
+//    baseUrl: String = 'http://localhost:4000'; // - Development only
 
   resourcesBaseURL: String = this.baseUrl + '/api/v1';
   authBaseUrl: String = this.baseUrl + '/auth/v1';
@@ -36,7 +36,6 @@ export class BridgeService {
     return response.pipe(
       tap((data: any) => {
         this.user = data.user;
-        this.user.role = "admin";
         sessionStorage.setItem('user', JSON.stringify(data.user));
         sessionStorage.setItem('auth_token', data.token);
         sessionStorage.setItem("courseProg", JSON.stringify(data.user.progress));

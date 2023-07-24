@@ -50,6 +50,8 @@ export class LoginPageComponent {
 
         const user = response.user;
 
+        console.log(user);
+
         if (user.role === "user") {
           this.router.navigateByUrl("/dashboard/profile");
         } else {

@@ -5,6 +5,14 @@
             <fa-icon [icon]="lockIcon"></fa-icon>
             Admin
         </span>
+
+        <span *ngIf="user.role == 'user'">
+            <fa-icon [icon]="lockIcon"></fa-icon>
+            User
+        </span>
+
+
+        
     </div>
     <nav class="header-navigation">
         <ul class="nav-list">

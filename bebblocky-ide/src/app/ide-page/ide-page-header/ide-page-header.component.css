@@ -63,7 +63,12 @@ img{
     animation: bounce 1s;
     padding:1rem;
 }
-
+ 
+#full-screen{
+width:100%;
+border: none; 
+background-color: lightgray;
+}
 .setting-menu-header{
     display:flex;
     width:100%;

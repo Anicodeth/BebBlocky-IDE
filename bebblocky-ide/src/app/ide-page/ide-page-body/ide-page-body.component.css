@@ -40,6 +40,13 @@
 
 }
 
+.window{
+    border-radius: 2rem;
+}
+.slides{
+    border-radius: 0 0 2rem 2rem;
+}
+
 .phone-container {
     width: 100%;
     height: 100%;

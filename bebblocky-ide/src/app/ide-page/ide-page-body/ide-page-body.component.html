@@ -13,7 +13,7 @@
       </div>
 <div class = "body-container">
 
-    <div class = "body-section" [ngClass]="{'reveal': addSlideClass, 'web-reveal': addWebClass}" >
+    <div class = "body-section slides" [ngClass]="{'reveal': addSlideClass, 'web-reveal': addWebClass}" >
         <app-ide-slides></app-ide-slides>
     </div>
     <div class = "body-section" [ngClass]="{'reveal': addEditorClass, 'web-reveal': addWebClass}" >
@@ -21,7 +21,7 @@
       <app-ide-python-editor *ngIf="type === 'python'"></app-ide-python-editor>
 
     </div>
-    <div class = "body-section" [ngClass]="{'reveal': addPreviewClass, 'web-reveal': addWebClass}" >
+    <div class = "body-section window" [ngClass]="{'reveal': addPreviewClass, 'web-reveal': addWebClass}" >
        <app-ide-preview-window *ngIf="type === 'html'"></app-ide-preview-window> 
        <app-ide-python-console *ngIf="type === 'python'"></app-ide-python-console>
 

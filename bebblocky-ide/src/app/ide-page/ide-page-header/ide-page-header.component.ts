@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -9,13 +9,14 @@ import { CodeEditorService } from '../../shared/services/code-editor.service';
   templateUrl: './ide-page-header.component.html',
   styleUrls: ['./ide-page-header.component.css']
 })
-export class IdePageHeaderComponent {
+export class IdePageHeaderComponent implements OnInit {
 
   public showSetting: boolean;
+  public night: boolean = false;
   public fontSize: any;
   public theme:string | undefined;
   public themes:string[] = ["chrome", "chaos","cobalt", "clouds", "dawn", "eclipse", "crimson_editor", "dreamweaver", "gob", "github", "gruvbox", "xcode"];
-
+  public user: any;
   constructor(
     private library: FaIconLibrary,
     private codeEditorService: CodeEditorService
@@ -23,6 +24,18 @@ export class IdePageHeaderComponent {
     this.showSetting = false;
     library.addIconPacks(fas, far);
     this.codeEditorService.fontSize;
+  }
+  ngOnInit(): void {
+    let user = JSON.parse(sessionStorage.getItem('user')!);
+    if (user) {
+      this.user = user;
+    }
+    else{
+      this.user = {
+        username: "Guest",
+      }
+    }
+
   }
 
   toggleSetting() {
@@ -36,6 +49,12 @@ export class IdePageHeaderComponent {
   setTheme(theme:string){
     this.codeEditorService.editorTheme.next(theme);
   }
+  nightAndDay(){
+    this.night = !this.night;
+    this.codeEditorService.mainTheme.next(true);
+  }
+
+
 
 
 }

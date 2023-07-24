@@ -80,3 +80,7 @@
     flex-direction: column;
     height: 100%;
   }
+
+  .all-editors{
+    background-color: #1a1a1a;
+  }

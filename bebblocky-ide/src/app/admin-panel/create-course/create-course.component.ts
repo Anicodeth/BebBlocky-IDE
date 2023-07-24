@@ -66,15 +66,12 @@ export class CreateCourseComponent {
   }
 
   dropLessons(event: CdkDragDrop<string[]>) {
-    console.log('here');
     let temp = this.lessons.at(event.previousIndex).value;
     this.lessons.at(event.previousIndex).setValue(this.lessons.at(event.currentIndex).value);
     this.lessons.at(event.currentIndex).setValue(temp);
   }
 
   dropSlides(lessonIndex: number, event: CdkDragDrop<string[]>) {
-    console.log('here, dropping slides.');
-    console.log(event.previousIndex, event.currentIndex);
     let temp = this.getSlides(lessonIndex).at(event.previousIndex).value;
     this.getSlides(lessonIndex).at(event.previousIndex).setValue(this.getSlides(lessonIndex).at(event.currentIndex).value);
     this.getSlides(lessonIndex).at(event.currentIndex).setValue(temp);
@@ -103,7 +100,6 @@ export class CreateCourseComponent {
       this.showSpinner = true;
       this.bridgeService.createCourse(courseData).subscribe((res: any) => {
         this.showSpinner = false;
-        console.log(res);
       });
   }
 

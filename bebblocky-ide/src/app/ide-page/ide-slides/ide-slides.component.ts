@@ -35,7 +35,6 @@ export class IdeSlidesComponent implements OnInit {
     this.courseId = parseInt(this.route.snapshot.paramMap.get('courseId')!);
     this.bridgeService.getCourse(this.courseId).subscribe((course: any) => {
       this.slides = course.course.slides;
-      console.log(this.slides);
       // this.codeEditorService.startCode.next(this.slides[0].startingCode);
 
       // const progress = this.bridgeService.getCourseProgress(this.courseId);

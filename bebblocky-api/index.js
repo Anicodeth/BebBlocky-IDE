@@ -60,7 +60,7 @@ const swaggerSpec = swaggerJsdoc({
       description: 'Beblocky 2.0 Web App API documentation',
     },
   },
-  apis: ['./routes/*'], // Specify the file(s) where your JSDoc annotations are present
+  apis: ['./routes/*'], // Specify the file(s) where JSDoc annotations are present
 });
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

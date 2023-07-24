@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {  Component, ElementRef, OnInit } from '@angular/core';
 import { BridgeService } from '../shared/services/bridge.service';
 import { ActivatedRoute } from '@angular/router';
 import { CodeEditorService } from '../shared/services/code-editor.service';
@@ -8,22 +8,42 @@ import { CodeEditorService } from '../shared/services/code-editor.service';
   templateUrl: './ide-page.component.html',
   styleUrls: ['./ide-page.component.css']
 })
-export class IdePageComponent {
+export class IdePageComponent implements OnInit {
   public showSpinner: boolean = false;
   public course: any;
   public isNight: boolean = false;
+  private contentDiv: HTMLElement;
 
   constructor(
     private bridgeService: BridgeService,
     private route: ActivatedRoute,
-    private codeService: CodeEditorService
-  ) {}
+    private codeService: CodeEditorService,
+    private elementRef: ElementRef
+
+  ) {    this.contentDiv = this.elementRef.nativeElement.querySelector('#ide-page-container');
+}
+
+
+
+
+  goFullScreen() {
+    this.contentDiv = this.elementRef.nativeElement.querySelector('#ide-page-container');
+    console.log(this.contentDiv, "Here");
+
+    if (this.contentDiv.requestFullscreen) {
+      this.contentDiv.requestFullscreen();
+
+    }
+  }
 
   ngOnInit() {
     this.showSpinner = true;
     this.codeService.mainTheme.subscribe(() => {
       this.isNight = !this.isNight; 
     });
+
+    this.codeService.fullScreen.subscribe(() => {
+this.goFullScreen();    });
     const courseId = this.route.snapshot.paramMap.get('courseId')!;
     this.bridgeService.getCourse(parseInt(courseId)).subscribe((course: any) => {
       this.course = course.course;

@@ -11,4 +11,5 @@ export class CodeEditorService {
   fontSize = new Subject<number>();
   editorTheme = new Subject<string>();
   mainTheme = new Subject<boolean>();
+  fullScreen = new Subject<boolean>();
 }

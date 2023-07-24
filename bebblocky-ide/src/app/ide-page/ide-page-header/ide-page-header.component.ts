@@ -53,6 +53,9 @@ export class IdePageHeaderComponent implements OnInit {
     this.night = !this.night;
     this.codeEditorService.mainTheme.next(true);
   }
+  fullScreen(){
+    this.codeEditorService.fullScreen.next(true);
+   }
 
 
 

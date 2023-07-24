@@ -33,6 +33,12 @@
     </div>
 
     <div class = "setting">
+        <label for="full-screen" class="form-label">FULL SCREEN:</label><br>
+        <button id = "full-screen" (click) = "fullScreen()">FullScreen</button>
+
+    </div>
+
+    <div class = "setting">
         <label for="theme">THEME</label><br>
         <select [ngModel] = "theme" (ngModelChange)="setTheme($event)">
             <option selected>dracula</option>

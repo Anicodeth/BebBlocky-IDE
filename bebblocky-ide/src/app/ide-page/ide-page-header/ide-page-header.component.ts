@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -17,6 +17,9 @@ export class IdePageHeaderComponent implements OnInit {
   public theme:string | undefined;
   public themes:string[] = ["chrome", "chaos","cobalt", "clouds", "dawn", "eclipse", "crimson_editor", "dreamweaver", "gob", "github", "gruvbox", "xcode"];
   public user: any;
+  @Input() beblockyImage: any = true;
+
+
   constructor(
     private library: FaIconLibrary,
     private codeEditorService: CodeEditorService
@@ -36,6 +39,13 @@ export class IdePageHeaderComponent implements OnInit {
       }
     }
 
+    // Night mode
+
+    let mode = JSON.parse(sessionStorage.getItem('nightMode')!);
+    if ( mode == true) {
+      this.night = true;
+    }
+
   }
 
   toggleSetting() {
@@ -52,6 +62,7 @@ export class IdePageHeaderComponent implements OnInit {
   nightAndDay(){
     this.night = !this.night;
     this.codeEditorService.mainTheme.next(true);
+    sessionStorage.setItem('nightMode', JSON.stringify(this.night));
   }
   fullScreen(){
     this.codeEditorService.fullScreen.next(true);

@@ -1,8 +1,8 @@
 <div class = "padding-container">
 <div class = "header-container">
-    <div class = "header-segment">
-        <img *ngIf = "!night"  src = "../../assets/logo-icons/BeBlocky-Logo-Small.png">
-        <img *ngIf = "night"  src = "../../assets/logo-icons/BeBlocky-Logo-Small-White.png">
+    <div class = "header-segment" >
+        <img *ngIf = "!night && beblockyImage"  src = "../../assets/logo-icons/BeBlocky-Logo-Small.png">
+        <img *ngIf = "night && beblockyImage"  src = "../../assets/logo-icons/BeBlocky-Logo-Small-White.png">
     </div>
 
     <div class = "header-segment">
@@ -10,9 +10,9 @@
         (click) = "nightAndDay()" ></fa-icon>
         <fa-icon class="header-icon moon" *ngIf = "night" [icon]="['fas', 'moon']"
         (click) = "nightAndDay()" ></fa-icon>
-        <fa-icon class="header-icon" (click) = "toggleSetting()" 
+        <fa-icon *ngIf = 'beblockyImage' class="header-icon" (click) = "toggleSetting()" 
         [icon]="['fas', 'gear']"></fa-icon>
-        <div class = "user-name"><h4>{{user.username}}</h4></div>
+        <div class = "user-name"><h4>@{{user.username}}</h4></div>
         <!--
         <fa-icon class="header-icon" [icon]="['fas', 'bars']"></fa-icon>
         -->

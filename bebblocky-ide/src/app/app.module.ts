@@ -44,6 +44,7 @@ import { FloatingActionButtonComponent } from './floating-action-button/floating
 import { IdePythonEditorComponent } from './ide-python-editor/ide-python-editor.component';
 import { IdePythonConsoleComponent } from './ide-python-console/ide-python-console.component';
 import { PythonService } from './python.service';
+import { ModernDashboardComponent } from './modern-dashboard/modern-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { PythonService } from './python.service';
     AdminSidebarComponent,
     FloatingActionButtonComponent,
     IdePythonEditorComponent,
-    IdePythonConsoleComponent
+    IdePythonConsoleComponent,
+    ModernDashboardComponent
   ],
   imports: [
     BrowserModule,

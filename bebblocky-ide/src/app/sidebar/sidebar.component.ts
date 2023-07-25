@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faHtml5, faCss3, faSquareJs } from '@fortawesome/free-brands-svg-icons';
 import { faCode, faUser, faLayerGroup, faFileCode } from '@fortawesome/free-solid-svg-icons';
 import { BridgeService } from 'src/app/shared/services/bridge.service';
+import { CodeEditorService } from '../shared/services/code-editor.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,15 +17,32 @@ export class SidebarComponent implements OnInit {
   generalMenuItems: any[] = []
   userMenuItems: any[] = []
   courseMenuItems: any[] = [];
+  public isNight: boolean = false;
 
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private bridgeService: BridgeService
+    private bridgeService: BridgeService,
+    private codeService: CodeEditorService
   ) { }
 
   ngOnInit() {
+
+
+
+      this.codeService.mainTheme.subscribe(() => {
+        this.isNight = !this.isNight; 
+      });
+
+    // Night mode
+
+    let mode = JSON.parse(sessionStorage.getItem('nightMode')!);
+    if ( mode == true) {
+      this.isNight = true;
+    }
+ 
+  
     this.generalMenuItems = [
       { name: 'Code', link: `/ide/${this.bridgeService.getLastAccessedCourseId()}`, icon: faCode, class: 'special' },
     ]
@@ -79,4 +97,6 @@ export class SidebarComponent implements OnInit {
   navigateTo(route: string): void {
     this.router.navigateByUrl(route);
   }
+
+  
 }

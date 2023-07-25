@@ -15,6 +15,7 @@ import { CreateCourseComponent } from './admin-panel/create-course/create-course
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { IsAdminGuard } from './shared/guards/is-admin.guard';
 import { IdePythonEditorComponent } from './ide-python-editor/ide-python-editor.component';
+import { ModernDashboardComponent } from './modern-dashboard/modern-dashboard.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,19 @@ const routes: Routes = [
     // redirectTo: '/dashboard/profile',
     // pathMatch: 'full',
     component: DashboardComponent,
+    canActivate: [LoggedInGuard],
+    children: [
+      { path: 'courses', component: AllCoursesComponent },
+      { path: 'my-courses', component: MyCoursesComponent },
+      { path: 'js-courses', component: JsCoursesComponent },
+      { path: 'css-courses', component: CssCoursesComponent },
+      { path: 'html-courses', component: HtmlCoursesComponent },
+      { path: 'profile', component: ProfileComponent }
+    ]
+  } ,
+  {
+    path: 'devdashboard',
+    component: ModernDashboardComponent,
     canActivate: [LoggedInGuard],
     children: [
       { path: 'courses', component: AllCoursesComponent },

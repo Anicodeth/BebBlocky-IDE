@@ -1,3 +1,8 @@
+#ide-page-container{
+    transition: all 0.3s ease-in-out;
+
+}
+
 .is-night{
     background-color: #1a1a1a;
     color: #fff;

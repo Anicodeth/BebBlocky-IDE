@@ -85,3 +85,18 @@ exports.loginUser = async (username, password) => {
     return { user, token };
   });
 };
+
+exports.verifyCode = async (code) => {
+  return await asyncWrapper(async () => {
+    const user = await User.findOne({ emailVerificationCode: code });
+
+    if (!user) {
+      throw new BadRequestError('Verification code not found.');
+    }
+
+    // Mark the email as verified and save the user
+    user.isEmailVerified = true;
+    user.emailVerificationCode = undefined;
+    return await user.save();
+  });
+}

@@ -39,6 +39,13 @@ const userSchema = new mongoose.Schema({
       message: props => `${props.value} is not a valid email address!`
     }
   },
+  isEmailVerified: {
+    type: Boolean,
+    default: false
+  },
+  emailVerificationCode: {
+    type: String
+  },
   password: {
     type: String,
     required: true,

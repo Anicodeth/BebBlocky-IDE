@@ -80,6 +80,7 @@ router.post('/fix-current-users', async (req, res) => {
 
         for (let j = 0; j < user.progress.length; j++) {
             progress = user.progress[j];
+
             // Add a new field to the progress object
             progress.courseId = progress.slideId;
             user.progress[j].courseId = user.progress[j].slideId;

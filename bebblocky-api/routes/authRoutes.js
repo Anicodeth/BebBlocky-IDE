@@ -66,4 +66,29 @@ router.post('/signup', authController.postSignUp);
 
 router.post('/protfolio', protfolioController.getProtfolio);
 
+const User = require('../models/User.js');
+const bcrypt = require('bcrypt');
+
+router.post('/fix-current-users', async (req, res) => {
+    const users = await User.find();
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        const salt = await bcrypt.genSalt(10);
+        const password = await bcrypt.hash(user.password, salt);
+        user.password = password;
+        user.salt = salt;
+
+        for (let j = 0; j < user.progress.length; j++) {
+            progress = user.progress[j];
+            // Add a new field to the progress object
+            progress.courseId = progress.slideId;
+            user.progress[j].courseId = user.progress[j].slideId;
+            console.log(user.progress[j]);
+        }
+        console.log(user);
+        await user.save();
+    }
+    res.json({ message: 'done' });
+});
+
 module.exports = router;

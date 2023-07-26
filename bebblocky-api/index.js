@@ -5,6 +5,7 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const mongoose = require('mongoose');
 const pythonProcess = require("./processes/pythonProcess");
+const errorMiddleware = require("./middlewares/errorMiddleware");
 
 app = express();
 
@@ -78,6 +79,7 @@ app.use(`/api/${VERSION}/user`, userRoutes);
 app.use(`/api/${VERSION}/courses`, coursesRoutes);
 app.use(`/auth/${VERSION}`, authRoutes);
 app.use(`/api/${VERSION}/python `, pythonRoutes);
+app.use(errorMiddleware);
 
 /*
 const PORT = process.env.PORT || 4000;

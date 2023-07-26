@@ -1,25 +1,22 @@
 // utils/email.js
 const nodemailer = require('nodemailer');
 
-async function sendVerificationEmail(email, code) {
+module.exports = async (email, code) => {
     const transporter = nodemailer.createTransport({
-        // Replace these with your email service provider settings
-        service: 'Gmail',
+        service: 'gmail', host: 'smtp.gmail.com',
         auth: {
             user: 'email@email.com',
-            pass: 'email_password',
+            pass: 'password',
         },
     });
 
     const mailOptions = {
-        from: 'your_email@gmail.com',
+        from: 'email.email.com',
         to: email,
-        subject: 'Email Verification',
+        subject: 'BeBlocky New Account',
         html: `<p>Welcome to BeBlocky, Inc. You have recently tried to create an account. Here is your verification code:
            ${code}</p>`,
     };
 
     await transporter.sendMail(mailOptions);
 }
-
-module.exports = { sendVerificationEmail };

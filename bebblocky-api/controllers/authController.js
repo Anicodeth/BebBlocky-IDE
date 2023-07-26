@@ -1,5 +1,5 @@
 const authService = require('../services/authService');
-const sendVerificationEmail = require('../utils/email');
+const sendVerificationEmail = require('../utils/email.js');
 
 async function asyncWrapper(req, res, callback, next) {
   try {
@@ -25,9 +25,9 @@ exports.postSignUpWithVerification  = async (req, res, next) => {
   return asyncWrapper(req, res, async (req, res) => {
     const { username, email, password } = req.body;
     const verificationCode = generateRandomCode();
-    const user = await authService.createUser(username, email, password, verificationCode);
+    const user = await authService.createUserWithVerification(username, email, password, verificationCode);
 
-    await sendVerificationEmail(email, verificationToken);
+    await sendVerificationEmail(email, verificationCode);
     res.status(201).json({ message: 'User created successfully. Please check your email for verification.' });
   }, next);
 };

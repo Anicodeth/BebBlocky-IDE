@@ -1,0 +1,64 @@
+<div class="header" [ngClass]="{'is-night':isNight , 'is-day':!isNight}">
+    <div class="hamburger" aria-label="Toggle mobile navigation" (click)="toggleSidebar()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+    </div>
+    <div class="header-title">
+        <span [class.shrink]="isExpanded" class="menu-item-text">
+            {{ currentMenuItemName }}
+        </span>
+    </div>
+</div>
+<div class="sidebar" [class.shrink]="!isExpanded" [ngClass]="{'is-night':isNight , 'is-day':!isNight, 'night-bar' : isNight}" (mouseenter)="expandSidebar()" (mouseleave)="shrinkSidebar()">
+    <div class="sidebar-logo" [class.shrink]="!isExpanded">
+        <img class="sidebar-logo-img">
+  
+        <!-- Add your logo or brand name here -->
+    </div>
+    <div class="sidebar-title">
+        <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">
+            Continue the course you were working on before
+        </span>
+    </div>
+    <div>
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of generalMenuItems" (click)="setCurrentMenuItemName(item.name)">
+                <a [class.shrink]="!isExpanded" [routerLink]="item.link">
+                    <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
+                    <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-title">
+        <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">
+            My Account
+        </span>
+    </div>
+    <div>
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of userMenuItems" (click)="setCurrentMenuItemName(item.name)">
+                <a [class.shrink]="!isExpanded" [routerLink]="item.link">
+                    <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
+                    <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-title">
+        <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">
+            Browse our courses!
+        </span>
+    </div>
+    <div>
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of courseMenuItems" (click)="setCurrentMenuItemName(item.name)">
+                <a [class.shrink]="!isExpanded" [routerLink]="item.link">
+                    <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
+                    <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,9 +1,6 @@
 <div class="container">
     <div class="header">
-        <h1>Browse all the courses we offer</h1>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        </p>
+        <h1 [ngClass]="{'is-night': isNight, 'is-day': !isNight}"><b>Browse</b> all the courses we offer</h1>
     </div>
     <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
     <app-courses *ngIf="courses && courses.length > 0" [courses]="courses"></app-courses>

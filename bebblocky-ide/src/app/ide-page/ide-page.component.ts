@@ -24,16 +24,10 @@ export class IdePageComponent implements OnInit {
 }
 
 
-
-
   goFullScreen() {
     this.contentDiv = this.elementRef.nativeElement.querySelector('#ide-page-container');
-    console.log(this.contentDiv, "Here");
-
     if (this.contentDiv.requestFullscreen) {
-      this.contentDiv.requestFullscreen();
-
-    }
+      this.contentDiv.requestFullscreen();}
   }
 
   ngOnInit() {

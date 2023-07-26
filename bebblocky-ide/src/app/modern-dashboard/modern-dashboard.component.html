@@ -1,0 +1,37 @@
+<div class="grid-container" [ngClass]="{'is-night':isNight , 'is-day':!isNight}">
+    <div class="sidebar">
+      <app-modern-sidebar></app-modern-sidebar>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+          <!-- <app-header></app-header> -->
+          <app-ide-page-header [beblockyImage] = 'false' ></app-ide-page-header>
+        </div>
+ 
+      <div class = "slider-container">
+        <h1 class = "welcome">Welcome Back,<b> {{user.username}} </b></h1>
+        <div class="slider">
+            <div *ngFor="let course of courses" class="slide" [ngClass]="{ 'active': course.active }" >
+              <div class = "course-text" >
+                <h2>{{ course.title }}</h2>
+               <p>{{ course.description }}</p>
+              <div class = "button-container">
+                Coming Soon
+              </div>
+            </div>
+
+            <div class = "course-image" >
+              <img src="{{ course.image }}" alt="">
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+      <div class = "courses-container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

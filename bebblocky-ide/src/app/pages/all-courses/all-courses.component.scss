@@ -1,7 +1,6 @@
 .container {
     width: 100%;
     min-height: 100vh;
-    margin: 1rem 1rem;
 }
 
 .header {
@@ -11,9 +10,10 @@
     margin-bottom: 20px;
 
     h1 {
+        margin-top: 1rem;
         font-size: 32px;
-        font-weight: 600;
         color: #000;
+        font-family: Georgia, 'Times New Roman', Times, serif;
     }
 
     p {
@@ -29,4 +29,12 @@
 
 .courses {
     width: 100%;
+}
+
+.is-night{
+    color: #fff !important;
+}
+
+.is-day{
+    color: #000 !important;
 }

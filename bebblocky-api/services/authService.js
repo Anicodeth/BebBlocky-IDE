@@ -42,21 +42,19 @@ async function asyncWrapper(callback) {
 exports.createUser = async (username, email, password) => {
   return await asyncWrapper(async () => {
     // try and see if any other user exists with the same username
-    let existingUser = User.find({ username });
+    let existingUser = await User.findOne({ username });
     if (existingUser) {
       throw new BadRequestError('Another user exists with the same username.');
     }
 
     // try and see if any other user exists with the same username
-    existingUser = User.find({ email });
+    existingUser = await User.findOne({ email });
     if (existingUser) {
       throw new BadRequestError('Another user exists with the same email.');
     }
 
     const salt = await generateSalt();
     password = await hashPassword(salt, password);
-
-    console.log('creating a new user: controller', username, email, password, salt);
 
     const user = new User({ username, salt, email, password });
 
@@ -75,7 +73,7 @@ exports.loginUser = async (username, password) => {
     const user = await User.findOne({ username });
 
     if (!user) {
-      throw new BadRequestError('Invalid username or password.');
+      throw new NotFoundError('User does not exist.');
     }
 
     const isValid = await validatePassword(user.salt, password, user.password);

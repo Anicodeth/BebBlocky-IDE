@@ -80,7 +80,7 @@ import { ModernDashboardComponent } from './modern-dashboard/modern-dashboard.co
     FloatingActionButtonComponent,
     IdePythonEditorComponent,
     IdePythonConsoleComponent,
-    ModernDashboardComponent
+    ModernDashboardComponent,
   ],
   imports: [
     BrowserModule,

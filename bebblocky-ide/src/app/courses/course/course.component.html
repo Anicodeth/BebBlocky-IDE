@@ -1,7 +1,7 @@
 <div routerLinkActive="active" class="course">
     <div class="course-about">
         <img src = "../../../assets/svg/desktopwindow.svg" alt="">
-        <h3>{{ courseName | truncate:10 }}</h3>
+        <h3>{{ courseName | truncate:8 }} </h3>
         <!-- <p>{{ courseDescription | truncate:8 }}</p> -->
     </div>
     <div *ngIf="user.role != 'admin'" class="course-progress">

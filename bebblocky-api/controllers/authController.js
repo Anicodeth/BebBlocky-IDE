@@ -1,35 +1,51 @@
 const authService = require('../services/authService');
-const jwt = require('jsonwebtoken');
+const sendVerificationEmail = require('../utils/email.js');
 
-exports.postSignUp = async (req, res) => {
-  const { username, email, password } = req.body;
-
+async function asyncWrapper(req, res, callback, next) {
   try {
-    const existingUser = await authService.checkExistingUser(username, email);
-    if (existingUser) {
-      return res.status(409).json({ message: 'Username or email already taken' });
-    }
+    return await callback(req, res);
+  } catch (error) {
+    next(error);
+  }
+}
+
+function generateRandomCode() {
+  return Math.floor(100000 + Math.random() * 900000);
+}
+
+exports.postSignUp= async (req, res, next) => {
+  return asyncWrapper(req, res, async (req, res) => {
+    const { username, email, password } = req.body;
     const user = await authService.createUser(username, email, password);
     res.status(201).json(user);
-  } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
-  }
+  }, next);
 };
 
-exports.postSignIn = async (req, res) => {
-  const { username, password } = req.body;
+exports.postSignUpWithVerification  = async (req, res, next) => {
+  return asyncWrapper(req, res, async (req, res) => {
+    const { username, email, password } = req.body;
+    const verificationCode = generateRandomCode();
+    const user = await authService.createUserWithVerification(username, email, password, verificationCode);
 
-  try {
-    const user = await authService.getUserByUsername(username);
+    await sendVerificationEmail(email, verificationCode);
+    res.status(201).json({ message: 'User created successfully. Please check your email for verification.' });
+  }, next);
+};
 
-    if (!user || user.password !== password) {
-      return res.status(401).json({ message: 'Invalid username or password' });
-    }
-
-    const token = jwt.sign({ userId: user._id }, 'Ananya' );
-
+exports.postSignIn = async (req, res, next) => {
+  return asyncWrapper(req, res, async (req, res) => {
+    const { username, password } = req.body;
+    const { user, token } = await authService.loginUser(username, password);
     res.status(201).json({ user, token });
-  } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
-  }
+  }, next);
 };
+
+
+exports.verifyToken = async (req, res, next) => {
+  return asyncWrapper(req, res, async (req, res) => {
+    const code = req.params.code;
+    const userDetails = await authService.verifyUser(code);
+    const { user, token } = await authService.loginUser(userDetails.username, userDetails.password);
+    res.status(201).json({ user, token });
+  });
+}

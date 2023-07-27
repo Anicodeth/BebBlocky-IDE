@@ -16,6 +16,6 @@ module.exports = (req, res, next) => {
     }
 
     req.user = decoded;
-    next();
+    next(req, res);
   });
 };

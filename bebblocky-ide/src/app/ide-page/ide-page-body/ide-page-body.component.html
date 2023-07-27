@@ -1,6 +1,6 @@
 <div class = "phone-container">
     <div class="window-toggle">
-        <button (click)="toggleWindows('slide')" [class.active]="activeWindow === 'slide'">Read
+        <button *ngIf = "!onlyCode" (click)="toggleWindows('slide')" [class.active]="activeWindow === 'slide'">Read
             <fa-icon class="header-icon" [icon]="['fas', 'bars']"></fa-icon>
         </button>
         <button (click)="toggleWindows('editor')" [class.active]="activeWindow === 'editor'">Code
@@ -12,7 +12,7 @@
       </div>
 <div class = "body-container">
 
-    <div class = "body-section slides" [ngClass]="{'reveal': addSlideClass, 'web-reveal': addWebClass}" >
+    <div *ngIf = "!onlyCode" class = "body-section slides" [ngClass]="{'reveal': addSlideClass, 'web-reveal': addWebClass}" >
         <app-ide-slides></app-ide-slides>
     </div>
     <div class = "body-section" [ngClass]="{'reveal': addEditorClass, 'web-reveal': addWebClass, 'expand': onlyCode}" >

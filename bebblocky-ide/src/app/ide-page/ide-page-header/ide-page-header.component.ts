@@ -40,6 +40,8 @@ export class IdePageHeaderComponent implements OnInit {
       }
     }
 
+    
+
     // Night mode
 
     let mode = JSON.parse(sessionStorage.getItem('nightMode')!);

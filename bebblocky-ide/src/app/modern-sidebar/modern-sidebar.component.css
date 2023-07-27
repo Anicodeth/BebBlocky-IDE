@@ -23,6 +23,7 @@
   position: fixed;
   transition: all 0.3s ease-in-out;
   background-color: white;
+  
   overflow: auto;
   z-index: 1000;
   border-right: 2px solid lightgray;
@@ -90,12 +91,12 @@
   flex-direction: row;
   align-items: center;
   text-decoration: none;
-  color: lightgray;
+  color: black;
   padding: 15px 20px;
   transition: all 0.3s;
   margin: 0 auto;
   font-family: "Montserrat", sans-serif;
-  font-weight: 400;
+  font-weight: bolder;
 }
 
 .sidebar .sidebar-menu .sidebar-menu-item a:hover {
@@ -224,12 +225,12 @@
 
 .is-night {
   background-color: #1a1a1a;
-  color: #fff;
+  color: #fff !important;
 }
 
 .is-day {
   background-color: #fff;
-  color: #000;
+  color: #000 !important;
 }
 
 

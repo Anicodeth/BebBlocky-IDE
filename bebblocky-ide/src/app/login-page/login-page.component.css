@@ -92,8 +92,9 @@ input {
   margin: 8px 0;
   width: 100%;
 }
+
 input:hover {
-border: 2.5px solid #02D3D7;
+  border: 2.5px solid #02D3D7;
 }
 
 .container {
@@ -140,6 +141,7 @@ border: 2.5px solid #02D3D7;
 }
 
 @keyframes show {
+
   0%,
   49.99% {
     opacity: 0;
@@ -219,44 +221,66 @@ border: 2.5px solid #02D3D7;
 }
 
 
-.mobile-sign-in{
-  display:none;
+.mobile-sign-in {
+  display: none;
   transition: 2s linear;
 }
-.mobile-sign-up{
+
+.mobile-sign-up {
   display: none;
 }
-.sign-up{
+
+.sign-up {
   margin-top: 1rem;
   font-weight: bold;
 }
-.sign-up:hover{
-color:blue;
-transition: 0.5s linear;
+
+.sign-up:hover {
+  color: blue;
+  transition: 0.5s linear;
 
 }
+
 @media (max-width: 650px) {
-.container{
-  display:none;
-}
-.mobile-sign-in{
-  display:flex;
-  z-index: 1000;
-  height:30rem;
-  width:90%;
+  .container {
+    display: none;
+  }
 
+  .mobile-sign-in {
+    display: flex;
+    z-index: 1000;
+    height: 30rem;
+    width: 90%;
+
+  }
+
+  .mobile-sign-up {
+    display: flex;
+    z-index: 1000;
+    height: 30rem;
+    width: 90%;
+  }
+
+  input {
+    height: 3rem;
+    width: 18rem;
+  }
+
+  form {
+    width: 100%;
+  }
 }
-.mobile-sign-up{
-  display:flex;
-  z-index: 1000;
-  height:30rem;
-  width:90%;
+
+.error p,
+.success p {
+  font-weight: 600;
+  font-size: 0.9rem;
 }
-input{
-  height:3rem;
-  width: 18rem;
+
+.error {
+  color: rgb(235, 90, 90);
 }
-form{
-  width:100%;
-}
+
+.success {
+  color: rgb(50, 150, 50);
 }

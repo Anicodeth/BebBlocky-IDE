@@ -14,7 +14,7 @@ async function asyncWrapper(callback) {
       if (error.code == 2) {
         throw new NotFoundError('User not found.');
       } else {
-      throw new InternalServerError("Internal server error");
+        throw new InternalServerError("Internal server error.");
       }
     } else {
       throw error;
@@ -22,17 +22,17 @@ async function asyncWrapper(callback) {
   }
 }
 
-async function getUser(userId) {
+exports.getUser = async (userId) => {
   return await asyncWrapper(async () => {
     return await User.findById(userId);
   });
 }
 
-async function getUserCourses(userId, courseCategory) {
+exports.getUserCourses = async (userId, courseLanguage) => {
   return await asyncWrapper(async () => {
     const user = await User.findById(userId);
-    const courses = (courseCategory)
-      ? await Course.find({ courseCategory })
+    const courses = (courseLanguage)
+      ? await Course.find({ courseLanguage })
       : await Course.find();
 
     const usercourses = courses.filter(course =>
@@ -42,7 +42,7 @@ async function getUserCourses(userId, courseCategory) {
   });
 }
 
-async function getUserCourseProgress(userId, courseId) {
+exports.getUserCourseProgress = async (userId, courseId) => {
   return await asyncWrapper(async () => {
     const user = await User.findById(userId);
     const progress = user.progress.find(
@@ -56,7 +56,7 @@ async function getUserCourseProgress(userId, courseId) {
   });
 }
 
-async function updateUserCourseProgress(userId, courseId, completedPercent) {
+exports.updateUserCourseProgress = async (userId, courseId, completedPercent) => {
   return await asyncWrapper(async () => {
     const user = await User.findById(userId);
     const progress = user.progress.find(
@@ -78,7 +78,7 @@ async function updateUserCourseProgress(userId, courseId, completedPercent) {
   });
 }
 
-async function updateLastAccessedCourse(userId, courseId) {
+exports.updateLastAccessedCourse = async (userId, courseId) => {
   return await asyncWrapper(async () => {
     const user = await User.findById(userId);
 
@@ -90,7 +90,7 @@ async function updateLastAccessedCourse(userId, courseId) {
   });
 }
 
-async function getLastAccessedCourse(userId) {
+exports.getLastAccessedCourse = async (userId) => {
   return await asyncWrapper(async () => {
     const user = await User.findById(userId);
 
@@ -98,11 +98,3 @@ async function getLastAccessedCourse(userId) {
   });
 }
 
-module.exports = {
-  getUser,
-  getUserCourses,
-  getUserCourseProgress,
-  updateUserCourseProgress,
-  updateLastAccessedCourse,
-  getLastAccessedCourse,
-};

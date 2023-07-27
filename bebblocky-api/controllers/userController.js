@@ -3,7 +3,7 @@ const asyncWrapper = require('../utils/controllerAsyncWrapper');
 
 function getUserCoursesByType(req, res, category, next) {
   return asyncWrapper(req, res, async (req, res) => {
-    const userId = req.user.userId;
+    const userId = req.user._id;
     const userCourses = await userService.getUserCourses(userId, category);
     res.status(200).json({ courses: userCourses });
   }, next);
@@ -34,7 +34,7 @@ exports.getUserJsCourses = async (req, res, next) => {
 exports.getUserCourseProgress = async (req, res, next) => {
   return asyncWrapper(req, res, async (req, res) => {
     const courseId = req.params.courseId;
-    const userId = req.user.userId;
+    const userId = req.user._id;
     const progress = await userService.getUserCourseProgress(userId, courseId);
     res.status(200).json({ progress });
   }, next);
@@ -42,7 +42,7 @@ exports.getUserCourseProgress = async (req, res, next) => {
 
 exports.updateUserCourseProgress = async (req, res, next) => {
   return asyncWrapper(req, res, async (req, res) => {
-    const userId = req.user.userId;
+    const userId = req.user._id;
     const courseId = req.params.courseId;
     const { completedPercent } = req.body;
     const message = await userService.updateUserCourseProgress(userId, courseId, completedPercent);
@@ -52,7 +52,7 @@ exports.updateUserCourseProgress = async (req, res, next) => {
 
 exports.updateLastAccessedCourse = async (req, res, next) => {
   return asyncWrapper(req, res, async (req, res) => {
-    const userId = req.user.userId;
+    const userId = req.user._id;
     const { courseId } = req.body;
     const message = await userService.updateLastAccessedCourse(userId, courseId);
     res.status(201).json({ message });
@@ -62,7 +62,7 @@ exports.updateLastAccessedCourse = async (req, res, next) => {
 
 exports.getLastAccessedCourse = async (req, res, next) => {
   return asyncWrapper(req, res, async (req, res) => {
-    const userId = req.user.userId;
+    const userId = req.user._id;
     const lastAccessedCourseId = await userService.getLastAccessedCourse(userId);
     res.status(201).json({ lastAccessedCourseId });
   }, next);

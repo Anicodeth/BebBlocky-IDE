@@ -3,8 +3,7 @@
     <form
       [formGroup]="loginForm"
       onsubmit="event.preventDefault()"
-      (submit)="login()"
-    >
+      (submit)="login()">
       <h1>Sign In</h1>
       <br />
       <input
@@ -12,12 +11,19 @@
         placeholder="Username"
         required
         type="text"
-      />
+        />
       <input
         formControlName="password"
         type="password"
         placeholder="Password"
-      />
+        />
+      <div class="success">
+        <p>{{ success }}</p>
+      </div>
+      <div class="error">
+        <p>{{ error }}</p>
+      </div>
+
       <a href="#">Forgot Your Password?</a>
 
       <button type="submit">
@@ -32,13 +38,19 @@
     <form
       [formGroup]="signupForm"
       (submit)="signup()"
-      onsubmit="event.preventDefault()"
-    >
+      onsubmit="event.preventDefault()">
       <h1>Create Account</h1>
       <br />
       <input formControlName="name" placeholder="Username" />
       <input formControlName="email" placeholder="Email" />
       <input formControlName="password" placeholder="Password" />
+ <div class="success">
+          <p>{{ success }}</p>
+        </div>
+        <div class="error">
+          <p>{{ error }}</p>
+        </div>
+
       <button type="submit">SignUp</button>
       <h5 class="sign-up" (click)="toggle()">Sign Up</h5>
     </form>
@@ -47,14 +59,12 @@
   <div
     class="container"
     [ngClass]="{ 'right-panel-active': isClassActive }"
-    id="container"
-  >
+    id="container">
     <div class="form-container sign-in-container">
       <form
         [formGroup]="loginForm"
         onsubmit="event.preventDefault()"
-        (submit)="login()"
-      >
+        (submit)="login()">
         <h1>Sign In</h1>
         <br />
         <input
@@ -62,12 +72,15 @@
           placeholder="Username"
           required
           type="text"
-        />
+          />
         <input
           formControlName="password"
           type="password"
           placeholder="Password"
-        />
+          />
+        <div class="error">
+          <p>{{ error }}</p>
+        </div>
         <a href="#">Forgot Your Password?</a>
 
         <button type="submit" [disabled]="isButtonDisabled">
@@ -81,13 +94,18 @@
       <form
         [formGroup]="signupForm"
         (submit)="signup()"
-        onsubmit="event.preventDefault()"
-      >
+        onsubmit="event.preventDefault()">
         <h1>Create Account</h1>
         <br />
         <input formControlName="name" placeholder="Username" />
         <input formControlName="email" placeholder="Email" />
         <input formControlName="password" placeholder="Password" />
+        <div class="success">
+          <p>{{ success }}</p>
+        </div>
+        <div class="error">
+          <p>{{ error }}</p>
+        </div>
         <button type="submit" [disabled]="isButtonDisabled">
           <span *ngIf="!isButtonDisabled">Sign Up</span>
           <app-progress-ripples *ngIf="isButtonDisabled"></app-progress-ripples>

@@ -13,35 +13,87 @@ export class BridgeService {
 
   constructor(
     private http: HttpClient
-    ) { }
+  ) { }
 
   user: User = JSON.parse(sessionStorage.getItem('user') || '{}');
   token: String = sessionStorage.getItem('auth_token')!;
 
-  baseUrl: String = 'https://beb-blocky-ide.vercel.app';
-//    baseUrl: String = 'http://localhost:4000'; // - Development only
+  // baseUrl: String = 'https://beb-blocky-ide.vercel.app';
+  baseUrl: String = 'http://localhost:4000'; // - Development only
 
   resourcesBaseURL: String = this.baseUrl + '/api/v1';
   authBaseUrl: String = this.baseUrl + '/auth/v1';
 
   signUp(username: string, email: string, password: string) {
     const body = { username: username, password: password, email: email };
-    return this.http.post(this.authBaseUrl + '/signup', body);
+    return this.http.post(this.authBaseUrl + '/signup', body).pipe(
+      catchError((error) => {
+        console.log(error);
+        if (error.error.message == "Another user exists with the same username.") {
+        // if ('username' error.error.message) {
+          console.log("Username error");
+          return throwError("That username is taken. Please pick another username.");
+        } else if (error.error.message == "Another user exists with the same email.") {
+          return throwError("That email is associated with another account. Please pick another email.");
+        } else {
+          return throwError("Something went wrong. Please try again.");
+        }
+      })
+    );
   }
 
   signIn(username: string, password: string): Observable<User> {
     const body = { username: username, password: password };
-    const response = this.http.post<User>(this.authBaseUrl + '/signin', body);
-
-    return response.pipe(
+    return this.http.post<User>(this.authBaseUrl + '/signin', body).pipe(
       tap((data: any) => {
         this.user = data.user;
         sessionStorage.setItem('user', JSON.stringify(data.user));
         sessionStorage.setItem('auth_token', data.token);
         sessionStorage.setItem("courseProg", JSON.stringify(data.user.progress));
+      }),
+      catchError((error) => {
+        if (error.status == 400) {
+          return throwError("Invalid username or password");
+        } else if (error.status == 404) {
+          return throwError("User does not exist. Please sign up.");
+        } else {
+          return throwError("Something went wrong. Please try again.");
+        }
       })
     );
   }
+
+  // signIn(username: string, password: string): Observable<User> {
+  // const body = { username: username, password: password };
+  // return this.http.post<User>(this.authBaseUrl + '/signin', body);
+
+  // return response.pipe(
+  //   tap((data: any) => {
+  //     console.log(data);
+  //     this.user = data.user;
+  //     sessionStorage.setItem('user', JSON.stringify(data.user));
+  //     sessionStorage.setItem('auth_token', data.token);
+  //     sessionStorage.setItem("courseProg", JSON.stringify(data.user.progress));
+  //   }),
+  //   catchError((error) => {
+  //     // Handle the error here
+  //     if (error.status == 401) {
+  //       this.logout();
+  //       this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
+  //       this.token = sessionStorage.getItem('auth_token')!;
+  //     } else {
+  //       this.logout();
+  //       this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
+  //       this.token = sessionStorage.getItem('auth_token')!;
+  //     }
+
+  //     // You can also show user-friendly error messages here if required
+
+  //     // Re-throw the error to propagate it to the subscriber
+  //     return throwError(error);
+  //   })
+  // );
+  // }
 
   getCourseProgress(courseId: number) {
     // find the courseId from the session storage "courseProg" and return the progress

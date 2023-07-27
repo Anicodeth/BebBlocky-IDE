@@ -5,7 +5,6 @@ const UnauthorizedError = require('../errors/UnauthorizedError');
 const NotFoundError = require('../errors/NotFoundError');
 
 module.exports = (err, req, res, next) => {
-    console.log(err);
     if (err instanceof BadRequestError) {
         return res.status(400).json({ message: err.message });
     } else if (err instanceof InternalServerError) {

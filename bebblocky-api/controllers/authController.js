@@ -1,19 +1,12 @@
 const authService = require('../services/authService');
 const sendVerificationEmail = require('../utils/email.js');
-
-async function asyncWrapper(req, res, callback, next) {
-  try {
-    return await callback(req, res);
-  } catch (error) {
-    next(error);
-  }
-}
+const asyncWrapper = require('../utils/controllerAsyncWrapper');
 
 function generateRandomCode() {
   return Math.floor(100000 + Math.random() * 900000);
 }
 
-exports.postSignUp= async (req, res, next) => {
+exports.postSignUp = async (req, res, next) => {
   return asyncWrapper(req, res, async (req, res) => {
     const { username, email, password } = req.body;
     const user = await authService.createUser(username, email, password);

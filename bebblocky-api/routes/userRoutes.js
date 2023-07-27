@@ -1,3 +1,9 @@
+const router = require('express').Router();
+const userController = require('../controllers/userController.js');
+const authMiddleware = require('../middlewares/authMiddleware.js');
+
+router.use(authMiddleware);
+
 /**
  * @swagger
  * tags:
@@ -5,8 +11,6 @@
  *   description: User API
  */
 
-const router = require('express').Router();
-const userController = require('../controllers/userController.js');
 
 /**
  * @swagger

@@ -1,60 +1,77 @@
+const BadRequestError = require('../errors/BadRequestError');
+const InternalServerError = require('../errors/InternalServerError');
+const NotFoundError = require('../errors/NotFoundError');
 const Course = require('../models/Course');
 
+
+async function asyncWrapper(callback) {
+  try {
+    return await callback();
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      // Extracting the field names from the error message
+      const missingFields = error.message.match(/Path `([^`]+)` is required\./g);
+
+      // Creating a user-friendly error message
+      let errorMessage = 'Invalid course data. The following fields are required: ';
+      errorMessage += missingFields.map(field => field.match(/`([^`]+)` is required\./)[1]).join(', ');
+      errorMessage += '.';
+
+      throw new BadRequestError(errorMessage);
+    } else if (error.name == 'MongoError') {
+      if (error.code == 2)
+        throw new NotFoundError('Course not found.');
+      else
+        throw new InternalServerError(error.message);
+    } else {
+      throw error;
+    }
+  }
+}
+
 exports.getAllCourses = async () => {
-  return Course.find();
+  return await asyncWrapper(async () => {
+    return await Course.find();
+  });
 };
 
 exports.getHtmlCourses = async () => {
-  return Course.find({ courseLanguage: 'html' });
+  return await asyncWrapper(async () => {
+    return await Course.find({ courseLanguage: 'html' });
+  });
 };
 
 exports.getCssCourses = async () => {
-  return Course.find({ courseLanguage: 'css' });
+  return await asyncWrapper(async () => {
+    return await Course.find({ courseLanguage: 'css' });
+  });
 };
 
 exports.getJsCourses = async () => {
-  return Course.find({ courseLanguage: 'js' });
+  return await asyncWrapper(async () => {
+    return await Course.find({ courseLanguage: 'js' });
+  });
 };
 
 exports.createCourse = async (courseData) => {
-  const result = await saveCourse(courseData);
-  if (result.success) {
-    return result.data;
-  } else {
-    throw new Error(result.error);
-  }
+  return await asyncWrapper(async () => {
+    const course = new Course(courseData);
+    return await course.save();
+  });
 };
 
 exports.getCourseById = async (courseId) => {
-  return Course.findOne({ courseId });
+  return await asyncWrapper(async () => {
+    const course = await Course.findOne({ courseId });
+    if (!course) {
+      throw new NotFoundError('Course not found.');
+    }
+  });
 };
 
 exports.deleteCourseById = async (courseId) => {
-  return Course.findOneAndDelete({ courseId });
+  return await asyncWrapper(async () => {
+    return await Course.findOneAndDelete({ courseId });
+  });
 };
 
-async function saveCourse(courseData) {
-  const course = new Course(courseData);
-
-  try {
-    await course.validate();
-  } catch (error) {
-    return {
-      success: false,
-      error: error.message
-    };
-  }
-
-  try {
-    const savedCourse = await course.save();
-    return {
-      success: true,
-      data: savedCourse
-    };
-  } catch (error) {
-    return {
-      success: false,
-      error: 'Failed to save the course'
-    };
-  }
-}

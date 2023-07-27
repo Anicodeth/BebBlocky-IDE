@@ -84,9 +84,7 @@ router.post('/fix-current-users', async (req, res) => {
             // Add a new field to the progress object
             progress.courseId = progress.slideId;
             user.progress[j].courseId = user.progress[j].slideId;
-            console.log(user.progress[j]);
         }
-        console.log(user);
         await user.save();
     }
     res.json({ message: 'done' });

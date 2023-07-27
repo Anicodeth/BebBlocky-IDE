@@ -36,6 +36,14 @@ export class IdeSlidesComponent implements OnInit {
     this.courseId = parseInt(this.route.snapshot.paramMap.get('courseId')!);
     this.bridgeService.getCourse(this.courseId).subscribe((course: any) => {
       this.course = course.course;
+      //get courses from session storage
+      let courses = JSON.parse(sessionStorage.getItem('courses')!);
+      //until backend is fixed !!
+      console.log(courses, "here");
+      if (courses) {
+        this.course = courses.find((course: any) => course.courseId == this.courseId);
+      }
+
       // Check if course is arranged with lessons (writing this to be compatible with the old, and the new courses)
       if (this.course.slides == undefined) {
         // If it is not, then we the slides are in lessons

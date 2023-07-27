@@ -1,4 +1,4 @@
-<div class="courser">
+<div class="courser" >
   <div class="dots-container">
     <div
       [class]="
@@ -18,8 +18,8 @@
       <p>❱</p>
     </div>
   </div>
-    <app-ide-slide
-    [backgroundColor]="slides[currentIndex].backgroundColor"
+    <app-ide-slide 
+    [backgroundColor]="slides[currentIndex].backgroundColor || 'yellow'"
     [color]="slides[currentIndex].color"
       [code]="slides[currentIndex].code"
       [title]="slides[currentIndex].title"

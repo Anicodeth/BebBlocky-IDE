@@ -12,7 +12,6 @@ export class IdePageComponent implements OnInit {
   public showSpinner: boolean = false;
   public course: any;
   public isNight: boolean = false;
-  public onlyCode: boolean = false;
   private contentDiv: HTMLElement;
 
   constructor(
@@ -45,17 +44,11 @@ export class IdePageComponent implements OnInit {
     this.codeService.fullScreen.subscribe(() => {
 this.goFullScreen();    });
     const courseId = this.route.snapshot.paramMap.get('courseId')!;
-    if (courseId == '0'){
-      this.codeService.onlyCode = true;
-      this.showSpinner = false;
-
-    }
-    else{
     this.bridgeService.getCourse(parseInt(courseId)).subscribe((course: any) => {
       this.course = course.course;
 
       // this.bridgeService.updateLastAccessedCourseId(this.course.courseId).subscribe(() => {});
       this.showSpinner = false;
-    });}
+    });
   }
 }

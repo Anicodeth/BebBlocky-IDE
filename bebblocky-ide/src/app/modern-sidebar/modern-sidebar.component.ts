@@ -44,7 +44,7 @@ export class ModernSidebarComponent {
  
   
     this.generalMenuItems = [
-      { name: 'Code', link: `/ide/0`, icon: faCode, class: 'special' },
+      { name: 'Code', link: `/ide/1`, icon: faCode, class: 'special' },
     ]
     this.userMenuItems = [
       { name: 'My Profile', link: '/devdashboard/profile', icon: faUser, class: 'regular' },

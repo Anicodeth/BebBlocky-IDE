@@ -45,6 +45,7 @@
 }
 .slides{
     border-radius: 0 0 2rem 2rem;
+
 }
 
 .phone-container {
@@ -64,6 +65,10 @@
   .web-reveal{
     display: block;
   }
+
+.expand {
+    width:48%;
+}
 
 
 @media (max-width:1000px) {

@@ -188,11 +188,7 @@
   }
 }
 
-@media only screen and (max-width: 1150px) {
-.sidebar.shrink{
-  width: 8%;
-}
-}
+
 
 /* Night mode styles */
 .night-bar {
@@ -235,3 +231,10 @@
   background-color: #fff;
   color: #000;
 }
+
+
+@media only screen and (max-width: 1150px) {
+  .sidebar.shrink, .night-bar.shrink{
+    width: 8%;
+  }
+  }

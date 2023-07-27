@@ -12,4 +12,5 @@ export class CodeEditorService {
   editorTheme = new Subject<string>();
   mainTheme = new Subject<boolean>();
   fullScreen = new Subject<boolean>();
+  onlyCode = false;
 }

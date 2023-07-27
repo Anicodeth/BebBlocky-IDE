@@ -3,6 +3,7 @@ import { HostListener } from '@angular/core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { CodeEditorService } from 'src/app/shared/services/code-editor.service';
 
 @Component({
   selector: 'app-ide-page-body',
@@ -18,9 +19,12 @@ export class IdePageBodyComponent implements OnInit {
   public addEditorClass: boolean = false;
   public addPreviewClass: boolean = false;
   public addWebClass: boolean = true;
+  public onlyCode: boolean = false;
+
 
   constructor(
-    private library: FaIconLibrary
+    private library: FaIconLibrary,
+    private codeEditorService: CodeEditorService
   ) {
     library.addIconPacks(fas, far);
   }
@@ -57,6 +61,11 @@ export class IdePageBodyComponent implements OnInit {
     if (window.innerWidth < 1000) {
       this.addWebClass = false;
     }
+
+    this.onlyCode = this.codeEditorService.onlyCode;
+
+
+
 
   }
 }

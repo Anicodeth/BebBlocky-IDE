@@ -9,6 +9,7 @@
             {{ currentMenuItemName }}
         </span>
     </div>
+    <app-ide-page-header [beblockyImage] = 'false' [userName] = 'false'></app-ide-page-header>
 </div>
 <div class="sidebar" [class.shrink]="!isExpanded" [ngClass]="{'is-night':isNight , 'is-day':!isNight, 'night-bar' : isNight}" (mouseenter)="expandSidebar()" (mouseleave)="shrinkSidebar()">
     <div class="sidebar-logo" [class.shrink]="!isExpanded">
@@ -18,7 +19,7 @@
     </div>
     <div class="sidebar-title">
         <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">
-            Continue the course you were working on before
+            Code, Innovate, and Create!
         </span>
     </div>
     <div>

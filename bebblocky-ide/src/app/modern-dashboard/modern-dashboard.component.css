@@ -48,6 +48,7 @@ body {
   align-items: flex-start;
   padding: 0 5rem 0 5rem;
   border-radius: 2rem;
+  margin-bottom: 1rem;
 }
 
 /* Courses container styles */
@@ -58,6 +59,7 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 2rem;
+  flex-direction: column;
 }
 
 /* Slider styles */
@@ -80,6 +82,7 @@ body {
   transition: opacity 0.5s;
   display: none;
   border-radius: 2rem;
+  padding: 2rem;
 
 }
 
@@ -88,15 +91,6 @@ body {
   display: flex;
 }
 
-.slide h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.slide p {
-  font-size: 16px;
-  line-height: 1.6;
-}
 
 .slide img {
   height: 10rem;
@@ -108,6 +102,9 @@ body {
   font-size: 1.15rem !important;
   font-weight: 600 !important;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   
   animation: fadein;
   animation-duration: 4s;
@@ -115,11 +112,14 @@ body {
 .course-text p{
   font-size: 1rem !important;
   font-weight: 600 !important;
+  text-align: left;
+
 }
 .course-text h2 {
   flex: 1;
   font-size: 3rem !important;
   font-weight: 600 !important;
+
   
   animation: fadein;
   animation-duration: 2s;
@@ -133,9 +133,8 @@ body {
 .button-container{
   background-color: #ff9800;
   font-weight: bolder;
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   padding: 0.1rem;
-  margin: auto;
   width:10rem;
 
 

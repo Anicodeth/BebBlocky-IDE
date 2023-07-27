@@ -18,6 +18,7 @@ export class IdePageHeaderComponent implements OnInit {
   public themes:string[] = ["chrome", "chaos","cobalt", "clouds", "dawn", "eclipse", "crimson_editor", "dreamweaver", "gob", "github", "gruvbox", "xcode"];
   public user: any;
   @Input() beblockyImage: any = true;
+  @Input() userName: any = true;
 
 
   constructor(

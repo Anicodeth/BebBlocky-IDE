@@ -22,6 +22,11 @@ export class AllCoursesComponent implements OnInit {
     this.codeService.mainTheme.subscribe(() => {
       this.isNight = !this.isNight; 
     });
+
+    let isNight = JSON.parse(sessionStorage.getItem('nightMode')!);
+    if (isNight == true) {
+      this.isNight = true;
+    }
     
     this.showSpinner = true;
     this.bridgeService.getCourses('').subscribe((courses: any) => {

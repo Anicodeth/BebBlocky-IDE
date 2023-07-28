@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { BridgeService } from 'src/app/shared/services/bridge.service';
+import { CourseService } from 'src/app/shared/services/course.service';
 
 @Component({
   selector: 'app-create-course',
@@ -28,6 +29,7 @@ import { BridgeService } from 'src/app/shared/services/bridge.service';
   ]
 })
 export class CreateCourseComponent {
+  @Input() editData: any;
   public showSpinner: boolean = false;
   public courseForm: FormGroup | any;
   public contentExample: string = "CSS Media Queries are a powerful tool in creating responsive websites. They allow us to apply different styles based on the characteristics of the device or screen size. Media Queries use the @media rule in CSS to define different styles for different conditions. Common media query conditions include screen width, device orientation, resolution, and more.";
@@ -42,7 +44,8 @@ export class CreateCourseComponent {
 
   constructor(
     private fb: FormBuilder,
-    private bridgeService: BridgeService
+    private bridgeService: BridgeService,
+    private courseService: CourseService
   ) {
     this.courseForm = this.fb.group({
       course: this.fb.group({
@@ -62,15 +65,16 @@ export class CreateCourseComponent {
     // timeout to show the spinner
     setTimeout(() => {
       this.showSpinner = false;
+      console.log(this.editData);
+      if (this.editData) {
+        console.log(this.editData);
+        this.courseForm = this.editData;
+        // this.courseForm.patchValue(this.editData);
+      }
     }, 2000);
   }
 
-  dropLessons(event: CdkDragDrop<string[]>) {
-    let temp = this.lessons.at(event.previousIndex).value;
-    this.lessons.at(event.previousIndex).setValue(this.lessons.at(event.currentIndex).value);
-    this.lessons.at(event.currentIndex).setValue(temp);
-  }
-
+  // Drag and drop functions
   dropSlides(lessonIndex: number, event: CdkDragDrop<string[]>) {
     let temp = this.getSlides(lessonIndex).at(event.previousIndex).value;
     this.getSlides(lessonIndex).at(event.previousIndex).setValue(this.getSlides(lessonIndex).at(event.currentIndex).value);
@@ -91,58 +95,13 @@ export class CreateCourseComponent {
   }
 
   saveCourse(): void {
-      const courseData = {
-        courseTitle: this.courseForm.value.course.courseTitle,
-        courseDescription: this.courseForm.value.course.courseDescription,
-        courseLanguage: this.courseForm.value.course.courseLanguage,
-        lessons: this.cleanLessons(this.courseForm.value.lessons)
-      }
+      const courseData = this.courseService.cleanCourse(this.courseForm);
+      console.log(courseData);
       this.showSpinner = true;
       this.bridgeService.createCourse(courseData).subscribe((res: any) => {
         this.showSpinner = false;
       });
   }
-
-  cleanLessons(lessonsData: any) {
-    let lessons = [];
-    for (let lesson of lessonsData) {
-      lessons.push(this.cleanLesson(lesson));
-    }
-    return lessons;
-  }
-
-  cleanLesson(lessonData: any) {
-    return {
-      lessonId: lessonData.lessonId,
-      lessonTitle: lessonData.lessonTitle,
-      lessonDescription: lessonData.lessonDescription,
-      lessonLanguage: lessonData.lessonLanguage,
-      slides: this.cleanSlides(lessonData.slides)
-    }
-  }
-
-  cleanSlides(slidesData: any) {
-    let slides = [];
-    for (let slide of slidesData) {
-      slides.push(this.cleanSlide(slide));
-    }
-    return slides;
-  }
-
-  cleanSlide(slideData: any) {
-    return {
-      backgroundColor: slideData.backgroundColor,
-      color: slideData.color,
-      title: slideData.title,
-      titleFont: slideData.titleFont,
-      content: slideData.content,
-      code: slideData.code,
-      contentFont: slideData.contentFont,
-      startingCode: slideData.startingCode,
-      image: slideData.image
-    }
-  }
-
 
   // Lesson Related Methods
   get lessons(): FormArray {
@@ -150,18 +109,7 @@ export class CreateCourseComponent {
   }
 
   addLesson() {
-    let lessonId = this.lessons.length + 1;
-    this.lessons.push(
-      this.fb.group({
-        lessonId: [lessonId, Validators.required],
-        lessonTitle: ["", Validators.required],
-        lessonDescription: ["", Validators.required],
-        lessonLanguage: ['html', Validators.required],
-        slides: this.fb.array([]),
-        editingSlideIndex: [""],
-        done: [false],
-      })
-    );
+    this.courseService.addLesson(this.courseForm);
     this.course.get('editingLessonIndex')?.setValue(this.lessons.length - 1);
   }
 
@@ -177,6 +125,7 @@ export class CreateCourseComponent {
     this.lessons.removeAt(index);
   }
 
+  // to toggle the lesson between editing and collapsed modes
   toggleLesson(index: number) {
     if (index != this.editingLessonIndex) {
       this.editingLessonIndex = index;
@@ -197,8 +146,12 @@ export class CreateCourseComponent {
   }
 
   // Slide Related Methods
+  getLesson(lessonIndex: number): FormGroup {
+    return this.lessons.at(lessonIndex) as FormGroup;
+  }
+
   getSlides(lessonIndex: number): FormArray {
-    return this.lessons.at(lessonIndex).get('slides') as FormArray;
+    return this.getLesson(lessonIndex).get('slides') as FormArray;
   }
 
   getSlide(lessonIndex: number, slideIndex: number): FormGroup {
@@ -206,20 +159,7 @@ export class CreateCourseComponent {
   }
 
   addSlide(lessonIndex: number) {
-    this.getSlides(lessonIndex).push(
-      this.fb.group({
-        backgroundColor: ["", Validators.required],
-        color: ["", Validators.required],
-        title: ["", Validators.required],
-        titleFont: ["", Validators.required],
-        content: ["", Validators.required],
-        contentFont: ["", Validators.required],
-        startingCode: ["", Validators.required],
-        code: ["", Validators.required],
-        image: ["", Validators.required],
-        done: [false]
-      })
-    );
+    this.courseService.addSlide(this.getLesson(lessonIndex));
     this.lessons.at(lessonIndex).get('editingSlideIndex')?.setValue(this.getSlides(lessonIndex).length - 1);
   }
 
@@ -255,6 +195,7 @@ export class CreateCourseComponent {
     this.capitalize(slides.at(index), formControlName);
   }
 
+  // Function to capitalize a form when needed
   capitalize(formGroup: FormGroup | any, formControlName: string) {
     if (formGroup != null && formControlName != null) {
       const words = formGroup.get(formControlName).value.split(' ');

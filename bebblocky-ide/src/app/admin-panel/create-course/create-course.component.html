@@ -3,16 +3,16 @@
         <div class="course-creator__manage-course">
             <div class="course-creator__manage-course__buttons">
                 <div class="course-creator__manage-course__buttons__title">
-                    <h2>Add a New Course</h2>
+                    <h2 >{{ (!this.editData) ? 'Add a New Course' : 'Edit the Course'}}</h2>
                     <p>You can start editing the options of the course here. You can add actual content by adding lessons to it.</p>
                 </div>
                 <div class="course-creator__manage-course__buttons__buttons buttons">
                     <div class="course-creator__manage-course__buttons__save-course button save" (click)="saveCourse()">
-                        Save
+                        {{ (!this.editData) ? 'Save Course' : 'Save Changes'}}
                     </div>
                     <div class="course-creator__manage-course__buttons__add-lesson
                         button add" (click)="addLesson()">
-                        Add a Lesson
+                        Add a new Lesson
                     </div>
                 </div>
             </div>

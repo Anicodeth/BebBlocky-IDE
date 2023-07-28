@@ -83,13 +83,13 @@ exports.deleteCourseById = async (courseId) => {
 
 exports.updateCourseById = async (courseId, courseData) => {
   return await asyncWrapper(async () => {
-    const course = await Course.findOne({ courseId });
+    let course = await Course.findOne({ courseId });
     if (!course) {
       throw new NotFoundError('Course not found.');
     }
 
-    course = courseData;
-    return await course.save();
+    // find one by id and update it
+    return await Course.findByIdAndUpdate(course._id, courseData, { new: true });
   });
 };
 

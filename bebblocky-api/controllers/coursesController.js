@@ -66,6 +66,6 @@ exports.updateCourse = async (req, res, next) => {
     const courseId = req.params.courseId;
     const courseData = req.body;
     const updatedCourse = await courseService.updateCourseById(courseId, courseData);
-    res.status(200).json(updatedCourse);
+    res.status(200).json({ course: updatedCourse });
   }, next);
 }

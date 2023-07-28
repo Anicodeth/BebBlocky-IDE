@@ -66,8 +66,8 @@ exports.getCourseById = async (courseId) => {
 
 exports.createCourse = async (courseData) => {
   return await asyncWrapper(async () => {
-    const course = new Course(courseData);
-    return await course.save();
+    console.log(courseData);
+    return await Course.create(courseData);
   });
 };
 

@@ -425,3 +425,18 @@ $ff-main: "Montserrat", sans-serif;
   background: $clr--settings;
   color: #fff;
 }
+
+.error, .success {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: $ff-main;
+}
+
+.error {
+  color: $clr--delete;
+}
+
+.success {
+  color: $clr--secondary;
+}

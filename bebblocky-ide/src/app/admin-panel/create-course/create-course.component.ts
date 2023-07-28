@@ -31,6 +31,8 @@ import { CourseService } from 'src/app/shared/services/course.service';
 export class CreateCourseComponent {
   @Input() editDataId: number | any;
   @Input() editData: FormGroup | any;
+  public error: string = "";
+  public success: string = "";
   public showSpinner: boolean = false;
   public courseForm: FormGroup | any;
   public contentExample: string = "CSS Media Queries are a powerful tool in creating responsive websites. They allow us to apply different styles based on the characteristics of the device or screen size. Media Queries use the @media rule in CSS to define different styles for different conditions. Common media query conditions include screen width, device orientation, resolution, and more.";
@@ -96,21 +98,25 @@ export class CreateCourseComponent {
   }
 
   saveCourse(): void {
-    console.log('here');
+    const courseData = this.courseService.cleanCourse(this.courseForm);
+    this.error = "";
+    this.showSpinner = true;
     if (!this.editData) {
-      const courseData = this.courseService.cleanCourse(this.courseForm);
-      console.log(courseData);
-      this.showSpinner = true;
       this.bridgeService.createCourse(courseData).subscribe((res: any) => {
         this.showSpinner = false;
+        this.editDataId = res.courseId;
+        this.editData = this.courseForm;
+        this.success = "Course created successfully. You can continue to edit it.";
+      }, (err: any) => {
+        this.showSpinner = false;
+        this.error = err.error.message;
       });
     } else {
-      console.log('here');
-      const courseData = this.courseService.cleanCourse(this.courseForm);
-      console.log(courseData);
-      this.showSpinner = true;
       this.bridgeService.updateCourse(this.editDataId, courseData).subscribe((res: any) => {
         this.showSpinner = false;
+      }, (err: any) => {
+        this.showSpinner = false;
+        this.error = err.error.message;
       });
     }
   }

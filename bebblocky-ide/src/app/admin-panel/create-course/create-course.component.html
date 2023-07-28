@@ -1,3 +1,9 @@
+<div *ngIf="error" class="error">
+    {{ error }} Please try again after fixing the errors.
+</div>
+<div *ngIf="success" class="success">
+    {{ success }}
+</div>
 <div *ngIf="!showSpinner" class="course-creator">
     <form [formGroup]="courseForm"  class="lesson-list">
         <div class="course-creator__manage-course">

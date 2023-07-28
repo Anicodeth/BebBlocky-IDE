@@ -29,7 +29,8 @@ import { CourseService } from 'src/app/shared/services/course.service';
   ]
 })
 export class CreateCourseComponent {
-  @Input() editData: any;
+  @Input() editDataId: number | any;
+  @Input() editData: FormGroup | any;
   public showSpinner: boolean = false;
   public courseForm: FormGroup | any;
   public contentExample: string = "CSS Media Queries are a powerful tool in creating responsive websites. They allow us to apply different styles based on the characteristics of the device or screen size. Media Queries use the @media rule in CSS to define different styles for different conditions. Common media query conditions include screen width, device orientation, resolution, and more.";
@@ -95,12 +96,23 @@ export class CreateCourseComponent {
   }
 
   saveCourse(): void {
+    console.log('here');
+    if (!this.editData) {
       const courseData = this.courseService.cleanCourse(this.courseForm);
       console.log(courseData);
       this.showSpinner = true;
       this.bridgeService.createCourse(courseData).subscribe((res: any) => {
         this.showSpinner = false;
       });
+    } else {
+      console.log('here');
+      const courseData = this.courseService.cleanCourse(this.courseForm);
+      console.log(courseData);
+      this.showSpinner = true;
+      this.bridgeService.updateCourse(this.editDataId, courseData).subscribe((res: any) => {
+        this.showSpinner = false;
+      });
+    }
   }
 
   // Lesson Related Methods
@@ -135,7 +147,7 @@ export class CreateCourseComponent {
       this.editingLessonIndex = null;
     }
   }
-  
+
   setLessonStatus(index: number, status: boolean) {
     this.editingLessonIndex = index;
     this.lessons.at(index).get('done')?.setValue(status);
@@ -176,7 +188,7 @@ export class CreateCourseComponent {
       this.lessons.at(lessonIndex).get('editingSlideIndex')?.setValue(slideIndex);
     }
   }
-  
+
   toggleSlide(lessonIndex: number, slideIndex: number) {
     if (slideIndex != this.getEditingSlideIndex(lessonIndex)) {
       this.lessons.at(lessonIndex).get('editingSlideIndex')?.setValue(slideIndex);

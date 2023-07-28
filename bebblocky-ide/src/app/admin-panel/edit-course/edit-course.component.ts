@@ -10,6 +10,7 @@ import { CourseService } from 'src/app/shared/services/course.service';
   styleUrls: ['./edit-course.component.css']
 })
 export class EditCourseComponent implements OnInit {
+  public courseId: number | any;
   public courseData: any;
   public courseForm: FormGroup;
   public error: string = "";
@@ -34,8 +35,8 @@ export class EditCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const courseId = this.route.snapshot.paramMap.get('courseId')!;
-    this.bridgeService.getCourse(parseInt(courseId)).subscribe((course: any) => {
+    this.courseId = parseInt(this.route.snapshot.paramMap.get('courseId')!);
+    this.bridgeService.getCourse(this.courseId).subscribe((course: any) => {
       this.courseData = course.course;
       this.courseService.fillCourseFromForUpdate(this.courseForm, this.courseData);
     },

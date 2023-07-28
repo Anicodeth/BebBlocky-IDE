@@ -66,11 +66,16 @@ exports.getCourseById = async (courseId) => {
     if (!course) {
       throw new NotFoundError('Course not found.');
     }
+    return course;
   });
 };
 
 exports.deleteCourseById = async (courseId) => {
   return await asyncWrapper(async () => {
+    const course = await Course.findOne({ courseId });
+    if (!course) {
+      throw new NotFoundError('Course not found.');
+    }
     return await Course.findOneAndDelete({ courseId });
   });
 };

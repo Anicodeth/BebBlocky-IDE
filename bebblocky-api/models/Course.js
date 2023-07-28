@@ -26,8 +26,7 @@ const slideSchema = new mongoose.Schema({
     required: true
   },
   startingCode: {
-    type: String,
-    required: true
+    type: String
   },
   code: {
     type: String,

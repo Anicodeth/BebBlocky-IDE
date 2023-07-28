@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faHtml5, faCss3, faSquareJs, faPython } from '@fortawesome/free-brands-svg-icons';
-import { faCode, faUser, faLayerGroup, faFileCode } from '@fortawesome/free-solid-svg-icons';
+import { faCode, faUser, faLayerGroup, faFileCode, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin-sidebar',
@@ -23,7 +23,7 @@ export class AdminSidebarComponent implements OnInit {
 
   ngOnInit() {
     this.generalMenuItems = [
-      { name: 'Create a new Course',  link: '/admin/create-course', icon: faCode, class: 'special' },
+      { name: 'Add a new Course',  link: '/admin/create-course', icon: faPlus, class: 'special' },
     ]
     this.userMenuItems = [
     ]

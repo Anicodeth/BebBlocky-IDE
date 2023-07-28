@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
 // $border: #ff9800;
-$background--primary: #e7ffc3;
+$background--primary: #def0e2;
 $background--secondary: #ffffff;
 $clr-light: #a7d464;
 
@@ -18,7 +18,7 @@ $ff-main: "Montserrat", sans-serif;
 .course-creator {
   display: flex;
   flex-direction: column;
-  padding: 0 2rem;
+  padding: 0 1rem;
   gap: 1rem;
   background: $background--primary;
   color: $clr--primary;
@@ -27,9 +27,7 @@ $ff-main: "Montserrat", sans-serif;
 
   &__manage-course {
     border: 1px solid $clr--secondary;
-    border-top: none;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-radius: 20px;
 
     background: $background--secondary;
 
@@ -121,7 +119,7 @@ $ff-main: "Montserrat", sans-serif;
       // min-height: 100vh;
       padding: 0 2rem;
       transition: all 0.5s ease-in-out;
-      box-shadow: 0px 0px 10px 0px $clr--secondary;
+      // box-shadow: 0px 0px 10px 0px $clr--secondary;
     }
 
     .idle {

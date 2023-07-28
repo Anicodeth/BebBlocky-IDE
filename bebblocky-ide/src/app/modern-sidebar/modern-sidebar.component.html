@@ -25,7 +25,7 @@
     <div>
         <ul class="sidebar-menu">
             <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of generalMenuItems" (click)="setCurrentMenuItemName(item.name)">
-                <a [class.shrink]="!isExpanded" [routerLink]="item.link" >
+                <a [class.shrink]="!isExpanded" [routerLink]="item.link" [ngClass]="{'is-night':isNight , 'is-day':!isNight}">
                     <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
                     <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
                 </a>
@@ -40,7 +40,7 @@
     <div>
         <ul class="sidebar-menu">
             <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of userMenuItems" (click)="setCurrentMenuItemName(item.name)">
-                <a [class.shrink]="!isExpanded" [routerLink]="item.link">
+                <a [class.shrink]="!isExpanded" [routerLink]="item.link" [ngClass]="{'is-night':isNight , 'is-day':!isNight}">
                     <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
                     <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
                 </a>
@@ -55,7 +55,7 @@
     <div>
         <ul class="sidebar-menu">
             <li class="sidebar-menu-item" routerLinkActive="active" *ngFor="let item of courseMenuItems" (click)="setCurrentMenuItemName(item.name)">
-                <a [class.shrink]="!isExpanded" [routerLink]="item.link">
+                <a [class.shrink]="!isExpanded" [routerLink]="item.link" [ngClass]="{'is-night':isNight , 'is-day':!isNight}">
                     <fa-icon class="sidebar-menu-item-icon" [icon]="item.icon"></fa-icon>
                     <span [class.shrink]="!isExpanded" *ngIf="isExpanded" class="menu-item-text">{{ item.name }}</span>
                 </a>

@@ -7,7 +7,8 @@
   --background-color: #ff9800;
   --beblocky-orange: #fcb332;
   --beblocky-purple: #703d99;
-  --beblock-light-blue: #dff1fb;
+  --beblocky-accent-purple: #a77dd4;
+  --beblocky-light-blue: #dff1fb;
   --beblocky-green: #5baf48;
   --beblocky-accent-green: #a7d464;
   --beblocky-light-green: #def0e2;
@@ -101,7 +102,7 @@
 
 .sidebar .sidebar-menu .sidebar-menu-item a:hover {
   background-color: #def0e2;
-  color: #111;
+  color: #111 !important;
 }
 
 .sidebar .sidebar-menu .sidebar-menu-item a.shrink {

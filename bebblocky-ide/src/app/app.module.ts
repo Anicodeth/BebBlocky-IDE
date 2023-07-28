@@ -46,6 +46,9 @@ import { IdePythonConsoleComponent } from './ide-python-console/ide-python-conso
 import { PythonService } from './python.service';
 import { ModernDashboardComponent } from './modern-dashboard/modern-dashboard.component';
 import { ModernSidebarComponent } from './modern-sidebar/modern-sidebar.component';
+import { DeleteCourseComponent } from './admin-panel/delete-course/delete-course.component';
+import { EditCourseComponent } from './admin-panel/edit-course/edit-course.component';
+import { CourseService } from './shared/services/course.service';
 
 @NgModule({
   declarations: [
@@ -82,7 +85,9 @@ import { ModernSidebarComponent } from './modern-sidebar/modern-sidebar.componen
     IdePythonEditorComponent,
     IdePythonConsoleComponent,
     ModernDashboardComponent,
-    ModernSidebarComponent
+    ModernSidebarComponent,
+    DeleteCourseComponent,
+    EditCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +103,8 @@ import { ModernSidebarComponent } from './modern-sidebar/modern-sidebar.componen
   providers: [
     CodeEditorService,
     BridgeService,
-    PythonService
+    PythonService,
+    CourseService
   ],
   bootstrap: [AppComponent]
 })

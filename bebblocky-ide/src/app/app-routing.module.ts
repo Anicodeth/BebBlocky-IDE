@@ -16,6 +16,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { IsAdminGuard } from './shared/guards/is-admin.guard';
 import { IdePythonEditorComponent } from './ide-python-editor/ide-python-editor.component';
 import { ModernDashboardComponent } from './modern-dashboard/modern-dashboard.component';
+import { DeleteCourseComponent } from './admin-panel/delete-course/delete-course.component';
+import { EditCourseComponent } from './admin-panel/edit-course/edit-course.component';
 
 const routes: Routes = [
   {
@@ -54,7 +56,6 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent }
     ]
   } ,
-  { path: 'create-course', component: CreateCourseComponent, },
   {
     path: 'admin',
     component: AdminPanelComponent,
@@ -62,6 +63,10 @@ const routes: Routes = [
     // pathMatch: 'full',
     canActivate: [LoggedInGuard, IsAdminGuard],
     children: [
+      // When an admin delete course is called, it should delete the course and redirect to /admin/courses
+      { path: 'delete-course/:courseId', component: DeleteCourseComponent },
+      { path: 'create-course', component: CreateCourseComponent, },
+      { path: 'edit-course/:courseId', component: EditCourseComponent },
       { path: 'courses', component: AllCoursesComponent },
       { path: 'my-courses', component: MyCoursesComponent },
       { path: 'js-courses', component: JsCoursesComponent },

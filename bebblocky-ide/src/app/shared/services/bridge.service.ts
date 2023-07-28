@@ -154,6 +154,21 @@ export class BridgeService {
     return this.http.get<Course>(this.resourcesBaseURL + '/courses/' + id.toString(), { headers: headers });
   }
 
+  deleteCourse(id: number): Observable<Course> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
+      return this.http.delete<Course>(this.resourcesBaseURL + '/courses/' + id.toString(), { headers: headers }).pipe(
+        catchError((error) => {
+          if (error.status == 401) {
+            return throwError("You are not authorized to delete this course.");
+          } else if (error.status == 404) {
+            return throwError("Course does not exist.");
+          } else {
+            return throwError("Something went wrong. Please try again.");
+          }
+        }
+      ));
+  }
+
   updateCourseProgress(id: number, percent: number): any {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
     return this.http.post(this.resourcesBaseURL + `/user/courses/${id}/progress`, { completedPercent: percent }, { headers: headers });
@@ -169,6 +184,14 @@ export class BridgeService {
   }
 
   createCourse(course: Course | Object): Observable<Course> {
-    return this.http.post<Course>(this.resourcesBaseURL + '/courses', course);
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
+    return this.http.post<Course>(this.resourcesBaseURL + '/courses', course, { headers: headers });
+    // Todo: Handle errors
+  }
+
+  updateCourse(courseId: number, course: Course | Object): Observable<Course> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
+    return this.http.put<Course>(this.resourcesBaseURL + '/courses/' + courseId.toString(), course, { headers: headers });
+    // Todo: Handle errors
   }
 }

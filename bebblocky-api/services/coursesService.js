@@ -53,12 +53,6 @@ exports.getJsCourses = async () => {
   });
 };
 
-exports.createCourse = async (courseData) => {
-  return await asyncWrapper(async () => {
-    const course = new Course(courseData);
-    return await course.save();
-  });
-};
 
 exports.getCourseById = async (courseId) => {
   return await asyncWrapper(async () => {
@@ -70,6 +64,13 @@ exports.getCourseById = async (courseId) => {
   });
 };
 
+exports.createCourse = async (courseData) => {
+  return await asyncWrapper(async () => {
+    const course = new Course(courseData);
+    return await course.save();
+  });
+};
+
 exports.deleteCourseById = async (courseId) => {
   return await asyncWrapper(async () => {
     const course = await Course.findOne({ courseId });
@@ -77,6 +78,18 @@ exports.deleteCourseById = async (courseId) => {
       throw new NotFoundError('Course not found.');
     }
     return await Course.findOneAndDelete({ courseId });
+  });
+};
+
+exports.updateCourseById = async (courseId, courseData) => {
+  return await asyncWrapper(async () => {
+    let course = await Course.findOne({ courseId });
+    if (!course) {
+      throw new NotFoundError('Course not found.');
+    }
+
+    // find one by id and update it
+    return await Course.findByIdAndUpdate(course._id, courseData, { new: true });
   });
 };
 

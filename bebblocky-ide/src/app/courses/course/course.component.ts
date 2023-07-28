@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { faArrowRight, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faArrowRight, faEdit, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { Course } from 'src/app/shared/models/course.dto';
 import { User } from 'src/app/shared/models/user.dto';
 import { BridgeService } from 'src/app/shared/services/bridge.service';
@@ -18,8 +19,11 @@ export class CourseComponent {
 
   public gotoIcon = faArrowRight;
   public editIcon = faEdit;
+  public deleteIcon = faTrashCan;
 
   constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private bridgeService: BridgeService
   ) {}
 
@@ -33,5 +37,9 @@ export class CourseComponent {
       return 0;
     }
     return progress;
+  }
+
+  deleteCourse() {
+    this.router.navigate([`/admin/delete-course/${this.courseId}`]);
   }
 }

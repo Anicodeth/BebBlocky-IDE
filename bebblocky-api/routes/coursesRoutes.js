@@ -134,32 +134,31 @@ router.delete('/:courseId', coursesController.deleteCourse);
 /**
  * @swagger
  * /api/v1/courses/{courseId}:
- *  put:
- *   summary: Update a specific course by ID
- *  tags: [Courses]
- * parameters:
- *  - name: courseId
- *   in: path
- *  description: ID of the course
- * required: true
- * schema:
- * type: string
- * requestBody:
- * required: true
- *  
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * // Define properties for the request body here
- * responses:
- * 200:
- * description: Course updated successfully
- * 404:
- * description: Course not found
- * 500:
- * description: Internal server error
+ *   delete:
+ *     summary: Update a specific course by ID
+ *     tags: [Courses]
+ *     parameters:
+ *       - name: courseId
+ *         in: path
+ *         description: ID of the course
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               // Define properties for the request body here
+ *     responses:
+ *       200:
+ *         description: Course deleted successfully
+ *       404:
+ *         description: Course not found
+ *       500:
+ *         description: Internal server error
  */
 router.put('/:courseId', coursesController.updateCourse);
 

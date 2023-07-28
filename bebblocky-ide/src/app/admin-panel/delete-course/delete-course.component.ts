@@ -17,7 +17,6 @@ export class DeleteCourseComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('here deleting course');
     const id = this.route.snapshot.paramMap.get('courseId')!;
     this.bridgeService.deleteCourse(Number(id)).subscribe(() => {
       this.router.navigate(['/admin/courses']);

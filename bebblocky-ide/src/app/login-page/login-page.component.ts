@@ -63,8 +63,6 @@ export class LoginPageComponent {
           this.isButtonDisabled = false;
 
           const user = response.user;
-          console.log(response);
-          console.log(user);
 
           if (user.role === "user") {
             this.router.navigateByUrl("/dashboard/profile");

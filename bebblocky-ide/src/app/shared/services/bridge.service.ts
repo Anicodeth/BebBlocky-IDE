@@ -28,10 +28,8 @@ export class BridgeService {
     const body = { username: username, password: password, email: email };
     return this.http.post(this.authBaseUrl + '/signup', body).pipe(
       catchError((error) => {
-        console.log(error);
         if (error.error.message == "Another user exists with the same username.") {
         // if ('username' error.error.message) {
-          console.log("Username error");
           return throwError("That username is taken. Please pick another username.");
         } else if (error.error.message == "Another user exists with the same email.") {
           return throwError("That email is associated with another account. Please pick another email.");
@@ -69,7 +67,6 @@ export class BridgeService {
 
   // return response.pipe(
   //   tap((data: any) => {
-  //     console.log(data);
   //     this.user = data.user;
   //     sessionStorage.setItem('user', JSON.stringify(data.user));
   //     sessionStorage.setItem('auth_token', data.token);

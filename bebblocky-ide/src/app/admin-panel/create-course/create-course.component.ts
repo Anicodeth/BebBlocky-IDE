@@ -68,11 +68,8 @@ export class CreateCourseComponent {
     // timeout to show the spinner
     setTimeout(() => {
       this.showSpinner = false;
-      console.log(this.editData);
       if (this.editData) {
-        console.log(this.editData);
         this.courseForm = this.editData;
-        // this.courseForm.patchValue(this.editData);
       }
     }, 2000);
   }

@@ -48,7 +48,6 @@ export class IdePageHeaderComponent implements OnInit {
     if ( mode == true) {
       this.night = true;
     }
-
   }
 
   toggleSetting() {

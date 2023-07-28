@@ -51,6 +51,8 @@ this.goFullScreen();    });
 
     }
     else{
+      this.codeService.onlyCode = false;
+
     this.bridgeService.getCourse(parseInt(courseId)).subscribe((course: any) => {
       this.course = course.course;
 

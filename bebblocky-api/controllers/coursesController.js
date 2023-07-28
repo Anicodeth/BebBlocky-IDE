@@ -33,16 +33,7 @@ exports.getJsCourses = async (req, res, next) => {
   }, next);
 };
 
-//Entire React courses
-exports.addCourse = async (req, res, next) => {
-  return asyncWrapper(req, res, async (req, res) => {
-    const courseData = req.body;
-    const createdCourse = await courseService.createCourse(courseData);
-    res.status(201).json(createdCourse);
-  }, next);
-};
-
-//Entire React courses
+// Get course by id
 exports.getCourse = async (req, res, next) => {
   return asyncWrapper(req, res, async (req, res) => {
     const courseId = req.params.courseId;
@@ -51,7 +42,16 @@ exports.getCourse = async (req, res, next) => {
   }, next);
 };
 
-//Entire React courses
+//Add new Course
+exports.addCourse = async (req, res, next) => {
+  return asyncWrapper(req, res, async (req, res) => {
+    const courseData = req.body;
+    const createdCourse = await courseService.createCourse(courseData);
+    res.status(201).json(createdCourse);
+  }, next);
+};
+
+//Delete course by id
 exports.deleteCourse = async (req, res, next) => {
   return asyncWrapper(req, res, async (req, res) => {
     const courseId = req.params.courseId;
@@ -59,3 +59,13 @@ exports.deleteCourse = async (req, res, next) => {
     res.status(200).json({ message: 'Course deleted successfully' });
   }, next);
 };
+
+// Update course by id
+exports.updateCourse = async (req, res, next) => {
+  return asyncWrapper(req, res, async (req, res) => {
+    const courseId = req.params.courseId;
+    const courseData = req.body;
+    const updatedCourse = await courseService.updateCourseById(courseId, courseData);
+    res.status(200).json(updatedCourse);
+  }, next);
+}

@@ -10,13 +10,11 @@
             <fa-icon [icon]="lockIcon"></fa-icon>
             User
         </span>
-
-
-        
     </div>
     <nav class="header-navigation">
         <ul class="nav-list">
-            <li class="nav-list-item"><a [routerLink]="['/dashboard/my-courses']"> My Courses </a></li>
+            <li class="nav-list-item"><a
+                    [routerLink]="['/dashboard/my-courses']"> My Courses </a></li>
             <li class="nav-list-item"><a (click)="logout()"> Logout </a></li>
         </ul>
     </nav>

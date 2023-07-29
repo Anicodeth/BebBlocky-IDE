@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+$border: #ff9800;
+$background-color: #ff9800;
+$beblocky-orange: #fcb332;
+
+$beblocky-purple: #703d99;
+
+$beblock-light-blue: #dff1fb;
+
+$beblocky-green: #5baf48;
+$beblocky-accent-green: #a7d464;
+$beblocky-light-green: #def0e2;
+$beblocky-pink: #8f6fb0;
+$beblocky-cyan: #2ebca4;
+$beblocky-cyan-accent: #37d6c9;
+$beblocky-red: #e74c3c;
+
+$green-linear-gradient: linear-gradient(to right, $beblocky-green, $beblocky-accent-green);
+$purple-pink-linear-gradient: linear-gradient(to right, $beblocky-purple, $beblocky-pink);
+
+$ff-primary: "Montserrat", sans-serif;
+
+.delete-course-container {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+
+    .delete-course {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        margin: 0 auto;
+        padding: 1rem;
+        border-radius: 20px;
+        border: 1px solid #222;
+
+        font-family: $ff-primary;
+
+        background: $green-linear-gradient;
+
+        &__title {
+
+            h1 {
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: $beblocky-red;
+            }
+        }
+
+        &__course-details {
+            display: flex;
+            flex-direction: column;
+
+            h2 {
+                font-size: 1.7rem;
+                font-weight: 500;
+            }
+        }
+
+        &__action {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            &__title {
+                h2 {
+                    font-size: 1rem;
+                    font-weight: 600;
+                }
+            }
+
+
+            &__buttons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+
+
+                &__button {
+                    color: white;
+                    font-size: 1.2rem;
+                    border: none;
+                    border-radius: 10px;
+                    outline: none;
+                    padding: 0.5rem 1rem;
+
+                    &:hover {
+                        cursor: pointer;
+                        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+                    }
+                }
+
+                .delete {
+                    color: #fff;
+                    background: $beblocky-red;
+                }
+
+                .cancel {
+                    color: #222;
+                    background: $beblocky-cyan-accent;
+                }
+            }
+        }
+    }
+}

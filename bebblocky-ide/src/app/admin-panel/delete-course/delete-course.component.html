@@ -1,1 +1,24 @@
-{{ error }}
+<div class="delete-course-container">
+    <div *ngIf="!showSpinner" class="delete-course">
+        <div class="delete-course__title">
+            <h1>Delete Course</h1>
+        </div>
+        <div class="delete-course__course-details">
+            <h2>{{ courseTitle }}</h2>
+        </div>
+        <div class="delete-course__action">
+            <div class="delete-course__action__title">
+                <h2>Are you sure you want to delete this course?</h2>
+            </div>
+            <div class="delete-course__action__buttons">
+                <button class="delete-course__action__buttons__button delete"
+                    (click)="delete()">Delete</button>
+                <button class="delete-course__action__buttons__button cancel"
+                    (click)="cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="showSpinner" class="delete-course-spiner">
+        <app-loading-spinner></app-loading-spinner>
+    </div>
+</div>

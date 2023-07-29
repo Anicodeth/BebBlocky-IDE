@@ -13,14 +13,8 @@ $ff-primary: "Montserrat", sans-serif;
 
 .grid-container {
     min-height: 100vh;
-    width: 100vw;
-
-    padding: 0px;
-    margin: 0px;
     display: flex;
     flex-direction: row;
-    // grid-template-columns: auto 1fr;
-    // gap: 1rem;
     background-color: $beblocky-light-green;
 }
 
@@ -43,6 +37,12 @@ $ff-primary: "Montserrat", sans-serif;
     position: relative;
     width: 95vw;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    router-outlet {
+        height: 100%;
+    }
 }
 
 .floating-action-button {

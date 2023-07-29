@@ -55,8 +55,13 @@ export class ModernSidebarComponent {
       { name: 'HTML Courses', link: '/devdashboard/html-courses', icon: faHtml5, class: 'regular' },
       { name: 'CSS Courses', link: '/devdashboard/css-courses', icon: faCss3, class: 'regular' },
       { name: 'JS Courses', link: '/devdashboard/js-courses', icon: faSquareJs, class: 'regular' },
-      // Add more menu items here
+      { name: 'Log Out', link: '/login', icon: faFileCode, class: 'regular'},
+
     ];
+  }
+  logout() {
+    this.bridgeService.logout();
+    this.router.navigate(['/']);
   }
 
   setCurrentMenuItemName(name: String): void {

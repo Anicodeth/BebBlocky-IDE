@@ -43,6 +43,12 @@ $ff-primary: "Montserrat", sans-serif;
     position: relative;
     width: 95vw;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    router-outlet {
+        height: 100%;
+    }
 }
 
 .floating-action-button {

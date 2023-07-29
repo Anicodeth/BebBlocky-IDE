@@ -110,15 +110,25 @@ export class IdeSlidesComponent implements OnInit {
     let percent: any = ((this.currentIndex + 1) / this.slides.length) * 100;
 
     this.bridgeService.updateCourseProgress(this.courseId, percent).subscribe((response: any) => {
+      
+      //old
       let temp: any = sessionStorage.getItem('courseProg');
       temp = JSON.parse(temp);
+      let found = false;
 
       temp.forEach((val: any) => {
         if (val.courseId == this.courseId) {
           val.completedPercent = percent;
+          found = true;
         }
       });
+      if(!found){
+        temp.push({courseId: this.courseId, completedPercent: percent});
+      }
       sessionStorage.setItem('courseProg', JSON.stringify(temp));
+
+
+
     });;
   }
 

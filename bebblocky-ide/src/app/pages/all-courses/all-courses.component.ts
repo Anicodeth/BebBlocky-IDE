@@ -31,6 +31,7 @@ export class AllCoursesComponent implements OnInit {
     this.showSpinner = true;
     this.bridgeService.getCourses('').subscribe((courses: any) => {
       this.courses = courses.courses;
+      console.log(this.courses);
       sessionStorage.setItem('courses', JSON.stringify(this.courses));
       this.showSpinner = false;
     });

@@ -127,6 +127,7 @@ export class BridgeService {
   }
 
   getUser() {
+    this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
     return this.user;
   }
 

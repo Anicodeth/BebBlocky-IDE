@@ -29,6 +29,7 @@
 .welcome {
   margin-left: 5rem;
   font-family: Georgia, 'Times New Roman', Times, serif !important;
+  font-size: 2.5rem !important;
 }
 
 body {
@@ -112,16 +113,19 @@ body {
   animation-duration: 4s;
 }
 .course-text p{
-  font-size: 1rem !important;
-  font-weight: 600 !important;
+  font-size: 1.5rem !important;
+  font-weight: 400 !important;
   text-align: left;
+  padding-right: 30rem;
+  margin-bottom: 1rem;
+  text-justify: inter-word;
+
 
 }
 .course-text h2 {
   flex: 1;
   font-size: 3rem !important;
-  font-weight: 600 !important;
-
+  font-weight: 300 !important;
   
   animation: fadein;
   animation-duration: 2s;

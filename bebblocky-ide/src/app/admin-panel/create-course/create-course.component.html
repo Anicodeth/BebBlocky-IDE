@@ -1,4 +1,4 @@
-<div *ngIf="error" class="error">
+ <div *ngIf="error" class="error">
     {{ error }} Please try again after fixing the errors.
 </div>
 <div *ngIf="success" class="success">
@@ -145,6 +145,11 @@
                                     <!-- <label *ngIf="getSlide(lessonIndex, slideIndex).value.code.length == 0" for="code">Slide Code</label> -->
                                     <textarea id="code" formControlName="code" rows="3" placeholder="{{ codeExample }}"></textarea>
                                 </div>
+                                <div
+                                class="course-creator__lessons__lesson__slides__slide__main-form__code form-holder">
+                                <!-- <label *ngIf="getSlide(lessonIndex, slideIndex).value.code.length == 0" for="code">Slide Code</label> -->
+                                <textarea formControlName="image" rows="3" placeholder="Image"></textarea>
+                            </div>
                         </div>
                         <div class="course-creator__lessons__lesson__slides__slide__buttons">
                             <div class="course-creator__lessons__lesson__slides__slide__buttons__change-background button setting" (click)="changeBackgroundInput.click()">

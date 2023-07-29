@@ -1,7 +1,11 @@
 <div routerLinkActive="active" class="course">
+
     <div class="course-about">
-        <img src="../../../assets/svg/desktopwindow.svg" alt="">
+        <div class = "course-image">
+            <img src="../../../assets/svg/desktopwindow.svg" alt="">
+        </div>
         <h3>{{ courseName | truncate:8 }} </h3>
+
         <!-- <p>{{ courseDescription | truncate:8 }}</p> -->
     </div>
     <div *ngIf="user.role != 'admin'" class="course-progress">
@@ -10,9 +14,10 @@
     </div>
     <div class="course-action-button">
         <a routerLink="/ide/{{ courseId }}" class="course-goto-button">
-            Start
+            Start Course
             <fa-icon class="sidebar-menu-item-icon" [icon]="gotoIcon"></fa-icon>
         </a>
+
         <a *ngIf="user.role == 'admin'" routerLink="/admin/edit-course/{{
             courseId }}" class="course-goto-button">
             <fa-icon class="sidebar-menu-item-icon" [icon]="editIcon"></fa-icon>

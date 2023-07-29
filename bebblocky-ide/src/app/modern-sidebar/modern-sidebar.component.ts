@@ -52,9 +52,9 @@ export class ModernSidebarComponent {
     ]
     this.courseMenuItems = [
       { name: 'All Courses', link: '/devdashboard/courses', icon: faLayerGroup, class: 'regular' },
-      //{ name: 'HTML Courses', link: '/devdashboard/html-courses', icon: faHtml5, class: 'regular' },
-      //{ name: 'CSS Courses', link: '/devdashboard/css-courses', icon: faCss3, class: 'regular' },
-      //{ name: 'JS Courses', link: '/devdashboard/js-courses', icon: faSquareJs, class: 'regular' },
+      { name: 'HTML Courses', link: '/devdashboard/html-courses', icon: faHtml5, class: 'regular' },
+      { name: 'CSS Courses', link: '/devdashboard/css-courses', icon: faCss3, class: 'regular' },
+      { name: 'JS Courses', link: '/devdashboard/js-courses', icon: faSquareJs, class: 'regular' },
       // Add more menu items here
     ];
   }

@@ -38,27 +38,33 @@ export class CreateCourseComponent {
   public contentExample: string = "CSS Media Queries are a powerful tool in creating responsive websites. They allow us to apply different styles based on the characteristics of the device or screen size. Media Queries use the @media rule in CSS to define different styles for different conditions. Common media query conditions include screen width, device orientation, resolution, and more.";
 
   public codeExample: string = "";
-
   public listOfFonts: string[] = [
     "Arial",
     "Verdana",
-    "Jetbrains Mono",
     "Comic Sans MS",
-    "Chalkduster",
-    "Fredoka One",
-    "Bangers",
-    "Amatic SC",
-    "Courier New", // A classic typewriter-style font
-    "Pacifico", // A fun and casual font with a handwritten feel
-    "Roboto Condensed", // A friendly and modern font with a condensed style
-    "Quicksand", // A playful font with rounded edges
-    "Architects Daughter", // A quirky and artistic font resembling hand-drawn letters
-    "Indie Flower", // A cursive font that gives a personal and creative touch
-    "Caveat", // A fun and decorative font with a handwritten look
-    "Bubblegum Sans", // A bold and rounded font that evokes a playful vibe
-    "Baloo", // A friendly and versatile font with a contemporary style
-    "Press Start 2P", // A nostalgic font inspired by retro video games
+    "Impact",
+    "Tahoma",
+    "Trebuchet MS",
+    "Courier New",
+    "Georgia",
+    "Lucida Sans Unicode",
+    "Lucida Console",
+    "Palatino Linotype",
+    "Times New Roman",
+    "Lucida Handwriting",
+    "Segoe UI",
+    "Century Gothic",
+    "Century Schoolbook",
+    "Franklin Gothic",
+    "Book Antiqua",
+    "Brush Script MT",
+    "Kristen ITC",
+    "Jokerman",
+    "Papyrus",
+    "Curlz MT",
+    "Showcard Gothic",
   ];
+
 
   constructor(
     private fb: FormBuilder,

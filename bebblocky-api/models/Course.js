@@ -30,7 +30,6 @@ const slideSchema = new mongoose.Schema({
   },
   code: {
     type: String,
-    required: true
   },
   image: {
     type: String

@@ -38,12 +38,33 @@ export class CreateCourseComponent {
   public contentExample: string = "CSS Media Queries are a powerful tool in creating responsive websites. They allow us to apply different styles based on the characteristics of the device or screen size. Media Queries use the @media rule in CSS to define different styles for different conditions. Common media query conditions include screen width, device orientation, resolution, and more.";
 
   public codeExample: string = "";
-
   public listOfFonts: string[] = [
     "Arial",
     "Verdana",
-    "Jetbrains Mono"
+    "Comic Sans MS",
+    "Impact",
+    "Tahoma",
+    "Trebuchet MS",
+    "Courier New",
+    "Georgia",
+    "Lucida Sans Unicode",
+    "Lucida Console",
+    "Palatino Linotype",
+    "Times New Roman",
+    "Lucida Handwriting",
+    "Segoe UI",
+    "Century Gothic",
+    "Century Schoolbook",
+    "Franklin Gothic",
+    "Book Antiqua",
+    "Brush Script MT",
+    "Kristen ITC",
+    "Jokerman",
+    "Papyrus",
+    "Curlz MT",
+    "Showcard Gothic",
   ];
+
 
   constructor(
     private fb: FormBuilder,

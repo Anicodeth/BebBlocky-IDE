@@ -50,6 +50,13 @@
     margin: auto;
     white-space: pre;
     overflow-x: scroll;
+    font-size: larger;
+} 
+
+.code-content::-webkit-scrollbar-thumb {
+    background: yellow; 
+    height:0.5rem;
+    border-radius: 100vw;
 }
 
 .text-content {
@@ -57,4 +64,12 @@
     text-align: center;
     margin-bottom: 1rem;
     font-size: 1.1rem;
+}
+.image-container {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 1rem;
 }

@@ -47,14 +47,14 @@ export class ModernSidebarComponent {
       { name: 'Code', link: `/ide/0`, icon: faCode, class: 'special' },
     ]
     this.userMenuItems = [
-      { name: 'My Profile', link: '/devdashboard/profile', icon: faUser, class: 'regular' },
+      { name: 'My Profile', link: '/dashboard/profile', icon: faUser, class: 'regular' },
       //{ name: 'My Courses', link: '/devdashboard/my-courses', icon: faFileCode, class: 'regular' },
     ]
     this.courseMenuItems = [
-      { name: 'All Courses', link: '/devdashboard/courses', icon: faLayerGroup, class: 'regular' },
-      { name: 'HTML Courses', link: '/devdashboard/html-courses', icon: faHtml5, class: 'regular' },
-      { name: 'CSS Courses', link: '/devdashboard/css-courses', icon: faCss3, class: 'regular' },
-      { name: 'JS Courses', link: '/devdashboard/js-courses', icon: faSquareJs, class: 'regular' },
+      { name: 'All Courses', link: '/dashboard/courses', icon: faLayerGroup, class: 'regular' },
+      { name: 'HTML Courses ', link: '/dashboard/html-courses', icon: faHtml5, class: 'regular' },
+      { name: 'CSS Courses', link: '/dashboard/css-courses', icon: faCss3, class: 'regular' },
+      { name: 'JS Courses', link: '/dashboard/js-courses', icon: faSquareJs, class: 'regular' },
       { name: 'Log Out', link: '/login', icon: faFileCode, class: 'regular'},
 
     ];

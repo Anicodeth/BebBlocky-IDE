@@ -24,7 +24,6 @@
         <p>{{ error }}</p>
       </div>
 
-      <a href="#">Forgot Your Password?</a>
 
       <button type="submit">
         <span *ngIf="!isButtonDisabled">Sign In</span>
@@ -65,7 +64,7 @@
         [formGroup]="loginForm"
         onsubmit="event.preventDefault()"
         (submit)="login()">
-        <h1>Sign In</h1>
+        <h1 class = "heads">Sign In</h1>
         <br />
         <input
           formControlName="username"
@@ -81,10 +80,9 @@
         <div class="error">
           <p>{{ error }}</p>
         </div>
-        <a href="#">Forgot Your Password?</a>
 
         <button type="submit" [disabled]="isButtonDisabled">
-          <span *ngIf="!isButtonDisabled">Sign In</span>
+          <span *ngIf="!isButtonDisabled" >Sign In</span>
           <app-progress-ripples *ngIf="isButtonDisabled"></app-progress-ripples>
         </button>
       </form>
@@ -95,7 +93,7 @@
         [formGroup]="signupForm"
         (submit)="signup()"
         onsubmit="event.preventDefault()">
-        <h1>Create Account</h1>
+        <h1 class = "heads">Create Account</h1>
         <br />
         <input formControlName="name" placeholder="Username" />
         <input formControlName="email" placeholder="Email" />
@@ -107,7 +105,7 @@
           <p>{{ error }}</p>
         </div>
         <button type="submit" [disabled]="isButtonDisabled">
-          <span *ngIf="!isButtonDisabled">Sign Up</span>
+          <span *ngIf="!isButtonDisabled" >Sign Up</span>
           <app-progress-ripples *ngIf="isButtonDisabled"></app-progress-ripples>
         </button>
       </form>
@@ -116,15 +114,15 @@
     <div class="overlay-container">
       <div class="overlay">
         <div class="overlay-panel overlay-left">
-          <h1>Welcome Back!</h1>
+          <h1 class = "heads">Welcome Back!</h1>
           <br />
-          <p>Let's continue Coding!</p>
+          <p class = "parts">Let's continue Coding!</p>
           <br />
           <button class="ghost" id="signIn" (click)="cheaker()">Sign In</button>
         </div>
         <div class="overlay-panel overlay-right">
-          <h1>Super, Let's Code!</h1>
-          <p>Enter your details and lets get going</p>
+          <h1 class = "heads">Super, Let's Code!</h1>
+          <p class = "parts">Enter your details and lets get going</p>
           <button class="ghost" id="signUp" (click)="cheaker()">Sign Up</button>
         </div>
       </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BridgeService } from '../shared/services/bridge.service';
 import { CodeEditorService } from '../shared/services/code-editor.service';
 interface Course {
@@ -7,6 +8,7 @@ interface Course {
   image: string;
   active: boolean;
 }
+
 @Component({
   selector: 'app-modern-dashboard',
   templateUrl: './modern-dashboard.component.html',
@@ -15,6 +17,11 @@ interface Course {
 export class ModernDashboardComponent implements OnInit{
   public isNight: boolean = false;
   public user: any;
+  public topSlide:any;
+  imageUrl: string = '../../assets/slide_header_pc.jpg';
+  breakpointWidth = 768;
+  defaultImageUrl = '../../assets/slide_header_pc.jpg';
+  alternativeImageUrl = '../../assets/Phone-BeBlocky.png';
   public courses:Course[] = [
     {
       title: 'Python Course',
@@ -22,37 +29,25 @@ export class ModernDashboardComponent implements OnInit{
       image: '../../assets/svg/python.svg',
       active: true,
     },
-    {
-      title: 'C++ Course',
-      description: 'C++ Course is designed for those who want to excel in C++ programming. Explore our expert-taught modules and advance your coding skills today.',
-      image: '../../assets/svg/cpp.svg',
-      active: false,
-    },
-    {
-      title: 'Java Course',
-      description: 'In the Java Course, you will gain hands-on experience in Java programming and software development. Join us and be a part of this exciting learning experience.',
-      image: '../../assets/svg/java.svg',
-      active: false,
-    },
-    {
-      title: 'C# Course',
-      description: 'The C# Course offers you the opportunity to master C# programming language and build powerful applications. Enroll now to unleash your potential.',
-      image: '../../assets/svg/csharp.svg',
-      active: false,
-    },
-    // Add more courses as needed
+
   ];
 
 
   constructor(
     private bridgeService: BridgeService,
-    private codeService: CodeEditorService
-  ) {}
+    private codeService: CodeEditorService,
+    private router: Router  ) {}
 
   ngOnChanges() {
     this.bridgeService.setUser();
   }
   ngOnInit(): void {
+    this.updateImageUrl(window.innerWidth);
+
+    //change navigation 
+    this.router.navigate(['/devdashboard/courses']);
+    
+
     let mode = JSON.parse(sessionStorage.getItem('nightMode')!);
     if ( mode == true) {
       this.isNight = true;
@@ -72,6 +67,26 @@ export class ModernDashboardComponent implements OnInit{
     this.startCarousel();
 
   }
+
+  
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(event: any): void {
+    const windowWidth = event.target.innerWidth;
+    this.updateImageUrl(windowWidth);
+  }
+
+  private updateImageUrl(windowWidth: number): void {
+    if (windowWidth <= this.breakpointWidth) {
+      this.imageUrl = this.alternativeImageUrl;
+    } else {
+      this.imageUrl = this.defaultImageUrl;
+    }
+  }
+
+
+
+
 
   startCarousel(): void {
     let currentIndex = 0;

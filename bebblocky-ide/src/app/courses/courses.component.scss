@@ -8,8 +8,22 @@
 }
 
 // Media query to show one by one on mobiles
-@media (max-width: 768px) {
+
+
+@media (max-width: 1200px) {
     .courses {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1000px) {
+    .courses {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 769px) {
+    .courses {
+        grid-template-columns:repeat(1, 1fr);
     }
 }

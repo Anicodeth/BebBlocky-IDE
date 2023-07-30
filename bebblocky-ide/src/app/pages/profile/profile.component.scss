@@ -8,5 +8,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color:black ;
     // justify-content: center;
+}
+
+.outline{
+    border: 0.25rem solid #5baf48;
+border-radius:1rem;
 }

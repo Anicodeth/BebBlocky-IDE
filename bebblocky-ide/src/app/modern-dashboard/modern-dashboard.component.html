@@ -13,18 +13,20 @@
       <div class = "slider-container">
         <h1 class = "welcome">Welcome Back,<b> {{user.username}} </b></h1>
         <div class="slider">
-            <div *ngFor="let course of courses" class="slide" [ngClass]="{ 'active': course.active }" >
+            <div *ngFor="let course of courses" class="slide" 
+            [style.background-image]="'url(' + imageUrl + ')'"
+            [ngClass]="{ 'active': course.active }" >
               <div class = "course-text" >
                 <h2>{{ course.title }}</h2>
                <p>{{ course.description }}</p>
               <div class = "button-container">
                 Coming Soon
               </div>
+
+              
         </div>
 
-            <div class = "course-image" >
-              <img src="{{ course.image }}" alt="">
-            </div>
+
           </div>
         </div>
     </div>

@@ -69,8 +69,7 @@
   margin: 0.5rem 10%;
   padding: 0rem 0.5rem;
   color: #5baf48;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
+
 }
 
 .sidebar .sidebar-menu {
@@ -129,6 +128,14 @@
 .sidebar .sidebar-menu .sidebar-menu-item.active a {
   background-color: #94e2eca8;
   color: #444;
+}
+
+.parts{
+  font-family: 'Gaegu';
+}
+.heads{
+  font-family: 'Chronic-Regular';
+  font-size: 2.2rem;
 }
 
 /* Media queries for responsiveness */

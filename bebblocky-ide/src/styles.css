@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'Chronic-Regular';
+    src: url('./assets/fonts/font/Chronic-Regular.ttf');
+  }
+
+@font-face {
+    font-family: 'Gaegu';
+    src: url('./assets/fonts/Gaegu/Gaegu-Regular.ttf');
+  }
+
+
 :root {
     --clr-main: #386d2c;
     --linear-gradient: linear-gradient(to bottom, #5baf48, #a7d464);
@@ -204,3 +215,11 @@ input,
 select {
     vertical-align: middle;
 }
+
+.parts{
+    font-family: 'Gaegu';
+  }
+  .heads{
+    font-family: 'Chronic-Regular';
+    font-size: 2.2rem;
+  }

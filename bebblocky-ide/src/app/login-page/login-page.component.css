@@ -284,3 +284,12 @@ input:hover {
 .success {
   color: rgb(50, 150, 50);
 }
+
+
+.heads{
+  font-size: 3rem;
+}
+
+.parts{
+  font-size: 1.5rem;
+}

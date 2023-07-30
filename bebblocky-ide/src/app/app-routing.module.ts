@@ -28,23 +28,23 @@ const routes: Routes = [
   },
   { path: 'ide/:courseId', component: IdePageComponent, canActivate: [LoggedInGuard] },
   { path: 'login', component: LoginPageComponent },
-  {
-    path: 'dashboard',
+   //{
+   // path: 'dashboard',
     // redirectTo: '/dashboard/profile',
     // pathMatch: 'full',
-    component: DashboardComponent,
-    canActivate: [LoggedInGuard],
-    children: [
-      { path: 'courses', component: AllCoursesComponent },
-      { path: 'my-courses', component: MyCoursesComponent },
-      { path: 'js-courses', component: JsCoursesComponent },
-      { path: 'css-courses', component: CssCoursesComponent },
-      { path: 'html-courses', component: HtmlCoursesComponent },
-      { path: 'profile', component: ProfileComponent }
-    ]
-  } ,
+   // component: DashboardComponent,
+   // canActivate: [LoggedInGuard],
+   // children: [
+   //   { path: 'courses', component: AllCoursesComponent },
+    //  { path: 'my-courses', component: MyCoursesComponent },
+    //  { path: 'js-courses', component: JsCoursesComponent },
+    //  { path: 'css-courses', component: CssCoursesComponent },
+    //  { path: 'html-courses', component: HtmlCoursesComponent },
+    //  { path: 'profile', component: ProfileComponent }
+    //]
+  //} ,
   {
-    path: 'devdashboard',
+    path: 'dashboard',
     component: ModernDashboardComponent,
     canActivate: [LoggedInGuard],
     children: [

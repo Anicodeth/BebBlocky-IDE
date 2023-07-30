@@ -65,7 +65,7 @@ export class LoginPageComponent {
           const user = response.user;
 
           if (user.role === "user") {
-            this.router.navigateByUrl("/dashboard/profile");
+            this.router.navigateByUrl("/dashboard/courses");
           } else {
             this.router.navigateByUrl("/admin/courses");
           }

@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+
 
 $border: #ff9800;
 $background-color: #ff9800;
@@ -34,6 +35,7 @@ $ff-primary: "Montserrat", sans-serif;
     width: 100%;
     height: 16.5rem;
     padding: 1rem;
+    
 
     .course-image{
         width:100%;
@@ -58,8 +60,10 @@ $ff-primary: "Montserrat", sans-serif;
         margin-bottom: 0.5rem;
         overflow: hidden;
         h3{
-            font-size: 1rem;
-            font-weight: 400;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: "gaegu" ;
+
  
         }
     }
@@ -91,19 +95,28 @@ $ff-primary: "Montserrat", sans-serif;
         justify-content: flex-start;
         align-items: flex-start;
         margin-top: 0.5rem;
+        width:100%;
 
-
-        
 
         .course-goto-button {
+            width: 100%;
             background-color: $background-color;
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
             color: #000;
             border: none;
             border-radius: 1.5rem;
             padding: 10px 10px;
+
             padding-right: 25px;
-            margin-right: 1rem;
+            padding-left: 25px;
+            padding-bottom: 13px;
+
             cursor: pointer;
+            font-family: "Chronic-Regular" ;
+
 
             i {
                 font-size: 1.2rem;

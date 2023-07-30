@@ -42,7 +42,22 @@ export class CreateCourseComponent {
   public listOfFonts: string[] = [
     "Arial",
     "Verdana",
-    "Jetbrains Mono"
+    "Jetbrains Mono",
+    "Comic Sans MS",
+    "Chalkduster",
+    "Fredoka One",
+    "Bangers",
+    "Amatic SC",
+    "Courier New", // A classic typewriter-style font
+    "Pacifico", // A fun and casual font with a handwritten feel
+    "Roboto Condensed", // A friendly and modern font with a condensed style
+    "Quicksand", // A playful font with rounded edges
+    "Architects Daughter", // A quirky and artistic font resembling hand-drawn letters
+    "Indie Flower", // A cursive font that gives a personal and creative touch
+    "Caveat", // A fun and decorative font with a handwritten look
+    "Bubblegum Sans", // A bold and rounded font that evokes a playful vibe
+    "Baloo", // A friendly and versatile font with a contemporary style
+    "Press Start 2P", // A nostalgic font inspired by retro video games
   ];
 
   constructor(

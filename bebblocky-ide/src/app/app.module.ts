@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatDialogueModule } from '@angular/material/dialog';
 
 import { NgTerminalComponent, NgTerminalModule } from 'ng-terminal';
 
@@ -49,6 +50,7 @@ import { ModernSidebarComponent } from './modern-sidebar/modern-sidebar.componen
 import { DeleteCourseComponent } from './admin-panel/delete-course/delete-course.component';
 import { EditCourseComponent } from './admin-panel/edit-course/edit-course.component';
 import { CourseService } from './shared/services/course.service';
+import { DeleteDialogueComponent } from './admin-panel/delete-dialogue/delete-dialogue.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +89,8 @@ import { CourseService } from './shared/services/course.service';
     ModernDashboardComponent,
     ModernSidebarComponent,
     DeleteCourseComponent,
-    EditCourseComponent
+    EditCourseComponent,
+    DeleteDialogueComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +101,8 @@ import { CourseService } from './shared/services/course.service';
     HttpClientModule,
     DragDropModule,
     NgTerminalModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogueModule
   ],
   providers: [
     CodeEditorService,

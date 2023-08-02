@@ -4,7 +4,7 @@
 
 .header-container{
     display: flex;
-    height: 3.4rem;
+    height: 3.415rem;
     width:100%;
     justify-content: space-between;
     padding-left:1rem;
@@ -40,7 +40,7 @@
     font-family: 'Courier New', Courier, monospace;
 }
 img{
-    height:2.5rem;
+    height:3rem;
   
 }
 .header-segment {
@@ -113,3 +113,9 @@ background-color: lightgray;
     50% { top: 5rem; }
     100% { top: 4rem; opacity: 1; }
   }
+
+@media (max-width:1000px) {
+    .header-icon{
+        margin-left:1rem;
+    }
+}

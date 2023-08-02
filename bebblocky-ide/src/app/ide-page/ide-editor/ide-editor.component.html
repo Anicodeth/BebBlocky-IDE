@@ -8,16 +8,17 @@
       <fa-icon *ngIf = "!verticalEditor" [icon]="['fas','layer-group']"></fa-icon>
       <fa-icon *ngIf = "verticalEditor" [icon]="['fas','square']"></fa-icon>
     </button>
+    
     <div class="editor-section " [ngClass]="{'reveal': addHtmlClass, 'vertical': verticalEditor}" >
-      <label for="html-editor" >index.html</label>
+      <label for="html-editor" > index.html</label>
       <div id = "html-editor" class="app-ace-editor" #htmlEditor></div>
     </div>
     <div class="editor-section " [ngClass]="{'reveal': addCssClass, 'vertical': verticalEditor}" >
-      <label for="css-editor">style.css</label>
+      <label for="css-editor"> style.css</label>
       <div class="app-ace-editor" #cssEditor></div>
     </div>
     <div class="editor-section " [ngClass]="{'reveal': addJsClass , 'vertical': verticalEditor}" >
-      <label for="js-editor" >script.js</label>
+      <label for="js-editor" > script.js</label>
       <div class="app-ace-editor" #jsEditor></div>
     </div>
   </div>

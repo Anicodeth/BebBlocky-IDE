@@ -37,6 +37,8 @@
     height: 90.7vh;
     display: none; 
     background-color: white;
+    border-radius: 1.75rem;
+    overflow:hidden;
 
 }
 
@@ -50,12 +52,12 @@
 
 .phone-container {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     position: relative;
+    padding:0;
 }
 
 .reveal {

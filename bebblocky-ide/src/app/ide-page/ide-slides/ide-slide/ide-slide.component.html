@@ -1,21 +1,22 @@
 <div class="course" [ngStyle]="{
     'background-color': backgroundColor,
     'color': color
-}">
+    }">
     <div class="main-content">
-        <h1 class="content-title" [ngStyle]="{ 'font-family':  titleFont }">
+        <h1 class="content-title" [ngStyle]="{ 'font-family': titleFont }">
             {{ title }}
         </h1>
         <div class="main-content">
-            <div class="text-content" [ngStyle]="{ 'font-family':  contentFont }">
+            <!-- <div class="text-content" [ngStyle]="{ 'font-family':  contentFont }">
                 <p>{{ content }}</p>
-            </div>
+            </div> -->
+            <div class="preview-window" #formattedHtml></div>
             <div *ngIf="code" class="code-content">
                 {{ code }}
             </div>
         </div>
-        <div class = "image-container">
-        <img src="{{ image }}">
-       </div>
+        <div class="image-container">
+            <img src="{{ image }}">
+        </div>
     </div>
 </div>

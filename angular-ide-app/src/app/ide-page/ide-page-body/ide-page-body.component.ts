@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HostListener } from '@angular/core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
@@ -20,6 +20,8 @@ export class IdePageBodyComponent implements OnInit {
   public addPreviewClass: boolean = false;
   public addWebClass: boolean = true;
   public onlyCode: boolean = false;
+
+  @Input() courseId: string = "1";
 
 
   constructor(

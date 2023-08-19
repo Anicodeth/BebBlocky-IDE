@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BridgeService } from 'src/app/shared/bridge.service';
 import { CodeEditorService } from 'src/app/shared/code-editor.service';
@@ -22,19 +22,17 @@ export class IdeSlidesComponent implements OnInit {
 
   public course: any;
   public slides: Slide[] = [];
-  public courseId: any;
+  @Input() courseId: string = "1";
   public input: any;
   public currentIndex: number = 0;
 
   constructor(
     private bridgeService: BridgeService,
-    private route: ActivatedRoute,
     private codeEditorService: CodeEditorService
   ) { }
 
   ngOnInit() {
-    this.courseId = parseInt(this.route.snapshot.paramMap.get('courseId')!);
-    this.bridgeService.getCourse(this.courseId).subscribe((course: any) => {
+    this.bridgeService.getCourse(parseInt(this.courseId)).subscribe((course: any) => {
       this.course = course.course;
       //get courses from session storage
       let courses = JSON.parse(sessionStorage.getItem('courses')!);
@@ -109,7 +107,7 @@ export class IdeSlidesComponent implements OnInit {
     this.setStartingCode();
     let percent: any = ((this.currentIndex + 1) / this.slides.length) * 100;
 
-    this.bridgeService.updateCourseProgress(this.courseId, percent).subscribe((response: any) => {
+    this.bridgeService.updateCourseProgress(parseInt(this.courseId), percent).subscribe((response: any) => {
 
       //old
       let temp: any = sessionStorage.getItem('courseProg');

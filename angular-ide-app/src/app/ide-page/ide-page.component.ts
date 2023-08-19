@@ -1,4 +1,4 @@
-import {  Component, ElementRef, OnInit } from '@angular/core';
+import {  Component, ElementRef, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BridgeService } from '../shared/bridge.service';
 import { CodeEditorService } from '../shared/code-editor.service';
@@ -14,10 +14,10 @@ export class IdePageComponent implements OnInit {
   public isNight: boolean = false;
   public onlyCode: boolean = false;
   private contentDiv: HTMLElement;
+  @Input() courseId: string = "";
 
   constructor(
     private bridgeService: BridgeService,
-    private route: ActivatedRoute,
     private codeService: CodeEditorService,
     private elementRef: ElementRef
 
@@ -44,15 +44,14 @@ export class IdePageComponent implements OnInit {
 
     this.codeService.fullScreen.subscribe(() => {
 this.goFullScreen();    });
-    const courseId = this.route.snapshot.paramMap.get('courseId')!;
-    if (courseId == '0'){
+    if (this.courseId == "0"){
       this.codeService.onlyCode = true;
       this.showSpinner = false;
 
     }
     else{
       this.codeService.onlyCode = false;
-      this.bridgeService.getCourse(parseInt(courseId)).subscribe((course: any) => {
+      this.bridgeService.getCourse(parseInt(this.courseId)).subscribe((course: any) => {
       this.course = course.course;
       // this.bridgeService.updateLastAccessedCourseId(this.course.courseId).subscribe(() => {});
       this.showSpinner = false;

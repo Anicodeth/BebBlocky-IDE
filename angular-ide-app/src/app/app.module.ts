@@ -1,4 +1,4 @@
-import { DoBootstrap, Injector, NgModule } from '@angular/core';
+import { DoBootstrap, Injector, Input, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -22,6 +22,7 @@ import { IdePythonEditorComponent } from './ide-python-editor/ide-python-editor.
 import { IdePythonConsoleComponent } from './ide-python-console/ide-python-console.component';
 import { PythonService } from './shared/services/python.service';
 import { NgTerminalModule } from 'ng-terminal';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { NgTerminalModule } from 'ng-terminal';
     FontAwesomeModule,
     FormsModule,
     NgTerminalModule,
+    HttpClientModule,
   ],
   providers: [
     BridgeService,
@@ -54,6 +56,7 @@ import { NgTerminalModule } from 'ng-terminal';
   bootstrap: [AppComponent]
 })
 export class AppModule implements DoBootstrap {
+  @Input() courseId: string = "0";
     constructor(private injector: Injector) {
       const webComponent = createCustomElement(AppComponent, { injector: this.injector });
       customElements.define('angular-component', webComponent);

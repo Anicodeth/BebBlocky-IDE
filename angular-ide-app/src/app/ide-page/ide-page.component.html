@@ -1,0 +1,6 @@
+<div *ngIf="!showSpinner" [ngClass]="{'is-night':isNight , 'is-day':!isNight}" id = 'ide-page-container' class = "ide-page-container">
+    <app-ide-page-header></app-ide-page-header>
+    <app-ide-page-body></app-ide-page-body>
+   <!-- <app-ide-page-footer></app-ide-page-footer> -->
+</div>
+<app-sk-cubes *ngIf="showSpinner"></app-sk-cubes>

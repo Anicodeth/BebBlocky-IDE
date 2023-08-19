@@ -1,0 +1,29 @@
+<div class = "phone-container">
+    <div class="window-toggle">
+        <button *ngIf = "!onlyCode" (click)="toggleWindows('slide')" [class.active]="activeWindow === 'slide'">Read
+            <fa-icon class="header-icon" [icon]="['fas', 'bars']"></fa-icon>
+        </button>
+        <button (click)="toggleWindows('editor')" [class.active]="activeWindow === 'editor'">Code
+            <fa-icon class="header-icon" [icon]="['fas', 'code']"></fa-icon>
+        </button>
+        <button (click)="toggleWindows('preview')" [class.active]="activeWindow === 'preview'">Run
+            <fa-icon class="header-icon" [icon]="['fas', 'arrow-right']"></fa-icon>
+        </button>
+      </div>
+<div class = "body-container">
+
+    <div *ngIf = "!onlyCode" class = "body-section slides" [ngClass]="{'reveal': addSlideClass, 'web-reveal': addWebClass}" >
+        <app-ide-slides></app-ide-slides>
+    </div>
+    <div class = "body-section" [ngClass]="{'reveal': addEditorClass, 'web-reveal': addWebClass, 'expand': onlyCode}" >
+      <app-ide-editor *ngIf="type === 'html'"></app-ide-editor>
+      <app-ide-python-editor *ngIf="type === 'python'"></app-ide-python-editor>
+
+    </div>
+    <div class = "body-section window" [ngClass]="{'reveal': addPreviewClass, 'web-reveal': addWebClass, 'expand': onlyCode}" >
+       <app-ide-preview-window *ngIf="type === 'html'"></app-ide-preview-window> 
+       <app-ide-python-console *ngIf="type === 'python'"></app-ide-python-console>
+
+    </div>
+</div>
+</div>

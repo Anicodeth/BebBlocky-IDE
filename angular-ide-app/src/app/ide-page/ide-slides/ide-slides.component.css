@@ -1,0 +1,142 @@
+.courser {
+  position: relative;
+  height: 100%;
+  font-family: Rajdhani, sans-serif;
+
+}
+
+app-ide-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+
+}
+
+.content-title {
+
+  font-family: Source Sans Pro, Helvetica, sans-serif !important;
+  color: black !important; 
+  margin: 0 auto;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 2rem;
+
+}
+
+.course {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0 0 2rem 2rem;
+  padding: 1rem;
+}
+
+.course .text-content {
+  padding: 1.6rem 0 0 0;
+}
+
+.course image {
+  width: 80%;
+}
+
+
+.course p {
+  margin: 0 auto;
+  color: #fff;
+}
+
+.right-arrow,
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  height: 90%;
+  width: 25%;
+  font-size: 3rem;
+  color: #ffffff5d;
+  z-index: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: justify-content 0.3s ease-in-out;
+
+}
+
+.right-arrow {
+  right: 0;
+  justify-content: end;
+  padding-right: 1rem;
+  border-radius: 10rem 0 0 10rem;
+
+}
+
+.left-arrow {
+  left: 0;
+  justify-content: start;
+  padding-left: 1rem;
+  border-radius: 0 10rem 10rem 0;
+}
+
+.right-arrow:hover,
+.left-arrow:hover {
+  color: #fff;
+  background-color: #00000049;
+  justify-content: center;
+  padding: 0;
+  transition: justify-content 0.3s ease-in-out, background-color 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+
+.dots-container {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.3rem;
+  height: 0.3rem;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 999;
+}
+
+.dot {
+  height: 100%;
+  width: 100%;
+}
+
+.completed-course {
+  background-color: #00000098;
+}
+
+.new-course {
+  background-color: #D3D3D3;
+}
+
+.main-content {
+  max-height: 100%;
+}
+
+.code-content {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  font-family: monospace;
+  width: 95%;
+  background-color: #404040;
+  color: white;
+  font-weight: bolder;
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  margin: auto;
+}
+
+.text-content {
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+
+}

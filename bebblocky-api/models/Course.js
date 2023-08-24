@@ -57,7 +57,7 @@ const lessonSchema = new mongoose.Schema({
   lessonLanguage: {
     type: String,
     required: true,
-    enum: ['html', 'css', 'js', 'python']
+    enum: ['html', 'css', 'js', 'py']
   },
   slides: [
     slideSchema

@@ -13,10 +13,13 @@ export class BridgeService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+    sessionStorage.setItem('auth_token',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGU3NDcwMzI3ZWFkNDhkODFmYTI2ZTciLCJpYXQiOjE2OTI4ODQxOTV9.9P3ghC9fycy0WxQmpFTZO6tBwN3YbhdtQD62feIsoLs" )
+  }
 
   user: User = JSON.parse(sessionStorage.getItem('user') || '{}');
   token: String = sessionStorage.getItem('auth_token')!;
+
 
   baseUrl: String = 'https://beb-blocky-ide.vercel.app';
   // baseUrl: String = 'http://localhost:4000'; // - Development only

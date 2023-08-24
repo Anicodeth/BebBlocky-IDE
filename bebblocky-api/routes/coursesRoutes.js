@@ -83,7 +83,7 @@ router.get('/js', coursesController.getJsCourses);
 router.get('/:courseId', coursesController.getCourse);
 
 // Use auth middleware for the following routes
-//router.use(authMiddleware);
+router.use(authMiddleware);
 
 /**
  * @swagger

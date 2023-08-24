@@ -33,6 +33,7 @@ export class IdePageComponent implements OnInit {
 
   ngOnInit() {
     this.showSpinner = true;
+ 
     
     let mode = JSON.parse(sessionStorage.getItem('nightMode')!);
     if ( mode == true) {

@@ -101,7 +101,7 @@ export default function CoursesRoute() {
                         <CardFooter className="flex flex-row justify-between items-center">
                             <p className="text-xl font-bold">$25</p>
                             <div className="rounded-full p-1 bg-gray-100">
-                               <a href= {`http://localhost:4200/ide/${course.courseId}`}> <ArrowRight size={24} className="text-ecstasy" /> </a>
+                               <a href= {`https://bebblocky.vercel.app/ide/${course.courseId}`}> <ArrowRight size={24} className="text-ecstasy" /> </a>
                             </div>
                         </CardFooter>
                     </Card>

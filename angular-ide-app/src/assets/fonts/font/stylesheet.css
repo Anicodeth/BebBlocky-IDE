@@ -1,0 +1,84 @@
+@font-face {
+    font-family: 'Chronic Line';
+    src: url('Chronic-Line.eot');
+    src: local('Chronic Line'), local('Chronic-Line'),
+        url('Chronic-Line.eot?#iefix') format('embedded-opentype'),
+        url('Chronic-Line.woff2') format('woff2'),
+        url('Chronic-Line.woff') format('woff'),
+        url('Chronic-Line.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Chronic Extras';
+    src: url('Chronic-Extras.eot');
+    src: local('Chronic Extras'), local('Chronic-Extras'),
+        url('Chronic-Extras.eot?#iefix') format('embedded-opentype'),
+        url('Chronic-Extras.woff2') format('woff2'),
+        url('Chronic-Extras.woff') format('woff'),
+        url('Chronic-Extras.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Chronic Dusty Dots';
+    src: url('Chronic-DustyDots.eot');
+    src: local('Chronic Dusty Dots'), local('Chronic-DustyDots'),
+        url('Chronic-DustyDots.eot?#iefix') format('embedded-opentype'),
+        url('Chronic-DustyDots.woff2') format('woff2'),
+        url('Chronic-DustyDots.woff') format('woff'),
+        url('Chronic-DustyDots.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Chronic Inline';
+    src: url('Chronic-Inline.eot');
+    src: local('Chronic Inline'), local('Chronic-Inline'),
+        url('Chronic-Inline.eot?#iefix') format('embedded-opentype'),
+        url('Chronic-Inline.woff2') format('woff2'),
+        url('Chronic-Inline.woff') format('woff'),
+        url('Chronic-Inline.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Chronic Filled';
+    src: url('Chronic-Filled.eot');
+    src: local('Chronic Filled'), local('Chronic-Filled'),
+        url('Chronic-Filled.eot?#iefix') format('embedded-opentype'),
+        url('Chronic-Filled.woff2') format('woff2'),
+        url('Chronic-Filled.woff') format('woff'),
+        url('Chronic-Filled.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Chronic Dotted';
+    src: url('Chronic-Dotted.eot');
+    src: local('Chronic Dotted'), local('Chronic-Dotted'),
+        url('Chronic-Dotted.eot?#iefix') format('embedded-opentype'),
+        url('Chronic-Dotted.woff2') format('woff2'),
+        url('Chronic-Dotted.woff') format('woff'),
+        url('Chronic-Dotted.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Chronic';
+    src: url('Chronic-Regular.eot');
+    src: local('Chronic'), local('Chronic-Regular'),
+        url('Chronic-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Chronic-Regular.woff2') format('woff2'),
+        url('Chronic-Regular.woff') format('woff'),
+        url('Chronic-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+

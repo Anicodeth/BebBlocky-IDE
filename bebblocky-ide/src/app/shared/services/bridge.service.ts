@@ -46,6 +46,7 @@ export class BridgeService {
       tap((data: any) => {
         this.user = data.user;
         sessionStorage.setItem('user', JSON.stringify(data.user));
+        console.log(data.token);
         sessionStorage.setItem('auth_token', data.token);
         sessionStorage.setItem("courseProg", JSON.stringify(data.user.progress));
       }),

@@ -51,11 +51,14 @@ interface Course {
 export default function CoursesRoute() {
     const [courses, setCourses] = useState<Course[]>([]);
 
+
     useEffect(() => {
     fetch("https://beb-blocky-ide.vercel.app/api/v1/courses")
       .then(response => response.json())
       .then(data => {
         setCourses(data.courses)
+        sessionStorage.setItem('auth_token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGU3NDcwMzI3ZWFkNDhkODFmYTI2ZTciLCJpYXQiOjE2OTI4Nzg3ODl9.JhKUoZLk9U65iIuG_nosAaFnxm56dS_K3jZv00uQUvk" );
+
       })
       .catch(error => console.error("Error fetching courses:", error));
     }, []);
@@ -98,7 +101,7 @@ export default function CoursesRoute() {
                         <CardFooter className="flex flex-row justify-between items-center">
                             <p className="text-xl font-bold">$25</p>
                             <div className="rounded-full p-1 bg-gray-100">
-                                <ArrowRight size={24} className="text-ecstasy" />
+                               <a href= {`http://localhost:4200/ide/${course.courseId}`}> <ArrowRight size={24} className="text-ecstasy" /> </a>
                             </div>
                         </CardFooter>
                     </Card>

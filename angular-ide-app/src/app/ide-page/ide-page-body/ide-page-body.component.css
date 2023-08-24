@@ -1,0 +1,88 @@
+.body-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0.2rem;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+
+}
+
+.window-toggle {
+    display: none;    
+    z-index: 1;
+    width: 100%;
+
+}
+
+.window-toggle button{
+    flex:1rem;
+    background-color: #444857;
+    color: #76DAFF;
+    font-family: monospace !important;
+    font-size: 1rem;
+    height:2.5rem;
+    font-weight: bold;
+}
+
+.window-toggle button.active {
+    background-color: #1E1F26;
+    color:white;
+  }
+.body-section {
+
+    width: 32.5%;
+    margin: auto;
+    height: 90.7vh;
+    display: none; 
+    background-color: white;
+    border-radius: 1.75rem;
+    overflow:hidden;
+
+}
+
+.window{
+    border-radius: 2rem;
+}
+.slides{
+    border-radius: 0 0 2rem 2rem;
+
+}
+
+.phone-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    padding:0;
+}
+
+.reveal {
+    display: block;
+  }
+
+  .web-reveal{
+    display: block;
+  }
+
+.expand {
+    width:48%;
+}
+
+
+@media (max-width:1000px) {
+
+    .window-toggle{
+        display: flex;
+    }
+    .body-container{
+        flex-direction: column;
+    }
+    .body-section{
+        width:98%;
+    }
+    
+}

@@ -1,0 +1,31 @@
+<div class="courser" >
+  <div class="dots-container">
+    <div
+      [class]="
+        courseIndex <= currentIndex ? 'dot completed-course' : 'dot new-course'
+      "
+      *ngFor="let course of slides; let courseIndex = index"
+      (click)="goToSlide(courseIndex)"
+    ></div>
+    <!-- <div style="width: 100%;height: 100%;background-color: black;"></div> -->
+  </div>
+  <div>
+    <div class = "overlay">
+    <div (click)="goToPrevious()" class="left-arrow">
+      <p>❰</p>
+    </div>
+    <div (click)="goToNext()" class="right-arrow">
+      <p>❱</p>
+    </div>
+  </div>
+    <app-ide-slide 
+    [backgroundColor]="slides[currentIndex].backgroundColor || 'yellow'"
+    [color]="slides[currentIndex].color"
+      [code]="slides[currentIndex].code"
+      [title]="slides[currentIndex].title"
+      [titleFont]="slides[currentIndex].titleFont"
+      [content]="slides[currentIndex].content"
+      [contentFont]="slides[currentIndex].contentFont"
+      [image]="slides[currentIndex].image"
+    ></app-ide-slide>
+</div>

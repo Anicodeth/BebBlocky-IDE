@@ -88,7 +88,6 @@ export default function CoursesRoute() {
                         </CardHeader>
                         <CardContent className="-mt-5">
                             <CardTitle>{course.courseTitle}</CardTitle>
-                            <p className="text-2xl font-semibold"></p>
                             <div className="flex flex-row justify-between items-center mt-2">
                                 <div className="flex gap-1">
                                     <Star size={16} className="text-apple" /><Star size={16} className="text-apple" /><Star size={16} className="text-apple" /><Star size={16} className="text-apple" /><StarHalf className="text-apple" size={16} />

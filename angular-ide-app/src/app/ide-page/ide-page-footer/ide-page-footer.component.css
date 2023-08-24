@@ -1,0 +1,35 @@
+.footer-container{
+    width:100%;
+    padding: 0.25rem;
+    margin-top: 0.35rem;
+    background-color:  #e7ffc3;
+    box-shadow:  #5BAF48 0px 1px 3px 3px,  #5BAF48 0px 1px 2px 0px; 
+}
+
+button{
+    border-radius: 20px;
+    width: 15rem;
+    border: 1px solid #5BAF48;
+    background-color: #5BAF48;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
+    box-shadow: rgba(255, 152, 0, 0.1) 0px 20px 25px -5px, rgba(255, 152, 0, 0.04) 0px 10px 10px -5px;
+    margin-right:0.5rem;  
+}
+
+
+@media (max-width:1000px) {
+    button{
+        width:48%;
+        margin-left:1%;
+        margin-right: 0%;
+   
+    }
+    
+}

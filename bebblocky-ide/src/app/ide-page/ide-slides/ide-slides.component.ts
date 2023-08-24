@@ -39,7 +39,7 @@ export class IdeSlidesComponent implements OnInit {
       //get courses from session storage
       let courses = JSON.parse(sessionStorage.getItem('courses')!);
       //until backend is fixed !!
-      console.log(courses, "here");
+    
       if (courses) {
         this.course = courses.find((course: any) => course.courseId == this.courseId);
       }

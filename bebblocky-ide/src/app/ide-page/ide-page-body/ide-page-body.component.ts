@@ -4,6 +4,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { CodeEditorService } from 'src/app/shared/services/code-editor.service';
+import { BridgeService } from 'src/app/shared/services/bridge.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ide-page-body',
@@ -20,11 +22,14 @@ export class IdePageBodyComponent implements OnInit {
   public addPreviewClass: boolean = false;
   public addWebClass: boolean = true;
   public onlyCode: boolean = false;
+  public courseId: any;
 
 
   constructor(
     private library: FaIconLibrary,
-    private codeEditorService: CodeEditorService
+    private codeEditorService: CodeEditorService,
+    private bridgeService: BridgeService,
+    private route: ActivatedRoute
   ) {
     library.addIconPacks(fas, far);
   }
@@ -55,6 +60,8 @@ export class IdePageBodyComponent implements OnInit {
       this.addPreviewClass = true;
     }
 
+
+
   }
 
   ngOnInit(): void {
@@ -64,8 +71,13 @@ export class IdePageBodyComponent implements OnInit {
 
     this.onlyCode = this.codeEditorService.onlyCode;
 
+    this.courseId = parseInt(this.route.snapshot.paramMap.get('courseId')!);
+    this.bridgeService.getCourse(this.courseId).subscribe((course: any) => {
+      this.type = course.course.courseLanguage;
+    });
 
 
 
-  }
-}
+
+  
+  }}

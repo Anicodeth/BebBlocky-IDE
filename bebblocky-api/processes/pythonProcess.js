@@ -36,6 +36,7 @@ socket.on('input', (data) => {
 pythonProcess.on('exit', (code) => {
   console.log(`Python process exited with code ${code}`);
   socket.emit('output', `Python process exited with code ${code}`);
+
 });
 
 }

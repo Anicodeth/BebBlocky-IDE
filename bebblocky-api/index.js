@@ -5,8 +5,9 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const mongoose = require('mongoose');
 const pythonProcess = require("./processes/pythonProcess");
+const pythonPusher = require("./processes/pythonPusher");
 const errorMiddleware = require("./middlewares/errorMiddleware");
-
+const Pusher = require("pusher");
 app = express();
 
 const http = require('http');
@@ -15,7 +16,23 @@ const io = require('socket.io')(server, {
   cors: {origin : '*'}
 });
 
+const pusher = new Pusher({
+  appId: "1635738",
+  key: "54bd977b9f1757fcfb9a",
+  secret: "b4491ceb65df4cd7f246",
+  cluster: "us3",
+  useTLS: true,
+});
 
+
+// Subscribe to a channel
+
+// Listen for 'execute' event from the client
+
+
+// Listen for 'disconnect' event
+
+/*
 io.on('connection', (socket) => {
   console.log('New client connected');
 
@@ -31,8 +48,10 @@ io.on('connection', (socket) => {
     console.log('Client disconnected');
   });
 });
-
+*/
 //Database linker
+
+
 mongoose
   .connect(
     "mongodb+srv://afmtoday:OlxwPFCF0rLMnA3e@cluster0.edrrjyh.mongodb.net/bebblocky?retryWrites=true&w=majority"

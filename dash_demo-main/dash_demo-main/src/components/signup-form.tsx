@@ -105,17 +105,17 @@ export default function SignUpForm() {
         <div className="space-y-4 xs:col-span-5 sm:col-span-5">
           <h3>Join BeBlocky As</h3>
           <div className="grid grid-cols-2 gap-4">
-            <Card className="w-full cursor-pointer"
+            <Card className="w-full cursor-pointer col-span-2"
               onClick={() => { form.setValue("role", "parent"); nextStep() }}
             >
               <CardHeader className="flex items-center -mt-4">
-                <PlusIcon className="text-apple" size={70} />
+                <PlusIcon className="text-apple" size={50} />
               </CardHeader>
               <CardFooter className="justify-center -mt-4">
                 <p className="text-lg">Parent</p>
               </CardFooter>
             </Card>
-            <Card className="w-full cursor-pointer"
+            {/* <Card className="w-full cursor-pointer"
               onClick={() => { form.setValue("role", "school"); nextStep() }}
             >
               <CardHeader className="flex items-center -mt-4">
@@ -124,7 +124,7 @@ export default function SignUpForm() {
               <CardFooter className="justify-center -mt-4">
                 <p className="text-lg">School</p>
               </CardFooter>
-            </Card>
+            </Card> */}
             <Card className="w-full cursor-pointer col-span-2"
               onClick={() => { form.setValue("role", "student"); nextStep() }}
             >

@@ -2,14 +2,13 @@ import type { GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import nookies from "nookies";
 import { getFirestore, getDoc, collection, getDocs, doc } from "firebase/firestore";
-
 import TopBar from "@/components/topbar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import admin from "@/lib/firebaseAdmin";
 import firebase_app from "@/lib/firebaseClient";
 import type { Student, User } from "@/lib/shape";
 import { useAuthContext } from "@/components/AuthContext";
-import ChildrenList from "@/components/children-list";
+import ChildrenGrid from "@/components/children-grid";
 import PerformanceCards from "@/components/performance-cards";
 
 interface Props {
@@ -34,7 +33,7 @@ export default function ProgressPage({ _is_parent, credit, students }: Props) {
                         <TabsTrigger className="px-10 rounded-3xl font-bold data-[state=active]:text-apple" value="child">Child</TabsTrigger>
                         <TabsTrigger className="px-10 rounded-3xl font-bold data-[state=active]:text-apple" value="children">Children</TabsTrigger>
                     </TabsList>
-                    <TabsContent value="child"><ChildrenList students={students} /></TabsContent>
+                    <TabsContent value="child"><ChildrenGrid students={students || []} children={undefined} /></TabsContent>
                     <TabsContent value="children"><PerformanceCards students={students} credit={credit} /></TabsContent>
                 </Tabs>
             </div >
@@ -65,7 +64,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
                 if (user.role === "parent") {
                     const studentsRef = collection(db, "School", uid, "Classes", "Class A", "Students");
                     const studentsSnap = await getDocs(studentsRef);
-                    const students = studentsSnap.docs.map((doc) =>
+                    const students = studentsSnap.docs.map((doc:any) =>
                         ({ ...doc.data() } as Student)
                     );
                     return {

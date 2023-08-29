@@ -89,7 +89,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       }
     }
 
-    return {
+    return { 
       props: {},
     };
   } catch (error) {

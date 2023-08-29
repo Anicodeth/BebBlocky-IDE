@@ -72,35 +72,35 @@ export function CreateStudentDialog({ id, is_parent }: Props) {
             <AlertDialog>
                 <AlertDialogTrigger asChild>
                     <Link href="#">
-                        <Card className="w-full rounded-3xl">
-                            <CardHeader className="flex items-center">
+                        <Card className="rounded-3xl flex flex-col items-center w-1/3 border border-1 bg-gray-100 shadow-md">
+                            <CardHeader>
                                 <div className="rounded-full bg-apple p-2 mr-2">
                                     <PlusIcon size="30" strokeWidth="5" color="white" />
                                 </div>
                             </CardHeader>
-                            <CardFooter className="justify-center text-dark-ebony">
-                                <p>Add Child</p>
+                            <CardFooter>
+                                <p className="text-dark-ebony">Add Child</p>
                             </CardFooter>
                         </Card>
                     </Link>
                 </AlertDialogTrigger>
-                <AlertDialogContent className="bg-apple text-white">
+                <AlertDialogContent className="bg-apple text-white flex flex-col items-center">
                     <AlertDialogHeader>
                         <AlertDialogTitle>Add Child</AlertDialogTitle>
                         <AlertDialogDescription className="text-white">Does your child already have an account?</AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel className="bg-apple opacity-50 border-none">Yes</AlertDialogCancel>
+                        <AlertDialogCancel className="bg-apple opacity-50 border-none py-2 px-5">Yes</AlertDialogCancel>
                         <DialogTrigger asChild>
                             <AlertDialogAction className="bg-apple opacity-50 hover:bg-gray-50 hover:text-black">No</AlertDialogAction>
                         </DialogTrigger>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
-            <DialogContent className="sm:max-w-[625px] bg-apple text-white">
+            <DialogContent className="sm:max-w-[625px] bg-apple text-white flex flex-col">
                 <DialogHeader>
                     <DialogTitle>Add Child</DialogTitle>
-                    <DialogDescription>Let&apos;s crate an account for your child.
+                    <DialogDescription>Let's crate an account for your child.
                     </DialogDescription>
                     <hr />
                 </DialogHeader>
@@ -133,7 +133,7 @@ export function CreateStudentDialog({ id, is_parent }: Props) {
                             )}
                         />
                         <DialogFooter className="flex items-center justify-between">
-                            <Button variant="link" type="submit" className="text-white">Add</Button>
+                            <Button variant="link" type="submit" className="bg-apple opacity-50 hover:bg-gray-50 hover:text-black">Add</Button>
                         </DialogFooter>
                     </form>
                 </Form>

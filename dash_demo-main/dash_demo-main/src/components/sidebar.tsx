@@ -23,11 +23,11 @@ const sidebarItems = [
         href: "/",
         icon: <Home className="mr-1 h-6 w-6" />,
     },
-  //  {
-    //    title: "Progress",
-      //  href: "/progress",
-        //icon: <Milestone className="mr-1 h-6 w-6" />,
-    //},
+   // {
+   //     title: "Progress",
+   //     href: "/progress",
+   //      icon: <Milestone className="mr-1 h-6 w-6" />,
+   //  },
     {
         title: "Courses",
         href: "/courses",

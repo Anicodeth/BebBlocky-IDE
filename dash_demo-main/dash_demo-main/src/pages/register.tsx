@@ -3,6 +3,7 @@ import SignUpForm from "@/components/signup-form"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
 import logo from '../../public/BeBlocky-Logo.png';
+import image from '../../public/default-register.png';
 
 export default function SignUpPage() {
     return (
@@ -36,7 +37,7 @@ export default function SignUpPage() {
             </div>
 
             <Image
-                src="https://via.placeholder.com/600x600"
+                src={image}
                 width={600}
                 height={600}
                 alt=""

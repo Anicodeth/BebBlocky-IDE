@@ -30,8 +30,7 @@ export default function CoursesRoute() {
                     Courses
                 </h1>
                 <p className="text-dark-ebony">
-                    Discover and select your preferred course of interest.
-                </p>
+          Discover and select your preferred course of interest."                                    </p>
                 <SearchInput onSearchTermChange={handleSearchInputChange} inputPlaceholder={"Search our courses here..."}/>
                 <hr className="w-full border-gray-300 mb-4" />
         { isLoading && <p>Loading...</p> }

@@ -6,6 +6,18 @@ export interface User {
     credit: string;
 }
 
+export interface Course {
+  courseId: number
+  courseTitle: string
+}
+
 export interface Student {
-    name: string;
+  name: string;
+  courses: Course[]
+}
+
+export interface Child {
+  name: string
+  lastSeen: string
+  courses: string[]
 }

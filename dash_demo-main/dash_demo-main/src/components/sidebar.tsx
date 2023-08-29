@@ -16,6 +16,7 @@ import signOutUser from "@/lib/signout"
 import { Milestone } from "lucide-react"
 import Image from "next/image"
 import logo from '../../public/BeBlocky-Logo.png'
+import defaultAvatar from '../../public/default-avatar.png'
 
 const sidebarItems = [
     {
@@ -56,7 +57,7 @@ export function Sidebar() {
     return (
         <nav
             id="sidenav-2"
-            className="fixed left-0 top-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden bg-gray-100 data-[te-sidenav-hidden='false']:translate-x-0"
+            className="fixed left-0 top-0 z-[1035] h-screen w-60 -translate-x-full overflow-hidden bg-gray-200 data-[te-sidenav-hidden='false']:translate-x-0"
             data-te-sidenav-hidden="false"
             data-te-sidenav-content="#content"
         >
@@ -90,7 +91,7 @@ export function Sidebar() {
                 <div className="py-3 absolute bottom-20">
                     <hr className="mb-5" />
                     <div className="flex justify-center items-center pl-5">
-                        <Image src="https://via.placeholder.com/80" alt="Avatar" width="50" height="50" className="rounded-full mr-2" />
+                        <Image src={defaultAvatar} alt="Avatar" width="50" height="50" className="rounded-full mr-2" />
                         <div>
                             <p className="font-semibold">{user?.displayName}</p>
                             <Button variant="default" size="sm" className="w-full bg-ecstasy rounded-lg text-white" onClick={signOutUser}>Logout <LogOut className="ml-2 h-4 w-4" /></Button>

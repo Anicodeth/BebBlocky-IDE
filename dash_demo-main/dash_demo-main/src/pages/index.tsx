@@ -4,11 +4,11 @@ import type { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import admin from "@/lib/firebaseAdmin";
 import { collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
-import ChildrenList from "@/components/children-list";
 import firebase_app from "@/lib/firebaseClient";
 import type { Student, User } from "@/lib/shape";
 import TopBar from "@/components/topbar";
-import { CreateStudentDialog } from "@/components/create-student-dialog";
+import ParentDashboard from "./parent-dashboard";
+import StudentDashboard from "./student-dashboard";
 
 
 
@@ -19,6 +19,24 @@ interface Props {
 
 const Home: NextPage = ({ is_parent, students }: Props) => {
   const { user } = useAuthContext();
+  const dummyStudents: Student[] = [
+    {
+      name: "Yohana " + user?.displayName?.split(" ")[0], 
+      courses: [
+        { courseId: 1, courseTitle: "Web Development" },
+        { courseId: 2, courseTitle: "Mobile App Development" },
+        { courseId: 3, courseTitle: "Desktop App Development" }
+      ]
+    },
+    {
+      name: "Bereket " + user?.displayName?.split(" ")[0], 
+      courses: [
+        { courseId: 1, courseTitle: "Web Development" },
+        { courseId: 2, courseTitle: "Python Development" }
+      ]
+    }
+  ]
+  if (user == null) return <></>
   return (
     <>
       <Head>
@@ -28,11 +46,9 @@ const Home: NextPage = ({ is_parent, students }: Props) => {
       </Head>
       <div className="container grid items-center gap-4 pb-4 pt-2 md:py-5">
         <TopBar name={user?.displayName as string} />
-        <h1 className="text-2xl font-semibold tracking-tight text-dark-ebony">Children</h1>
-        <ChildrenList students={students}>
-          <CreateStudentDialog id={user?.uid as string} is_parent={is_parent as boolean} />
-        </ChildrenList>
       </div>
+      { is_parent && <ParentDashboard user={user} is_parent={true} students={dummyStudents} /> }
+      { !is_parent && <StudentDashboard user={user} />}
     </>
   );
 };

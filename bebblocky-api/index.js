@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const pythonProcess = require("./processes/pythonProcess");
 const pythonPusher = require("./processes/pythonPusher");
 const errorMiddleware = require("./middlewares/errorMiddleware");
-const Pusher = require("pusher");
+//const Pusher = require("pusher");
 app = express();
 
 const http = require('http');
@@ -16,13 +16,25 @@ const io = require('socket.io')(server, {
   cors: {origin : '*'}
 });
 
-const pusher = new Pusher({
-  appId: "1635738",
-  key: "54bd977b9f1757fcfb9a",
-  secret: "b4491ceb65df4cd7f246",
-  cluster: "us3",
-  useTLS: true,
-});
+// const pusher = new Pusher({
+//   appId: "1635738",
+//   key: "54bd977b9f1757fcfb9a",
+//   secret: "b4491ceb65df4cd7f246",
+//   cluster: "us3",
+//   useTLS: true,
+// });
+
+// pusher.trigger("my-channel", "my-event", { message: "hello world" });
+
+// var Pusher = require('pusher-client');
+// var pusher = new Pusher('54bd977b9f1757fcfb9a',  {
+//   cluster: 'us3'
+// });
+// var order_book_channel = pusher.subscribe('my-channel');
+// order_book_channel.bind('my-event', function(data) {
+//     console.log(data);
+// })
+
 
 
 // Subscribe to a channel
@@ -97,7 +109,7 @@ VERSION = "v1";
 app.use(`/api/${VERSION}/user`, userRoutes);
 app.use(`/api/${VERSION}/courses`, coursesRoutes);
 app.use(`/auth/${VERSION}`, authRoutes);
-app.use(`/api/${VERSION}/python `, pythonRoutes);
+app.use(`/api/${VERSION}/python`, pythonRoutes);
 app.use(errorMiddleware);
 
 /*

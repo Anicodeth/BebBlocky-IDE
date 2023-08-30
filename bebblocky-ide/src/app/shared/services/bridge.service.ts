@@ -22,7 +22,7 @@ export class BridgeService {
 
 
   baseUrl: String = 'https://beb-blocky-ide.vercel.app';
-  // baseUrl: String = 'http://localhost:4000'; // - Development only
+  //baseUrl: String = 'http://localhost:4000'; // - Development only
 
   resourcesBaseURL: String = this.baseUrl + '/api/v1';
   authBaseUrl: String = this.baseUrl + '/auth/v1';
@@ -195,5 +195,10 @@ export class BridgeService {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
     return this.http.put<Course>(this.resourcesBaseURL + '/courses/' + courseId.toString(), course, { headers: headers });
     // Todo: Handle errors
+  }
+
+  runCode(code: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${sessionStorage.getItem('auth_token')}` });
+    return this.http.post<any>(this.resourcesBaseURL + '/python/run', { code: code }, { headers: headers });
   }
 }

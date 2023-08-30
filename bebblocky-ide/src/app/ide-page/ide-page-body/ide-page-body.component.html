@@ -17,12 +17,12 @@
     </div>
     <div class = "body-section" [ngClass]="{'reveal': addEditorClass, 'web-reveal': addWebClass, 'expand': onlyCode}" >
       <app-ide-editor *ngIf="type === 'html'"></app-ide-editor>
-      <app-ide-python-editor *ngIf="type === 'python'"></app-ide-python-editor>
+      <app-ide-python-editor *ngIf="type === 'python' || type === 'py'"></app-ide-python-editor>
 
     </div>
     <div class = "body-section window" [ngClass]="{'reveal': addPreviewClass, 'web-reveal': addWebClass, 'expand': onlyCode}" >
        <app-ide-preview-window *ngIf="type === 'html'"></app-ide-preview-window> 
-       <app-ide-python-console *ngIf="type === 'python'"></app-ide-python-console>
+       <app-ide-python-console *ngIf="type === 'python' || type === 'py'"></app-ide-python-console>
 
     </div>
 </div>

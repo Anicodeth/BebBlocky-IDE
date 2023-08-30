@@ -22,7 +22,7 @@ public temp:string = "";
     this.child.onData().subscribe((input:any) => {
       if (input === '\r') { // Carriage Return (When Enter is pressed)
         this.child.write(this.prompt);
-        this.pythonservice.socket.emit('input', { input: this.temp  });
+       // this.pythonservice.socket.emit('input', { input: this.temp  });
         this.temp = "";
       } else if (input === '\u007f') { // Delete (When Backspace is pressed)
         if (this.child.underlying.buffer.active.cursorX > 2) {
@@ -59,9 +59,14 @@ public temp:string = "";
 }
 
   ngOnInit(): void {
-    this.pythonservice.socket.on('output', (data:any) => {
-      this.child.write(data + '\r\n');
-    });
+    // this.pythonservice.socket.on('output', (data:any) => {
+    //   this.child.write(data + '\r\n');
+    // });
+
+    this.pythonservice.compiled.subscribe((data:any) => {
+      this.child.write(data.output + '\r\n');
+    }
+    );
   }
 
 }

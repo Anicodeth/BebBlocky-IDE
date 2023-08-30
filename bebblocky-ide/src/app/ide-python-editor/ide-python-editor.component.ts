@@ -16,7 +16,7 @@ export class IdePythonEditorComponent implements AfterViewInit, OnInit {
 constructor(private pythonService:PythonService) {}
 
 executePython() {
-  this.pythonService.socket.emit('execute', { code: this.pythonEditor.getValue() });
+  this.pythonService.run(this.pythonEditor.getValue()) ;
 }
 
   ngAfterViewInit() {

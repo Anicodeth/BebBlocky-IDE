@@ -73,7 +73,9 @@ export class IdePageBodyComponent implements OnInit {
 
     this.courseId = parseInt(this.route.snapshot.paramMap.get('courseId')!);
     this.bridgeService.getCourse(this.courseId).subscribe((course: any) => {
+      
       this.type = course.course.courseLanguage;
+
     });
 
 

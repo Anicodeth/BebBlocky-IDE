@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import Link from "next/link"
+import { useState } from "react"
 
 const FormSchema = z.object({
   email: z.string().email(),
@@ -26,6 +27,7 @@ export default function SignInForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
+  const [ error, setError ] = useState("")
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     const { email, password } = data
@@ -33,7 +35,7 @@ export default function SignInForm() {
       await signInWithEmailAndPassword(auth, email, password)
       return await router.push("/")
     } catch (error) {
-      console.log(error)
+      setError("Error occured with your trial to sign in. Try again.");
     }
   }
 
@@ -69,6 +71,7 @@ export default function SignInForm() {
             </FormItem>
           )}
         />
+        { error.length > 0 && <p className="text-sm font-medium text-destructive">{error}</p> }
         <Button type="submit" className="text-white bg-ecstasy w-full">Login</Button>
         <Link href="/" className="flex justify-center items-center text-dark-ebony text-xs">Forgot Password?</Link>
       </form>

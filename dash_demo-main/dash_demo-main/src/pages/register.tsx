@@ -8,6 +8,7 @@ import image from '../../public/default-register.png';
 export default function SignUpPage() {
     return (
         <div className="grid lg:grid-cols-2 gap-4 lg:gap-x-12 lg:mb-0 place-items-center w-full h-full">
+          <div className="flex flex-col items-center justfiy-center">
             <div className="container mb-12 lg:mb-0">
                 <Image
                     src={logo}
@@ -22,7 +23,7 @@ export default function SignUpPage() {
                         Welcome to BeBlocky Dashboard
                     </p>
                 </div>
-                <Tabs defaultValue="login" className="w-[400px] lg:ml-20 xl:ml-20">
+                <Tabs defaultValue="login" className="w-[400px]">
                     <TabsList className="grid w-full grid-cols-2 text-white mb-4 bg-apple rounded-2xl">
                         <TabsTrigger className="rounded-xl font-bold data-[state=active]:text-apple" value="login">Signin</TabsTrigger>
                         <TabsTrigger className="rounded-xl font-bold data-[state=active]:text-apple" value="register">Signup</TabsTrigger>
@@ -35,14 +36,14 @@ export default function SignUpPage() {
                     </TabsContent>
                 </Tabs>
             </div>
+        </div>
 
             <Image
                 src={image}
-                width={600}
-                height={600}
                 alt=""
+                style={{ height: "100vh", aspectRatio: "1/1" }}
                 className="w-full hidden md:block lg:block"
             />
-        </div>
+      </div>
     )
 }

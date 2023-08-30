@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import Link from "next/link"
+import { useState } from "react"
 
 const FormSchema = z.object({
   email: z.string().email(),
@@ -21,6 +22,7 @@ const FormSchema = z.object({
 })
 
 export default function SignInForm() {
+  const [ error, setError ] = useState("")
   const router = useRouter()
   const auth = getAuth()
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -33,7 +35,7 @@ export default function SignInForm() {
       await signInWithEmailAndPassword(auth, email, password)
       return await router.push("/")
     } catch (error) {
-      console.log(error)
+      setError("Something happened with your signin. Try again.")
     }
   }
 

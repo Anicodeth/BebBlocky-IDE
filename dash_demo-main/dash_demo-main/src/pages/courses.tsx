@@ -3,11 +3,15 @@ import Head from "next/head";
 import SearchInput from "@/components/search-input";
 import useCourses, { Course } from "@/services/useCourses";
 import CourseCard from "@/components/course-card";
+import { useAuthContext } from "@/components/AuthContext";
 
 export default function CoursesRoute() {
   const { courses, isLoading, error } = useCourses();
   const [ searchTerm, setSearchTerm ] = useState<string>("");
   const [ filteredCourses, setFilteredCourses ] = useState<Course[]>(courses);
+
+  const { user } = useAuthContext();
+  console.log(user);
 
   const handleSearchInputChange = (term: string) => {
     setSearchTerm(term);

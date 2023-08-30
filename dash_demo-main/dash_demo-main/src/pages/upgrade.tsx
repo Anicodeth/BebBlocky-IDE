@@ -31,7 +31,10 @@ export default function UpgradePage() {
                 amount: 1000,
             }),
         });
-        const url = await response.json().then((data) => data.response.data.checkout_url);
+        const url = await response.json().then(({ response }) => { 
+          console.log(response)
+          return response.data.checkout_url;
+        });
         router.push(url);
     }
     return (
@@ -46,7 +49,7 @@ export default function UpgradePage() {
                 <div className="text-center">
                     <h1 className="text-4xl font-bold">Best Plans for you</h1>
                     <p>
-                        You can Upgrade to membership for additional features.
+                        You can Upgrade your membership for additional features.
                     </p>
                 </div>
                 <Tabs defaultValue="monthly">

@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from "next/image";
-import { ArrowRight, Star, StarHalf } from "lucide-react";
+import { ArrowRight, Star, StarHalf, ShoppingCartIcon } from "lucide-react";
 
 import {
     Card,
@@ -16,6 +16,8 @@ import cssLogo from '../../public/icons/css3/css3-original.svg'
 import jsLogo from '../../public/icons/javascript/javascript-original.svg'
 import python from '../../public/icons/python/python-original.svg'
 import { Course } from '@/services/useCourses';
+import { useAuthContext } from './AuthContext';
+import { useRouter } from 'next/router';
 
 interface LogoDict {
     [key: string]: string; // Assuming the imported SVG paths are strings
@@ -34,6 +36,27 @@ interface Props {
 }
 
 const CourseCard = ({ course }: Props) => {
+  const { user } = useAuthContext();
+    const router = useRouter();
+
+    async function onUpgrade() {
+        const response = await fetch("/api/new-payment/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: user?.email,
+                name: user?.displayName,
+                id: user?.uid,
+                amount: 25,
+                return_url: '/courses'
+            }),
+        });
+        const url = await response.json().then(({ response }) => response.data.checkout_url);
+        router.push(url);
+    }
+
   return <Card className="text-dark-ebony bg-gray-100">
                         <CardHeader>
                             <Image src={logoDict[course.courseLanguage]!} alt="Course image" width={180} height={110} className="mx-auto rounded-xl mb-3" />
@@ -51,8 +74,9 @@ const CourseCard = ({ course }: Props) => {
                         </CardContent>
                         <CardFooter className="flex flex-row justify-between items-center">
                             <p className="text-xl font-bold">$25</p>
-                            <div className="rounded-full p-1 bg-gray-100">
-                               <a href= {`https://bebblocky.vercel.app/ide/${course.courseId}`}> <ArrowRight size={24} className="text-ecstasy" /> </a>
+                            <div className="flex flex-row gap-2 rounded-full p-1 bg-gray-100">
+                               <ArrowRight size={24} className="text-ecstasy cursor-pointer" onClick={() => router.push(`https://bebblocky.vercel.app/ide/${course.courseId}`)} />
+        <ShoppingCartIcon className="text-ecstasy cursor-pointer" onClick={onUpgrade}/>
                             </div>
                         </CardFooter>
                     </Card>

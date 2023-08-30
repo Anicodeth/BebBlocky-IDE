@@ -37,7 +37,7 @@ export default function ProgressPage({ _is_parent, credit, students }: Props) {
                     <TabsContent value="children"><PerformanceCards students={students} credit={credit} /></TabsContent>
                 </Tabs>
             </div >
-        </>
+        </>w
     )
 }
 

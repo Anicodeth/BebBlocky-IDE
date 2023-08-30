@@ -40,7 +40,7 @@ const CourseCard = ({ course }: Props) => {
     const router = useRouter();
 
     async function onUpgrade() {
-        const response = await fetch("/api/new-payment/", {
+        const response = await fetch("/api/payment/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

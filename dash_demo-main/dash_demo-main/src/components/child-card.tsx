@@ -37,10 +37,7 @@ const ChildCard = ({ student: child, addCourseRoute }: Props) => {
       <div className="bg-white">
                             <hr className="border-apple mt-2 mb-5" />
                         </div>
-                                      <div className="flex-flex-col">
-          { child.courses.map(course => <p key={course.courseId} className='text-dark-ebony text-lg font-semibold'>{course.courseTitle}</p>) }
-        </div>
-                        </CardContent> 
+                                  </CardContent> 
                         { false && <CardFooter className="bg-white rounded-b-3xl">
                             <Button variant="secondary" className="mt-4 -mx-2 rounded-2xl bg-ecstasy text-white text-xs hover:bg-sky-900">VIEW PROGRESS <ChevronRight className="ml-1 h-4 w-4" /></Button>
                         </CardFooter> }

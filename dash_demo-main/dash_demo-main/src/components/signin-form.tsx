@@ -71,7 +71,7 @@ export default function SignInForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="text-white bg-ecstasy w-full">Login</Button>
+        <Button variant={"mainButton"} type="submit" className="text-white bg-ecstasy w-full">Login</Button>
         <Link href="/" className="flex justify-center items-center text-dark-ebony text-xs">Forgot Password?</Link>
       </form>
     </Form>

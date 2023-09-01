@@ -20,6 +20,9 @@ import firebase_app from "@/lib/firebaseClient"
 import { Checkbox } from "@/components/ui/checkbox"
 import { GraduationCap, PlusIcon } from "lucide-react"
 import { Card, CardHeader, CardFooter, CardContent } from "@/components/ui/card"
+import usePayment, { UserPaymentData } from "@/services/usePayment"
+import { useAuthContext } from "./AuthContext"
+import { useRouter } from "next/router"
 
 const FormSchema = z
   .object({
@@ -42,6 +45,31 @@ export default function SignUpForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
+    const { user } = useAuthContext();
+    const router = useRouter();
+    const { data: checkout_url, error, makePayment, isLoading, isSuccess } = usePayment();
+
+
+  const paymentPlans = [
+    {title: "Free", price: 0, description: "Free courses for yourself."},
+    {title: "Standard", price: 10, description: "Unlocks access to some of our best courses."},
+    {title: "Gold", price: 25, description: "Chosen by the majority of our users. Provides access to premium courses."},
+    {title: "Premium", price: 50, description: "This is the premium plan; the best plan for the best learning experience."}
+  ]
+
+const onBuyClick = (price: number) => {
+if (user !== null)
+  {
+    const paymentData: UserPaymentData = {
+    first_name: user.displayName?.split(" ")[0] || "First Name",
+    last_name: user.displayName?.split(" ")[1] || "Last Name",
+      amount: price,
+      email: user.email || "email@email.com",
+      return_url: "http://localhost:3000"
+    }
+    makePayment(paymentData);
+  }
+  }
 
   const steps = React.useMemo(
     () => [
@@ -99,6 +127,7 @@ export default function SignUpForm() {
     nextStep()
   }
 
+  isSuccess && router.push(checkout_url) 
   return (
     <div className="grid xs:grid-cols-6 sm:grid-cols-6 gap-4 place-items-center w-full h-full">
       {state?.currentStep == 0 && (
@@ -218,7 +247,7 @@ export default function SignUpForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="text-white bg-ecstasy w-full">Sign Up</Button>
+            <Button variant={"mainButton"} type="submit" className="text-white bg-ecstasy w-full">Sign Up</Button>
           </form>
         </Form>
       )}
@@ -226,39 +255,18 @@ export default function SignUpForm() {
         <div className="space-y-4  xs:col-span-5 sm:col-span-5">
           <h3>Choose Your Plan</h3>
           <div className="grid grid-cols-2 gap-4">
-            <Card className="w-full shadow-lg rounded-3xl">
-              <div className="bg-gray-100 rounded-3xl m-4">
+            {paymentPlans.map(plan => <>
+            <Card className="w-full shadow-lg rounded-3xl cursor-pointer hover:shadow-2xl" onClick={() => {onBuyClick(plan.price)}}>
+              <div className="rounded-3xl m-4">
                 <CardHeader className="flex items-center">
-                  Free
+                  {plan.title}
                 </CardHeader>
-                <CardContent className="flex items-center justify-center text-3xl font-extrabold -my-4 text-ecstasy">0$</CardContent>
+                <CardContent className="flex items-center justify-center text-3xl font-extrabold -my-4 text-ecstasy">${plan.price}</CardContent>
               </div>
               <CardFooter className="justify-center">
-                <p>Upto only 3 Child</p>
+                <p>{plan.description}</p>
               </CardFooter>
-            </Card>
-            <Card className="w-full shadow-lg rounded-3xl">
-              <div className="bg-gray-100 rounded-3xl m-4">
-                <CardHeader className="flex items-center">
-                  Standard
-                </CardHeader>
-                <CardContent className="flex items-center justify-center text-3xl font-extrabold -my-4 text-ecstasy">5$</CardContent>
-              </div>
-              <CardFooter className="justify-center">
-                <p>Upto 5 Child</p>
-              </CardFooter>
-            </Card>
-            <Card className="w-full shadow-lg rounded-3xl col-span-2">
-              <div className="bg-gray-100 rounded-3xl m-4">
-                <CardHeader className="flex items-center">
-                  Premium
-                </CardHeader>
-                <CardContent className="flex items-center justify-center text-3xl font-extrabold -my-4 text-ecstasy">15$</CardContent>
-              </div>
-              <CardFooter className="justify-center">
-                <p>Upto 10 Child</p>
-              </CardFooter>
-            </Card>
+            </Card></>)}
           </div>
         </div>
       )}

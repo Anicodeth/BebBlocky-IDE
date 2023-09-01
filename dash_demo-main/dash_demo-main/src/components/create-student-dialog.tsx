@@ -35,6 +35,7 @@ const db = getFirestore(firebase_app as FirebaseApp)
 
 const FormSchema = z.object({
     name: z.string(),
+  email: z.string(),
     password: z.string(), // TODO: Add password validation
 })
 
@@ -121,6 +122,19 @@ export function CreateStudentDialog({ id, is_parent }: Props) {
                         />
                         <FormField
                             control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Child&apos;s Email</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Enter their email:" className="text-black" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
@@ -133,7 +147,7 @@ export function CreateStudentDialog({ id, is_parent }: Props) {
                             )}
                         />
                         <DialogFooter className="flex items-center justify-between">
-                            <Button variant="link" type="submit" className="bg-apple opacity-50 hover:bg-gray-50 hover:text-black">Add</Button>
+                            <Button variant="link" type="submit" className="bg-apple opacity-50 hover:bg-gray-50 hover:text-black">Create Account</Button>
                         </DialogFooter>
                     </form>
                 </Form>

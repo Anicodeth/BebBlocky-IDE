@@ -19,23 +19,8 @@ interface Props {
 
 const Home: NextPage = ({ is_parent, students }: Props) => {
   const { user } = useAuthContext();
-  const dummyStudents: Student[] = [
-    {
-      name: "Yohana " + user?.displayName?.split(" ")[0], 
-      courses: [
-        { courseId: 1, courseTitle: "Web Development" },
-        { courseId: 2, courseTitle: "Mobile App Development" },
-        { courseId: 3, courseTitle: "Desktop App Development" }
-      ]
-    },
-    {
-      name: "Bereket " + user?.displayName?.split(" ")[0], 
-      courses: [
-        { courseId: 1, courseTitle: "Web Development" },
-        { courseId: 2, courseTitle: "Python Development" }
-      ]
-    }
-  ]
+  console.log(students);
+  console.log(is_parent);
   if (user == null) return <></>
   return (
     <>
@@ -47,7 +32,7 @@ const Home: NextPage = ({ is_parent, students }: Props) => {
       <div className="container grid items-center gap-4 pb-4 pt-2 md:py-5">
         <TopBar name={user?.displayName as string} />
       </div>
-      { is_parent && <ParentDashboard user={user} is_parent={true} students={dummyStudents} /> }
+      { is_parent && <ParentDashboard user={user} is_parent={true} students={students!} /> }
       { !is_parent && <StudentDashboard user={user} />}
     </>
   );

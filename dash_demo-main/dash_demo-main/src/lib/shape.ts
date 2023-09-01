@@ -12,8 +12,7 @@ export interface Course {
 }
 
 export interface Student {
-  name: string;
-  courses: Course[]
+  name: string; 
 }
 
 export interface Child {

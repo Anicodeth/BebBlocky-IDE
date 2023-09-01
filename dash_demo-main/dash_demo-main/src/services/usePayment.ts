@@ -1,54 +1,153 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { nanoid } from 'nanoid/async';
-import { doc, getFirestore, setDoc } from 'firebase/firestore';
-import firebase_app from '@/lib/firebaseClient';
-import type { FirebaseApp } from 'firebase/app';
+import { useAuthContext } from "@/components/AuthContext"
+import firebase_app from "@/lib/firebaseClient"
+import axios from "axios"
+import { FirebaseApp } from "firebase/app"
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
+import { nanoid } from "nanoid"
+import { useState } from "react"
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { amount, email, name, id, return_url } = req.body;
+interface PaymentData {
+  first_name: string
+  last_name: string
+  email: string
+  amount: number
+  currency: string
+  tx_ref: string
+  callback_url: string
+  return_url: string
+  "customization[title]": string
+  "customization[description]": string
+}
 
-  try {
-    // Generate a unique reference for this transactionconst
-    const transaction_reference = `TX-${(await nanoid()).toUpperCase()}`;
-    const paymentData = {
-      first_name: name.split(' ')[0],
-      last_name: name.split(' ')[1],
-      email: email,
-      amount: amount,
-      currency: 'ETB',
-      tx_ref: transaction_reference,
-      return_url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/${return_url}` || `http://localhost:3000/${return_url}`,
-      callback_url: `${`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/verify/` || 'http://localhost:3000/api/verify/'}${transaction_reference}`,
+export interface UserPaymentData {
+  first_name: string
+  last_name: string
+  email: string
+  amount: number
+  return_url: string
+}
 
+interface CheckoutWrapper {
+  checkout_url: string
+}
+
+export interface ChapaResponse {
+  message: string
+  status: "success" | "failed"
+  data: CheckoutWrapper
+}
+
+const plans = {
+  0: "Free",
+  10: "Standard",
+  25: "Gold",
+  50: "Premium",
+  100: "StandardYearly",
+  250: "GoldYearly",
+  5000: "PremiumYearly"
+}
+
+function usePayment() {
+  const { user } = useAuthContext();
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [data, setData] = useState<string>("/");
+  const [isInitialzed, setInitialized] = useState<boolean>(false);
+  const [isPending, setPending] = useState<boolean>(false);
+  const [isSuccess, setSuccess] = useState<boolean>(false);
+  const [txRef, setTxRef] = useState<string>("");
+
+  const db = getFirestore(firebase_app as FirebaseApp);
+
+  if (user !== null) {
+    const userRef = doc(db, 'users', user?.uid);
+
+    getDoc(userRef).then((res) => {
+      if (res.exists()) {
+        const userData = res.data();
+        setTxRef(userData.pendingPayment.tx_ref);
+      }
+    }).catch((error) => {
+      console.error("Error fetching user data:", error);
+    });
+  }
+
+  const makePayment = async (userPaymentData: UserPaymentData) => {
+    setPending(true);
+    const tx_ref = `TX-${nanoid().toUpperCase()}`;
+
+    const paymentData: PaymentData = {
+      ...userPaymentData,
+      currency: "USD",
+      tx_ref: tx_ref,
+      callback_url: `https://localhost:3000/api/verify/`,
+      "customization[title]": "BeBlocky, Inc.",
+      "customization[description]": "You and upto one child can use this subscription."
     }
 
-        // Initialize the transaction and redirect to payment page
-        const response = await fetch('https://api.chapa.co/v1/transaction/initialize', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}`,
-            },
-            body: JSON.stringify(paymentData),
-        });
+    setLoading(true);
 
-        // Handle the payment response and return the appropriate response to the client
-        if (response.status !== 200) {
-            return res.status(500).json({ error: 'Something went wrong' });
-        }
+    await axios.post<ChapaResponse>('/api/chapa-payment', paymentData)
+      .then(async (res: any) => {
+        setLoading(false);
+        console.log(res.data);
+        setData(res.data.response.data.checkout_url);
+        setInitialized(true);
 
         const db = getFirestore(firebase_app as FirebaseApp);
-        await setDoc(doc(db, 'payments', transaction_reference), {
-            id: id,
-            amount: amount,
-            ref: transaction_reference,
-            email: email,
-            name: name,
-            verified: false,
+        console.log('here');
+        await setDoc(doc(db, 'chapa-payments', paymentData.tx_ref), {
+          id: user?.uid,
+          amount: paymentData.amount,
+          ref: paymentData.tx_ref,
+          email: paymentData.email,
+          name: `${paymentData.first_name} ${paymentData.last_name}`,
+          verified: false,
         });
-        res.status(200).json({ response: await response.json() });
-    } catch (error) {
-        // Handle any errors that occur during the payment process
-        res.status(500).json({ error: error });
-    }
+
+        if (user != null) {
+          const userRef = doc(db, "users", user.uid);
+          await setDoc(userRef, {
+            pendingPaymentAmount: paymentData.amount,
+            pendingPaymentRef: paymentData.tx_ref,
+            userPackage: paymentData.amount
+          });
+        }
+      })
+      .catch((error: Error) => {
+        console.log(error);
+        setLoading(false);
+        setInitialized(false);
+        setError(error.message);
+      })
+  }
+
+  const verifyPayment = async (userTxRef: string) => {
+    if (user === null) return;
+
+    setLoading(true);
+    axios.get(`/api/verify/${userTxRef}`)
+      .then(async (_) => {
+        setLoading(false);
+        setSuccess(true);
+      })
+      .catch((error: Error) => {
+        setLoading(false);
+        setError(error.message);
+      })
+  }
+
+  return {
+    makePayment,
+    isLoading,
+    error,
+    data,
+    isInitialzed,
+    isSuccess,
+    isPending,
+    verifyPayment,
+    txRef,
+  }
 }
+
+export default usePayment

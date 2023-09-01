@@ -8,7 +8,7 @@ export default async function handler(
     res: NextApiResponse,
 ) {
     const { txref } = req.query
-    console.log(req.query)
+
     if (txref) {
         const db = getFirestore(firebase_app as FirebaseApp)
         const paymentRef = doc(db, 'payments', txref as string)

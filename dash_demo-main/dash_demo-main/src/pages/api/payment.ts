@@ -3,8 +3,10 @@ import { nanoid } from 'nanoid/async';
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import firebase_app from '@/lib/firebaseClient';
 import type { FirebaseApp } from 'firebase/app';
+import { useAuthContext } from '@/components/AuthContext';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { user } = useAuthContext();
     const { amount, email, name, id } = req.body;
 
     try {
@@ -17,8 +19,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             amount: amount,
             currency: 'ETB',
             tx_ref: ref,
-            return_url: `${`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/verify/` || 'http://localhost:3000/api/verify/'}${ref}`,
-            // return_url: `http://localhost:3000/`,
+            callback_url: `${`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/verify/` || 'http://localhost:3000/api/verify/'}${ref}`,
+            return_url: `http://localhost:3000/`,
         }
 
         // Initialize the transaction and redirect to payment page
@@ -43,6 +45,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             name: name,
             verified: false,
         });
+    // update the user to have pending paymentData
+    if (user != null) {
+      const userRef = doc(db, "users", user.uid);
+      await setDoc(userRef, {
+        pendingPayment: paymentData,
+      }, { merge: true });
+    }
         res.status(200).json({ response: await response.json() });
     } catch (error) {
         // Handle any errors that occur during the payment process

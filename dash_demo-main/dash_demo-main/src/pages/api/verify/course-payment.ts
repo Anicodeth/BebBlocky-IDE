@@ -31,6 +31,8 @@ export default async function handler(
 
             await updateDoc(paymentRef, { verified: true }).then(async () => {
                 await updateDoc(userRef, { credit: "5" })
+
+                // Add logic here to buy the course 
             })
         })
     }

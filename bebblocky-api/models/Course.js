@@ -84,7 +84,10 @@ const courseSchema = new mongoose.Schema({
   },
   lessons: [
     lessonSchema
-  ]
+  ],
+  subType: {
+    type: String
+  }
 });
 
 // Define a pre 'save' middleware to generate and assign the incrementing courseId

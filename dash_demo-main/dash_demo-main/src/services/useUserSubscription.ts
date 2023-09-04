@@ -5,7 +5,7 @@ import firebase_app from '@/lib/firebaseClient';
 import { FirebaseApp } from 'firebase/app';
 import useGetUser from "./useGetUser";
 
-interface UserData {
+interface UserSubscriptionData {
   email: string
   expiry_date: Date
   subscription: string
@@ -16,7 +16,7 @@ interface UserData {
 
 const useUserSubscription = () => {
   const { user } = useAuthContext();
-  const [userData, setUserData] = useState<UserData>();
+  const [userData, setUserData] = useState<UserSubscriptionData>();
   const [isLoading, setLoading] = useState(true);
   const { isLoading: userAccountDataLoading, userAccountData } = useGetUser()
 
@@ -32,7 +32,7 @@ const useUserSubscription = () => {
 
           if (docSnap.exists()) {
             const data = docSnap.data();
-            const userFetchedData: UserData = {
+            const userFetchedData: UserSubscriptionData = {
               email: data.email,
               expiry_date: data.expiry_date.toDate(),
               subscription: data.subscription,

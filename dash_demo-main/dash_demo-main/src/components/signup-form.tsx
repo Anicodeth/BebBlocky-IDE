@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import * as z from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -48,13 +48,20 @@ export default function SignUpForm() {
     const { user } = useAuthContext();
     const router = useRouter();
     const { isSuccess, isLoading, checkoutUrl, makePayment } = usePayment();
+  const [ userData, setUserData ] = useState<UserPaymentData>({
+    first_name: "",
+    last_name: "",
+    email: "",
+    return_url: "",
+    amount: 0
+  })
 
 
   const paymentPlans = [
-    {title: "Free", price: 0, description: "Free courses for yourself."},
-    {title: "Standard", price: 10, description: "Unlocks access to some of our best courses."},
-    {title: "Gold", price: 25, description: "Chosen by the majority of our users. Provides access to premium courses."},
-    {title: "Premium", price: 50, description: "This is the premium plan; the best plan for the best learning experience."}
+    {title: "Free", price: 0, description: "You can try it for free and upgrade later."},
+    {title: "Standard", price: 1000, description: "Unlocks access to some of our best courses."},
+    {title: "Gold", price: 2500, description: "Chosen by the majority of our users. Provides access to premium courses."},
+    {title: "Premium", price: 5000, description: "This is the premium plan; the best plan for the best learning experience."}
   ]
 
 const onBuyClick = (price: number) => {
@@ -65,11 +72,13 @@ if (user !== null)
     last_name: user.displayName?.split(" ")[1] || "Last Name",
       amount: price,
       email: user.email || "email@email.com",
-      return_url: "http://localhost:3000"
+      return_url: "http://localhost:3000/register"
     }
     makePayment(paymentData);
   }
   }
+
+isSuccess && router.push(checkoutUrl)
 
   const steps = React.useMemo(
     () => [
@@ -93,7 +102,9 @@ if (user !== null)
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     const { email, password, role } = data
-    console.log(data);
+
+    setUserData({ ...userData })
+    setUserData({ ...userData, email: email })
     try {
       await createUserWithEmailAndPassword(auth, email, password).then(async ({ user }) => {
         await updateProfile(user, { displayName: data.name });
@@ -127,7 +138,8 @@ if (user !== null)
     nextStep()
   }
 
-  isSuccess && router.push(checkout_url) 
+  if (isLoading) return <p>Your account has been created. We are redirecting you to chapa to finish your payment now...</p>
+
   return (
     <div className="grid xs:grid-cols-6 sm:grid-cols-6 gap-4 place-items-center w-full h-full">
       {state?.currentStep == 0 && (
@@ -261,7 +273,7 @@ if (user !== null)
                 <CardHeader className="flex items-center">
                   {plan.title}
                 </CardHeader>
-                <CardContent className="flex items-center justify-center text-3xl font-extrabold -my-4 text-ecstasy">${plan.price}</CardContent>
+                <CardContent className="flex items-center justify-center text-3xl font-extrabold -my-4 text-ecstasy">ETB {plan.price}</CardContent>
               </div>
               <CardFooter className="justify-center">
                 <p>{plan.description}</p>

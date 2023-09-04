@@ -1,6 +1,6 @@
-import React from 'react'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
-import { Button } from './ui/button'
+import React from 'react';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
 
 interface Props {
   price: string
@@ -13,13 +13,19 @@ interface Props {
   expiry_date: Date
 }
 const SubscriptionCard = ({ price, isPremium, name, onAction, isOwened, isMonthly, isVerified, expiry_date }: Props) => {
+  function isDayPassed(expiryDate: Date): boolean {
+    const currentDate = new Date();
+    return expiryDate < currentDate;
+  }
+
   return <Card
     key={price}
     className={`${isPremium ? "bg-gradient-to-b from-apple to-atlantis text-white" : ""} ${isOwened ? "border-blue-400": ""}`}
   >
     <CardHeader>
       <CardTitle className={isPremium ? "text-2xl font-bold" : "text-2xl font-bold text-dark-ebony"}>
-       { `${name} ${ isOwened ? "(Your Plan)" : "" }` }
+        <span>{ name }</span>
+       { isOwened && <p className='text-sm font-semibold'> { `(Your plan. Expires on: ${expiry_date.getDay()} / ${expiry_date.getMonth()} / ${expiry_date.getFullYear()})` }  </p> }
       </CardTitle>
       <CardDescription>
         <p className={isPremium ? "text-3xl font-bold mb-4" : "text-3xl font-bold text-dark-ebony"}>
@@ -41,9 +47,9 @@ const SubscriptionCard = ({ price, isPremium, name, onAction, isOwened, isMonthl
         variant="outline"
         className="border-ecstasy text-ecstasy border-2 w-full font-semibold"
         onClick={() => onAction(price)}
-        disabled={isOwened && isVerified}
+        disabled={isOwened && isVerified && !isDayPassed(expiry_date)}
       >
-        { isOwened && isVerified ? "Enjoy your plan!" : isOwened ? "Pay now!" : "Buy Now!" }
+        { isOwened && isVerified ? "Enjoy your plan!" : isOwened && isDayPassed(expiry_date) ? "Renew subscription." : isOwened ? "Pay now!" : "Buy Now!" }
       </Button>
     </CardFooter>
   </Card>

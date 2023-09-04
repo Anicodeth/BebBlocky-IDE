@@ -16,9 +16,7 @@ import cssLogo from '../../public/icons/css3/css3-original.svg'
 import jsLogo from '../../public/icons/javascript/javascript-original.svg'
 import python from '../../public/icons/python/python-original.svg'
 import { Course } from '@/services/useCourses';
-import { useAuthContext } from './AuthContext';
 import { useRouter } from 'next/router';
-import { Button } from './ui/button';
 
 interface LogoDict {
     [key: string]: string; // Assuming the imported SVG paths are strings

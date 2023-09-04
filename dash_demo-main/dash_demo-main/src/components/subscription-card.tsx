@@ -49,7 +49,7 @@ const SubscriptionCard = ({ price, isPremium, name, onAction, isOwened, isMonthl
         onClick={() => onAction(price)}
         disabled={isOwened && isVerified && !isDayPassed(expiry_date)}
       >
-        { isOwened && isVerified ? "Enjoy your plan!" : isOwened && isDayPassed(expiry_date) ? "Renew subscription." : isOwened ? "Pay now!" : "Buy Now!" }
+        { isOwened && isVerified ? "Enjoy your plan!" : isOwened && isDayPassed(expiry_date) ? "Renew subscription." : isOwened ? "Complete payment now!" : "Buy Now!" }
       </Button>
     </CardFooter>
   </Card>

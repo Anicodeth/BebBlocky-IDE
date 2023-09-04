@@ -159,7 +159,7 @@ export function CreateStudentDialog({ id, is_parent }: Props) {
                                 <FormItem>
                                     <FormLabel>Child&apos;s Password</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Enter password" className="text-black" {...field} />
+                                        <Input type={'password'} placeholder="Enter password" className="text-black" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

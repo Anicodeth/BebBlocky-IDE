@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from "next/image";
-import { ArrowRight, Star, StarHalf, ShoppingCartIcon } from "lucide-react";
+import { ArrowRight, Star, StarHalf, ShoppingCartIcon, Link } from "lucide-react";
 
 import {
     Card,
@@ -18,6 +18,7 @@ import python from '../../public/icons/python/python-original.svg'
 import { Course } from '@/services/useCourses';
 import { useAuthContext } from './AuthContext';
 import { useRouter } from 'next/router';
+import { Button } from './ui/button';
 
 interface LogoDict {
     [key: string]: string; // Assuming the imported SVG paths are strings
@@ -33,35 +34,20 @@ const logoDict: LogoDict = {
 
 interface Props {
   course: Course
+  userHasCourse: boolean
 }
 
-const CourseCard = ({ course }: Props) => {
+const CourseCard = ({ course, userHasCourse }: Props) => {
   const { user } = useAuthContext();
     const router = useRouter();
-
-    async function onUpgrade() {
-        const response = await fetch("/api/payment/", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: user?.email,
-                name: user?.displayName,
-                id: user?.uid,
-                amount: 25,
-                return_url: '/courses'
-            }),
-        });
-        const url = await response.json().then(({ response }) => response.data.checkout_url);
-        router.push(url);
-    }
 
   return <Card className="text-dark-ebony bg-gray-100">
                         <CardHeader>
                             <Image src={logoDict[course.courseLanguage]!} alt="Course image" width={180} height={110} className="mx-auto rounded-xl mb-3" />
                             <div className="flex flex-row justify-center gap-2">
-                                <Badge variant="secondary" className="rounded-xl text-dark-ebony bg-gray-200">{course.courseLanguage.toUpperCase()}</Badge>                            </div>
+                                <Badge variant="secondary" className="rounded-xl text-dark-ebony bg-gray-200">{course.courseLanguage.toUpperCase()}</Badge>
+<Badge variant="secondary" className="rounded-xl text-dark-ebony bg-gray-200">{course.subType}</Badge>
+      </div>
                         </CardHeader>
                         <CardContent className="-mt-5">
                             <CardTitle>{course.courseTitle}</CardTitle>
@@ -73,11 +59,12 @@ const CourseCard = ({ course }: Props) => {
                             </div>
                         </CardContent>
                         <CardFooter className="flex flex-row justify-between items-center">
-                            <p className="text-xl font-bold">$25</p>
+                            <p className="text-xl font-bold"></p>
                             <div className="flex flex-row gap-2 rounded-full p-1 bg-gray-100">
-                               <ArrowRight size={24} className="text-ecstasy cursor-pointer" onClick={() => router.push(`https://bebblocky.vercel.app/ide/${course.courseId}`)} />
-        <ShoppingCartIcon className="text-ecstasy cursor-pointer" onClick={onUpgrade}/>
-                            </div>
+                               { userHasCourse && <ArrowRight size={24} className="text-ecstasy cursor-pointer" onClick={() => router.push(`https://bebblocky.vercel.app/ide/${course.courseId}`)} /> }
+        { !userHasCourse && <p onClick={() => {router.push("/upgrade")}} className='text-lg text-ecstasy text-right hover:underline cursor-pointer font-semibold'>Upgrade</p> }
+
+                                    </div>
                         </CardFooter>
                     </Card>
 }

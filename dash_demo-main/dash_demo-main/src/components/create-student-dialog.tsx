@@ -30,6 +30,7 @@ import { Card, CardHeader, CardFooter } from "@/components/ui/card"
 import Link from "next/link"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { DialogDescription } from "@radix-ui/react-dialog"
+import { useAuthContext } from "./AuthContext"
 
 const db = getFirestore(firebase_app as FirebaseApp)
 
@@ -48,6 +49,7 @@ interface Props {
 }
 
 export function CreateStudentDialog({ id, is_parent }: Props) {
+  const { user } = useAuthContext()
     const router = useRouter()
     const [open, setOpen] = React.useState(false)
     const form = useForm<z.infer<typeof FormSchema>>({
@@ -59,7 +61,9 @@ export function CreateStudentDialog({ id, is_parent }: Props) {
         try {
             await addDoc(collection(db, "School", id, "Classes", className, "Students"), {
                 name: data.name,
-                password: data.password
+                email: data.email,
+                password: data.password,
+                parentId: user?.uid
             })
         } catch (error) {
             console.log(error)

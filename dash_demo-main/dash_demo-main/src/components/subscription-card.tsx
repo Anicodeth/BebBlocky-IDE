@@ -10,11 +10,12 @@ interface Props {
   isOwened: boolean
   isMonthly: boolean
   isVerified: boolean
+  expiry_date: Date
 }
-const SubscriptionCard = ({ price, isPremium, name, onAction, isOwened, isMonthly, isVerified }: Props) => {
+const SubscriptionCard = ({ price, isPremium, name, onAction, isOwened, isMonthly, isVerified, expiry_date }: Props) => {
   return <Card
     key={price}
-    className={`${isPremium ? "bg-gradient-to-b from-apple to-atlantis text-white" : ""} ${isOwened ? "bg-blue-300": ""}`}
+    className={`${isPremium ? "bg-gradient-to-b from-apple to-atlantis text-white" : ""} ${isOwened ? "border-blue-400": ""}`}
   >
     <CardHeader>
       <CardTitle className={isPremium ? "text-2xl font-bold" : "text-2xl font-bold text-dark-ebony"}>

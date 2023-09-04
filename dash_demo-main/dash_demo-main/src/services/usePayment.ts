@@ -58,11 +58,12 @@ const usePayment = () => {
     setSuccess(false)
     setCheckoutUrl("")
 
+    const txRef = "TX-" + nanoid();
     const realPaymentData: PaymentData = {
       ...paymentData,
       currency: "ETB",
-      tx_ref: "TX-" + nanoid(),
-      callback_url: "", // The call backurl here
+      tx_ref: txRef,
+      callback_url: `https://beb-blocky-ide-kxez-git-main-anicodeth.vercel.app/verify/${txRef}`,
       "customization[title]": "Beblocky, Inc.",
       "customization[description]": "BeBlocky subscription."
     }

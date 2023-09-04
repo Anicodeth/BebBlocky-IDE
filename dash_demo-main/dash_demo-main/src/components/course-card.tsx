@@ -35,10 +35,10 @@ const logoDict: LogoDict = {
 interface Props {
   course: Course
   userHasCourse: boolean
+  userHasCourseVerified: boolean
 }
 
-const CourseCard = ({ course, userHasCourse }: Props) => {
-  const { user } = useAuthContext();
+const CourseCard = ({ course, userHasCourse, userHasCourseVerified }: Props) => {
     const router = useRouter();
 
   return <Card className="text-dark-ebony bg-gray-100">
@@ -61,8 +61,9 @@ const CourseCard = ({ course, userHasCourse }: Props) => {
                         <CardFooter className="flex flex-row justify-between items-center">
                             <p className="text-xl font-bold"></p>
                             <div className="flex flex-row gap-2 rounded-full p-1 bg-gray-100">
-                               { userHasCourse && <ArrowRight size={24} className="text-ecstasy cursor-pointer" onClick={() => router.push(`https://bebblocky.vercel.app/ide/${course.courseId}`)} /> }
+                               { userHasCourse && userHasCourseVerified && <ArrowRight size={24} className="text-ecstasy cursor-pointer" onClick={() => router.push(`https://bebblocky.vercel.app/ide/${course.courseId}`)} /> }
         { !userHasCourse && <p onClick={() => {router.push("/upgrade")}} className='text-lg text-ecstasy text-right hover:underline cursor-pointer font-semibold'>Upgrade</p> }
+        { userHasCourse && !userHasCourseVerified &&  <p onClick={() => {router.push("/upgrade")}} className='text-lg text-ecstasy text-right hover:underline cursor-pointer font-semibold'>Verify Payment</p>}
 
                                     </div>
                         </CardFooter>

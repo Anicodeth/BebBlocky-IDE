@@ -65,8 +65,8 @@ export default function CoursesRoute() {
         { error.length > 0 && <p>{ error }</p>}
         { courses.length > 0 && <h2 className="text-2xl font-bold tracking-tight">{ (searchTerm || "Most Popular") + " Courses" }</h2> }
                 <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 grid-cols-1 items-center gap-4 pb-4 pt-2">
-                { searchTerm.length > 0 && filteredCourses.map(course => (<CourseCard key={course.courseId} course={course} userHasCourse={userHasCourse(course)} />))}
-                { searchTerm.length == 0 && courses.map(course => (<CourseCard key={course.courseId} course={course} userHasCourse={userHasCourse(course)} />))}
+                { searchTerm.length > 0 && filteredCourses.map(course => (<CourseCard key={course.courseId} course={course} userHasCourse={userHasCourse(course)} userHasCourseVerified={userData!.verified} />))}
+                { searchTerm.length == 0 && courses.map(course => (<CourseCard key={course.courseId} course={course} userHasCourse={userHasCourse(course)} userHasCourseVerified={userData!.verified} />))}
 
                 </div>
                             </div >

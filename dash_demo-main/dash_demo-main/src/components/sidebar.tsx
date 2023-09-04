@@ -44,11 +44,11 @@ const sidebarItems = [
     //     href: "/support",
     //     icon: <HelpCircle className="mr-1 h-6 w-6" />,
     // },
-    {
-        title: "Setting",
-        href: "/setting",
-        icon: <Settings className="mr-1 h-6 w-6" />,
-    },
+    // {
+    //     title: "Setting",
+    //     href: "/setting",
+    //     icon: <Settings className="mr-1 h-6 w-6" />,
+    // },
 ]
 
 export function Sidebar() {

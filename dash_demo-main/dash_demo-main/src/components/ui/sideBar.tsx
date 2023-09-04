@@ -25,11 +25,11 @@ const sidebarItems = [
         href: "/",
         icon: <Home className="mr-1 h-6 w-6" />,
     },
-    {
-        title: "Progress",
-        href: "/progress",
-        icon: <Milestone className="mr-1 h-6 w-6" />,
-    },
+    // {
+    //     title: "Progress",
+    //     href: "/progress",
+    //     icon: <Milestone className="mr-1 h-6 w-6" />,
+    // },
     {
         title: "Courses",
         href: "/courses",
@@ -40,16 +40,16 @@ const sidebarItems = [
         href: "/upgrade",
         icon: <ShoppingCart className="mr-1 h-6 w-6" />,
     },
-    {
-        title: "Support",
-        href: "/support",
-        icon: <HelpCircle className="mr-1 h-6 w-6" />,
-    },
-    {
-        title: "Setting",
-        href: "/setting",
-        icon: <Settings className="mr-1 h-6 w-6" />,
-    },
+    // {
+    //     title: "Support",
+    //     href: "/support",
+    //     icon: <HelpCircle className="mr-1 h-6 w-6" />,
+    // },
+    // {
+    //     title: "Setting",
+    //     href: "/setting",
+    //     icon: <Settings className="mr-1 h-6 w-6" />,
+    // },
 ]
 
 const SideBar = () => {

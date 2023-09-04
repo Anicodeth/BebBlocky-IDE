@@ -73,11 +73,11 @@ export default function UpgradePage() {
                     </TabsList>
                     <TabsContent value="monthly">
                         <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 text-center mx-5 mt-10 w-fit place-items-center">
-                            {Object.entries(monthlySubscriptionPlans).map(([price, planName]) => <SubscriptionCard onAction={onBuyClick} price={price} isPremium={price === "2500"} name={planName ? planName : ""} isOwened={planName == userData?.subscription} isMonthly={true} isVerified={userData?.verified} /> )}                                                   </div>
+                            {Object.entries(monthlySubscriptionPlans).map(([price, planName]) => <SubscriptionCard onAction={onBuyClick} price={price} isPremium={price === "2500"} name={planName ? planName : ""} isOwened={planName == userData?.subscription} isMonthly={true} isVerified={userData?.verified!} expiry_date={userData?.expiry_date!} /> )}                                                   </div>
                     </TabsContent>
                     <TabsContent value="yearly">
                         <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 text-center mx-5 mt-10 w-fit place-items-center">
-                            {Object.entries(yearlySubscriptionPlans).map(([price, planName]) => <SubscriptionCard onAction={onBuyClick} price={price} isPremium={price === "25000"} name={planName ? planName : ""} isOwened={planName == userData?.subscription} isMonthly={false} isVerified={userData?.verified} /> )}                        </div>
+                            {Object.entries(yearlySubscriptionPlans).map(([price, planName]) => <SubscriptionCard onAction={onBuyClick} price={price} isPremium={price === "25000"} name={planName ? planName : ""} isOwened={planName == userData?.subscription} isMonthly={false} isVerified={userData?.verified!} expiry_date={userData?.expiry_date!} /> )}                        </div>
                     </TabsContent>
                 </Tabs>
 

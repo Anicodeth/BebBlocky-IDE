@@ -4,14 +4,43 @@ import SearchInput from "@/components/search-input";
 import useCourses, { Course } from "@/services/useCourses";
 import CourseCard from "@/components/course-card";
 import { useAuthContext } from "@/components/AuthContext";
+import { useRouter } from "next/router";
+import useGetUser from "@/services/useGetUser";
+import useUserSubscription from "@/services/useUserSubscription";
 
 export default function CoursesRoute() {
   const { courses, isLoading, error } = useCourses();
   const [ searchTerm, setSearchTerm ] = useState<string>("");
   const [ filteredCourses, setFilteredCourses ] = useState<Course[]>(courses);
+  const { userData, isLoading: userDataLoading } = useUserSubscription()
 
   const { user } = useAuthContext();
-  console.log(user);
+  const router = useRouter();
+
+  const userHasCourse = (course: Course) => {
+    console.log(userData);
+    if (!userData || !userData.verified) {
+      return course.subType == "F";
+    }
+
+    console.log(userData.subscription);
+    if (userData.subscription === "Premium" || userData.subscription === "PremiumYearly")
+  {
+      return true
+    }
+
+    if (userData.subscription === "Gold" || userData.subscription === "Gold")
+  {
+      return course.subType != "P"
+    }
+
+  if (userData.subscription === "Standard" || userData.subscription === "Standard")
+  {
+      return course.subType != "P" && course.subType != "G"
+    } 
+
+    return course.subType == "F";
+  };
 
   const handleSearchInputChange = (term: string) => {
     setSearchTerm(term);
@@ -41,8 +70,8 @@ export default function CoursesRoute() {
         { error.length > 0 && <p>{ error }</p>}
         { courses.length > 0 && <h2 className="text-2xl font-bold tracking-tight">{ (searchTerm || "Most Popular") + " Courses" }</h2> }
                 <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 grid-cols-1 items-center gap-4 pb-4 pt-2">
-                { searchTerm.length > 0 && filteredCourses.map(course => (<CourseCard key={course.courseId} course={course} />))}
-                { searchTerm.length == 0 && courses.map(course => (<CourseCard key={course.courseId} course={course} />))}
+                { searchTerm.length > 0 && filteredCourses.map(course => (<CourseCard key={course.courseId} course={course} userHasCourse={userHasCourse(course)} />))}
+                { searchTerm.length == 0 && courses.map(course => (<CourseCard key={course.courseId} course={course} userHasCourse={userHasCourse(course)} />))}
 
                 </div>
                             </div >

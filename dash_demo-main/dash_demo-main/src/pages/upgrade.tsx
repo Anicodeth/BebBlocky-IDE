@@ -37,9 +37,8 @@ export default function UpgradePage() {
       last_name: user.displayName?.split(" ")[1] || "Last Name",
       amount: parseInt(price),
       email: user.email || 'email@email.com',
-      return_url: "http://localhost:3000" + "/upgrade"
+      return_url: "https://beb-blocky-ide-kxez.vercel.app" + "/upgrade"
     }
-    console.log('here')
     makePayment(paymentData);
   } 
 

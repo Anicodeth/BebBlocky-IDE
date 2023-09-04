@@ -11,7 +11,7 @@ export default function CoursesRoute() {
   const [ searchTerm, setSearchTerm ] = useState<string>("");
   const [ filteredCourses, setFilteredCourses ] = useState<Course[]>(courses);
   const { userData, isLoading: userDataLoading } = useUserSubscription();
-  const { userAccountData, isLoading: userAccountDataLoading } = useGetUser();
+  const { isLoading: userAccountDataLoading } = useGetUser();
 
   console.log(courses, userData);
   function isDayPassed(expiryDate: Date): boolean {
@@ -71,7 +71,7 @@ export default function CoursesRoute() {
         { courses.length > 0 && <h2 className="text-2xl font-bold tracking-tight">{ (searchTerm || "Most Popular") + " Courses" }</h2> }
                 <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 grid-cols-1 items-center gap-4 pb-4 pt-2">
                 { searchTerm.length > 0 && userData && filteredCourses.map(course => (<CourseCard key={course.courseId} course={course} userHasCourse={userHasCourse(course)} userHasCourseVerified={userData!.verified} />))}
-                { searchTerm.length == 0 && userData && courses.map(course => (<CourseCard key={course.courseId} course={course} userHasCourse={userHasCourse(course)} userHasCourseVerified={userData!.verified} />))}
+                { searchTerm.length == 0 && userData && courses.map(course => (<CourseCard key={course.courseId} course={course} userHasCourse={userHasCourse(course)} userHasCourseVerified={course.subType == "F" || course.subType == null || userData!.verified} />))}
 
                 </div>
                             </div >

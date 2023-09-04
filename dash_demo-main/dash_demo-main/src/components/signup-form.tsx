@@ -65,6 +65,9 @@ export default function SignUpForm() {
   ]
 
 const onBuyClick = (price: number) => {
+    if (price == 0) {
+      router.push("https://beb-blocky-ide-kxez.vercel.app/")
+    }
 if (user !== null)
   {
     const paymentData: UserPaymentData = {
@@ -72,7 +75,7 @@ if (user !== null)
     last_name: user.displayName?.split(" ")[1] || "Last Name",
       amount: price,
       email: user.email || "email@email.com",
-      return_url: "http://localhost:3000/register"
+      return_url: "https://beb-blocky-ide-kxez.vercel.app/register"
     }
     makePayment(paymentData);
   }

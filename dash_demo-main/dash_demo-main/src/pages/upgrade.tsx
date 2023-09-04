@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import usePayment, { UserPaymentData, subscriptionPlans } from "@/services/usePayment";
 import { useState } from "react";
 import SubscriptionCard from "@/components/subscription-card";
+import useUserSubscription from "@/services/useUserSubscription";
 
 export const monthlySubscriptionPlans = {
   1000: subscriptionPlans[1000],
@@ -21,10 +22,12 @@ export const yearlySubscriptionPlans = {
 };
 
 export default function UpgradePage() {
-    const { user } = useAuthContext();
-    const router = useRouter();
-    const { isLoading, isSuccess, checkoutUrl,  makePayment } = usePayment();
-    const [ checkedOut, setCheckedOut ] = useState(false);
+  const { user } = useAuthContext();
+  const router = useRouter();
+  const { isLoading, isSuccess, checkoutUrl,  makePayment } = usePayment();
+  const [ checkedOut, setCheckedOut ] = useState(false);
+  const { userData, isLoading: userDataLoading } = useUserSubscription();
+
 
   const onBuyClick = (price: string) => {
     if (user == null)
@@ -47,6 +50,7 @@ export default function UpgradePage() {
   }
 
   if (isLoading) return <p className="text-center text-dark-ebony font-semibold text-2xl">Payment is being processed, you'll be redirected to Chapa once we are done...</p>
+  if (userDataLoading) return <p className="text-center text-dark-ebony font-semibold text-2xl">Getting your data...</p>
     return (
         <>
             <Head>
@@ -69,11 +73,11 @@ export default function UpgradePage() {
                     </TabsList>
                     <TabsContent value="monthly">
                         <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 text-center mx-5 mt-10 w-fit place-items-center">
-                            {Object.entries(monthlySubscriptionPlans).map(([price, planName]) => <SubscriptionCard onAction={onBuyClick} price={price} isPremium={price === "2500"} name={planName ? planName : ""} isOwened={price === "2500"} isMonthly={true} /> )}                                                   </div>
+                            {Object.entries(monthlySubscriptionPlans).map(([price, planName]) => <SubscriptionCard onAction={onBuyClick} price={price} isPremium={price === "2500"} name={planName ? planName : ""} isOwened={planName == userData?.subscription} isMonthly={true} isVerified={userData?.verified} /> )}                                                   </div>
                     </TabsContent>
                     <TabsContent value="yearly">
                         <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 text-center mx-5 mt-10 w-fit place-items-center">
-                            {Object.entries(yearlySubscriptionPlans).map(([price, planName]) => <SubscriptionCard onAction={onBuyClick} price={price} isPremium={price === "25000"} name={planName ? planName : ""} isOwened={false} isMonthly={false} /> )}                        </div>
+                            {Object.entries(yearlySubscriptionPlans).map(([price, planName]) => <SubscriptionCard onAction={onBuyClick} price={price} isPremium={price === "25000"} name={planName ? planName : ""} isOwened={planName == userData?.subscription} isMonthly={false} isVerified={userData?.verified} /> )}                        </div>
                     </TabsContent>
                 </Tabs>
 

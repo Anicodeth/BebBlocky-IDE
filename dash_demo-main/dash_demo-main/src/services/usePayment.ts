@@ -1,7 +1,6 @@
 import { useAuthContext } from "@/components/AuthContext"
 import firebase_app from "@/lib/firebaseClient"
 import axios from "axios"
-import { subscribe } from "diagnostics_channel"
 import { FirebaseApp } from "firebase/app"
 import { doc, getFirestore, setDoc } from "firebase/firestore"
 import { nanoid } from "nanoid"
@@ -89,9 +88,10 @@ const usePayment = () => {
           expiry_date: subscriptionPlans[paymentData.amount]!.includes("Yearly") ? new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) : new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
         });
       })
-      .catch((error: Error) => {})
+      .catch((error: Error) => {
+        // TODO: Handle the error and show a meaningfull message
+      })
       .finally(() => {
-        console.log('here');
         setLoading(false);
       })
   }

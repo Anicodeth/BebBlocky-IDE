@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       headers: {
         Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}`
     }})
-      .then((data) => {
+      .then(async (data) => {
         res.send(data);
         try {
           const tx_ref = data.data.tx_ref;

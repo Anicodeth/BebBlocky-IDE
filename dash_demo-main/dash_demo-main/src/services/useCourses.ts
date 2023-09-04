@@ -20,6 +20,7 @@ export interface Course {
   courseDescription: string
   courseLanguage: string
   slides: Slide[]
+  subType: string
 }
 
 function useCourses() {

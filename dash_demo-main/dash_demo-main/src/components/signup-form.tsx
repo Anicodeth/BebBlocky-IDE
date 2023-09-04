@@ -47,7 +47,7 @@ export default function SignUpForm() {
   })
     const { user } = useAuthContext();
     const router = useRouter();
-    const { data: checkout_url, error, makePayment, isLoading, isSuccess } = usePayment();
+    const { isSuccess, isLoading, checkoutUrl, makePayment } = usePayment();
 
 
   const paymentPlans = [

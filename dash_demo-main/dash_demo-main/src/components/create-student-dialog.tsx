@@ -2,7 +2,7 @@ import React from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { addDoc, collection, getFirestore } from "firebase/firestore"
+import { addDoc, collection, doc, getFirestore, setDoc } from "firebase/firestore"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -31,6 +31,8 @@ import Link from "next/link"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { DialogDescription } from "@radix-ui/react-dialog"
 import { useAuthContext } from "./AuthContext"
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth"
+import { create } from "domain"
 
 const db = getFirestore(firebase_app as FirebaseApp)
 
@@ -49,6 +51,7 @@ interface Props {
 }
 
 export function CreateStudentDialog({ id, is_parent }: Props) {
+  const  auth  = getAuth();
   const { user } = useAuthContext()
     const router = useRouter()
     const [open, setOpen] = React.useState(false)
@@ -59,12 +62,24 @@ export function CreateStudentDialog({ id, is_parent }: Props) {
     async function onSubmit(data: z.infer<typeof FormSchema>) {
         const className = is_parent ? "Class A" : "Students" // TODO: Change this to the class name of the school
         try {
+            await createUserWithEmailAndPassword(auth, data.email, data.password).then(async ({ user: createdUser }) => {
+              await updateProfile(createdUser, { displayName: data.name });
+          await setDoc(doc(db, "users", createdUser.uid), {
+            uid: createdUser.uid,
+              email: createdUser.email,
+              name: data.name,
+              role: "Student",
+              credit: 0,
+              parentId: user?.uid
+          }) 
+      });
             await addDoc(collection(db, "School", id, "Classes", className, "Students"), {
                 name: data.name,
                 email: data.email,
                 password: data.password,
                 parentId: user?.uid
-            })
+            });
+            
         } catch (error) {
             console.log(error)
         }

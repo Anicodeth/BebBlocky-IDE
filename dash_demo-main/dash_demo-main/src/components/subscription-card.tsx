@@ -9,11 +9,12 @@ interface Props {
   onAction: (price: string) => void
   isOwened: boolean
   isMonthly: boolean
+  isVerified: boolean
 }
-const SubscriptionCard = ({ price, isPremium, name, onAction, isOwened, isMonthly }: Props) => {
+const SubscriptionCard = ({ price, isPremium, name, onAction, isOwened, isMonthly, isVerified }: Props) => {
   return <Card
     key={price}
-    className={isPremium ? "bg-gradient-to-b from-apple to-atlantis text-white" : ""}
+    className={`${isPremium ? "bg-gradient-to-b from-apple to-atlantis text-white" : ""} ${isOwened ? "bg-blue-300": ""}`}
   >
     <CardHeader>
       <CardTitle className={isPremium ? "text-2xl font-bold" : "text-2xl font-bold text-dark-ebony"}>
@@ -39,8 +40,9 @@ const SubscriptionCard = ({ price, isPremium, name, onAction, isOwened, isMonthl
         variant="outline"
         className="border-ecstasy text-ecstasy border-2 w-full font-semibold"
         onClick={() => onAction(price)}
+        disabled={isOwened && isVerified}
       >
-        { isOwened ? "This is your plan" : "Buy Now" }
+        { isOwened && isVerified ? "Enjoy your plan!" : isOwened ? "Pay now!" : "Buy Now!" }
       </Button>
     </CardFooter>
   </Card>

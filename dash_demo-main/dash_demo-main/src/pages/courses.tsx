@@ -3,38 +3,33 @@ import Head from "next/head";
 import SearchInput from "@/components/search-input";
 import useCourses, { Course } from "@/services/useCourses";
 import CourseCard from "@/components/course-card";
-import { useAuthContext } from "@/components/AuthContext";
-import { useRouter } from "next/router";
-import useGetUser from "@/services/useGetUser";
 import useUserSubscription from "@/services/useUserSubscription";
+import useGetUser from "@/services/useGetUser";
 
 export default function CoursesRoute() {
   const { courses, isLoading, error } = useCourses();
   const [ searchTerm, setSearchTerm ] = useState<string>("");
   const [ filteredCourses, setFilteredCourses ] = useState<Course[]>(courses);
-  const { userData, isLoading: userDataLoading } = useUserSubscription()
+  const { userData, isLoading: userDataLoading } = useUserSubscription();
+  const { userAccountData, isLoading: userAccountDataLoading } = useGetUser();
 
-  const { user } = useAuthContext();
-  const router = useRouter();
-
+  
   const userHasCourse = (course: Course) => {
-    console.log(userData);
     if (!userData || !userData.verified) {
       return course.subType == "F";
     }
 
-    console.log(userData.subscription);
-    if (userData.subscription === "Premium" || userData.subscription === "PremiumYearly")
-  {
+    if (userData.subscription.includes("Premium"))
+    {
       return true
     }
 
-    if (userData.subscription === "Gold" || userData.subscription === "Gold")
+    if (userData.subscription.includes("Gold"))
   {
       return course.subType != "P"
     }
 
-  if (userData.subscription === "Standard" || userData.subscription === "Standard")
+  if (userData.subscription.includes("Standard"))
   {
       return course.subType != "P" && course.subType != "G"
     } 
@@ -66,7 +61,7 @@ export default function CoursesRoute() {
           Discover and select your preferred course of interest."                                    </p>
                 <SearchInput onSearchTermChange={handleSearchInputChange} inputPlaceholder={"Search our courses here..."}/>
                 <hr className="w-full border-gray-300 mb-4" />
-        { isLoading && <p>Loading...</p> }
+        { (userDataLoading || isLoading || userAccountDataLoading ) && <p>Loading...</p> }
         { error.length > 0 && <p>{ error }</p>}
         { courses.length > 0 && <h2 className="text-2xl font-bold tracking-tight">{ (searchTerm || "Most Popular") + " Courses" }</h2> }
                 <div className="grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 grid-cols-1 items-center gap-4 pb-4 pt-2">

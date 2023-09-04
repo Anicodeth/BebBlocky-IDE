@@ -1,31 +1,50 @@
 import { useAuthContext } from "@/components/AuthContext";
 import { useEffect, useState } from "react";
-import { getFirestore, doc, getDoc, DocumentData } from 'firebase/firestore';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import firebase_app from '@/lib/firebaseClient';
 import { FirebaseApp } from 'firebase/app';
+import useGetUser from "./useGetUser";
+
+interface UserData {
+  email: string
+  expiry_date: Date
+  subscription: string
+  tx_ref: string
+  uid: string
+  verified: boolean
+}
 
 const useUserSubscription = () => {
   const { user } = useAuthContext();
-  const [userData, setUserData] = useState<DocumentData>();
+  const [userData, setUserData] = useState<UserData>();
   const [isLoading, setLoading] = useState(true);
+  const { isLoading: userAccountDataLoading, userAccountData } = useGetUser()
 
   useEffect(() => {
-    if (user) {
+    if (user && userAccountData) { 
       const fetchUserSubscription = async () => {
+        const userId = userAccountData.role == "Student" ? userAccountData.parentId : user.uid;
         const db = getFirestore(firebase_app as FirebaseApp);
-        const userSubscriptionsRef = doc(db, "UserSubscriptions", user.uid);
+        const userSubscriptionsRef = doc(db, "UserSubscriptions", userId);
 
         try {
           const docSnap = await getDoc(userSubscriptionsRef);
-          console.log('here', docSnap.data());
 
           if (docSnap.exists()) {
-            setUserData(docSnap.data());
+            const data = docSnap.data();
+            const userFetchedData: UserData = {
+              email: data.email,
+              expiry_date: data.expiry_date.toDate(),
+              subscription: data.subscription,
+              tx_ref: data.tx_ref,
+              uid: data.uid,
+              verified: data.verified
+            }
+            setUserData(userFetchedData);
           } else {
             setUserData(undefined);
           }
         } catch (error) {
-          console.error("Error fetching user subscription:", error);
           setUserData(undefined);
         } finally {
           setLoading(false);
@@ -37,7 +56,7 @@ const useUserSubscription = () => {
       setLoading(false);
       setUserData(undefined);
     }
-  }, [user]); 
+  }, [user, userAccountData]); 
 
   return { userData, isLoading };
 };

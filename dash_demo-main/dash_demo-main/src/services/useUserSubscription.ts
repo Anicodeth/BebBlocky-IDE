@@ -5,11 +5,11 @@ import firebase_app from '@/lib/firebaseClient';
 import { FirebaseApp } from 'firebase/app';
 import useGetUser from "./useGetUser";
 
-interface UserSubscriptionData {
+export interface UserSubscriptionData {
   email: string
   expiry_date: Date
   subscription: string
-  tx_ref: string
+  txRef: string
   uid: string
   verified: boolean
 }
@@ -36,7 +36,7 @@ const useUserSubscription = () => {
               email: data.email,
               expiry_date: data.expiry_date.toDate(),
               subscription: data.subscription,
-              tx_ref: data.tx_ref,
+              txRef: data.tx_ref,
               uid: data.uid,
               verified: data.verified
             }

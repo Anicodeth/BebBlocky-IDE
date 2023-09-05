@@ -1,27 +1,32 @@
 import axios from 'axios';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getFirestore, doc, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, updateDoc, getDoc } from 'firebase/firestore';
 import firebase_app from '@/lib/firebaseClient';
 import { FirebaseApp } from 'firebase/app';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const { transaction_reference } = req.query;
+    const { userId } = req.query as { userId: string };
 
-    if (!transaction_reference) {
-      res.status(400).json({ error: "No transaction_reference provided."})
+    if (!userId || userId === undefined) {
+      res.status(400).json({ error: "No user id provided."})
     }
 
-    await axios.get(`https://api.chapa.co/v1/transaction/verify/${transaction_reference}`, {
+    const db = getFirestore(firebase_app as FirebaseApp);
+    const userSubscriptionsRef = doc(db, "UserSubscriptions", userId);
+    const docSnap = await getDoc(userSubscriptionsRef);
+
+    if (!docSnap.exists()) {
+      res.status(400).json({ error: "No user subscription found."})
+    }
+
+    const userSubscriptionData = docSnap.data();
+
+    await axios.get(`https://api.chapa.co/v1/transaction/verify/${userSubscriptionData?.txRef}`, {
       headers: {
         Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}`
     }})
       .then(async (data) => {
-        res.send(data);
         try {
-          const tx_ref = data.data.tx_ref;
-          const firestore = getFirestore(firebase_app as FirebaseApp);
-          const userSubscriptionsRef = doc(firestore, "UserSubscriptions", tx_ref);
-
           const newData = {
             verified: true,
           };

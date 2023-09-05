@@ -63,7 +63,7 @@ const usePayment = () => {
       ...paymentData,
       currency: "ETB",
       tx_ref: txRef,
-      callback_url: `https://beb-blocky-ide-kxez-git-main-anicodeth.vercel.app/verify/${txRef}`,
+      callback_url: `https://beb-blocky-ide-kxez-git-main-anicodeth.vercel.app/verify/${user.uid}`,
       "customization[title]": "Beblocky, Inc.",
       "customization[description]": "BeBlocky subscription."
     }
